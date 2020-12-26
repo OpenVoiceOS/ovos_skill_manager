@@ -1,0 +1,49 @@
+{
+    "OVOS": [
+        {
+            "name": "DuckDuckGo",
+            "skillname": "DuckDuckGo",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-ddg",
+            "url": "https://github.com/JarbasSkills/skill-ddg",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "i386",
+                "arm",
+                "arm64",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "who is elon musk",
+                "tell me more",
+                "ask the duck about the big bang",
+                "continue",
+                "when was stephen hawking born"
+            ],
+            "requirements": {
+                "python": [
+                    "google_trans_new",
+                    "RAKEkeywords",
+                    "requests"
+                ],
+                "system": {},
+                "skill": []
+            },
+            "download_url": "https://github.com/JarbasSkills/skill-ddg/archive/master.zip",
+            "license": "apache-2.0",
+            "icon": "./res/icon/ddg.png",
+            "description": "Uses the [DuckDuckGo API](https://duckduckgo.com/api) to provide information. \n\nNOTE: this is meant a better alternative to the official duck duck go skill, it will be blacklisted",
+            "category": "Information",
+            "tags": [
+                "duckduckgo",
+                "query",
+                "search-engine",
+                "searchengine"
+            ]
+        }
+    ]
+}
