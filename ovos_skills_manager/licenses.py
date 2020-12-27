@@ -1,10 +1,21 @@
 LICENSE_MATCHERS = {
-    "agpl": "GNU AFFERO GENERAL PUBLIC LICENSE",
-    "lgpl": "GNU LESSER GENERAL PUBLIC LICENSE",
-    "gpl": "GNU GENERAL PUBLIC LICENSE",
-    "apache-2.0": "Apache License",
-    "unlicense": "https://unlicense.org",
+    "agpl-1.0": "AFFERO GENERAL PUBLIC LICENSE Version 1",
+    "agpl-2.0": "GNU AFFERO GENERAL PUBLIC LICENSE Version 2",
+    "agpl-3.0": "GNU AFFERO GENERAL PUBLIC LICENSE Version 3",
+    "lgpl-2.0": "GNU LESSER GENERAL PUBLIC LICENSE Version 2",
+    "lgpl-2.1": "GNU LESSER GENERAL PUBLIC LICENSE Version 2.1",
+    "lgpl-3.0": "GNU LESSER GENERAL PUBLIC LICENSE Version 3",
+    "gpl-1.0": "GNU GENERAL PUBLIC LICENSE Version 1",
+    "gpl-2.0": "GNU GENERAL PUBLIC LICENSE Version 2",
+    "gpl-3.0": "GNU GENERAL PUBLIC LICENSE Version 3",
+    "cpl-1.0": "PROVIDED UNDER THE TERMS OF THIS COMMON PUBLIC LICENSE",
+    "apache-1.0": "1995-1999 The Apache Group",
+    "apache-1.1": "The Apache Software License, Version 1.1",
+    "apache-2.0": "Apache License Version 2.0",
+    "unlicense": "unlicense.org",
     "mit": "MIT License",
+    "mpl-1.0": "Mozilla Public License Version 1.0",
+    "mpl-1.1": "Mozilla Public License Version 1.1",
     "mpl-2.0": "Mozilla Public License Version 2.0",
     "bsl-1.0": "Boost Software License - Version 1.0",
     "zlib": "zlib License",
@@ -33,24 +44,110 @@ LICENSE_MATCHERS = {
     "postgresql": "PostgreSQL License",
     "upl-1.0": "The Universal Permissive License (UPL), Version 1.0",
     "vim": "VIM LICENSE",
-    "wtfpl": "DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE"
+    "wtfpl": "DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE",
+    "rpsl-1.0": "RealNetworks Public Source License Version 1.0",
+    "apsl-2.0": "APPLE PUBLIC SOURCE LICENSE Version 2.0"
 }
 
 
-# TODO BSD Zero Clause License, gpl versions, non free licenses
-# https://choosealicense.com/licenses/0bsd/
+def is_permissive(license_type):
+    if license_type in ["mit", "apache-2.0", "unlicense", "0bsd", "isc"]:
+        return True
+    return False
 
 
-def match_gpls(license):
-    pass
+def is_viral(license_type):
+    # GPL
+    # With a strict view on the OpenSource definition, the GPL would be a non-free license.
+    # In GPL section 8, it is permitted to add a clause that could restrict the GPL to give it's permission only to specific groups, but this would be in conflict with section 5 of the OpenSource definition.
+    # Fortunately, there is no actual software that makes use of GPL section 8, so all currently existing GPLd software is compliant to the OpenSource definition.
+    # The GPL prevents code flow from code under GPL into other works being under different even OSI compliant licenses.
+    # Note that the GPL still permits collective works and thus allows linking against other independent works as long as this may be achieved by linking unmodified works or only slightly modified works.
+    # As the GPL impairs collaboration and as the GPL, does not contain a method to defend against patent suing, the OSSCC does not recommend to use the GPL for new projects.
+
+    # LGPL
+    # With a strict view on the OpenSource definition, the LGPL would be a non-free license.
+    # In LGPL section 12, it is permitted to add a clause that could restrict the LGPL to give it's permission only to specific groups, but this would be in conflict wth section 5 of the OpenSource definition.
+    # Fortunately, there is no actual software that makes use of LGPL section 12, so all currently existing LGPLd software is compliant to the OpenSource definition.
+
+    # The LGPL prevents code flow from code under LGPL into other works being under different OSI compliant licenses.
+    # The LGPL however allows to non-LGPL works to link against a LGPL work.
+    # As the LGPL does not allow code merging the OSSCC does not recommend to use the LGPL for new projects.
+
+    # GPLv3
+    # The GPLv3 has been published in June 2007. The GPLv3 no longer contains claims that are comparable to section 8 of the GPL, so the GPLv3 is a true OSS license.
+    # The GPLv3 added claims to defend against patent suing.
+    # Unfortunately, the GPLv3 tries to add further restrictions on collective works and as this is done by using an ambiguous wording,
+    # it is expected to create a high risk to distributors for being sued by authors or Copyright holders.
+    # As the GPLv3 impairs collaboration even more than the GPL, the OSSCC does not recommend to use the GPLv3 for new projects.
+
+    # CPL
+    # The CPL permits only contributions and anhancements to the original work but does not allow to use code from a CPL licensed work in another work.
+    # So the CPL is even more restrictive than the GPL.
+    # For this reason, the OSSCC does not recommend to use the CPL for new projects.
+
+    # EPL
+    # The EPL permits only contributions and anhancements to the original work but does not allow to use code from a EPL licensed work in another work.
+    # So the EPL is even more restrictive than the GPL.
+    # For this reason, the OSSCC does not recommend to use the EPL for new projects.
+
+    if license_type in ["agpl-1.0", "agpl-2.0", "agpl-3.0", "lgpl-2.0",
+                        "lgpl-2.1", "lgpl-3.0", "gpl-1.0", "gpl-2.0",
+                        "gpl-3.0", "epl-1.0", "epl-2.0", "cpl-1.0"]:
+        return True
+    return False
 
 
-def match_bsds(license):
-    pass
+def _is_0bsd(license):
+    template = """
+    Permission to use, copy, modify, and distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+    """
+    lines = [l for l in license.lower().split("\n") if l.strip()]
+    if "copyright" in lines[0]:
+        lines = lines[1:]
+    license = " ".join(lines).replace("\n", "").replace(" ", "").replace("\t",
+                                                                         "").replace(
+        "\r", "").strip()
+    t = template.replace("\n", "").replace(" ", "").lower().strip()
+    if t == license:
+        return True
+    return False
 
 
-def match_others(license):
-    pass
+def _is_isc(license):
+    template = """
+    Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+    """
+    lines = [l for l in license.lower().split("\n") if l.strip()]
+    if "copyright" in lines[0]:
+        lines = lines[1:]
+    license = " ".join(lines).replace("\n", "").replace(" ", "").replace("\t",
+                                                                         "").replace(
+        "\r", "").strip()
+    t = template.replace("\n", "").replace(" ", "").lower().strip()
+    if t == license:
+        return True
+    return False
+
+
+def _is_mit(license):
+    template = """
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    """
+    lines = [l for l in license.lower().split("\n") if l.strip()]
+    if "copyright" in lines[0]:
+        lines = lines[1:]
+    license = " ".join(lines).replace("\n", "").replace(" ", "").replace("\t",
+                                                                         "").replace(
+        "\r", "").strip()
+    t = template.replace("\n", "").replace(" ", "").lower().strip()
+    if t == license:
+        return True
+    return False
 
 
 def get_license_type(license):
@@ -59,8 +156,21 @@ def get_license_type(license):
     # - license list is ordered in a way that first match NEEDS to override others
 
     # quick and dirty
-    header = "\n".join(license.lower().replace(" ", "").split("\n")[:10])
+    header = "\n".join(license.split("\n")[:30]).lower() \
+        .replace(" ", "").replace("\n", "").replace("\r", "") \
+        .replace("\t", "").replace(",", "")
+
     for k, v in LICENSE_MATCHERS.items():
-        if v.lower().replace(" ", "") in header:
+        if v.lower().replace(" ", "").replace(",", "") in header:
             return k
-    return license.split("\n")[0].strip()
+
+    if _is_isc(license):
+        return "isc"
+
+    if _is_0bsd(license):
+        return "0bsd"
+
+    if _is_mit(license):
+        return "mit"
+
+    return license.strip().split("\n")[0]

@@ -70,7 +70,7 @@ class SkillEntry:
 
     @property
     def skill_name(self):
-        return self.as_json.get("skillname")
+        return self.as_json.get("skillname") or self.as_json.get("name")
 
     @property
     def skill_short_description(self):
@@ -114,7 +114,7 @@ class SkillEntry:
 
     @property
     def branch(self):
-        return self.as_json.get("branch") or "master"
+        return self.as_json.get("branch")
 
     @property
     def download_url(self):

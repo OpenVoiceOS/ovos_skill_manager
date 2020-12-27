@@ -1,6 +1,7 @@
 
 def readme_to_json(text):
-    text += "\n## "  # marker to end parsing
+    text = text.replace("\r", "").replace("\t", "") + "\n## "  # marker to
+    # end parsing
     data = {}
     current_section = "title"
     current_text = ""

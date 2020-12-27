@@ -15,6 +15,7 @@ def get_andlos_list_skills(parse_github=False, skiplist=None):
         s = skill['skill_info']
         if s['repo'] in skiplist:
             continue
+        print(s)
         cats = [s for s in s['categories'] if len(s) > 2]
         cat = cats[0] if len(cats) else None
         tags = list(set(s['tags'] + cats))

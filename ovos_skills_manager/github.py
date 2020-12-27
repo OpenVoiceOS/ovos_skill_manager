@@ -4,7 +4,7 @@ from ovos_utils import camel_case_split, create_daemon
 from ovos_utils.log import LOG
 from ovos_utils.json_helper import merge_dict
 from ovos_skills_manager.session import SESSION as requests
-from ovos_skills_manager.licenses import get_license_type
+from ovos_skills_manager.licenses import get_license_type, is_viral, is_permissive
 import json
 import yaml
 from enum import Enum
@@ -42,8 +42,9 @@ GITHUB_README_LOCATIONS = [
 
 GITHUB_LICENSE_LOCATIONS = [
     GithubUrls.URL + "/blob/{branch}/LICENSE",
-    GithubUrls.URL + "/blob/{branch}/LICENSE.md",
     GithubUrls.URL + "/blob/{branch}/LICENSE.txt",
+    GithubUrls.URL + "/blob/{branch}/UNLICENSE",
+    GithubUrls.URL + "/blob/{branch}/LICENSE.md",
     GithubUrls.URL + "/blob/{branch}/License",
     GithubUrls.URL + "/blob/{branch}/License.md",
     GithubUrls.URL + "/blob/{branch}/License.txt",
@@ -102,10 +103,8 @@ def skill_name_from_github_url(url):
 def branch_from_github_url(url):
     if "/tree/" in url:
         branch = url.split("/tree/")[-1].split("/")[0]
-    else:
-        branch = "master"
-    if validate_branch(branch, url):
-        return branch
+        if validate_branch(branch, url):
+            return branch
     raise GithubInvalidBranch
 
 
@@ -360,7 +359,7 @@ def get_requirements_json_from_github_url(url, branch=None):
     data = {"python": [], "system": {}, "skill": []}
     try:
         manif = get_manifest_from_github_url(url, branch)
-        data = manif['dependencies']
+        data = manif['dependencies'] or {"python": [], "system": {}, "skill": []}
     except GithubManifestNotFound:
         pass
     try:
@@ -378,17 +377,19 @@ def get_requirements_json_from_github_url(url, branch=None):
 
 def parse_github_url(url, branch=None):
     # cache_repo_requests(url)  # speed up requests TODO avoid rate limit
-    branch = branch or branch_from_github_url(url)
+    if not branch:
+        try:
+            branch = branch_from_github_url(url)
+        except GithubInvalidBranch:
+            pass
     url = normalize_github_url(url)
     author, repo = author_repo_from_github_url(url)
 
     data = {
         "authorname": author,
-        "skillname": repo,
         "foldername": repo,
-        "name": skill_name_from_github_url(url),
+        "skillname": skill_name_from_github_url(url),
         "url": url,
-        "branch": branch,
         "license": "unknown",
         "requirements": get_requirements_json_from_github_url(url, branch),
         "download_url": download_url_from_github_url(url, branch)
@@ -417,6 +418,11 @@ def parse_github_url(url, branch=None):
     except GithubReadmeNotFound:
         pass
 
+    # branch should override branch from readme/json ?
+    # i believe so because json in github might be outdated
+    if branch:
+        data["branch"] = branch
+
     # parse bigscreen flags
     if data["requirements"].get("system"):
         data['systemDeps'] = True
@@ -431,10 +437,10 @@ def parse_github_url(url, branch=None):
     # augment tags
     if "tags" not in data:
         data["tags"] = []
-    if "gpl" in data["license"]:
+    if is_viral(data["license"]):
         data["tags"].append("viral-license")
-    if "mit" in data["license"] or "apache" in data["license"]:
+    elif is_permissive(data["license"]):
         data["tags"].append("permissive-license")
-    if "unknown" in data["license"]:
+    elif "unknown" in data["license"]:
         data["tags"].append("no-license")
     return data

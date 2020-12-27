@@ -8,19 +8,19 @@
             "description": "Mycroft doesn't know how to do or answer everything (yet).  This _fallback_ is how Mycroft lets you know that, unfortunately, it can't help with what you said.\n\nBut wait, there is still hope!  Mycroft is working to get smarter with help from friends.  For who have selected to [Opt In to the Open Dataset](https://home.mycroft.ai/#/setting/basic#opendataset), these missed phrases are aggregated and analyzed to help identify what the world _wants_ their voice assistant to do that it can't yet.  So if millions of people start asking for guava growing tips, we'll promote this as an idea to be handled as a default Skill.",
             "authorname": "MycroftAI",
             "examples": [
-                "I need a pizza.",
                 "Show me the money.",
-                "Show me the money",
+                "I need a pizza.",
                 "How do I make my guava blue?",
+                "Show me the money",
                 "I need a pizza"
             ],
             "category": "Configuration",
             "tags": [
-                "fallback",
-                "unknown",
                 "permissive-license",
+                "unknown",
+                "Configuration",
                 "system",
-                "Configuration"
+                "fallback"
             ],
             "platforms": [
                 "all"
@@ -51,23 +51,23 @@
             "description": "Ask general-knowledge queries of your Mycroft device.  If no other Skills can handle the _Intent_, [Wolfram Alpha](https://wolframalpha.com) will be queried\nto see if it can find an answer.  You'll be surprised by how much it knows!\n\nFor deeper exploration, you can also request the sources behind the answer. An email will be sent to your registered account linking you to all the details within Wolfram Alpha's website.",
             "authorname": "MycroftAI",
             "examples": [
-                "How many inches in a meter?",
-                "When was The Rocky Horror Picture Show released?",
-                "What's 18 times 4?",
                 "What is Madonna's real name?",
-                "Send me the source on that",
+                "When was The Rocky Horror Picture Show released?",
                 "Send me the source on that.",
-                "How tall is Mount Everest?"
+                "How many inches in a meter?",
+                "Send me the source on that",
+                "How tall is Mount Everest?",
+                "What's 18 times 4?"
             ],
             "category": "Information",
             "tags": [
-                "information",
-                "fallback",
-                "general-knowledge",
                 "permissive-license",
                 "wolfram-alpha",
+                "information",
+                "general-knowledge",
                 "query",
-                "Information"
+                "Information",
+                "fallback"
             ],
             "platforms": [
                 "all"
@@ -77,9 +77,9 @@
             "license": "apache-2.0",
             "requirements": {
                 "python": [
+                    "wolframalpha==3.0",
                     "requests>=2.13.0",
-                    "mtranslate",
-                    "wolframalpha==3.0"
+                    "mtranslate"
                 ],
                 "system": {},
                 "skill": []
@@ -95,64 +95,6 @@
             "desktopFile": true
         },
         {
-            "skillname": "Set alarms",
-            "foldername": "skill-alarm",
-            "url": "https://github.com/MycroftAI/skill-alarm",
-            "branch": "e3aa539642f6d6f45214310715a5cf782e7ba4fd",
-            "description": "Set a single use alarm, daily alarms, or weekly recurring alarms.\r\n\r\n You can choose from five different alarm sounds:\r\n * Constant Beep\r\n * Four rapid beeps\r\n * Escalating beeps\r\n * Alarm bell\r\n * Gentle chimes",
-            "authorname": "MycroftAI",
-            "examples": [
-                "Set an alarm for 9 pm July 14th\r",
-                "Set an alarm for 8:00 am every Tuesday\r",
-                "Set an alarm for weekdays at 7 in the morning.",
-                "Set an alarm for 9:30 am.",
-                "Set an alarm for weekdays at 7 in the morning\r",
-                "Set an alarm for 8:00 am on Mondays\r",
-                "Set an alarm for 9:30 am\r",
-                "Are any alarms set?\r",
-                "Set an alarm for 10:00 am on the weekends.",
-                "Cancel my 10:00 am alarm.",
-                "Set an alarm for 8:00 am every Tuesday.",
-                "Set an alarm for 10:00 am on the weekends\r",
-                "Snooze for 30 minutes.",
-                "Set an alarm (Mycroft will prompt for more information)\r",
-                "Set an alarm.",
-                "Cancel my 10:00 am alarm\r",
-                "Set an alarm for 8:00 am on Mondays.",
-                "Are any alarms set?",
-                "Snooze for 30 minutes\r",
-                "Set an alarm for 9 pm July 14th."
-            ],
-            "category": "Daily",
-            "tags": [
-                "permissive-license",
-                "Daily",
-                "alarm"
-            ],
-            "platforms": [
-                "all"
-            ],
-            "short_description": "Set alarms with Mycroft",
-            "name": "Alarm Skill",
-            "license": "apache-2.0",
-            "requirements": {
-                "python": [
-                    "pyalsaaudio"
-                ],
-                "system": {},
-                "skill": []
-            },
-            "download_url": "https://github.com/MycroftAI/skill-alarm/archive/e3aa539642f6d6f45214310715a5cf782e7ba4fd.zip",
-            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/clock.svg",
-            "credits": [
-                "Mycroft AI (@MycroftAI)"
-            ],
-            "categories": [
-                "Daily"
-            ],
-            "desktopFile": true
-        },
-        {
             "skillname": "Audio Recorder",
             "foldername": "skill-audio-record",
             "url": "https://github.com/MycroftAI/skill-audio-record",
@@ -160,24 +102,24 @@
             "description": "This Skill records audio from the microphone and allows you to play back that recording. This Skill is particularly useful when trying to diagnose microphone issues, because it allows you to \"hear\" what Mycroft is hearing.",
             "authorname": "MycroftAI",
             "examples": [
-                "Start recording",
-                "Erase recording",
-                "Play the recording.",
-                "Start recording for 40 minutes",
                 "Erase recording.",
-                "Play the recording",
                 "Start recording.",
-                "Start recording for 40 minutes."
+                "Play the recording.",
+                "Erase recording",
+                "Start recording",
+                "Play the recording",
+                "Start recording for 40 minutes.",
+                "Start recording for 40 minutes"
             ],
             "category": "Configuration",
             "tags": [
-                "configuration",
-                "permissive-license",
-                "record",
-                "microphone",
                 "audio",
+                "permissive-license",
+                "microphone",
+                "Configuration",
+                "configuration",
                 "record-audio",
-                "Configuration"
+                "record"
             ],
             "platforms": [
                 "all"
@@ -203,60 +145,6 @@
             "desktopFile": true
         },
         {
-            "skillname": "Device Configuration",
-            "foldername": "skill-configuration",
-            "url": "https://github.com/MycroftAI/skill-configuration",
-            "branch": "9231778e959c65a4f8156923fb26d11483d72ea0",
-            "description": "User and device settings from [home.mycroft.ai](https://home.mycroft.ai) are\nsynchronized with your Devices.  This Skill performs that synchronization and\nallows you to check your settings.\n\nYou can also change the technology used to perform Wake Word spotting.  This is\nthe system that wakes the device up when you say \"Hey Mycroft\".",
-            "authorname": "MycroftAI",
-            "examples": [
-                "Set the Listener to default (for advanced debugging)",
-                "What's your name?",
-                "Set the Listener to default.",
-                "Configuration update",
-                "Configuration update.",
-                "Update config",
-                "Set the Listener to Precise (for advanced debugging)",
-                "What's your location?",
-                "Update config.",
-                "Set the Listener to Precise.",
-                "What's the current Listener?",
-                "What's the current Listener? (for advanced debugging)"
-            ],
-            "category": "Configuration",
-            "tags": [
-                "configuration",
-                "config",
-                "permissive-license",
-                "system",
-                "update-config",
-                "Configuration"
-            ],
-            "platforms": [
-                "all"
-            ],
-            "short_description": "Synchronize your Device Settings with [Home](https://home.mycroft.ai).",
-            "name": "Configuration Skill",
-            "license": "apache-2.0",
-            "requirements": {
-                "python": [
-                    "requests>=2.13.0",
-                    "humanhash3"
-                ],
-                "system": {},
-                "skill": []
-            },
-            "download_url": "https://github.com/MycroftAI/skill-configuration/archive/9231778e959c65a4f8156923fb26d11483d72ea0.zip",
-            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/cogs.svg",
-            "credits": [
-                "Mycroft AI (@MycroftAI)"
-            ],
-            "categories": [
-                "Configuration"
-            ],
-            "desktopFile": true
-        },
-        {
             "skillname": "Date and Time",
             "foldername": "skill-date-time",
             "url": "https://github.com/MycroftAI/skill-date-time",
@@ -264,25 +152,25 @@
             "description": "Get the local time or time for major cities around the world.  Times\nare given in 12-hour (2:30 pm) or 24-hour format (14:30) based on the\nTime Format setting at [Home](https://home.mycroft.ai/#/setting/basic)\n\nTime can optionally be shown on a display, like a digital clock.  See\nthe [Skill Setting](https://home.mycroft.ai/#/skill).",
             "authorname": "MycroftAI",
             "examples": [
-                "What's the date?",
-                "Tell me the day of the week",
                 "What time is it?",
-                "Tell me the day of the week.",
                 "Show me the time",
                 "What time is it in Paris?",
-                "What day is Memorial Day 2020?",
-                "Show me the time."
+                "Tell me the day of the week",
+                "Tell me the day of the week.",
+                "Show me the time.",
+                "What's the date?",
+                "What day is Memorial Day 2020?"
             ],
             "category": "Daily",
             "tags": [
-                "world-time",
-                "date-time",
-                "date",
+                "time",
                 "permissive-license",
                 "clock",
-                "Daily",
+                "date-time",
                 "world-clock",
-                "time"
+                "date",
+                "Daily",
+                "world-time"
             ],
             "platforms": [
                 "all"
@@ -292,11 +180,11 @@
             "license": "apache-2.0",
             "requirements": {
                 "python": [
-                    "pytz==2017.2",
-                    "holidays",
                     "geocoder",
+                    "tzlocal==1.3",
                     "timezonefinder",
-                    "tzlocal==1.3"
+                    "pytz==2017.2",
+                    "holidays"
                 ],
                 "system": {},
                 "skill": []
@@ -325,13 +213,13 @@
             ],
             "category": "Information",
             "tags": [
-                "duckduckgo",
-                "search-engine",
-                "fallback",
                 "permissive-license",
-                "searchengine",
+                "search-engine",
                 "query",
-                "Information"
+                "duckduckgo",
+                "searchengine",
+                "Information",
+                "fallback"
             ],
             "platforms": [
                 "all"
@@ -365,18 +253,19 @@
             "authorname": "MycroftAI",
             "examples": [
                 "Thank you.",
-                "Hello world.",
                 "Thank you",
-                "Hello world",
-                "How are you?"
+                "Hello world.",
+                "How are you?",
+                "Hello world"
             ],
             "category": "Configuration",
             "tags": [
-                "first-skill",
-                "hello",
                 "helloworld",
+                "hello",
                 "greeting",
-                "Configuration"
+                "no-license",
+                "Configuration",
+                "first-skill"
             ],
             "platforms": [
                 "all"
@@ -407,29 +296,29 @@
             "description": "Add and remove Skills using your voice or from the [Marketplace](https://market.mycroft.ai).\nYou can also assist skill authors in testing new versions of their skills by\nusing \"install prevew version\" to gain access to skills still under development\nand testing.  If you do this, please be consicious the skill may be in an\nunstable development state and report issues to the author appropriately.\n\nYou can also install Skills that are not officially released by entering the\nSkill's GitHub repository URL in the [Installer's web user interface](https://home.mycroft.ai/#/skill).\n\nSkills are ultimately installed using the [Mycroft Skill Manager (msm)](https://mycroft.ai/documentation/msm).  If verbally installing, Mycroft will speak a list of possible matches for\nambiguous names -- just pick the skill you want from the list read to you.",
             "authorname": "MycroftAI",
             "examples": [
-                "Uninstall coin flip",
-                "Install the preview version of coin flip ",
-                "Remove coin flip",
-                "Uninstall coin flip.",
-                "Download custom skill",
-                "Install the preview version of coin flip.",
                 "Remove coin flip.",
-                "Install coin flip.",
+                "Install the preview version of coin flip.",
+                "Install the preview version of coin flip ",
+                "Uninstall coin flip.",
                 "Install coin flip",
-                "Download custom skill."
+                "Install coin flip.",
+                "Uninstall coin flip",
+                "Download custom skill.",
+                "Download custom skill",
+                "Remove coin flip"
             ],
             "category": "Configuration",
             "tags": [
-                "download",
-                "skills",
-                "install",
                 "permissive-license",
                 "msm",
-                "installer",
-                "add-skill",
+                "install",
                 "skill",
-                "system",
-                "Configuration"
+                "download",
+                "add-skill",
+                "installer",
+                "skills",
+                "Configuration",
+                "system"
             ],
             "platforms": [
                 "all"
@@ -462,23 +351,23 @@
             "description": "Retrieve the [IP address](https://en.wikipedia.org/wiki/IP_address), also known as the \"network address\" of the Device and respond verbally to the user, and if the Device supports it, display the IP address.",
             "authorname": "MycroftAI",
             "examples": [
-                "Tell me your network address",
-                "Tell me your IP address.",
+                "Tell me your IP address",
                 "What's your network address?",
-                "What network are you connected to?",
+                "Tell me your IP address.",
                 "What's your IP address?",
                 "Tell me your network address.",
-                "Tell me your IP address"
+                "What network are you connected to?",
+                "Tell me your network address"
             ],
             "category": "Configuration",
             "tags": [
-                "network",
-                "network-address",
-                "IPaddress",
                 "permissive-license",
-                "IP-address",
+                "IPaddress",
+                "network",
+                "Configuration",
                 "system",
-                "Configuration"
+                "network-address",
+                "IP-address"
             ],
             "platforms": [
                 "all"
@@ -511,24 +400,24 @@
             "description": "Brighten your day with a little humor.  This draws on the jokes collected by the [PyJokes project](https://github.com/pyjokes/pyjokes) to give you a chuckle.\n \n The joke categories are:\n * Neutral -- jokes that are safe for work, kids or your grandmother\n * Chuck Norris -- jokes only a geek can love\n \n _WARNING:  Laughter is not guaranteed, but eye rolls are likely._",
             "authorname": "MycroftAI",
             "examples": [
-                "Make me laugh.",
-                "Tell me a Chuck Norris joke",
-                "How about a neutral joke.",
-                "Tell me a joke",
-                "Tell me a joke.",
                 "Make me laugh",
+                "How about a neutral joke.",
+                "Tell me a Chuck Norris joke",
+                "Tell me a Chuck Norris joke.",
+                "Tell me a joke.",
+                "Make me laugh.",
                 "How about a neutral joke",
-                "Tell me a Chuck Norris joke."
+                "Tell me a joke"
             ],
             "category": "Entertainment",
             "tags": [
+                "funny",
+                "Entertainment",
+                "permissive-license",
+                "joke",
                 "humor",
                 "humour",
-                "funny",
-                "joke",
-                "jokes",
-                "permissive-license",
-                "Entertainment"
+                "jokes"
             ],
             "platforms": [
                 "all"
@@ -561,16 +450,16 @@
             "description": "The Mycroft Mark 1 menu which appears when you press and hold the top button\nhas a 'DEMO' option.  This Skill implements a simple mode which can be used\nto draw attention at trade shows, stores, etc.\n\nThe demo starts with the unit's eyes dancing around.  Every 2 minutes it will\nsing a song.  The singing is synched to the clock, so multiple units can form\na chorus.\n\nYou can stop the demo by pressing the top button or saying \"Stop\".",
             "authorname": "MycroftAI",
             "examples": [
-                "Stop - ends the DEMO.",
-                "Stop - ends the DEMO"
+                "Stop - ends the DEMO",
+                "Stop - ends the DEMO."
             ],
             "category": "Configuration",
             "tags": [
-                "demonstration",
-                "permissive-license",
                 "showcase",
+                "permissive-license",
                 "demo",
-                "Configuration"
+                "Configuration",
+                "demonstration"
             ],
             "platforms": [
                 "platform_mark1"
@@ -601,26 +490,26 @@
             "description": "The Mycroft Mark 1 has several unique capabilities which this Skill lets you control.\n\n### Eye Color\nThe Mark 1 has beautiful eyes -- and you get to pick their color!  Set them to\na named color (\"blue\", \"magenta\", \"teal\", etc) or any color using RGB values.\nPleas see the [color](https://github.com/MycroftAI/mycroft-mark-1/blob/dev/dialog/en-us/colors.value)\nlist for more options\n\n###  Faceplate Brightness\nSet the faceplate to a specific brightness, or allow it to automatically adjust\nits brightness level to dim at night.",
             "authorname": "MycroftAI",
             "examples": [
-                "Turn on auto brightness.",
-                "Set a custom eye color (you'll be prompted for values)",
+                "Dim to 50%",
+                "Change your eye color to the default",
                 "Change your eye color to the default.",
                 "Set your eye color to pink.",
-                "Set your eye color to pink",
-                "Turn on auto brightness",
-                "Change to low brightness.",
-                "Set a custom eye color.",
-                "Dim to 50%",
+                "Set a custom eye color (you'll be prompted for values)",
                 "Change to low brightness",
-                "Change your eye color to the default"
+                "Turn on auto brightness.",
+                "Set your eye color to pink",
+                "Set a custom eye color.",
+                "Turn on auto brightness",
+                "Change to low brightness."
             ],
             "category": "Configuration",
             "tags": [
-                "configuration",
                 "permissive-license",
                 "settings",
+                "configuration",
+                "Configuration",
                 "mark1",
-                "system",
-                "Configuration"
+                "system"
             ],
             "platforms": [
                 "platform_mark1"
@@ -630,8 +519,8 @@
             "license": "apache-2.0",
             "requirements": {
                 "python": [
-                    "arrow==0.12.0",
-                    "astral==1.4"
+                    "astral==1.4",
+                    "arrow==0.12.0"
                 ],
                 "system": {},
                 "skill": []
@@ -655,22 +544,22 @@
             "authorname": "MycroftAI",
             "examples": [
                 "Go to sleep.",
-                "Go to sleep",
-                "Nap time.",
-                "Wake up",
                 "Nap time",
+                "Wake up",
+                "Nap time.",
+                "Go to sleep",
                 "Wake up."
             ],
             "category": "Daily",
             "tags": [
+                "sleep",
                 "do-not-disturb",
                 "permissive-license",
-                "naptime",
                 "donotdisturb",
                 "nap",
-                "Daily",
-                "sleep",
-                "Configuration"
+                "Configuration",
+                "naptime",
+                "Daily"
             ],
             "platforms": [
                 "all"
@@ -702,23 +591,23 @@
             "description": "Play the latest news from an RSS audio feed. Your device location will be used to provide a local feed from your country if available. Otherwise, the National Public Radio (NPR)\nHourly News will be used. You can also choose your own default or add a custom audio feed at: [home.mycroft.ai](https://home.mycroft.ai/#/skill).\n\nSupported stations include:\nAssociated Press (AP) Hourly Radio News\n * [AU] ABC News Australia\n * [BE] VRT Nieuws\n * [CA] CBC News\n * [DE] DLF\n * [DE] WDR\n * [FI] YLE\n * [SE] Ekot\n * [UK] BBC News\n * [US] Fox News\n * [US] NPR News Now\n * [US] PBS NewsHour",
             "authorname": "MycroftAI",
             "examples": [
-                "What's the news?",
                 "Restart news.",
-                "Tell me the news.",
-                "Play the news.",
-                "Play the BBC news",
                 "Play the news",
-                "Tell me the news",
                 "Play the BBC news.",
-                "Restart news"
+                "What's the news?",
+                "Play the news.",
+                "Restart news",
+                "Tell me the news.",
+                "Tell me the news",
+                "Play the BBC news"
             ],
             "category": "Daily",
             "tags": [
-                "headlines",
-                "news",
                 "permissive-license",
-                "Daily",
-                "Information"
+                "news",
+                "Information",
+                "headlines",
+                "Daily"
             ],
             "platforms": [
                 "all"
@@ -752,17 +641,17 @@
             "description": "The default backend to provide services for Mycroft users is\n [Home](https://home.mycroft.ai/).  Pairing a device with Home provides access\n to privacy-protecting Speech to Text, Wolfram Alpha and other such services,\n as well as easy configuration for all your Mycroft devices.",
             "authorname": "MycroftAI",
             "examples": [
-                "Pair my device.",
-                "Pair my device (happens automatically on first run if not paired already)"
+                "Pair my device (happens automatically on first run if not paired already)",
+                "Pair my device."
             ],
             "category": "Configuration",
             "tags": [
+                "pairing",
+                "pair",
                 "permissive-license",
                 "connectivity",
-                "pair",
-                "pairing",
-                "system",
-                "Configuration"
+                "Configuration",
+                "system"
             ],
             "platforms": [
                 "all"
@@ -793,18 +682,18 @@
             "description": "Ask about the \"birth\" and parentage of Mycroft and get a taste of the community\nwho is fostering this open source artificial intelligence.",
             "authorname": "MycroftAI",
             "examples": [
-                "Who made you?",
                 "What are you?",
-                "Do you even rhyme?",
                 "When were you created?",
-                "Where were you born?"
+                "Where were you born?",
+                "Do you even rhyme?",
+                "Who made you?"
             ],
             "category": "Entertainment",
             "tags": [
-                "personality",
+                "Entertainment",
                 "permissive-license",
-                "persona",
-                "Entertainment"
+                "personality",
+                "persona"
             ],
             "platforms": [
                 "all"
@@ -835,34 +724,34 @@
             "description": "This Skill doesn't do anything by itself, but it provides an important common\nlanguage for audio playback skills.  By handling simple phrases like\n'pause', this one Skill can turn around and rebroadcast the [messagebus](https://mycroft.ai/documentation/message-bus/)\ncommand `mycroft.audio.service.pause`, allowing several music services to share\ncommon terminology such as \"pause\".\n\nAdditionally, this implements the common Play handler.  This allows playback\nservices to negotiate which is best suited to play back a specific request.\nThis capability is used by the [Spotify](https://github.com/forslund/spotify-skill) and [Pandora](https://github.com/mycroftai/pianobar-skill) Skills, among others.",
             "authorname": "MycroftAI",
             "examples": [
-                "Play Pandora.",
-                "Next track",
-                "Play Pandora",
-                "Resume.",
-                "Pause.",
                 "Next song",
-                "Previous song.",
-                "Previous track.",
-                "Resume",
-                "Pause",
-                "Previous song",
-                "Next track.",
-                "Play my summer playlist.",
+                "Pause.",
                 "Next song.",
+                "Previous track.",
+                "Play Pandora",
+                "Next track",
+                "Play Pandora.",
+                "Pause",
                 "Play my summer playlist",
-                "Previous track"
+                "Next track.",
+                "Resume.",
+                "Previous song.",
+                "Resume",
+                "Previous track",
+                "Play my summer playlist.",
+                "Previous song"
             ],
             "category": "Music",
             "tags": [
-                "next",
                 "resume",
-                "pause",
                 "permissive-license",
                 "playback",
                 "Music",
-                "music",
+                "pause",
+                "play",
                 "system",
-                "play"
+                "music",
+                "next"
             ],
             "platforms": [
                 "all"
@@ -893,23 +782,23 @@
             "description": "Flexible reminder Skill, allowing you to set single and repeating reminders for tasks. The reminders are set on the Device, and have no external dependencies.",
             "authorname": "MycroftAI",
             "examples": [
-                "Remind me to put the garbage out at 8pm.",
-                "Remind me to walk the dog in an hour",
-                "Set a reminder every day to take my vitamin pill",
-                "Remind me to walk the dog in an hour.",
-                "Remind me to stretch in 10 minutes",
                 "Remind me to stretch in 10 minutes.",
                 "Remind me to put the garbage out at 8pm",
+                "Remind me to walk the dog in an hour",
                 "Set a reminder every day to take my vitamin pill.",
+                "Remind me to put the garbage out at 8pm.",
+                "Remind me to stretch in 10 minutes",
+                "Remind me to walk the dog in an hour.",
                 "Set a reminder every Friday at 2pm.",
-                "Set a reminder every Friday at 2pm"
+                "Set a reminder every Friday at 2pm",
+                "Set a reminder every day to take my vitamin pill"
             ],
             "category": "Daily",
             "tags": [
-                "reminders",
                 "permissive-license",
                 "reminder",
-                "Daily"
+                "Daily",
+                "reminders"
             ],
             "platforms": [
                 "all"
@@ -945,14 +834,14 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "lyrics",
-                "sing",
+                "Entertainment",
                 "permissive-license",
                 "singing",
-                "song",
                 "music",
+                "song",
                 "texttospeech",
-                "Entertainment"
+                "sing",
+                "lyrics"
             ],
             "platforms": [
                 "all"
@@ -983,21 +872,21 @@
             "description": "Turn Mycroft into a parrot.  Speak a phrase and listen to it repeated in Mycroft's selected voice.",
             "authorname": "MycroftAI",
             "examples": [
-                "repeat Once upon a midnight dreary, while I pondered, weak and weary, Over many a quaint and curious volume of forgotten lore",
-                "say Goodnight, Gracie",
                 "Repeat Once upon a midnight dreary, while I pondered, weak and weary, Over many a quaint and curious volume of forgotten lore.",
-                "Say Goodnight, Gracie.",
+                "Speak I can say anything you'd like!",
                 "speak I can say anything you'd like!",
-                "Speak I can say anything you'd like!"
+                "Say Goodnight, Gracie.",
+                "say Goodnight, Gracie",
+                "repeat Once upon a midnight dreary, while I pondered, weak and weary, Over many a quaint and curious volume of forgotten lore"
             ],
             "category": "Entertainment",
             "tags": [
-                "speak",
-                "repeat",
+                "Entertainment",
                 "permissive-license",
+                "speak",
                 "say",
                 "system",
-                "Entertainment"
+                "repeat"
             ],
             "platforms": [
                 "all"
@@ -1021,49 +910,6 @@
             "desktopFile": true
         },
         {
-            "skillname": "Spelling",
-            "foldername": "skill-spelling",
-            "url": "https://github.com/MycroftAI/skill-spelling",
-            "branch": "89c154850cf79f3b2544337e42874adc9e0c7520",
-            "description": "Mycroft can spell any word which is understood by speech-to-text.  The proper spelling is pronounced on all platforms, as well as displayed by devices such as the Mark 1.",
-            "authorname": "MycroftAI",
-            "examples": [
-                "Spell omnipotence",
-                "How do you spell aardvark?",
-                "How do you spell bureacracy?",
-                "Spell succotash",
-                "Spell succotash.",
-                "Spell omnipotence."
-            ],
-            "category": "Information",
-            "tags": [
-                "spell",
-                "permissive-license",
-                "spelling",
-                "Information"
-            ],
-            "platforms": [
-                "all"
-            ],
-            "short_description": "Let Mycroft help you spell words",
-            "name": "Spelling Skill",
-            "license": "apache-2.0",
-            "requirements": {
-                "python": [],
-                "system": {},
-                "skill": []
-            },
-            "download_url": "https://github.com/MycroftAI/skill-spelling/archive/89c154850cf79f3b2544337e42874adc9e0c7520.zip",
-            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/book-reader.svg",
-            "credits": [
-                "Mycroft AI (@MycroftAI)"
-            ],
-            "categories": [
-                "Information"
-            ],
-            "desktopFile": true
-        },
-        {
             "skillname": "Spotify",
             "foldername": "spotify-skill",
             "url": "https://github.com/forslund/spotify-skill",
@@ -1071,24 +917,24 @@
             "description": "Stream your favorite music from the popular Spotify music service.  Spotify\nPremium users can search and play tracks from their own playlists or the huge\nSpotify music library.\n\nYou can also control your Mycroft device using the Spotify Connect system.\nSo play DJ on your phone while listening on Mycroft!\n\n### Authorization:\nThis Skill uses two different methods of authentication. Both need to be filled in correctly for the **Skill** to function correctly.\n\n#### API connection to your Spotify account\nAfter installing `mycroft-spotify`, in your [Skill\nsettings for Spotify](https://home.mycroft.ai/#/skill) in home.mycroft.ai you will see settings for the Spotify Skill. You will see a username and password field and a 'Connect' button. Ignore the username and password field for now, and click the 'Connect' button. You will be prompted to log in to Spotify, and to authorize Mycroft AI to use your Spotify account using OAuth. This allows Mycroft access to your account details such as Playlists.\n\n#### Username and password to authenticate a Mycroft device\nIn addition to account details, Mycroft needs to be authorized as a **device** for Spotify. To do this, we use your username and password for Spotify. These must be entered as well, or you will receive an error message like:\n\n`I couldn't find any Spot-ify devices.  This skill requires a Spotify Premium account to work properly.`\n\nwhen you try to use the **Skill** on a Mycroft device.\n\nIf you log in to Spotify using Facebook, your password will be your _Facebook_ password, but your Spotify device username. You can get your Spotify device username [here](https://www.spotify.com/us/account/set-device-password/).\n\n_NOTE: You MUST have a Premium Spotify account to use this **Skill**. It will NOT work with a free Spotify account._",
             "authorname": "forslund",
             "examples": [
-                "Play the album Hello Nasty on Spotify.",
-                "Search Spotify for Hello Nasty",
-                "What Spotify devices are available?",
-                "Play discover weekly",
-                "Play my liked songs",
-                "Play discover weekly.",
                 "Play my liked songs.",
-                "Play something by Covenant.",
                 "Play Hello Nasty on Spotify.",
                 "Play something by Coventant",
-                "Play the album Hello Nasty on Spotify"
+                "Play discover weekly",
+                "Play something by Covenant.",
+                "What Spotify devices are available?",
+                "Play my liked songs",
+                "Play discover weekly.",
+                "Search Spotify for Hello Nasty",
+                "Play the album Hello Nasty on Spotify",
+                "Play the album Hello Nasty on Spotify."
             ],
             "category": "Music",
             "tags": [
-                "permissive-license",
-                "Music",
                 "music",
-                "spotify"
+                "permissive-license",
+                "spotify",
+                "Music"
             ],
             "platforms": [
                 "all"
@@ -1114,51 +960,6 @@
             "desktopFile": true
         },
         {
-            "skillname": "Stock Prices",
-            "foldername": "skill-stock",
-            "url": "https://github.com/MycroftAI/skill-stock",
-            "branch": "4ba6ea9860e374b2e09a1582f33bc0b46a911ae3",
-            "description": "Using the [Financial Modeling Prep](https://financialmodelingprep.com/developer/docs/) API, you can ask Mycroft to get the current price of stocks.",
-            "authorname": "MycroftAI",
-            "examples": [
-                "Stock price of Google.",
-                "Trading at Google",
-                "Trading at Google.",
-                "Stock price of Google"
-            ],
-            "category": "Information",
-            "tags": [
-                "financial",
-                "stocks",
-                "permissive-license",
-                "stock-market",
-                "stock-prices",
-                "Information"
-            ],
-            "platforms": [
-                "all"
-            ],
-            "short_description": "Provides current stock prices",
-            "name": "Stock Skill",
-            "license": "apache-2.0",
-            "requirements": {
-                "python": [
-                    "requests>=2.13.0"
-                ],
-                "system": {},
-                "skill": []
-            },
-            "download_url": "https://github.com/MycroftAI/skill-stock/archive/4ba6ea9860e374b2e09a1582f33bc0b46a911ae3.zip",
-            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/money-check-alt.svg",
-            "credits": [
-                "Mycroft AI (@MycroftAI)"
-            ],
-            "categories": [
-                "Information"
-            ],
-            "desktopFile": true
-        },
-        {
             "skillname": "System",
             "foldername": "skill-stop",
             "url": "https://github.com/MycroftAI/skill-stop",
@@ -1166,21 +967,21 @@
             "description": "Provides verbal interfaces for basic framework interactions, such as the\n\"Stop\" command.  Also provide interface to control physical Mycroft hardware.\n\nNOTE: This Skill is a little unusual in that it really doesn't do anything\ndirectly, rather it emits messages for the device creator to capture.",
             "authorname": "MycroftAI",
             "examples": [
-                "Stop.",
                 "Stop",
+                "Reboot",
+                "Stop.",
                 "Configure wifi",
-                "Allow remote login",
+                "Configure wifi.",
+                "Allow remote login.",
+                "Turn off.",
                 "Turn off",
                 "Reboot.",
-                "Configure wifi.",
-                "Reboot",
-                "Turn off.",
-                "Allow remote login."
+                "Allow remote login"
             ],
             "category": "Configuration",
             "tags": [
-                "permissive-license",
                 "system",
+                "permissive-license",
                 "Configuration"
             ],
             "platforms": [
@@ -1212,23 +1013,23 @@
             "description": "This Skill generates a package with debugging information and emails it to the email address registered in your [home.mycroft.ai](https://home.mycroft.ai) account. This package can be used for debugging issues yourself, or alternatively it can be emailed to Mycroft to create a support request. \n\nThe package contains all of your `mycroft-core` logs on the Device, and information about active Skills and Intents at the time the support request was generated. \n\nThis uses the [0x0.st](https://0x0.st/) service for storing the debugging information.",
             "authorname": "MycroftAI",
             "examples": [
-                "Create a support ticket.",
+                "Create a support ticket",
+                "Send me debug info.",
                 "You're not working!",
                 "Send me debug info",
-                "Create a support ticket",
-                "Send me debug info."
+                "Create a support ticket."
             ],
             "category": "Configuration",
             "tags": [
-                "logs",
-                "permissive-license",
                 "support",
-                "help",
+                "permissive-license",
+                "troubleshooting",
                 "support-request",
-                "system",
-                "assistance",
                 "Configuration",
-                "troubleshooting"
+                "system",
+                "help",
+                "assistance",
+                "logs"
             ],
             "platforms": [
                 "all"
@@ -1254,6 +1055,63 @@
             "desktopFile": true
         },
         {
+            "skillname": "Set alarms",
+            "foldername": "skill-alarm",
+            "url": "https://github.com/MycroftAI/skill-alarm",
+            "branch": "e3aa539642f6d6f45214310715a5cf782e7ba4fd",
+            "description": "Set a single use alarm, daily alarms, or weekly recurring alarms.\n\n You can choose from five different alarm sounds:\n * Constant Beep\n * Four rapid beeps\n * Escalating beeps\n * Alarm bell\n * Gentle chimes",
+            "authorname": "MycroftAI",
+            "examples": [
+                "Set an alarm for 10:00 am on the weekends.",
+                "Set an alarm for 10:00 am on the weekends",
+                "Set an alarm for weekdays at 7 in the morning",
+                "Cancel my 10:00 am alarm.",
+                "Set an alarm (Mycroft will prompt for more information)",
+                "Set an alarm for 8:00 am on Mondays.",
+                "Set an alarm for 8:00 am every Tuesday",
+                "Set an alarm for 8:00 am on Mondays",
+                "Cancel my 10:00 am alarm",
+                "Snooze for 30 minutes.",
+                "Snooze for 30 minutes",
+                "Set an alarm for 9 pm July 14th.",
+                "Set an alarm for 8:00 am every Tuesday.",
+                "Set an alarm for 9:30 am.",
+                "Set an alarm.",
+                "Set an alarm for 9 pm July 14th",
+                "Set an alarm for weekdays at 7 in the morning.",
+                "Set an alarm for 9:30 am",
+                "Are any alarms set?"
+            ],
+            "category": "Daily",
+            "tags": [
+                "alarm",
+                "Daily",
+                "permissive-license"
+            ],
+            "platforms": [
+                "all"
+            ],
+            "short_description": "Set alarms with Mycroft",
+            "name": "Alarm Skill",
+            "license": "apache-2.0",
+            "requirements": {
+                "python": [
+                    "pyalsaaudio"
+                ],
+                "system": {},
+                "skill": []
+            },
+            "download_url": "https://github.com/MycroftAI/skill-alarm/archive/e3aa539642f6d6f45214310715a5cf782e7ba4fd.zip",
+            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/clock.svg",
+            "credits": [
+                "Mycroft AI (@MycroftAI)"
+            ],
+            "categories": [
+                "Daily"
+            ],
+            "desktopFile": true
+        },
+        {
             "skillname": "Timer",
             "foldername": "mycroft-timer",
             "url": "https://github.com/MycroftAI/mycroft-timer",
@@ -1261,27 +1119,27 @@
             "description": "Use Mycroft when your hands are messy or you need more that the one timer in your kitchen.  Multiple timers are easy to set and track with conversational interactions.\n\nOn a Mark 1 you'll see visual feedback as the timer runs, and you can use\nthe top button to stop the beeping once a timer expires.",
             "authorname": "MycroftAI",
             "examples": [
-                "Set a timer for 3 hours called turkey",
-                "How long is left on the turkey timer?",
                 "Mute the timer (once triggered)",
-                "Set a timer for 3 hours called turkey.",
-                "Start a timer.",
                 "Set a timer for 1 minute.",
-                "Mute the timer.",
-                "Start a timer for 30 seconds",
-                "Cancel the timer.",
-                "How long is left on the timer?",
+                "Set a timer for 3 hours called turkey.",
                 "Start a timer for 30 seconds.",
-                "Start a timer (will be prompted)",
+                "Mute the timer.",
+                "Cancel the timer.",
+                "Set a timer for 3 hours called turkey",
+                "How long is left on the timer?",
                 "Cancel the timer",
-                "Set a timer for 1 minute"
+                "Start a timer.",
+                "Start a timer (will be prompted)",
+                "Start a timer for 30 seconds",
+                "Set a timer for 1 minute",
+                "How long is left on the turkey timer?"
             ],
             "category": "Daily",
             "tags": [
                 "timer",
+                "Daily",
                 "permissive-license",
-                "kitchen-timer",
-                "Daily"
+                "kitchen-timer"
             ],
             "platforms": [
                 "all"
@@ -1315,25 +1173,25 @@
             "authorname": "MycroftAI",
             "examples": [
                 "What is the weather going to be like Tuesday?",
-                "What is the weather in Houston?",
-                "What's the humidity?",
-                "How windy is it?",
                 "Is it going to snow?",
-                "When will it rain next?",
                 "What's the temperature?",
-                "What is the forecast tomorrow?",
-                "What is the weather?"
+                "What is the weather in Houston?",
+                "What is the weather?",
+                "How windy is it?",
+                "What's the humidity?",
+                "When will it rain next?",
+                "What is the forecast tomorrow?"
             ],
             "category": "Daily",
             "tags": [
-                "snow",
-                "temperature",
                 "rain",
-                "weather",
-                "permissive-license",
                 "forecast",
+                "humidity",
+                "temperature",
+                "weather",
                 "Daily",
-                "humidity"
+                "snow",
+                "permissive-license"
             ],
             "platforms": [
                 "all"
@@ -1344,8 +1202,8 @@
             "requirements": {
                 "python": [
                     "requests>=2.13.0",
-                    "pyowm==2.6.1",
-                    "multi-key-dict==2.0.3"
+                    "multi-key-dict==2.0.3",
+                    "pyowm==2.6.1"
                 ],
                 "system": {},
                 "skill": []
@@ -1369,20 +1227,20 @@
             "authorname": "MycroftAI",
             "examples": [
                 "What version are you running?",
+                "What's your platform build?",
                 "Check version.",
                 "What's your platform build? ",
-                "Check version",
-                "What's your platform build?"
+                "Check version"
             ],
             "category": "Configuration",
             "tags": [
-                "permissive-license",
                 "version",
-                "versioning",
                 "system",
                 "platform",
+                "Configuration",
+                "versioning",
                 "build",
-                "Configuration"
+                "permissive-license"
             ],
             "platforms": [
                 "all"
@@ -1413,33 +1271,33 @@
             "description": "Query [Wikipedia](https://www.wikipedia.org) for answers to all your questions.  Get just a summary, or ask for more to get in-depth information.\n \n This Skill uses the [Wikimedia API](https://en.wikipedia.org/w/api.php).",
             "authorname": "MycroftAI",
             "examples": [
+                "Tell me about beans.",
+                "Tell me about the Pembroke Welsh Corgi",
                 "Tell me More.",
+                "Tell me something random.",
                 "Tell me about Elon Musk",
+                "Check Wikipedia for beans.",
                 "Check Wikipedia for beans",
                 "Search for chocolate",
-                "More information (followup after an initial summary)",
-                "Check Wikipedia for beans.",
-                "Tell me about the Pembroke Welsh Corgi.",
-                "Search for chocolate.",
-                "Tell me about beans",
-                "Tell me something random",
-                "Tell me More (followup after an initial summary)",
-                "Tell me about the Pembroke Welsh Corgi",
-                "Tell me about beans.",
-                "Tell me something random.",
                 "Tell me about Elon Musk.",
-                "More information."
+                "Search for chocolate.",
+                "More information.",
+                "Tell me something random",
+                "Tell me about the Pembroke Welsh Corgi.",
+                "Tell me More (followup after an initial summary)",
+                "More information (followup after an initial summary)",
+                "Tell me about beans"
             ],
             "category": "Information",
             "tags": [
-                "encyclopedia",
+                "Information",
                 "question",
-                "general-knowledge",
                 "wikipedia",
                 "permissive-license",
-                "query",
-                "Information",
-                "wiki"
+                "general-knowledge",
+                "encyclopedia",
+                "wiki",
+                "query"
             ],
             "platforms": [
                 "all"
@@ -1472,25 +1330,25 @@
             "description": "Control the volume of Mycroft with verbal commands or by spinning the physical\nbutton on a Mark 1.",
             "authorname": "MycroftAI",
             "examples": [
-                "Set volume to 75 percent.",
-                "Turn up the volume",
-                "Turn up the volume.",
                 "Set volume to 5.",
-                "Mute audio",
-                "Decrease the audio.",
-                "Set volume to 75 percent",
                 "Decrease the audio",
+                "Turn up the volume",
+                "Set volume to 5",
+                "Turn up the volume.",
                 "Mute audio.",
-                "Set volume to 5"
+                "Mute audio",
+                "Set volume to 75 percent",
+                "Decrease the audio.",
+                "Set volume to 75 percent."
             ],
             "category": "Configuration",
             "tags": [
-                "sound",
-                "volume",
-                "permissive-license",
                 "system",
+                "volume",
+                "volume-control",
+                "sound",
                 "Configuration",
-                "volume-control"
+                "permissive-license"
             ],
             "platforms": [
                 "all"
@@ -1523,25 +1381,26 @@
             "description": "Pandora provides dynamically generated internet radio streams.  Streams are\ninfluenced by the the traits of the music played and the songs you like\nor skip.\n\nUsing this skill does require a [Pandora.com](https://pandora.com) account.\nSign-up is free with ad-supported streams.",
             "authorname": "MycroftAI",
             "examples": [
-                "Play Pandora.",
-                "Skip this song.",
-                "List my stations",
                 "Play Pandora",
-                "Skip this song",
-                "List my stations.",
+                "Next song",
                 "Play Today's Hits Radio on Pandora",
                 "Play Today's Hits Radio on Pandora.",
-                "Next station",
-                "Next station.",
+                "List my stations",
+                "List my stations.",
+                "Play Pandora.",
+                "Skip this song",
                 "Next song.",
-                "Next song"
+                "Next station.",
+                "Skip this song.",
+                "Next station"
             ],
             "category": "Music",
             "tags": [
-                "pandora",
-                "free",
+                "no-license",
                 "Music",
-                "music"
+                "pandora",
+                "music",
+                "free"
             ],
             "platforms": [
                 "all"
@@ -1574,21 +1433,21 @@
             "description": "When a new release is being tested, this skill is installed to verify the\ninstallation mechanism functions properly.  Additionally, the following line\nis edited to verify that the skill update process occurs as intended.\n\nTest line:  2018/10/23 23:14",
             "authorname": "MycroftAI",
             "examples": [
-                "Release test.",
                 "Release test",
-                "Run the release test (should respond with 'Test passed')"
+                "Run the release test (should respond with 'Test passed')",
+                "Release test."
             ],
             "category": "Configuration",
             "tags": [
-                "cd",
-                "testing",
-                "permissive-license",
-                "release-test",
-                "quality-assurance",
                 "release",
+                "quality-assurance",
                 "qa",
+                "Configuration",
                 "ci",
-                "Configuration"
+                "permissive-license",
+                "testing",
+                "release-test",
+                "cd"
             ],
             "platforms": [
                 "all"
@@ -1629,7 +1488,7 @@
             ],
             "short_description": "Skill to determine when Mycroft AI has finished booting up.",
             "name": "Finished Booting Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [],
                 "system": {},
@@ -1646,6 +1505,148 @@
             "desktopFile": true
         },
         {
+            "skillname": "Device Configuration",
+            "foldername": "skill-configuration",
+            "url": "https://github.com/MycroftAI/skill-configuration",
+            "branch": "9231778e959c65a4f8156923fb26d11483d72ea0",
+            "description": "User and device settings from [home.mycroft.ai](https://home.mycroft.ai) are\nsynchronized with your Devices.  This Skill performs that synchronization and\nallows you to check your settings.\n\nYou can also change the technology used to perform Wake Word spotting.  This is\nthe system that wakes the device up when you say \"Hey Mycroft\".",
+            "authorname": "MycroftAI",
+            "examples": [
+                "What's your location?",
+                "Set the Listener to Precise.",
+                "What's the current Listener?",
+                "What's your name?",
+                "Configuration update",
+                "Update config.",
+                "Set the Listener to Precise (for advanced debugging)",
+                "Set the Listener to default (for advanced debugging)",
+                "Set the Listener to default.",
+                "Configuration update.",
+                "What's the current Listener? (for advanced debugging)",
+                "Update config"
+            ],
+            "category": "Configuration",
+            "tags": [
+                "update-config",
+                "Configuration",
+                "configuration",
+                "config",
+                "system",
+                "permissive-license"
+            ],
+            "platforms": [
+                "all"
+            ],
+            "short_description": "Synchronize your Device Settings with [Home](https://home.mycroft.ai).",
+            "name": "Configuration Skill",
+            "license": "apache-2.0",
+            "requirements": {
+                "python": [
+                    "humanhash3",
+                    "requests>=2.13.0"
+                ],
+                "system": {},
+                "skill": []
+            },
+            "download_url": "https://github.com/MycroftAI/skill-configuration/archive/9231778e959c65a4f8156923fb26d11483d72ea0.zip",
+            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/cogs.svg",
+            "credits": [
+                "Mycroft AI (@MycroftAI)"
+            ],
+            "categories": [
+                "Configuration"
+            ],
+            "desktopFile": true
+        },
+        {
+            "skillname": "Spelling",
+            "foldername": "skill-spelling",
+            "url": "https://github.com/MycroftAI/skill-spelling",
+            "branch": "89c154850cf79f3b2544337e42874adc9e0c7520",
+            "description": "Mycroft can spell any word which is understood by speech-to-text.  The proper spelling is pronounced on all platforms, as well as displayed by devices such as the Mark 1.",
+            "authorname": "MycroftAI",
+            "examples": [
+                "Spell succotash.",
+                "Spell omnipotence",
+                "Spell omnipotence.",
+                "How do you spell bureacracy?",
+                "How do you spell aardvark?",
+                "Spell succotash"
+            ],
+            "category": "Information",
+            "tags": [
+                "spelling",
+                "Information",
+                "permissive-license",
+                "spell"
+            ],
+            "platforms": [
+                "all"
+            ],
+            "short_description": "Let Mycroft help you spell words",
+            "name": "Spelling Skill",
+            "license": "apache-2.0",
+            "requirements": {
+                "python": [],
+                "system": {},
+                "skill": []
+            },
+            "download_url": "https://github.com/MycroftAI/skill-spelling/archive/89c154850cf79f3b2544337e42874adc9e0c7520.zip",
+            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/book-reader.svg",
+            "credits": [
+                "Mycroft AI (@MycroftAI)"
+            ],
+            "categories": [
+                "Information"
+            ],
+            "desktopFile": true
+        },
+        {
+            "skillname": "Stock Prices",
+            "foldername": "skill-stock",
+            "url": "https://github.com/MycroftAI/skill-stock",
+            "branch": "4ba6ea9860e374b2e09a1582f33bc0b46a911ae3",
+            "description": "Using the [Financial Modeling Prep](https://financialmodelingprep.com/developer/docs/) API, you can ask Mycroft to get the current price of stocks.",
+            "authorname": "MycroftAI",
+            "examples": [
+                "Trading at Google",
+                "Trading at Google.",
+                "Stock price of Google",
+                "Stock price of Google."
+            ],
+            "category": "Information",
+            "tags": [
+                "financial",
+                "stock-prices",
+                "stocks",
+                "stock-market",
+                "Information",
+                "permissive-license"
+            ],
+            "platforms": [
+                "all"
+            ],
+            "short_description": "Provides current stock prices",
+            "name": "Stock Skill",
+            "license": "apache-2.0",
+            "requirements": {
+                "python": [
+                    "requests>=2.13.0"
+                ],
+                "system": {},
+                "skill": []
+            },
+            "download_url": "https://github.com/MycroftAI/skill-stock/archive/4ba6ea9860e374b2e09a1582f33bc0b46a911ae3.zip",
+            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/money-check-alt.svg",
+            "credits": [
+                "Mycroft AI (@MycroftAI)"
+            ],
+            "categories": [
+                "Information"
+            ],
+            "desktopFile": true
+        },
+        {
             "skillname": "Query",
             "foldername": "skill-query",
             "url": "https://github.com/MycroftAI/skill-query",
@@ -1653,9 +1654,9 @@
             "description": "Negotiates handling of questions by calling all registered Common Query Skills. This is done by sending a `question:query` message with the utterance to give the skills the posibility to report back if they can answer the question and at which confidence.",
             "authorname": "MycroftAI",
             "examples": [
-                "How tall is Abraham Lincoln?",
+                "What is an Aardwark?",
                 "Why is the sky blue?",
-                "What is an Aardwark?"
+                "How tall is Abraham Lincoln?"
             ],
             "category": "Information",
             "tags": [
@@ -1692,33 +1693,33 @@
             "description": "Interact with your smart home using the [Wink system](https://www.wink.com/).  Wink hubs can work with virtually any brand of lights, including [Philips Hue](https://www2.meethue.com/en-us), [GE](https://www.gelighting.com/), [Sylvania](https://www.sylvania.com/en-us/Pages/default.aspx), [Cree](https://creebulb.com/connected), and many more.  Use Mycroft to easily interact with nearby lights and light groups you create within the Wink ecosystem.\n\nYour can easily find the right light or lights based on the names of lights and groups.  The Mycroft device's Name (set at [Home](https://home.mycroft.ai/) -- check by asking \"what is your name?\")\ncan be used to find lights and/or groups with begin with that same name. For example, if your Mycroft device's location is set to 'Kitchen' and you say \"Turn on the light\", lights with the following names would be turned on:\n\nIt will NOT turn on a light called \"Porch off the kitchen\".\n\nYou can also include the light/group name in your request, along with intensity words, such as: `bright`, `dim`, `full`, `half`, `completely`, `partially`\nKitchen\n * Kitchen sink\n * Kitchen fan (group consisting of 'Fan 1', 'Fan 2', 'Fan 3')",
             "authorname": "MycroftAI",
             "examples": [
-                "Brighter (conversationally)",
-                "Turn on the bedroom lights dimly",
-                "Switch off the light.",
-                "Raise the light in the kitchen.",
                 "Turn on the bedroom lights dimly.",
+                "Turn on the bedroom lights dimly",
+                "Brighter (conversationally)",
+                "Flip on the light.",
                 "Dimmer (conversationally)",
+                "Dim the lights.",
+                "Switch off the light",
+                "Raise the light in the kitchen.",
                 "Flip on the light",
                 "Dim the lights",
-                "Switch off the light",
-                "Flip on the light.",
-                "Dim the lights.",
-                "Raise the light in the kitchen"
+                "Raise the light in the kitchen",
+                "Switch off the light."
             ],
             "category": "IoT",
             "tags": [
-                "smarthome",
-                "IoT",
-                "wink",
-                "lightbulb",
+                "winkhub",
                 "LED",
-                "permissive-license",
-                "smart-home",
+                "wink",
                 "light",
                 "iot",
+                "smarthome",
                 "lighting",
-                "winkhub",
-                "home-automation"
+                "smart-home",
+                "permissive-license",
+                "lightbulb",
+                "home-automation",
+                "IoT"
             ],
             "platforms": [
                 "all"
@@ -1749,19 +1750,20 @@
             "description": "Zork is one of the classic text based adventure games from an era before high-end graphics circuits, instead it runs on the graphics hardware of your mind!\n\nExplore the white house, the forest surrounding it and the hidden kingdom below it. Moving this from the text domain to the voice domain makes for a curiously engaging experience and if nothing else a fun couple of minutes.\n\nThe skill utilizes the excellent Frotz (http://frotz.sourceforge.net/) Z-Machine interpreter and the Zork data files are from infocom-if (http://infocom-if.org/index2.html).\n\n*Be ware of Grues....*",
             "authorname": "forslund",
             "examples": [
-                "Quit zork.",
+                "quit zork",
                 "Play zork.",
                 "open mailbox",
-                "play zork",
-                "quit zork",
-                "Open mailbox."
+                "Quit zork.",
+                "Open mailbox.",
+                "play zork"
             ],
             "category": "Entertainment",
             "tags": [
-                "game",
                 "port",
+                "Entertainment",
                 "adventure",
-                "Entertainment"
+                "no-license",
+                "game"
             ],
             "platforms": [
                 "all"
@@ -1789,19 +1791,20 @@
             "foldername": "fallback-aiml",
             "url": "https://github.com/forslund/fallback-aiml",
             "branch": "68a322e77c56c7afa19cf41ea1370c3e20e8c291",
-            "description": "The fallback leverages the [Alice chatbot](https://www.chatbots.org/chatbot/a.l.i.c.e/) to create some fun interactions.  Phrases not explicitly handled by other skills will be run by the chatbot, so nearly every interaction will have _some_ response.  But be warned, Mycroft might become a bit obnoxious...\r\n\r\nThe AIML takes up a considerable amount of memory so the skill is disabled by default. To enable go to Skillsettings under home.mycroft.ai\r\n\r\nThis is based on the original work of [JarbasAI](https://github.com/JarbasAI) with updates from all over the Mycroft community.",
+            "description": "The fallback leverages the [Alice chatbot](https://www.chatbots.org/chatbot/a.l.i.c.e/) to create some fun interactions.  Phrases not explicitly handled by other skills will be run by the chatbot, so nearly every interaction will have _some_ response.  But be warned, Mycroft might become a bit obnoxious...\n\nThe AIML takes up a considerable amount of memory so the skill is disabled by default. To enable go to Skillsettings under home.mycroft.ai\n\nThis is based on the original work of [JarbasAI](https://github.com/JarbasAI) with updates from all over the Mycroft community.",
             "authorname": "forslund",
             "examples": [
-                "Do you like ice cream.",
-                "I have a jump rope\r",
+                "Do you like dogs",
+                "Do you like dogs.",
+                "Do you like ice cream",
                 "I have a jump rope.",
-                "Do you like ice cream\r",
-                "Do you like dogs\r",
-                "Do you like dogs."
+                "I have a jump rope",
+                "Do you like ice cream."
             ],
             "category": "Entertainment",
             "tags": [
                 "aiml",
+                "no-license",
                 "chatbot",
                 "Entertainment"
             ],
@@ -1821,7 +1824,7 @@
             "download_url": "https://github.com/forslund/fallback-aiml/archive/68a322e77c56c7afa19cf41ea1370c3e20e8c291.zip",
             "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/robot.svg",
             "credits": [
-                "@jarbasal\r\n@nielstron\r\n@EazyAlvaro\r\n@forslund"
+                "@jarbasal\n@nielstron\n@EazyAlvaro\n@forslund"
             ],
             "categories": [
                 "Entertainment"
@@ -1836,17 +1839,18 @@
             "description": "This skill makes a random choice between two specified options. You can ask who is going to win the game, what should you wear, what you should eat, or simply \"decide\" between two options.",
             "authorname": "lhannon",
             "examples": [
-                "What should I wear, t-shirt or polo?",
-                "What should I eat for lunch, burger or sushi?",
-                "Decide heads or tails",
                 "Who is going to win tonight's game, Villanova or Duke?",
-                "Decide heads or tails."
+                "Decide heads or tails",
+                "Decide heads or tails.",
+                "What should I eat for lunch, burger or sushi?",
+                "What should I wear, t-shirt or polo?"
             ],
             "category": "Entertainment",
             "tags": [
-                "oscon2018",
                 "oscon",
-                "Entertainment"
+                "no-license",
+                "Entertainment",
+                "oscon2018"
             ],
             "platforms": [
                 "all"
@@ -1877,25 +1881,25 @@
             "description": "Let Mycroft help you mix better and more fun drinks and cocktails. When asked Mycroft provides ingredients and mixing instructions for various drinks. The skill uses the fabulous [theCocktailDB](https://thecocktaildb.com/).",
             "authorname": "forslund",
             "examples": [
-                "How do I mix a Moscow Mule.",
+                "How do I make a daiquiri.",
                 "how do I make a daiquiri",
-                "how do I mix a Moscow Mule",
-                "How do I make a daiquiri."
+                "How do I mix a Moscow Mule.",
+                "how do I mix a Moscow Mule"
             ],
             "category": "Information",
             "tags": [
+                "recipies",
+                "drinks",
                 "cocktails",
                 "viral-license",
-                "recipies",
-                "Information",
-                "drinks"
+                "Information"
             ],
             "platforms": [
                 "all"
             ],
             "short_description": "Get help mixing drinks.",
             "name": "Cocktail Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [],
                 "system": {},
@@ -1919,38 +1923,38 @@
             "description": "This skill integrates plasma-shell activities with mycroft which enables users to control their desktop activities via voice on the go, users can create activities, switch, remove, stop and display activities on their desktops.",
             "authorname": "AIIX",
             "examples": [
-                "Kill activity 'Activity Name.",
-                "switch to activity 'Activity Name'",
-                "Show current Activities.",
-                "Switch to activity 'Activity Name.",
-                "remove activity 'Activity Name'",
+                "Create new activity 'Activity Name.",
                 "Remove activity 'Activity Name.",
-                "kill activity 'Activity Name'",
-                "create new activity 'Activity Name'",
                 "show current Activities",
-                "Create new activity 'Activity Name."
+                "Show current Activities.",
+                "create new activity 'Activity Name'",
+                "switch to activity 'Activity Name'",
+                "remove activity 'Activity Name'",
+                "Kill activity 'Activity Name.",
+                "kill activity 'Activity Name'",
+                "Switch to activity 'Activity Name."
             ],
             "category": "Productivity",
             "tags": [
-                "activities",
-                "Productivity",
-                "control",
                 "kde",
+                "switch",
                 "viral-license",
                 "desktop",
                 "plasma",
-                "switch"
+                "Productivity",
+                "activities",
+                "control"
             ],
             "platforms": [
                 "platform_plasmoid"
             ],
             "short_description": "Control Your Plasmashell Activities",
             "name": "Plasma Activities Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [
-                    "dbus-python",
-                    "dbus-python "
+                    "dbus-python ",
+                    "dbus-python"
                 ],
                 "system": {
                     "all": "libdbus-1-dev libdbus-glib-1-dev"
@@ -1975,23 +1979,23 @@
             "description": "With this skill, Mycroft can check your email. With this skill, Mycroft can say the sender and the subject of each email. You can also request Mycroft to notify you when you get email, either any email, or just from a specific sender. In addition, this skill allows you to ask if you have any email, and will list the new email from that sender.\n\nTo configure this skill go [to the skill wiki](https://github.com/LinusS1/email-skill/wiki/Configuration)",
             "authorname": "LinusS1",
             "examples": [
+                "Do I have any new emails?",
                 "Do I have any email from Bob?",
-                "Tell me when I get new mail.",
+                "Check my email.",
                 "Tell me when I get new mail",
                 "Check my email",
-                "Do I have any new mail?",
-                "Check my email.",
-                "Do I have any new emails?"
+                "Tell me when I get new mail.",
+                "Do I have any new mail?"
             ],
             "category": "Productivity",
             "tags": [
-                "Productivity",
-                "permissive-license",
+                "emails",
+                "Information",
                 "mail",
+                "Productivity",
                 "email",
                 "Daily",
-                "Information",
-                "emails"
+                "permissive-license"
             ],
             "platforms": [
                 "all"
@@ -2026,19 +2030,20 @@
             "authorname": "rickyphewitt",
             "examples": [
                 "Play Playlist Rockin Tunes From Emby.",
-                "Play Dance Gavin Dance From Emby",
-                "Play Song Stitch From Emby.",
+                "play Album Deadweight From Emby",
+                "Play Album Deadweight From Emby.",
                 "Play Artist Thrice From Emby",
                 "Play Artist Thrice From Emby.",
-                "Play Album Deadweight From Emby.",
+                "Play Dance Gavin Dance From Emby",
                 "Play Dance Gavin Dance From Emby.",
-                "play Album Deadweight From Emby"
+                "Play Song Stitch From Emby."
             ],
             "category": "Music",
             "tags": [
                 "Music",
-                "Emby,Music",
-                "Emby,"
+                "no-license",
+                "Emby,",
+                "Emby,Music"
             ],
             "platforms": [
                 "all"
@@ -2071,29 +2076,29 @@
             "description": "In Number Guess, you provide a lower and upper bound, then try to guess the randomly generated number between those bounds. With this skill, Mycroft can play with you! Ask Mycroft to generate a random number, try to guess, and Mycroft will tell you if your guess is too high, too low, or spot on.",
             "authorname": "Arc676",
             "examples": [
-                "Let's play Number Guess",
-                "Let's play Number Guess.",
-                "Number Guess",
                 "Play Number Guess",
                 "Number Guess.",
-                "Play Number Guess."
+                "Play Number Guess.",
+                "Number Guess",
+                "Let's play Number Guess",
+                "Let's play Number Guess."
             ],
             "category": "Entertainment",
             "tags": [
+                "guessing",
+                "viral-license",
+                "Entertainment",
+                "random",
                 "game",
                 "numberguess",
-                "viral-license",
-                "number",
-                "random",
-                "guessing",
-                "Entertainment"
+                "number"
             ],
             "platforms": [
                 "all"
             ],
             "short_description": "Play Number Guess with Mycroft",
             "name": "Number Guess Mycroft Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [],
                 "system": {},
@@ -2117,16 +2122,16 @@
             "description": "Ask Mycroft any yes/no question and receive a randomly chosen answer.\n\nPlease don't use this skill for any important questions.",
             "authorname": "Arc676",
             "examples": [
-                "Crystal Ball, will the world end tomorrow?",
                 "Tell me the future; will Mycroft become greater than Siri or Alexa?",
+                "Crystal Ball, will the world end tomorrow?",
                 "Mirror mirror on the wall, am I the fairest of them all?",
                 "What does the future hold? Will I become rich and famous?"
             ],
             "category": "Entertainment",
             "tags": [
+                "viral-license",
                 "crystalball",
                 "random",
-                "viral-license",
                 "Entertainment"
             ],
             "platforms": [
@@ -2134,7 +2139,7 @@
             ],
             "short_description": "Provides random answers to yes/no questions",
             "name": "Crystal Ball Mycroft Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [],
                 "system": {},
@@ -2165,25 +2170,25 @@
             ],
             "category": "IoT",
             "tags": [
-                "homeautomation",
-                "IoT",
-                "viral-license",
-                "iot",
                 "homeassistant",
-                "smarthome"
+                "smarthome",
+                "iot",
+                "viral-license",
+                "homeautomation",
+                "IoT"
             ],
             "platforms": [
                 "all"
             ],
             "short_description": "Awaken your home - Control Home Assistant",
             "name": "Homeassistant Skill",
-            "license": "lgpl",
+            "license": "lgpl-3.0",
             "requirements": {
                 "python": [
-                    "python-Levenshtein==0.12.0",
                     "responses",
                     "fuzzywuzzy==0.14.0",
-                    "requests"
+                    "requests",
+                    "python-Levenshtein==0.12.0"
                 ],
                 "system": {},
                 "skill": []
@@ -2208,20 +2213,20 @@
             "examples": [],
             "category": "IoT",
             "tags": [
-                "aiy",
-                "IoT",
-                "googlevoicekit",
                 "voicekit",
-                "viral-license",
+                "googlevoicekit",
+                "Googleaiy",
+                "aiy",
                 "voicehat",
-                "Googleaiy"
+                "viral-license",
+                "IoT"
             ],
             "platforms": [
                 "platform_picroft"
             ],
             "short_description": "Enables Google AIY voicekit",
             "name": "Picroft Google Aiy Voicekit Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [
                     "RPi.GPIO"
@@ -2247,32 +2252,32 @@
             "description": "Gives quotations from notable people using wikiquote.\n\nsupported languages are: english, german, spanish, french, italian\n\nother languages may work, but additional changes may be required in the wikiquote package",
             "authorname": "danielwine",
             "examples": [
-                "I need some wisdom",
-                "Give me a Buddhist wisdom.",
-                "I need some wisdom.",
-                "Give me a quote",
-                "Give me a Buddhist wisdom",
-                "Give me a quote.",
                 "Tell me a quote from Lincoln.",
-                "Tell me a quote from Lincoln"
+                "Give me a Buddhist wisdom.",
+                "Give me a quote.",
+                "I need some wisdom.",
+                "Give me a Buddhist wisdom",
+                "Tell me a quote from Lincoln",
+                "I need some wisdom",
+                "Give me a quote"
             ],
             "category": "Entertainment",
             "tags": [
-                "knowledge",
-                "viral-license",
                 "quotes",
+                "wisdom",
+                "viral-license",
+                "Entertainment",
                 "random",
                 "Information",
-                "wisdom",
-                "philosophy",
-                "Entertainment"
+                "knowledge",
+                "philosophy"
             ],
             "platforms": [
                 "all"
             ],
             "short_description": "Gives quotations from notable people",
             "name": "Wikiquote Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [
                     "wikiquote"
@@ -2299,34 +2304,34 @@
             "description": "This skill installs Theia IDE on your Mycroft device. This is an easy way to make and edit skills \nwith integratio to Github, and tools like mycroft-msm and mycroft-msk directly from the integrated \nshell.\nTheia provides Microsoft VS Code experience in the browser.\n\nhttps://www.theia-ide.org/index.html\n\n<img src='screenshot.png' card_color='#40DBB0' width=800 style='vertical-align:bottom'/>",
             "authorname": "andlo",
             "examples": [
-                "End theia IDE.",
-                "Deactivate IDE",
-                "Activate IDE",
-                "Run IDE.",
+                "Restart IDE.",
                 "Restart IDE",
-                "Restart IDE."
+                "Activate IDE",
+                "Deactivate IDE",
+                "End theia IDE.",
+                "Run IDE."
             ],
             "category": "Productivity",
             "tags": [
-                "dev",
-                "theia",
-                "Productivity",
-                "viral-license",
+                "editor",
                 "vscode",
                 "IDE",
-                "editor"
+                "viral-license",
+                "dev",
+                "theia",
+                "Productivity"
             ],
             "platforms": [
-                "all",
-                "platform_picroft"
+                "platform_picroft",
+                "all"
             ],
             "short_description": "Installs and setup THEIA IDE locally on your device. Real VS Code experience.",
             "name": "Theia Ide Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [
-                    "ptvsd",
-                    "wget"
+                    "wget",
+                    "ptvsd"
                 ],
                 "system": {},
                 "skill": []
@@ -2349,35 +2354,35 @@
             "description": "Search for files, images, music, documents locally using the powerful Krunner Plasma desktop feature, also see your recent documents or files and user other plugins like calculate etc",
             "authorname": "AIIX",
             "examples": [
-                "Hey Mycroft, display recent documents",
-                "Hey Mycroft, search the computer for bookmarks",
-                "Calculate 2 plus 2.",
-                "Hey Mycroft, search this computer for 'Filename/Application' ",
-                "Search the computer for bookmarks.",
-                "Search this computer for 'Filename/Application.",
                 "Hey Mycroft, calculate 2 plus 2",
-                "Display recent documents."
+                "Hey Mycroft, search the computer for bookmarks",
+                "Search the computer for bookmarks.",
+                "Hey Mycroft, search this computer for 'Filename/Application' ",
+                "Display recent documents.",
+                "Calculate 2 plus 2.",
+                "Hey Mycroft, display recent documents",
+                "Search this computer for 'Filename/Application."
             ],
             "category": "Productivity",
             "tags": [
-                "documents",
-                "krunner",
-                "Productivity",
-                "control",
                 "kde",
+                "documents",
+                "viral-license",
                 "bookmarks",
                 "recent",
-                "viral-license",
                 "search",
+                "krunner",
                 "plasma",
-                "desktop"
+                "desktop",
+                "Productivity",
+                "control"
             ],
             "platforms": [
                 "platform_plasmoid"
             ],
             "short_description": "Krunner enables users to search their local desktop for files, images, recent documents, bookmarks and utilize other krunner plugins.",
             "name": "Krunner Search Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [
                     "dbus-python"
@@ -2403,16 +2408,16 @@
             "description": "Repeat what was said, but change the order randomly. Configurations can be used to modify the default min and max chunk size, randomness percent, and fragment type (char, word, sentence)",
             "authorname": "JonStratton",
             "examples": [
-                "Randomize Set fragment type word.",
-                "Randomize Say this is a test.",
-                "Randomize Set maximum 3.",
-                "Randomize Set maximum 3",
                 "Randomize Set minimum 1.",
                 "Randomize Set randomness 75.",
-                "Randomize Set minimum 1",
+                "Randomize Set fragment type word.",
+                "Randomize Set maximum 3",
+                "Randomize Set maximum 3.",
+                "Randomize Say this is a test.",
+                "Randomize Set fragment type word",
                 "Randomize Set randomness 75",
                 "Randomize Say this is a test",
-                "Randomize Set fragment type word"
+                "Randomize Set minimum 1"
             ],
             "category": "Entertainment",
             "tags": [
@@ -2424,7 +2429,7 @@
             ],
             "short_description": "Repeat using the cut up technique.",
             "name": "Cut Up Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [],
                 "system": {},
@@ -2449,29 +2454,29 @@
             "authorname": "JonStratton",
             "examples": [
                 "Crack Password.",
+                "Stop Monitor.",
                 "Start Monitor.",
+                "List interfaces.",
+                "Disconnect Clients.",
                 "List wireless networks.",
                 "Select network number three.",
-                "Stop Monitor.",
-                "List interfaces.",
-                "Select interface number one.",
-                "Disconnect Clients."
+                "Select interface number one."
             ],
             "category": "Information",
             "tags": [
                 "aircrack",
-                "wifi",
                 "aircrack-ng",
                 "viral-license",
-                "Information"
+                "Information",
+                "wifi"
             ],
             "platforms": [
-                "platform_plasmoid",
-                "platform_picroft"
+                "platform_picroft",
+                "platform_plasmoid"
             ],
             "short_description": "A simple Mycroft wrapper for a small subset of Aircrack-ng.",
             "name": "Aircrack Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [
                     "pexpect"
@@ -2497,23 +2502,23 @@
             "description": "You can ask MyCroft to remember and forget things.\nIt will store everything in a list locally on your device.",
             "authorname": "luke5sky",
             "examples": [
-                "What did you remember?",
-                "Hey mycroft, remember take the trash out",
-                "Forget phrase take the trash out.",
                 "Hey mycroft, what did you remember",
                 "Hey mycroft, forget all phrases",
+                "What did you remember?",
                 "Forget all phrases.",
-                "Hey mycroft, forget phrase take the trash out",
-                "Remember take the trash out."
+                "Hey mycroft, remember take the trash out",
+                "Remember take the trash out.",
+                "Forget phrase take the trash out.",
+                "Hey mycroft, forget phrase take the trash out"
             ],
             "category": "Daily",
             "tags": [
                 "todo-list",
                 "remember",
                 "Productivity",
-                "permissive-license",
                 "Daily",
-                "brain"
+                "brain",
+                "permissive-license"
             ],
             "platforms": [
                 "all"
@@ -2545,19 +2550,19 @@
             "description": "Laugh randomly or when requested, gender configurable on home.mycroft.ai",
             "authorname": "JarbasSkills",
             "examples": [
-                "Random laughter",
                 "do the evil laugh",
+                "Laugh like Alexa.",
                 "Laugh like Alexa",
-                "Can you laugh.",
-                "Laugh like Alexa."
+                "Random laughter",
+                "Can you laugh."
             ],
             "category": "Entertainment",
             "tags": [
-                "funny",
-                "entertainment",
                 "repeating",
+                "entertainment",
+                "Entertainment",
                 "laugh",
-                "Entertainment"
+                "funny"
             ],
             "platforms": [
                 "all"
@@ -2590,17 +2595,17 @@
             "examples": [
                 "Set auto volume on.",
                 "Set auto volume off.",
-                "Clear auto volume measurements.",
-                "Set auto volume off",
+                "Clear auto volume measurements",
                 "Set auto volume on",
-                "Clear auto volume measurements"
+                "Set auto volume off",
+                "Clear auto volume measurements."
             ],
             "category": "Daily",
             "tags": [
-                "viral-license",
-                "Daily",
                 "Configuration",
-                "volume"
+                "volume",
+                "Daily",
+                "viral-license"
             ],
             "platforms": [
                 "platform_picroft",
@@ -2608,7 +2613,7 @@
             ],
             "short_description": "Sets the volume depending on background noise level",
             "name": "Auto Volume Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [],
                 "system": {},
@@ -2636,11 +2641,11 @@
             "category": "IoT",
             "tags": [
                 "IoT",
-                "Productivity",
-                "permissive-license",
-                "messenger",
+                "telegram-bot",
                 "bot",
-                "telegram-bot"
+                "permissive-license",
+                "Productivity",
+                "messenger"
             ],
             "platforms": [
                 "all"
@@ -2676,26 +2681,26 @@
             "authorname": "andlo",
             "examples": [
                 "Countdown from 10.",
+                "Count to 10.",
                 "Count to 10",
-                "Countdown from 10",
-                "Count to 10."
+                "Countdown from 10"
             ],
             "category": "Daily",
             "tags": [
+                "Daily",
                 "count",
                 "countdown",
-                "Daily",
                 "viral-license"
             ],
             "platforms": [
-                "platform_plasmoid",
                 "platform_picroft",
                 "platform_mark1",
-                "platform_mark2"
+                "platform_mark2",
+                "platform_plasmoid"
             ],
             "short_description": "Count and countdown skill",
             "name": "Count Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [],
                 "system": {},
@@ -2719,30 +2724,30 @@
             "description": "This skill enables Mycroft to tell lots of fairytales. So make a cup of coco, and sit back and enjoy listning to the good tales.\n\nContent is from fairytalez.com, so please go visit there if you like the stories.\nFairytalez.com is the world's largest collection of fairy tales, fables and folktales. Discover more than 2,000 classic tales plus new stories by fairy tale fans.\n\nhttp://www.fairytalez.com\n\n\n_“If you want your children to be intelligent, read them fairy tales. If you want them to be more\nintelligent, read them more fairy tales.”\nAlbert Einstein_",
             "authorname": "andlo",
             "examples": [
-                "Tell a fairy tale.",
-                "Tell me the story The Little Match Girl.",
-                "Continue story",
                 "Tell me the story The Little Match Girl",
                 "Continue story.",
-                "Tell a fairy tale"
+                "Tell a fairy tale",
+                "Tell me the story The Little Match Girl.",
+                "Continue story",
+                "Tell a fairy tale."
             ],
             "category": "Entertainment",
             "tags": [
-                "stories",
                 "fairy",
                 "story",
-                "fairytales",
-                "viral-license",
+                "Entertainment",
                 "fairytale",
-                "tales",
-                "Entertainment"
+                "viral-license",
+                "stories",
+                "fairytales",
+                "tales"
             ],
             "platforms": [
                 "all"
             ],
             "short_description": "Mycroft tells more then 2000 fairy tales, folk tales, and fables from all around the world.",
             "name": "Fairytalez Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [
                     "bs4"
@@ -2768,19 +2773,19 @@
             "description": "Run a speedtest with Mycroft.\nThis skill uses the speedtest-cli (https://github.com/sivel/speedtest-cli) which runs an internet bandwidth test using speedtest.net.\n\nBe aware that this speedtest relies on the capability of the network-adapter of your Mycroft device.\n\nExamples for Raspberry Pi: \n\nIf a Raspberry Pi 3 B - connected to WiFi - runs Mycroft you won't get more than 40 Mbit/s from the speedtest despite your internet connection may have more bandwith.\nRaspberry Pi 3 B  onboard WiFi: max. ~40 Mbit/s, onboard LAN: max. ~100 Mbit/s \n * Raspberry Pi 3 B+ onboard WiFi: max. ~100 Mbit/s, onboard LAN: max. ~225 Mbit/s",
             "authorname": "luke5sky",
             "examples": [
-                "Hey mycroft, run a speedtest",
-                "Run a speedtest."
+                "Run a speedtest.",
+                "Hey mycroft, run a speedtest"
             ],
             "category": "Daily",
             "tags": [
+                "ínternet",
                 "bandwith",
-                "IoT",
-                "Productivity",
-                "permissive-license",
-                "Daily",
-                "speed",
                 "Information",
-                "ínternet"
+                "permissive-license",
+                "Productivity",
+                "Daily",
+                "IoT",
+                "speed"
             ],
             "platforms": [
                 "all"
@@ -2816,29 +2821,29 @@
             "description": "Mycroft.AI will select a random number between a min and max value.\nThe minimum and maximum value may be in any order and any value.",
             "authorname": "pcwii",
             "examples": [
-                "select a number between 1 and 10",
-                "Select a number between 1 and 10.",
-                "Select a number between 20 and 1.",
-                "select a number between 20 and 1",
-                "pick a number from 5 to 15",
                 "Choose a number between 100 and 199.",
+                "pick a number from 5 to 15",
+                "Select a number between 20 and 1.",
                 "Pick a number from 5 to 15.",
-                "choose a number between 100 and 199"
+                "select a number between 20 and 1",
+                "Select a number between 1 and 10.",
+                "choose a number between 100 and 199",
+                "select a number between 1 and 10"
             ],
             "category": "Entertainment",
             "tags": [
-                "dice",
                 "viral-license",
-                "decisionmaker",
+                "Entertainment",
                 "random",
-                "Entertainment"
+                "dice",
+                "decisionmaker"
             ],
             "platforms": [
                 "all"
             ],
             "short_description": "Select a random number when provided a min and max value",
             "name": "Pick Number Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [],
                 "system": {},
@@ -2868,22 +2873,22 @@
             ],
             "category": "Daily",
             "tags": [
-                "esa",
+                "space",
+                "viral-license",
+                "Entertainment",
                 "iss",
                 "spacestation",
-                "viral-license",
+                "Information",
                 "nasa",
                 "Daily",
-                "Information",
-                "space",
-                "Entertainment"
+                "esa"
             ],
             "platforms": [
                 "all"
             ],
             "short_description": "Where is the international space station - ISS",
             "name": "Iss Tracker Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [],
                 "system": {},
@@ -2909,27 +2914,27 @@
             "description": "This skill enables mycroft to generate random numbers for you.    \nYou either need to specify a range or type of dice (e.g. d20).\n\nPerfect whenever you need to generate a random number, but don't have a dice nearby.",
             "authorname": "Dragoncraft89",
             "examples": [
-                "Generate a random number between 0 and 5.",
-                "roll a dice",
-                "generate a random number between 0 and 5",
-                "Roll a dice.",
                 "roll a d20",
-                "Roll a d20."
+                "generate a random number between 0 and 5",
+                "roll a dice",
+                "Generate a random number between 0 and 5.",
+                "Roll a d20.",
+                "Roll a dice."
             ],
             "category": "Entertainment",
             "tags": [
-                "dice",
-                "dnd",
                 "viral-license",
                 "random",
-                "Entertainment"
+                "dnd",
+                "Entertainment",
+                "dice"
             ],
             "platforms": [
                 "all"
             ],
             "short_description": "Generates random numbers for you",
             "name": "Dice Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [],
                 "system": {},
@@ -2953,40 +2958,40 @@
             "description": "With this skill, you can ask Mycroft many different facts about Pokemon. The things you can ask it range from useful statistics such as when a Pokemon evolves or how effective a move is to a Pokemon's weight.",
             "authorname": "retrodaredevil",
             "examples": [
+                "How tall is Pikachu?",
+                "Give me some info about the ability Static.",
+                "What is Static's flavor text in emerald?",
                 "Give me some info about the ability Static",
-                "Give me some detailed information about the ability Static.",
                 "What does Bulbasaur evolve into?",
+                "How much does Pikachu weigh in kilograms.",
                 "What generation was Static first introduced?",
-                "What are eevee's evolutions?",
-                "What type is Pikachu?",
                 "What generation was Pichu introduced in?",
-                "What is Pikachu's base happiness?",
+                "What abilities does Pikachu have?",
+                "Give me some detailed information about the ability Static",
                 "What is Static's flavor text in emerald",
-                "What is Bulbasaur's base attack?",
+                "What is Pikachu's base happiness?",
                 "How effective is a ground move against Pikachu?",
+                "What is Intimidate's flavor text in diamond?",
                 "What is Intimidate's flavor text in diamond",
+                "What is Pikachu's first evolution?",
+                "What does Charizard evolve from?",
                 "How much does Pikachu weigh in kilograms",
                 "What is Pikachu's final evolution?",
-                "What does Charizard evolve from?",
-                "How much does Pikachu weigh in kilograms.",
-                "What abilities does Pikachu have?",
-                "Give me some info about the ability Static.",
-                "What is Intimidate's flavor text in diamond?",
-                "What is Static's flavor text in emerald?",
-                "Give me some detailed information about the ability Static",
-                "What is Pikachu's first evolution?",
-                "How tall is Pikachu?"
+                "Give me some detailed information about the ability Static.",
+                "What is Bulbasaur's base attack?",
+                "What type is Pikachu?",
+                "What are eevee's evolutions?"
             ],
             "category": "Entertainment",
             "tags": [
-                "Video Games",
-                "Games",
-                "permissive-license",
-                "Pokedex",
-                "Video",
-                "Information",
                 "Pokemon",
-                "Entertainment"
+                "Games",
+                "Video",
+                "Entertainment",
+                "Information",
+                "Video Games",
+                "Pokedex",
+                "permissive-license"
             ],
             "platforms": [
                 "all"
@@ -3020,20 +3025,20 @@
             "description": "The Mycroft Mark 2 has several unique capabilities which this Skill lets you\ncontrol.\n\n###  Faceplate Brightness\nSet the faceplate to a specific brightness, or allow it to automatically adjust\nits brightness level to dim at night.",
             "authorname": "MycroftAI",
             "examples": [
-                "Turn on auto brightness.",
                 "Turn on auto brightness",
-                "Change to low brightness.",
+                "Turn on auto brightness.",
                 "Dim to 50%",
+                "Change to low brightness.",
                 "Change to low brightness"
             ],
             "category": "Configuration",
             "tags": [
-                "configuration",
-                "permissive-license",
                 "settings",
-                "mark2",
+                "Configuration",
                 "system",
-                "Configuration"
+                "mark2",
+                "configuration",
+                "permissive-license"
             ],
             "platforms": [
                 "platform_respeaker",
@@ -3044,8 +3049,8 @@
             "license": "apache-2.0",
             "requirements": {
                 "python": [
-                    "arrow==0.12.0",
-                    "astral==1.4"
+                    "astral==1.4",
+                    "arrow==0.12.0"
                 ],
                 "system": {},
                 "skill": []
@@ -3068,31 +3073,31 @@
             "description": "This Skill helps to give Mycroft a personality by learning any new information that you provide.",
             "authorname": "gras64",
             "examples": [
-                "can you keep a secret",
-                "Please do not say what I'm talking about.",
                 "I tell you something private.",
-                "There you can learn something",
-                "Houmor is probably not your strength.",
-                "Please do not say what I'm talking about",
-                "Do you want to learn something",
-                "I tell you something private",
-                "I show you something",
-                "Can you keep a secret.",
-                "Do you already know this.",
+                "can you keep a secret",
                 "I show you something.",
-                "I want to explain it.",
-                "Do you want to learn something.",
                 "Do you already know this",
-                "There you can learn something."
+                "I tell you something private",
+                "I want to explain it.",
+                "Houmor is probably not your strength.",
+                "I show you something",
+                "Do you want to learn something.",
+                "Please do not say what I'm talking about.",
+                "Do you want to learn something",
+                "Can you keep a secret.",
+                "There you can learn something.",
+                "There you can learn something",
+                "Please do not say what I'm talking about",
+                "Do you already know this."
             ],
             "category": "Entertainment",
             "tags": [
                 "learning",
-                "Productivity",
-                "permissive-license",
+                "Entertainment",
                 "science",
                 "Information",
-                "Entertainment"
+                "Productivity",
+                "permissive-license"
             ],
             "platforms": [
                 "all"
@@ -3134,17 +3139,17 @@
             ],
             "category": "Productivity",
             "tags": [
-                "Notes",
                 "Productivity",
-                "viral-license",
-                "Note-taking"
+                "Notes",
+                "Note-taking",
+                "viral-license"
             ],
             "platforms": [
                 "all"
             ],
             "short_description": "Access and manage lists with Mycroft",
             "name": "List Manager Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [],
                 "system": {},
@@ -3167,47 +3172,47 @@
             "description": "Example skill to showcase Mycroft GUI supported delegates and skill displays",
             "authorname": "AIIX",
             "examples": [
-                "Show Simple Text Example.",
-                "Show Examples Menu",
-                "Show Audio Player Example.",
-                "Show Paginated Text Example.",
-                "Show Proportional Delegate Example",
-                "Show Vertical Cards List Example.",
-                "Show Proportional Delegate Example.",
-                "Show Horizontal Cards List Example.",
                 "Show Simple Image Example",
-                "Show Simple Text Example",
-                "Show Vertical Cards List Example",
                 "Show Sliding Image Example.",
-                "Show Event System Example.",
-                "Show Lottie Animation Example.",
-                "Show Simple Image Example.",
-                "Show Lottie Animation Example",
-                "Show Sliding Image Example",
                 "Show Paginated Text Example",
-                "Show Event System Example",
-                "Show Audio Player Example",
+                "Show Simple Image Example.",
                 "Show Examples Menu.",
-                "Show Horizontal Cards List Example"
+                "Show Simple Text Example",
+                "Show Sliding Image Example",
+                "Show Audio Player Example",
+                "Show Lottie Animation Example.",
+                "Show Event System Example.",
+                "Show Lottie Animation Example",
+                "Show Paginated Text Example.",
+                "Show Horizontal Cards List Example.",
+                "Show Proportional Delegate Example.",
+                "Show Vertical Cards List Example.",
+                "Show Proportional Delegate Example",
+                "Show Horizontal Cards List Example",
+                "Show Audio Player Example.",
+                "Show Simple Text Example.",
+                "Show Event System Example",
+                "Show Examples Menu",
+                "Show Vertical Cards List Example"
             ],
             "category": "Information",
             "tags": [
-                "mycroft-gui",
-                "mycroftgui",
                 "example",
+                "mycroft-gui",
+                "sample",
                 "viral-license",
+                "delegates",
                 "gui",
                 "Information",
-                "delegates",
-                "sample"
+                "mycroftgui"
             ],
             "platforms": [
-                "platform_plasmoid",
-                "platform_mark2"
+                "platform_mark2",
+                "platform_plasmoid"
             ],
             "short_description": "Mycroft GUI Showcase Examples",
             "name": "Gui Examples Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [],
                 "system": {},
@@ -3243,21 +3248,21 @@
             ],
             "category": "Entertainment",
             "tags": [
+                "TMDB",
                 "Mark",
                 "Actors",
-                "TMDB",
                 "Movies",
+                "Entertainment",
                 "viral-license",
-                "I",
                 "Mark I",
-                "Entertainment"
+                "I"
             ],
             "platforms": [
                 "all"
             ],
             "short_description": "Find information about movies, actors and production details.",
             "name": "Moviemaster Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [
                     "tmdbv3api"
@@ -3283,19 +3288,19 @@
             "description": "Use this skill to request the definition of any word with just your voice.  By harnessing wiktionary this skill does not require any type of API key but is dependent on Wiktionary being up and accessible.\n\nFurther enhancements will include being able to ask about related words and parts of speech using conversational context.",
             "authorname": "TREE-Ind",
             "examples": [
-                "Tell me the definition of apple.",
                 "Find the definition for grape.",
-                "What is the definition for orange",
                 "Find the definition for grape",
-                "What is the definition for orange?",
-                "Tell me the definition of apple"
+                "Tell me the definition of apple.",
+                "Tell me the definition of apple",
+                "What is the definition for orange",
+                "What is the definition for orange?"
             ],
             "category": "Information",
             "tags": [
                 "Dictionary",
                 "permissive-license",
-                "Word",
-                "Information"
+                "Information",
+                "Word"
             ],
             "platforms": [
                 "all"
@@ -3329,27 +3334,27 @@
             "authorname": "padresb",
             "examples": [
                 "Look at that cat",
-                "What does a dog say",
-                "Look at that cat.",
-                "Bark",
-                "Bark.",
                 "Mailman is here.",
+                "What does a dog say?",
+                "Look at that cat.",
+                "Bark.",
+                "Bark",
                 "Mailman is here",
-                "What does a dog say?"
+                "What does a dog say"
             ],
             "category": "Daily",
             "tags": [
-                "Dog",
-                "Bark",
                 "Daily",
-                "viral-license"
+                "Dog",
+                "viral-license",
+                "Bark"
             ],
             "platforms": [
                 "all"
             ],
             "short_description": "Barks like a dog",
             "name": "Bark Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [],
                 "system": {},
@@ -3373,20 +3378,20 @@
             "description": "Provides historical events for today or any other calendar day using information pulled from [Wikipedia](https://www.wikipedia.org).\n\nThis Skill uses the [Wikimedia API](https://en.wikipedia.org/w/api.php).",
             "authorname": "austin-carnahan",
             "examples": [
-                "Tell me about events in history on December 12th",
-                "What historical events happened on June 16th?",
-                "What happened today in history?",
                 "Tell me more.",
                 "What's another event?",
-                "Tell me more",
-                "Tell me about events in history on December 12th."
+                "Tell me about events in history on December 12th",
+                "What happened today in history?",
+                "What historical events happened on June 16th?",
+                "Tell me about events in history on December 12th.",
+                "Tell me more"
             ],
             "category": "Information",
             "tags": [
                 "permissive-license",
                 "Trivia",
-                "History",
-                "Information"
+                "Information",
+                "History"
             ],
             "platforms": [
                 "all"
@@ -3419,20 +3424,20 @@
             "description": "Allows you to dismiss Mycroft verbally, in case of accidental activation, or if you change your mind. By default, Mycroft will confirm this action, but there is a setting to disable verbal feedback, accessible over the web interface.",
             "authorname": "ChanceNCounter",
             "examples": [
-                "Dismissed.",
-                "Go away.",
-                "Forget it.",
-                "forget it",
                 "dismissed",
-                "Nevermind.",
+                "Go away.",
                 "nevermind",
-                "go away"
+                "forget it",
+                "Dismissed.",
+                "Nevermind.",
+                "go away",
+                "Forget it."
             ],
             "category": "Configuration",
             "tags": [
+                "Configuration",
                 "basic",
-                "permissive-license",
-                "Configuration"
+                "permissive-license"
             ],
             "platforms": [
                 "all"
@@ -3468,17 +3473,17 @@
             ],
             "category": "Daily",
             "tags": [
-                "find-skill",
-                "dumb",
+                "Configuration",
                 "fallback",
-                "skills",
                 "find",
+                "dumb",
+                "search",
+                "Information",
+                "find-skill",
                 "permissive-license",
                 "Media",
-                "search",
                 "Daily",
-                "Information",
-                "Configuration"
+                "skills"
             ],
             "platforms": [
                 "all"
@@ -3514,27 +3519,27 @@
             "description": "Mycroft will announce estimated arrival times of MBTA buses at your stop so you never leave the house before you have to.  All data and arrival predictions used by this skill are provided by the MBTA.  \n\nSee below for full documentation, including how to track buses traveling toward your stop, but to get started just say \"Hey Mycroft, T Bus Arrivals\".  You will be prompted for the bus route, direction and stop name.  Mycroft will respond with all estimated arrival times at your stop.\n\n<details><summary>View Sample dialog</summary>\n<dl>\n<dt>Hey Mycroft T Bus Arrivals</dt>\n<dd>Which route are you riding?</dd>\n<dt>One</dt>\n<dd>Are you going outbound toward Harvard or Inbound toward Dudley?</dd>\n<dt>Inbound</dt>\n<dd>Which stop?</dd>\n<dt>Mount Auburn Street at Putnam Ave</dt>\n<dd>Route One service to Dudley arrivals for Mount Auburn Street at Putnam Avenue:<dd>\n<dd>Arriving in 11 minutes<dd>\n<dd>Arriving in 21 minutes<dd>\n<dd>Arriving in 34 minutes<dd>\n</dl>\n</details>\n\n<details><summary>View Full Documentation</summary>\n\n#### T bus or Transit\n\nWherever this documentation calls for saying \"T bus\" to Mycroft it can be replaced with \"transit\", and vice versa.  If Mycroft is having difficulty understanding  one, try the other.\n\n#### Arrival Times\n\nTo provide bus arrival times the skill requires three pieces of information:  bus route, traveling direction and bus stop.  If you do not provide all information needed the skill will prompt you for the rest.  For example, saying\n\n> T bus arrivals route 57 going inbound stop Brighton Ave and Linden Street\n\nwill retrieve all arrival times predicted for the stop.  The arrival times could also be retrieved by any of the following:\n\n> T bus arrivals route 57 going inbound\n\n> T bus arrivals route 57\n\n> T bus arrivals\n\nMycroft will prompt for any missing information.\n\n#### Bus Tracking\n\nBus tracking is similar to Arrival Times but Mycroft will continue to track buses, periodically updating their predicted arrival times, until they have passed the stop.  By default Mycroft will track the next three buses and will announce updated arrival predictions every 30 seconds.  These values can be changed in the skill settings on Mycroft Home.  The minimum frequency of updates  is 30 seconds.\n\nAs with Arrivals, say\n\n> T bus tracking\n\nto begin.  Predicted arrival times of the next three tracked buses will be announced right away and updated every 30 seconds.  Be aware that there may be any number of buses heading to your stop but only the arrival predictions for the tracked buses will be announced.\n\nWhen a bus passes your stop it will drop off the tracking list and there will be one fewer arrival time announced on subsequent updates.  When all buses have passed your stop Mycroft will automatically stop tracking.  If you would like tracking to end at any time say\n\n> T bus shutdown\n\n#### Shortcuts\n\nIf you ride the same route from the same stop often you will want to use shortcuts.  After Mycroft announces arrivals or starts tracking buses you may save the route, direction and stop combination as a shortcut using any name you wish.\n\nSuppose you take the bus to work and went through the process of asking for arrivals, telling Mycroft the bus route, direction and stop.  Now say\n\n> transit save shortcut\n\nand Mycroft will prompt you for a name.  If you say\n\n> rat race\n\nyou may get Arrivals or begin Bus Tracking using the shortcut\n\n>T bus tracking rat race\n\nTwo additional phrases\n\n> list T bus shortcuts\n\n> T bus remove shortcut rat race\n\nallow you to list and delete saved shortcuts.\n\n#### API Key\n\nWhen installed this skill does not use an API key when getting data from the MBTA servers.  Using a key allows a higher rate limit when requesting data.  It should not be necessary to use an API key but if you like you may obtain one on the [MBTA website](https://api-v3.mbta.com/register). In the skill settings on Mycroft Home check the box next to \"Use my API key\" and enter your key in the text field.\n\n</details>",
             "authorname": "richhowley",
             "examples": [
-                "Save Transit Shortcut.",
+                "T Bus Arrivals.",
                 "T Bus Tracking.",
+                "Save Transit Shortcut.",
                 "Save Transit Shortcut",
-                "T Bus Arrivals",
                 "T Bus Tracking",
-                "T Bus Arrivals."
+                "T Bus Arrivals"
             ],
             "category": "Transport",
             "tags": [
-                "MBTA,",
-                "Boston",
+                "MBTA,Boston",
                 "Transport",
                 "viral-license",
-                "MBTA,Boston"
+                "Boston",
+                "MBTA,"
             ],
             "platforms": [
                 "all"
             ],
             "short_description": "Announce arrivals of MBTA buses.",
             "name": "Mbta Bus Tracking Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [],
                 "system": {},
@@ -3558,21 +3563,21 @@
             "description": "Get listings of US National Parks by state, have Mycroft read descriptions of  national parks and even test your knowledge of where National Parks are located.  \n\nTo use this skill  you will need to obtain an API key from the [National Park Service](https://www.nps.gov/subjects/developer/get-started.htm).  Just follow the link and fill in the form, it's free and you will not be required to create an account.  When the skill is installed there will be a new settings entry in the Skills section of [Mycroft Home](https://home.mycroft.ai) under National Parks.  Paste in your API key and click the Save button.  As soon as the skill picks up the API key it will be able to connect to the NPS servers.\n  \nFor the purpose of this skill the term \"National Park\" is used loosely to refer to almost any property managed by the US National Park Service.  Properties with a designation of  National Monument, National Historic Site or National Recreation Area will be included in park listings.   The only designation that is explicitly excluded from park listings is National Historic Trail.  All information is provided by the National Park Service.\n\nWhen asking for a park description the skill will do a search on the words given, so one does not need to say the complete park name.  For example, 'describe Edgar national park\", \"describe Edgar Allan national park\" and \"describe Edgar Allan Poe national park\" will all provide a description of Edgar Allan Poe National Historic Site.  \n\nSince definite articles are dropped from speech, searches for descriptions of some properties will fail if they are included.  For example, trying to hear a description of Rosie the Riveter WWII Home Front National Historical Park by saying \"describe Rosie the Riveter national park\" will fail but \"describe Rosie national park\" and \"describe Riveter national park\" will succeed.\n\nAfter asking to be quizzed Mycroft will ask what state a particular National Park Service property is in.  The answer may be spoken after the beep without using the wake word but there will only be a few seconds to answer.  If Mycroft does not respond to the answer use the wake word with \"Repeat national parks quiz\" and answer after the beep.",
             "authorname": "richhowley",
             "examples": [
-                "Repeat national parks quiz",
-                "Describe Yellowstone national park",
-                "Quiz me on national parks.",
                 "List national parks in Utah",
-                "List national parks in Utah.",
-                "Quiz me on national parks",
+                "Describe Yellowstone national park.",
                 "Repeat national parks quiz.",
-                "Describe Yellowstone national park."
+                "Quiz me on national parks",
+                "Repeat national parks quiz",
+                "Quiz me on national parks.",
+                "Describe Yellowstone national park",
+                "List national parks in Utah."
             ],
             "category": "Information",
             "tags": [
+                "vacation",
+                "parks",
                 "viral-license",
                 "nationalparks",
-                "parks",
-                "vacation",
                 "Information"
             ],
             "platforms": [
@@ -3580,7 +3585,7 @@
             ],
             "short_description": "Information on US National Parks",
             "name": "National Parks Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [],
                 "system": {},
@@ -3604,38 +3609,38 @@
             "description": "Allows users to interact with the LIFX-brand smartbulbs on their home network through Mycroft. Can change power, brightness, color, and color-temperature of individual Lights and predefined Groups.",
             "authorname": "samclane",
             "examples": [
-                "Now turn it red.",
-                "->",
-                "Increase the bedroom light temperature.",
-                "Turn on the bedroom light.",
-                "Dim it.",
-                "Turn on the bedroom light",
-                "Set the bedroom light yellow.",
-                "Now turn it red",
                 "Also uses Contexts.",
+                "Dim it",
+                "->",
+                "Turn on the bedroom light",
+                "Turn on the bedroom light.",
+                "Now turn it red",
+                "Set the bedroom light yellow.",
+                "Dim it.",
                 "Turn down the bedroom light.",
                 "Turn off the bedroom light.",
-                "Dim it"
+                "Increase the bedroom light temperature.",
+                "Now turn it red."
             ],
             "category": "IoT",
             "tags": [
-                "lifx",
-                "IoT",
-                "smartbulb",
-                "smartlight",
                 "viral-license",
-                "home-automation"
+                "lifx",
+                "smartlight",
+                "home-automation",
+                "IoT",
+                "smartbulb"
             ],
             "platforms": [
                 "all"
             ],
             "short_description": "A mycroft skill to control LIFX brand smart-bulbs.",
             "name": "Lifx Mycroft Skill",
-            "license": "agpl",
+            "license": "gpl-3.0",
             "requirements": {
                 "python": [
-                    "webcolors>=1.11.1",
                     "lifxlan",
+                    "webcolors>=1.11.1",
                     "fuzzywuzzy"
                 ],
                 "system": {},
@@ -3660,26 +3665,26 @@
             "authorname": "brezuicabogdan",
             "examples": [
                 "Check tv shows.",
-                "Check my episodes.",
-                "Any new episodes",
                 "Check tv shows",
-                "Anything new on my episodes",
-                "Any new episodes.",
+                "Any new episodes",
+                "Check my episodes.",
                 "Anything new on my episodes.",
-                "Check my episodes"
+                "Any new episodes.",
+                "Check my episodes",
+                "Anything new on my episodes"
             ],
             "category": "Information",
             "tags": [
-                "shows",
-                "Episodes",
-                "Tv shows",
-                "Myepisodes.com",
-                "Myepisodes",
                 "Series",
-                "Tv",
-                "Media",
+                "Myepisodes",
+                "Tv shows",
+                "Entertainment",
                 "Information",
-                "Entertainment"
+                "shows",
+                "Media",
+                "Tv",
+                "Myepisodes.com",
+                "Episodes"
             ],
             "platforms": [
                 "all"

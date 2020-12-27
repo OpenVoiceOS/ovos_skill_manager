@@ -70,7 +70,7 @@ def get_mycroft_marketplace_skills(branch=None, parse_github=False,
             except GithubInvalidBranch:
                 LOG.error("branch : {branch} not available for skill: {skill}".format(branch=branch, skill=url))
                 continue
-            if not is_valid_github_skill_url(url):
+            if not is_valid_github_skill_url(url, branch):
                 LOG.error("{skill} does not seem like a valid skill".format(skill=url))
                 continue
 

@@ -1,49 +1,157 @@
 {
     "OVOS": [
         {
-            "name": "DuckDuckGo",
             "skillname": "DuckDuckGo",
             "authorname": "JarbasSkills",
             "foldername": "skill-ddg",
             "url": "https://github.com/JarbasSkills/skill-ddg",
-            "branch": "master",
-            "desktopFile": false,
+            "branch": "v0.1.0",
+            "desktopFile": true,
             "warning": "",
             "systemDeps": false,
             "platforms": [
-                "i386",
-                "arm",
+                "ia64",
                 "arm64",
+                "i386",
                 "x86_64",
-                "ia64"
+                "arm"
             ],
             "examples": [
                 "who is elon musk",
-                "tell me more",
-                "ask the duck about the big bang",
                 "continue",
-                "when was stephen hawking born"
+                "when was stephen hawking born",
+                "tell me more",
+                "ask the duck about the big bang"
             ],
+            "license": "apache-2.0",
             "requirements": {
                 "python": [
-                    "google_trans_new",
                     "RAKEkeywords",
+                    "google_trans_new",
                     "requests"
                 ],
                 "system": {},
                 "skill": []
             },
-            "download_url": "https://github.com/JarbasSkills/skill-ddg/archive/master.zip",
-            "license": "apache-2.0",
+            "download_url": "https://github.com/JarbasSkills/skill-ddg/archive/v0.1.0.zip",
             "icon": "./res/icon/ddg.png",
             "description": "Uses the [DuckDuckGo API](https://duckduckgo.com/api) to provide information. \n\nNOTE: this is meant a better alternative to the official duck duck go skill, it will be blacklisted",
+            "short_description": "Use DuckDuckGo to answer questions",
             "category": "Information",
+            "categories": [
+                "Information"
+            ],
             "tags": [
+                "searchengine",
+                "Information",
                 "duckduckgo",
-                "query",
                 "search-engine",
-                "searchengine"
+                "query",
+                "permissive-license"
+            ],
+            "name": "DuckDuckGo"
+        },
+        {
+            "name": "Wolfram Alpha",
+            "skillname": "Wolfram Alpha",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-wolfie",
+            "url": "https://github.com/JarbasSkills/skill-wolfie",
+            "branch": "v0.1",
+            "desktopFile": true,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "ia64",
+                "arm64",
+                "i386",
+                "x86_64",
+                "arm"
+            ],
+            "download_url": "https://github.com/JarbasSkills/skill-wolfie/archive/v0.1.zip",
+            "examples": [
+                "What is Madonna's real name?",
+                "How many inches in a meter?",
+                "ask the wolf what is the speed of light",
+                "When was The Rocky Horror Picture Show released?",
+                "What's 18 times 4?",
+                "How tall is Mount Everest?"
+            ],
+            "license": "apache-2.0",
+            "requirements": {
+                "python": [
+                    "google_trans_new",
+                    "requests>=2.13.0"
+                ],
+                "system": {},
+                "skill": []
+            },
+            "icon": "./res/icon/wolfie.png",
+            "description": "Ask general-knowledge queries of your Mycroft device. \nCommonQuery skill for [Wolfram Alpha](https://wolframalpha.com). \nYou'll be surprised by how much it knows!\n\nYou can also explicitly request to \"ask the wolf\"\n\nNOTE: this is meant to be a better alternative to the official mycroft skill, it will blacklist the official skill!!",
+            "short_description": "Use Wolfram Alpha for general knowledge questions",
+            "category": "Information",
+            "categories": [
+                "Information"
+            ],
+            "tags": [
+                "information",
+                "wolfram-alpha",
+                "Information",
+                "general-knowledge",
+                "query",
+                "permissive-license"
             ]
+        },
+        {
+            "url": "https://github.com/JarbasSkills/skill-icanhazdadjokes",
+            "branch": "v0.1.0",
+            "authorname": "JarbasSkills",
+            "skillname": "Jokes",
+            "foldername": "skill-icanhazdadjokes",
+            "name": "Jokes",
+            "license": "apache-2.0",
+            "requirements": {
+                "python": [
+                    "google_trans_new",
+                    "pyjokes"
+                ],
+                "system": {},
+                "skill": []
+            },
+            "download_url": "https://github.com/JarbasSkills/skill-icanhazdadjokes/archive/v0.1.0.zip",
+            "icon": "./res/icon/dadjokes.png",
+            "platforms": [
+                "arm",
+                "arm64",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "tell me a joke",
+                "say a joke",
+                "do you know any chuck norris jokes",
+                "make me laugh",
+                "tell me a joke about dentists",
+                "do you know any jokes",
+                "can you tell jokes"
+            ],
+            "description": "Brighten your day with dad humor.  \n\n _WARNING:  Laughter is not guaranteed, but eye rolls are likely._\n\nWorks in all languages\n\nNOTE: this will automatically blacklist the official mycroft skill",
+            "short_description": "Let Mycroft brighten your day with a little humor from [icanhazdadjoke](icanhazdadjoke.com)",
+            "category": "Entertainment",
+            "categories": [
+                "Entertainment"
+            ],
+            "tags": [
+                "funny",
+                "humour",
+                "Entertainment",
+                "jokes",
+                "humor",
+                "joke",
+                "permissive-license"
+            ],
+            "desktopFile": true
         }
     ]
 }
