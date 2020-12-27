@@ -73,7 +73,7 @@ class OVOSSkillsManager:
             for appstore in self.appstores:
                 appstore.clear_cache()
 
-    def enable_appstore(self, appstore):
+    def validate_appstore_name(self, appstore):
         if appstore in ["pling", "bigscreen"]:
             appstore = "pling"
         elif appstore in ["mycroft", "mycroft_marketplace"]:
@@ -84,19 +84,14 @@ class OVOSSkillsManager:
             appstore = "ovos"
         elif appstore not in self.config["appstores"]:
             raise UnknownAppstore
+        return appstore
+
+    def enable_appstore(self, appstore):
+        appstore = self.validate_appstore_name(appstore)
         self.config["appstores"][appstore]["active"] = True
 
     def disable_appstore(self, appstore):
-        if appstore in ["pling", "bigscreen"]:
-            appstore = "pling"
-        elif appstore in ["mycroft", "mycroft_marketplace"]:
-            appstore = "mycroft_marketplace"
-        elif appstore in ["andlo", "andlo_skill_list"]:
-            appstore = "andlo_skill_list"
-        elif appstore in ["ovos", "ovos_appstore", "ovos_marketplace"]:
-            appstore = "ovos"
-        elif appstore not in self.config["appstores"]:
-            raise UnknownAppstore
+        appstore = self.validate_appstore_name(appstore)
         self.config["appstores"][appstore]["active"] = False
 
     def sync_appstores(self, merge=False, new_only=True, threaded=False):

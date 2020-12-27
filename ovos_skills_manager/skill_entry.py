@@ -1,9 +1,11 @@
 import json
 from os.path import isfile
 from ovos_skills_manager.session import SESSION as requests
-from ovos_skills_manager.exceptions import GithubInvalidUrl, JSONDecodeError, GithubJsonNotFound
+from ovos_skills_manager.exceptions import GithubInvalidUrl, \
+    JSONDecodeError, GithubJsonNotFound, GithubInvalidBranch
 from ovos_skills_manager.github import parse_github_url, \
-    download_url_from_github_url, get_requirements_json_from_github_url
+    download_url_from_github_url, get_requirements_json_from_github_url, \
+    branch_from_github_url
 from ovos_utils.json_helper import merge_dict
 from ovos_utils.skills import blacklist_skill, whitelist_skill, \
     make_priority_skill, get_skills_folder
@@ -193,13 +195,33 @@ class SkillEntry:
         file = self.skill_folder + "." + self.download_url.split(".")[-1]
         return install_skill(self.download_url, folder, file)
 
-    def install(self, folder=None):
-        LOG.info('Installing system requirements...')
-        system = self.requirements["system"]
-        install_system_deps(system)
-        LOG.info('Running pip install')
-        pyth = self.requirements["python"]
-        pip_install(pyth)
+    def install(self, folder=None, default_branch="master"):
+        LOG.info("Installing skill: {url} from branch: {branch}".format(
+            url=self.url, branch=self.branch))
+        skills = self.requirements.get("skill", [])
+        if skills:
+            LOG.info('Installing required skills')
+        for s in skills:
+            try:
+                branch = branch_from_github_url(s)
+            except GithubInvalidBranch:
+                LOG.warning("skill branch not specified for {skill}, "
+                            "falling back to '{branch}'".
+                            format(branch=default_branch, skill=s))
+                branch = default_branch
+            skill = SkillEntry.from_github_url(s, branch)
+            skill.install(folder)
+
+        system = self.requirements.get("system")
+        if system:
+            LOG.info('Installing system requirements')
+            install_system_deps(system)
+
+        pyth = self.requirements.get("python")
+        if pyth:
+            LOG.info('Running pip install')
+            pip_install(pyth)
+
         LOG.info("Downloading " + self.url)
         return self.download(folder)
 

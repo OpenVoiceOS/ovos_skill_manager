@@ -13,7 +13,7 @@ DEFAULT_CONSTRAINTS = '/etc/mycroft/constraints.txt'
 PIP_LOCK = ComboLock(join(gettempdir(), "ovos_pip.lock"))
 
 
-def pip_install(packages, constraints=None):
+def pip_install(packages, constraints=None, print_logs=False):
     if not len(packages):
         return False
     # Use constraints to limit the installed versions
@@ -38,8 +38,12 @@ def pip_install(packages, constraints=None):
         in the manifest.
         """
         for dependent_python_package in packages:
+            LOG.info("(pip) Installing " + dependent_python_package)
             pip_command = pip_args + [dependent_python_package]
-            proc = Popen(pip_command, stdout=PIPE, stderr=PIPE)
+            if print_logs:
+                proc = Popen(pip_command)
+            else:
+                proc = Popen(pip_command, stdout=PIPE, stderr=PIPE)
             pip_code = proc.wait()
             if pip_code != 0:
                 stderr = proc.stderr.read().decode()
