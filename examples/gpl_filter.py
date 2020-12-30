@@ -1,6 +1,6 @@
-from ovos_skills_manager import MycroftMarketplace
+from ovos_skills_manager import MycroftMarketplace, AndloSkillList
 
-appstore = MycroftMarketplace()
+appstore = AndloSkillList()
 
 for s in appstore.search_skills_by_tag("viral-license"):
     # GPL

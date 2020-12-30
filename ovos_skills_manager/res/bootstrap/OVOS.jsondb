@@ -11,24 +11,24 @@
             "systemDeps": false,
             "platforms": [
                 "ia64",
-                "arm64",
-                "i386",
                 "x86_64",
-                "arm"
+                "arm",
+                "arm64",
+                "i386"
             ],
             "examples": [
                 "who is elon musk",
-                "continue",
                 "when was stephen hawking born",
                 "tell me more",
-                "ask the duck about the big bang"
+                "ask the duck about the big bang",
+                "continue"
             ],
             "license": "apache-2.0",
             "requirements": {
                 "python": [
-                    "RAKEkeywords",
+                    "requests",
                     "google_trans_new",
-                    "requests"
+                    "RAKEkeywords"
                 ],
                 "system": {},
                 "skill": []
@@ -42,13 +42,15 @@
                 "Information"
             ],
             "tags": [
-                "searchengine",
-                "Information",
                 "duckduckgo",
                 "search-engine",
+                "Information",
+                "searchengine",
                 "query",
                 "permissive-license"
             ],
+            "appstore": "OpenVoiceOS",
+            "appstore_url": "https://openvoiceos.github.io/OVOS-skills-store/skill-ddg.json",
             "name": "DuckDuckGo"
         },
         {
@@ -63,25 +65,27 @@
             "systemDeps": false,
             "platforms": [
                 "ia64",
-                "arm64",
-                "i386",
                 "x86_64",
-                "arm"
+                "arm",
+                "arm64",
+                "i386"
             ],
             "download_url": "https://github.com/JarbasSkills/skill-wolfie/archive/v0.1.zip",
             "examples": [
-                "What is Madonna's real name?",
                 "How many inches in a meter?",
-                "ask the wolf what is the speed of light",
-                "When was The Rocky Horror Picture Show released?",
                 "What's 18 times 4?",
-                "How tall is Mount Everest?"
+                "How tall is Mount Everest?",
+                "When was The Rocky Horror Picture Show released?",
+                "ask the wolf what is the speed of light",
+                "What is Madonna's real name?"
             ],
+            "appstore": "OpenVoiceOS",
+            "appstore_url": "https://openvoiceos.github.io/OVOS-skills-store/skill-wolfie.json",
             "license": "apache-2.0",
             "requirements": {
                 "python": [
-                    "google_trans_new",
-                    "requests>=2.13.0"
+                    "requests>=2.13.0",
+                    "google_trans_new"
                 ],
                 "system": {},
                 "skill": []
@@ -96,8 +100,8 @@
             "tags": [
                 "information",
                 "wolfram-alpha",
-                "Information",
                 "general-knowledge",
+                "Information",
                 "query",
                 "permissive-license"
             ]
@@ -105,10 +109,11 @@
         {
             "url": "https://github.com/JarbasSkills/skill-icanhazdadjokes",
             "branch": "v0.1.0",
+            "appstore": "OpenVoiceOS",
+            "appstore_url": "https://openvoiceos.github.io/OVOS-skills-store/skill-icanhazdadjokes.json",
             "authorname": "JarbasSkills",
-            "skillname": "Jokes",
             "foldername": "skill-icanhazdadjokes",
-            "name": "Jokes",
+            "skillname": "Jokes",
             "license": "apache-2.0",
             "requirements": {
                 "python": [
@@ -120,6 +125,7 @@
             },
             "download_url": "https://github.com/JarbasSkills/skill-icanhazdadjokes/archive/v0.1.0.zip",
             "icon": "./res/icon/dadjokes.png",
+            "name": "Jokes",
             "platforms": [
                 "arm",
                 "arm64",
@@ -128,13 +134,13 @@
                 "ia64"
             ],
             "examples": [
-                "tell me a joke",
+                "can you tell jokes",
+                "tell me a joke about dentists",
                 "say a joke",
                 "do you know any chuck norris jokes",
-                "make me laugh",
-                "tell me a joke about dentists",
                 "do you know any jokes",
-                "can you tell jokes"
+                "make me laugh",
+                "tell me a joke"
             ],
             "description": "Brighten your day with dad humor.  \n\n _WARNING:  Laughter is not guaranteed, but eye rolls are likely._\n\nWorks in all languages\n\nNOTE: this will automatically blacklist the official mycroft skill",
             "short_description": "Let Mycroft brighten your day with a little humor from [icanhazdadjoke](icanhazdadjoke.com)",
@@ -143,11 +149,11 @@
                 "Entertainment"
             ],
             "tags": [
-                "funny",
-                "humour",
                 "Entertainment",
-                "jokes",
+                "humour",
+                "funny",
                 "humor",
+                "jokes",
                 "joke",
                 "permissive-license"
             ],

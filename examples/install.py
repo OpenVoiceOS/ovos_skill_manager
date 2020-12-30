@@ -2,6 +2,13 @@ from ovos_skills_manager import SkillEntry
 
 skills_folder = "installed_skills"
 
+# skill requirements, branch not specified  c
+url = "https://github.com/JarbasSkills/mycroft-node-red"
+s = SkillEntry.from_github_url(url, "master")
+updated = s.install(skills_folder)
+print("skill updated:", updated)
+
+exit()
 # from github url + implicit branch with json available
 url = "https://github.com/MycroftAI/skill-hello-world/tree/20.08"
 s = SkillEntry.from_github_url(url)

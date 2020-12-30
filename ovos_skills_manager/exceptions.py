@@ -71,3 +71,32 @@ class GithubNotSkill(GithubInvalidUrl):
 
 class UnknownAppstore(ValueError):
     """ unrecognized appstore """
+
+
+class GithubAPIException(GithubInvalidUrl):
+    """ an error occured with github api endpoints """
+
+
+class GithubAPIInvalidBranch(GithubAPIException, GithubInvalidBranch):
+    """ could not retrieve releases github api endpoints """
+
+
+class GithubAPIReleasesNotFound(GithubAPIException):
+    """ could not retrieve releases github api endpoints """
+
+
+class GithubAPIFileNotFound(GithubAPIException, FileNotFoundError):
+    """ an error occured with github api endpoints """
+
+
+class GithubAPIReadmeNotFound(GithubAPIFileNotFound, GithubReadmeNotFound):
+    """ could not retrieve releases github api endpoints """
+
+
+class GithubAPILicenseNotFound(GithubAPIFileNotFound, GithubLicenseNotFound):
+    """ could not retrieve releases github api endpoints """
+
+
+class GithubAPIRepoNotFound(GithubAPIException):
+    """ could not retrieve releases github api endpoints """
+

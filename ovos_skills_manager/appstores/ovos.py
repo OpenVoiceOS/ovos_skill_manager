@@ -10,7 +10,7 @@ import json
 def get_ovos_skills(parse_github=False, skiplist=None):
     skiplist = skiplist or []
     path = join(gettempdir(), "ovos")
-    dl_url = "https://github.com/OpenVoiceOS/OVOS-appstore/archive/main.zip"
+    dl_url = "https://github.com/OpenVoiceOS/OVOS-skills-store/archive/main.zip"
     download_extract_zip(dl_url, path,  join(path, "ovos-appstore.zip"))
     for root, folders, files in walk(path):
         files = [f for f in files if f.endswith(".json")]
@@ -19,6 +19,9 @@ def get_ovos_skills(parse_github=False, skiplist=None):
                 data = json.load(j)
                 if data["url"] in skiplist:
                     continue
+                data["appstore"] = "OpenVoiceOS"
+                data["appstore_url"] = \
+                    join("https://openvoiceos.github.io/OVOS-skills-store", f)
                 yield SkillEntry.from_json(data,
                                            parse_github=parse_github)
 

@@ -1,4 +1,4 @@
-from ovos_skills_manager.github import get_readme_from_github_url
+from ovos_skills_manager.github.api import get_readme_from_api
 from ovos_skills_manager.utils import readme_to_json
 from pprint import pprint
 
@@ -15,10 +15,10 @@ url = "https://github.com/brezuicabogdan/myepisodes-skill"
 
 ## Non standard readmes  (pling)
 
-url = "https://github.com/JarbasSkills/skill-voip"
+url = "https://github.com/JarbasSkills/skill-better-playback-control"
 
 
 ## Non standard readmes  (andlo)
-readme = get_readme_from_github_url(url)
+readme = get_readme_from_api(url)
 pprint(readme)
 pprint(readme_to_json(readme))

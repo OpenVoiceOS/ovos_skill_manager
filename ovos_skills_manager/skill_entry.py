@@ -3,7 +3,7 @@ from os.path import isfile
 from ovos_skills_manager.session import SESSION as requests
 from ovos_skills_manager.exceptions import GithubInvalidUrl, \
     JSONDecodeError, GithubJsonNotFound, GithubInvalidBranch
-from ovos_skills_manager.github import parse_github_url, \
+from ovos_skills_manager.github.raw import parse_github_url, \
     download_url_from_github_url, get_requirements_json_from_github_url, \
     branch_from_github_url
 from ovos_utils.json_helper import merge_dict

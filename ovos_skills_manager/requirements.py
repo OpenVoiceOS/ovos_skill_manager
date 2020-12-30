@@ -4,9 +4,11 @@ import os
 import sys
 from subprocess import PIPE, Popen
 from pako import PakoManager
-from ovos_skills_manager.exceptions import PipException, SkillRequirementsException
+from ovos_skills_manager.exceptions import PipException, \
+    SkillRequirementsException, InvalidManifest
 from json_database.utils.combo_lock import ComboLock
 from tempfile import gettempdir
+import yaml
 
 # default constraints to use if none are given
 DEFAULT_CONSTRAINTS = '/etc/mycroft/constraints.txt'
@@ -67,3 +69,30 @@ def install_system_deps(manifest, overrides=None):
         return manager.install(packages, overrides=overrides)
     except Exception as e:
         raise SkillRequirementsException(str(e))
+
+
+def validate_manifest(content):
+    if isinstance(content, str):
+        data = yaml.safe_load(content)
+    else:
+        assert isinstance(content, dict)
+        data = content
+    if not data:
+        # most likely just the template full of comments
+        raise InvalidManifest
+    if 'dependencies' in data:
+        return data
+
+    # some skills in the wild have the manifest without the top-level key
+    LOG.warning("invalid manifest, attempting recovery")
+    recovered = {"dependencies": {}}
+    if "python" in data:
+        recovered["dependencies"]["python"] = data["python"]
+    if "skill" in data:
+        recovered["dependencies"]["skill"] = data["skill"]
+    if "system" in data:
+        recovered["dependencies"]["system"] = data["system"]
+    if not len(recovered["dependencies"]):
+        # suspicious, doesn't follow standard
+        raise InvalidManifest
+    return recovered

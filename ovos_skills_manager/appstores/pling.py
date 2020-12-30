@@ -4,9 +4,6 @@ from ovos_skills_manager.skill_entry import SkillEntry
 from ovos_skills_manager.exceptions import JSONDecodeError
 from ovos_skills_manager.appstores import AbstractAppstore
 import json
-from ovos_skills_manager.github import is_valid_github_skill_url, \
-    validate_branch
-from ovos_skills_manager.exceptions import GithubInvalidBranch
 from ovos_utils.log import LOG
 
 

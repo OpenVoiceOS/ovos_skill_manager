@@ -1,7 +1,7 @@
 from ovos_skills_manager.skill_entry import SkillEntry
 from ovos_utils.configuration import read_mycroft_config
 from ovos_skills_manager.session import SESSION as requests
-from ovos_skills_manager.github import is_valid_github_skill_url, \
+from ovos_skills_manager.github.raw import is_valid_github_skill_url, \
     validate_branch, normalize_github_url
 from ovos_skills_manager.exceptions import GithubInvalidBranch
 from ovos_skills_manager.appstores import AbstractAppstore

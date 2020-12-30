@@ -1,15 +1,15 @@
-from ovos_skills_manager.exceptions import *
+from ovos_skills_manager.github import *
 from ovos_skills_manager.utils import desktop_to_json, readme_to_json
-from ovos_utils import camel_case_split, create_daemon
+from ovos_skills_manager.licenses import get_license_type, is_viral, \
+    is_permissive
 from ovos_utils.log import LOG
 from ovos_utils.json_helper import merge_dict
-from ovos_skills_manager.session import SESSION as requests
-from ovos_skills_manager.licenses import get_license_type, is_viral, is_permissive
 import json
 import yaml
 from enum import Enum
 
 
+# Manual Extraction
 class GithubUrls(str, Enum):
     URL = "https://github.com/{author}/{repo}"
     BRANCH = URL + "/tree/{branch}"
@@ -26,31 +26,11 @@ class GithubUrls(str, Enum):
 
 
 GITHUB_README_LOCATIONS = [
-    GithubUrls.URL + "/blob/{branch}/README",
-    GithubUrls.URL + "/blob/{branch}/README.md",
-    GithubUrls.URL + "/blob/{branch}/README.txt",
-    GithubUrls.URL + "/blob/{branch}/README.rst",
-    GithubUrls.URL + "/blob/{branch}/readme",
-    GithubUrls.URL + "/blob/{branch}/readme.md",
-    GithubUrls.URL + "/blob/{branch}/readme.rst",
-    GithubUrls.URL + "/blob/{branch}/readme.txt",
-    GithubUrls.URL + "/blob/{branch}/Readme",
-    GithubUrls.URL + "/blob/{branch}/Readme.md",
-    GithubUrls.URL + "/blob/{branch}/Readme.rst",
-    GithubUrls.URL + "/blob/{branch}/Readme.txt"
+    GithubUrls.URL + readme for readme in GITHUB_README_FILES
 ]
 
 GITHUB_LICENSE_LOCATIONS = [
-    GithubUrls.URL + "/blob/{branch}/LICENSE",
-    GithubUrls.URL + "/blob/{branch}/LICENSE.txt",
-    GithubUrls.URL + "/blob/{branch}/UNLICENSE",
-    GithubUrls.URL + "/blob/{branch}/LICENSE.md",
-    GithubUrls.URL + "/blob/{branch}/License",
-    GithubUrls.URL + "/blob/{branch}/License.md",
-    GithubUrls.URL + "/blob/{branch}/License.txt",
-    GithubUrls.URL + "/blob/{branch}/license",
-    GithubUrls.URL + "/blob/{branch}/license.md",
-    GithubUrls.URL + "/blob/{branch}/license.txt"
+    GithubUrls.URL + lic for lic in GITHUB_LICENSE_FILES
 ]
 
 GITHUB_ICON_LOCATIONS = [
@@ -64,53 +44,6 @@ GITHUB_JSON_LOCATIONS = [
     GithubUrls.URL + "/blob/{branch}/res/desktop/skill.json",
     GithubUrls.URL + "/blob/{branch}/skill.json"
 ]
-
-
-# url utils
-def normalize_github_url(url):
-    url = url.replace("https://raw.githubusercontent.com",
-                      "https://github.com").replace(".git", "")
-    if not url.startswith("https://github.com/"):
-        raise GithubInvalidUrl
-    authorname, skillname = url.replace("https://github.com/", "").split("/")[
-                            :2]
-    return "/".join(["https://github.com", authorname, skillname])
-
-
-def file_url_to_raw_github_url(url):
-    if not url.startswith("https://github.com") and \
-            not url.startswith("https://raw.githubusercontent.com"):
-        raise GithubInvalidUrl
-    url = url.replace("/blob", ""). \
-        replace("https://github.com", "https://raw.githubusercontent.com")
-    if requests.get(url).status_code != 200:
-        raise GithubRawUrlNotFound
-    return url
-
-
-def author_repo_from_github_url(url):
-    url = normalize_github_url(url)
-    return url.split("/")[-2:]
-
-
-def skill_name_from_github_url(url):
-    _, repo = author_repo_from_github_url(url)
-    words = camel_case_split(repo.replace("-", " ").lower()).split(" ")
-    name = " ".join([w for w in words if w != "skill"]) + " skill"
-    return name.title()
-
-
-def branch_from_github_url(url):
-    if "/tree/" in url:
-        branch = url.split("/tree/")[-1].split("/")[0]
-        if validate_branch(branch, url):
-            return branch
-    raise GithubInvalidBranch
-
-
-def validate_branch(branch, url):
-    url = normalize_github_url(url) + "/tree/{branch}".format(branch=branch)
-    return requests.get(url).status_code == 200
 
 
 def validate_github_skill_url(url, branch=None):
@@ -135,15 +68,18 @@ def is_valid_github_skill_url(url, branch=None):
 def cache_repo_requests(url, branch=None):
     # this looks dumb, but offers a good speed up since this package uses
     # requests_cache
-    for t in GithubUrls:
-        def cache():
-            try:
-                match_url_template(url, t, branch)
-            except GithubInvalidUrl:
-                pass
-            except Exception as e:
-                LOG.exception(e)
-        create_daemon(cache)
+    # TODO solve rate limiting
+    # for t in GithubUrls:
+    #         def cache():
+    #             try:
+    #                 match_url_template(url, t, branch)
+    #             except GithubInvalidUrl:
+    #                 pass
+    #             except Exception as e:
+    #                 LOG.exception(e)
+    #
+    #         create_daemon(cache)
+    return
 
 
 def match_url_template(url, template, branch=None):
@@ -298,7 +234,9 @@ def get_manifest_from_github_url(url, branch=None):
     if 'dependencies' in data:
         return data
     # some skills in the wild have the manifest without the top-level key
-    LOG.warning("{url} contains an invalid manifest, attempting recovery".format(url=url))
+    LOG.warning(
+        "{url} contains an invalid manifest, attempting recovery".format(
+            url=url))
     recovered = {"dependencies": {}}
     if "python" in data:
         recovered["dependencies"]["python"] = data["python"]
@@ -359,7 +297,8 @@ def get_requirements_json_from_github_url(url, branch=None):
     data = {"python": [], "system": {}, "skill": []}
     try:
         manif = get_manifest_from_github_url(url, branch)
-        data = manif['dependencies'] or {"python": [], "system": {}, "skill": []}
+        data = manif['dependencies'] or {"python": [], "system": {},
+                                         "skill": []}
     except GithubManifestNotFound:
         pass
     try:
@@ -375,25 +314,20 @@ def get_requirements_json_from_github_url(url, branch=None):
     return data
 
 
-def parse_github_url(url, branch=None):
+def get_skill_from_github_url(data, url, branch=None):
     # cache_repo_requests(url)  # speed up requests TODO avoid rate limit
+    url = normalize_github_url(url)
     if not branch:
         try:
             branch = branch_from_github_url(url)
         except GithubInvalidBranch:
             pass
-    url = normalize_github_url(url)
-    author, repo = author_repo_from_github_url(url)
-
-    data = {
-        "authorname": author,
-        "foldername": repo,
-        "skillname": skill_name_from_github_url(url),
-        "url": url,
-        "license": "unknown",
-        "requirements": get_requirements_json_from_github_url(url, branch),
-        "download_url": download_url_from_github_url(url, branch)
-    }
+    if branch:
+        data["branch"] = branch
+    data["url"] = url
+    data["skillname"] = skill_name_from_github_url(url)
+    data["requirements"] = get_requirements_json_from_github_url(url, branch)
+    data["download_url"] = download_url_from_github_url(url, branch)
 
     try:
         data["license"] = get_license_type_from_github_url(url, branch)
