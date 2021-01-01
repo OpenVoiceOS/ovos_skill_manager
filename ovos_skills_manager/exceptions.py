@@ -17,51 +17,31 @@ class GithubInvalidUrl(GithubSkillEntryError):
     """ unrecognized url """
 
 
-class GithubInvalidBranch(GithubInvalidUrl):
+class GithubFileNotFound(FileNotFoundError, GithubInvalidUrl):
     """ unrecognized url """
+
+
+class GithubInvalidBranch(GithubInvalidUrl):
+    """ unrecognized branch """
 
 
 class GithubRawUrlNotFound(GithubInvalidUrl):
-    """ unrecognized url """
+    """ unrecognized raw url """
 
 
 class GithubDownloadUrlNotFound(GithubInvalidUrl):
-    """ unrecognized url """
+    """ unrecognized download url """
 
 
-class GithubReadmeNotFound(GithubInvalidUrl):
+class GithubReadmeNotFound(GithubFileNotFound):
     """ could not extract readme from github """
 
 
-class GithubJsonNotFound(GithubInvalidUrl):
-    """ could not extract .json from github """
-
-
-class GithubIconNotFound(GithubInvalidUrl):
-    """ could not extract icon from github """
-
-
-class GithubDesktopNotFound(GithubInvalidUrl):
+class GithubLicenseNotFound(GithubFileNotFound):
     """ could not extract .desktop from github """
 
 
-class GithubLicenseNotFound(GithubInvalidUrl):
-    """ could not extract .desktop from github """
-
-
-class GithubRequirementsNotFound(GithubInvalidUrl):
-    """ could not extract requirements.txt from github """
-
-
-class GithubSkillRequirementsNotFound(GithubInvalidUrl):
-    """ could not extract skill_requirements.txt from github """
-
-
-class GithubManifestNotFound(GithubInvalidUrl):
-    """ could not extract manifest.yml from github """
-
-
-class InvalidManifest(GithubManifestNotFound):
+class InvalidManifest(GithubFileNotFound):
     """ manifest.yml from github is invalid YAML """
 
 
@@ -85,7 +65,7 @@ class GithubAPIReleasesNotFound(GithubAPIException):
     """ could not retrieve releases github api endpoints """
 
 
-class GithubAPIFileNotFound(GithubAPIException, FileNotFoundError):
+class GithubAPIFileNotFound(GithubFileNotFound, GithubAPIException):
     """ an error occured with github api endpoints """
 
 

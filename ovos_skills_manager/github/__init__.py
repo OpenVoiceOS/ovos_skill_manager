@@ -62,8 +62,17 @@ def get_skill_data(url, branch=None):
     except GithubSkillEntryError as e:
         pass
 
+    # find logo
+    try:
+        data["logo"] = get_logo_url(url, branch)
+    except GithubFileNotFound as e:
+        pass
+
     # augment with requirements
     data["requirements"] = get_requirements_json(url, branch)
+
+    # augment with android data
+    data["android"] = get_android_json(url, branch)
 
     # augment tags
     if is_viral(data["license"]):
@@ -249,7 +258,7 @@ def get_icon(url, branch=None):
 
 
 # handle logo
-def get_logo(url, branch=None):
+def get_logo_url(url, branch=None):
     try:
         return get_logo_url_from_github_api(url, branch)
     except GithubAPIException:

@@ -402,6 +402,29 @@ def get_skill_from_api(url, branch=None, strict=False):
 
     data["requirements"] = get_requirements_json_from_github_api(url, branch)
 
+    # find logo
+    try:
+        data["logo"] = get_logo_url_from_github_api(url, branch)
+    except GithubAPIFileNotFound as e:
+        pass
+
+    # find icon
+    try:
+        data["icon"] = icon = get_icon_url_from_github_api(url, branch)
+    except GithubAPIFileNotFound:
+        icon = None
+
+    # augment with android data
+    try:
+        data["android"] = get_android_json_from_github_api(url, branch)
+    except GithubAPIFileNotFound:
+        # best guess or throw exception?
+        author, repo = author_repo_from_github_url(url)
+        data["android"] = {
+            'android_icon': icon,
+            'android_name': skill_name_from_github_url(url),
+            'android_handler': '{repo}.{author}.home'.format(repo=repo,
+                                                             author=author)}
     # augment tags
     if "tags" not in data:
         data["tags"] = []
@@ -425,7 +448,7 @@ def get_icon_url_from_github_api(url, branch=None):
         if "API rate limit exceeded" in data.get("message", ""):
             raise GithubAPIRateLimited
         return data["download_url"]
-    raise GithubAPIReadmeNotFound
+    raise GithubAPIFileNotFound
 
 
 def get_logo_url_from_github_api(url, branch=None):
@@ -438,7 +461,7 @@ def get_logo_url_from_github_api(url, branch=None):
         if "API rate limit exceeded" in data.get("message", ""):
             raise GithubAPIRateLimited
         return data["download_url"]
-    raise GithubAPIReadmeNotFound
+    raise GithubAPIFileNotFound
 
 
 def get_android_url_from_github_api(url, branch=None):
@@ -450,7 +473,7 @@ def get_android_url_from_github_api(url, branch=None):
         if "API rate limit exceeded" in data.get("message", ""):
             raise GithubAPIRateLimited
         return data["download_url"]
-    raise GithubAPIReadmeNotFound
+    raise GithubAPIFileNotFound
 
 
 def get_android_json_from_github_api(url, branch=None):
@@ -466,6 +489,6 @@ def get_android_json_from_github_api(url, branch=None):
             return json.loads(base64.b64decode(android).decode("utf-8"))
         # TODO Raise UnknownEncoding?
         return android
-    raise GithubAPIReadmeNotFound
+    raise GithubAPIFileNotFound
 
 

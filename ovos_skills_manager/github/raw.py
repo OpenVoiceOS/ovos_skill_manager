@@ -99,7 +99,7 @@ def get_json_url_from_github_url(url, branch):
     except GithubInvalidUrl:
         if requests.get(url).status_code == 200:
             return url
-    raise GithubJsonNotFound
+    raise GithubFileNotFound
 
 
 def get_readme_url_from_github_url(url, branch):
@@ -131,13 +131,13 @@ def get_desktop_url_from_github_url(url, branch):
     except GithubInvalidUrl:
         if requests.get(url).status_code == 200:
             return url
-    raise GithubDesktopNotFound
+    raise GithubFileNotFound
 
 
 def get_icon_url_from_github_url(url, branch):
     try:
         desktop = get_desktop_json_from_github_url(url, branch)
-    except GithubDesktopNotFound:
+    except GithubFileNotFound:
         desktop = {}
 
     for template in GITHUB_ICON_LOCATIONS:
@@ -156,7 +156,7 @@ def get_icon_url_from_github_url(url, branch):
         if requests.get(url).status_code == 200:
             return blob2raw(url)
         return icon_file
-    raise GithubIconNotFound
+    raise GithubFileNotFound
 
 
 def get_license_url_from_github_url(url, branch):
@@ -174,7 +174,7 @@ def requirements_url_from_github_url(url, branch):
     try:
         return match_url_template(url, GithubUrls.REQUIREMENTS, branch)
     except GithubInvalidUrl:
-        raise GithubRequirementsNotFound
+        raise GithubFileNotFound
 
 
 def skill_requirements_url_from_github_url(url, branch):
@@ -182,7 +182,7 @@ def skill_requirements_url_from_github_url(url, branch):
     try:
         return match_url_template(url, GithubUrls.SKILL_REQUIREMENTS, branch)
     except GithubInvalidUrl:
-        raise GithubSkillRequirementsNotFound
+        raise GithubFileNotFound
 
 
 def manifest_url_from_github_url(url, branch):
@@ -190,7 +190,7 @@ def manifest_url_from_github_url(url, branch):
     try:
         return match_url_template(url, GithubUrls.MANIFEST, branch)
     except GithubInvalidUrl:
-        raise GithubManifestNotFound
+        raise GithubFileNotFound
 
 
 # data getters
@@ -238,7 +238,7 @@ def get_skill_json_from_github_url(url, branch):
         url = get_json_url_from_github_url(url, branch)
         url = blob2raw(url)
     except GithubInvalidUrl:
-        raise GithubJsonNotFound
+        raise GithubFileNotFound
 
     res = requests.get(url).text
     return json.loads(res)
@@ -289,17 +289,17 @@ def get_requirements_json_from_github_url(url, branch):
         manif = get_manifest_from_github_url(url, branch)
         data = manif['dependencies'] or {"python": [], "system": {},
                                          "skill": []}
-    except GithubManifestNotFound:
+    except GithubFileNotFound:
         pass
     try:
         req = get_requirements_from_github_url(url, branch)
         data["python"] = list(set(data["python"] + req))
-    except GithubRequirementsNotFound:
+    except GithubFileNotFound:
         pass
     try:
         skill_req = get_skill_requirements_from_github_url(url, branch)
         data["skill"] = list(set(data["skill"] + skill_req))
-    except GithubSkillRequirementsNotFound:
+    except GithubFileNotFound:
         pass
     return data
 
@@ -336,7 +336,7 @@ def get_skill_from_github_url(url, branch=None):
     try:
         data = merge_dict(data, get_skill_json_from_github_url(url, branch),
                           merge_lists=True, skip_empty=True, no_dupes=True)
-    except GithubJsonNotFound:
+    except GithubFileNotFound:
         pass
 
     # augment with readme data
@@ -362,7 +362,7 @@ def get_skill_from_github_url(url, branch=None):
         pass
     try:
         data["icon"] = get_icon_url_from_github_url(url, branch)
-    except GithubIconNotFound:
+    except GithubFileNotFound:
         pass
     # parse bigscreen flags
     if data["requirements"].get("system"):
@@ -372,8 +372,17 @@ def get_skill_from_github_url(url, branch=None):
     try:
         desktop = get_desktop_from_github_url(url, branch)
         data['desktopFile'] = True
-    except GithubDesktopNotFound:
+    except GithubFileNotFound:
         data['desktopFile'] = False
+
+    # find logo
+    try:
+        data["logo"] = get_logo_url_from_github_url(url, branch)
+    except GithubFileNotFound as e:
+        pass
+
+    # augment with android data
+    data["android"] = get_android_json_from_github_url(url, branch)
 
     # augment tags
     if "tags" not in data:
@@ -394,8 +403,7 @@ def get_logo_url_from_github_url(url, branch=None):
             return match_url_template(url, template, branch)
         except GithubInvalidUrl:
             pass
-
-    raise GithubAPIFileNotFound
+    raise GithubFileNotFound
 
 
 def get_android_url_from_github_url(url, branch=None):
@@ -406,10 +414,23 @@ def get_android_url_from_github_url(url, branch=None):
         except GithubInvalidUrl:
             pass
 
-    raise GithubAPIFileNotFound
+    raise GithubFileNotFound
 
 
 def get_android_json_from_github_url(url, branch=None):
-    url = get_android_url_from_github_url(url, branch)
-    return requests.get(url).json()
+    try:
+        url = get_android_url_from_github_url(url, branch)
+        return requests.get(url).json()
+    except GithubFileNotFound:
+        # best guess or throw exception?
+        author, repo = author_repo_from_github_url(url)
+        try:
+            icon = get_icon_url_from_github_url(url, branch)
+        except GithubFileNotFound:
+            icon = None
+        return {'android_icon': icon,
+                'android_name': skill_name_from_github_url(url),
+                'android_handler': '{repo}.{author}.home'.format(repo=repo,
+                                                                 author=author)
+                }
 
