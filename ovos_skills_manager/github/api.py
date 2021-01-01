@@ -1,7 +1,7 @@
 from ovos_utils.log import LOG
 from ovos_utils.json_helper import merge_dict
 from ovos_skills_manager.github.utils import *
-from ovos_skills_manager.licenses import get_license_type, is_viral, \
+from ovos_skills_manager.licenses import parse_license_type, is_viral, \
     is_permissive
 from ovos_skills_manager.utils import desktop_to_json, readme_to_json
 from ovos_skills_manager.requirements import validate_manifest
@@ -185,7 +185,7 @@ def get_license_type_from_github_api(url, branch=None):
     except Exception as e:
         pass
     text = get_license_from_github_api(url, branch)
-    return get_license_type(text)
+    return parse_license_type(text)
 
 
 def get_license_from_github_api(url, branch=None):

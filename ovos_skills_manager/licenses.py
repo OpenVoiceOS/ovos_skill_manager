@@ -98,65 +98,53 @@ def is_viral(license_type):
     return False
 
 
-def _is_0bsd(license):
+def _check_template(lic, template):
+    lines = [l for l in lic.lower().split("\n") if l.strip()]
+    lic = ''.join(filter(str.isalpha, lic)).lower()
+    t = ''.join(filter(str.isalpha, template)).lower()
+
+    if t == lic:
+        return True
+
+    # account for copyright in first line
+    if "copyright" in lines[0]:
+        lic = "\n".join(lines[1:])
+        return _check_template(lic, template)
+    return False
+
+
+def _is_0bsd(lic):
     template = """
     Permission to use, copy, modify, and distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
     THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     """
-    lines = [l for l in license.lower().split("\n") if l.strip()]
-    if "copyright" in lines[0]:
-        lines = lines[1:]
-    license = " ".join(lines).replace("\n", "").replace(" ", "").replace("\t",
-                                                                         "").replace(
-        "\r", "").strip()
-    t = template.replace("\n", "").replace(" ", "").lower().strip()
-    if t == license:
-        return True
-    return False
+    return _check_template(lic, template)
 
 
-def _is_isc(license):
+def _is_isc(lic):
     template = """
     Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
     THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
     """
-    lines = [l for l in license.lower().split("\n") if l.strip()]
-    if "copyright" in lines[0]:
-        lines = lines[1:]
-    license = " ".join(lines).replace("\n", "").replace(" ", "").replace("\t",
-                                                                         "").replace(
-        "\r", "").strip()
-    t = template.replace("\n", "").replace(" ", "").lower().strip()
-    if t == license:
-        return True
-    return False
+    return _check_template(lic, template)
 
 
-def _is_mit(license):
+def _is_mit(lic):
     template = """
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
     The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     """
-    lines = [l for l in license.lower().split("\n") if l.strip()]
-    if "copyright" in lines[0]:
-        lines = lines[1:]
-    license = " ".join(lines).replace("\n", "").replace(" ", "").replace("\t",
-                                                                         "").replace(
-        "\r", "").strip()
-    t = template.replace("\n", "").replace(" ", "").lower().strip()
-    if t == license:
-        return True
-    return False
+    return _check_template(lic, template)
 
 
-def get_license_type(license):
+def parse_license_type(lic):
     # assumptions
     # - license header is somewhere in the first 10 lines
     # - license list is ordered in a way that first match NEEDS to override others
 
     # quick and dirty
-    header = "\n".join(license.split("\n")[:30]).lower() \
+    header = "\n".join(lic.split("\n")[:30]).lower() \
         .replace(" ", "").replace("\n", "").replace("\r", "") \
         .replace("\t", "").replace(",", "")
 
@@ -164,13 +152,13 @@ def get_license_type(license):
         if v.lower().replace(" ", "").replace(",", "") in header:
             return k
 
-    if _is_isc(license):
+    if _is_isc(lic):
         return "isc"
 
-    if _is_0bsd(license):
+    if _is_0bsd(lic):
         return "0bsd"
 
-    if _is_mit(license):
+    if _is_mit(lic):
         return "mit"
 
-    return license.strip().split("\n")[0]
+    return lic.strip().split("\n")[0]

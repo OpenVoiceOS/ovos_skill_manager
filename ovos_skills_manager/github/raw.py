@@ -1,6 +1,6 @@
 from ovos_skills_manager.github.utils import *
 from ovos_skills_manager.utils import desktop_to_json, readme_to_json
-from ovos_skills_manager.licenses import get_license_type, is_viral, \
+from ovos_skills_manager.licenses import parse_license_type, is_viral, \
     is_permissive
 from ovos_utils.log import LOG
 from ovos_utils.json_helper import merge_dict
@@ -39,7 +39,7 @@ GITHUB_ANDROID_JSON_LOCATIONS = [
 ]
 
 
-def cache_repo_requests(url, branch):
+def cache_repo_requests(url, branch=None):
     # this looks dumb, but offers a good speed up since this package uses
     # requests_cache
     # TODO solve rate limiting
@@ -86,7 +86,8 @@ def get_repo_releases_from_github_url(url):
     return releases
 
 
-def get_json_url_from_github_url(url, branch):
+def get_json_url_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
     # try default github url
     for template in GITHUB_JSON_LOCATIONS:
         try:
@@ -105,7 +106,8 @@ def get_json_url_from_github_url(url, branch):
     raise GithubFileNotFound
 
 
-def get_readme_url_from_github_url(url, branch):
+def get_readme_url_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
     # try url from default github location
     for template in GITHUB_README_LOCATIONS:
         try:
@@ -121,7 +123,8 @@ def get_readme_url_from_github_url(url, branch):
     raise GithubReadmeNotFound
 
 
-def get_desktop_url_from_github_url(url, branch):
+def get_desktop_url_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
     # try default github location
     try:
         return match_url_template(url, GithubUrls.DESKTOP_FILE, branch)
@@ -137,7 +140,8 @@ def get_desktop_url_from_github_url(url, branch):
     raise GithubFileNotFound
 
 
-def get_icon_url_from_github_url(url, branch):
+def get_icon_url_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
     try:
         desktop = get_desktop_json_from_github_url(url, branch)
     except GithubFileNotFound:
@@ -162,7 +166,8 @@ def get_icon_url_from_github_url(url, branch):
     raise GithubFileNotFound
 
 
-def get_license_url_from_github_url(url, branch):
+def get_license_url_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
     # default github locations
     for template in GITHUB_LICENSE_LOCATIONS:
         try:
@@ -172,7 +177,8 @@ def get_license_url_from_github_url(url, branch):
     raise GithubLicenseNotFound
 
 
-def requirements_url_from_github_url(url, branch):
+def requirements_url_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
     # try default github url
     try:
         return match_url_template(url, GithubUrls.REQUIREMENTS, branch)
@@ -180,7 +186,8 @@ def requirements_url_from_github_url(url, branch):
         raise GithubFileNotFound
 
 
-def skill_requirements_url_from_github_url(url, branch):
+def skill_requirements_url_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
     # try default github url
     try:
         return match_url_template(url, GithubUrls.SKILL_REQUIREMENTS, branch)
@@ -188,7 +195,8 @@ def skill_requirements_url_from_github_url(url, branch):
         raise GithubFileNotFound
 
 
-def manifest_url_from_github_url(url, branch):
+def manifest_url_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
     # try default github url
     try:
         return match_url_template(url, GithubUrls.MANIFEST, branch)
@@ -197,19 +205,22 @@ def manifest_url_from_github_url(url, branch):
 
 
 # data getters
-def get_requirements_from_github_url(url, branch):
+def get_requirements_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
     url = requirements_url_from_github_url(url, branch)
     return [t for t in requests.get(url).text.split("\n")
             if t.strip() and not t.strip().startswith("#")]
 
 
-def get_skill_requirements_from_github_url(url, branch):
+def get_skill_requirements_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
     url = skill_requirements_url_from_github_url(url, branch)
     return [t for t in requests.get(url).text.split("\n")
             if t.strip() and not t.strip().startswith("#")]
 
 
-def get_manifest_from_github_url(url, branch):
+def get_manifest_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
     url = manifest_url_from_github_url(url, branch)
     manifest = requests.get(url).text
     data = yaml.safe_load(manifest)
@@ -235,7 +246,7 @@ def get_manifest_from_github_url(url, branch):
     return recovered
 
 
-def get_skill_json_from_github_url(url, branch):
+def get_skill_json_from_github_url(url, branch=None):
     branch = branch or get_branch_from_github_url(url)
     try:
         url = get_json_url_from_github_url(url, branch)
@@ -252,46 +263,53 @@ def get_skill_json_from_github_url(url, branch):
         raise GithubFileNotFound
 
 
-def get_readme_from_github_url(url, branch):
+def get_readme_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
     url = get_readme_url_from_github_url(url, branch)
     return requests.get(url).text
 
 
-def get_license_from_github_url(url, branch):
+def get_license_from_github_url(url, branch=None):
     url = get_license_url_from_github_url(url, branch)
     return requests.get(url).text
 
 
-def get_license_type_from_github_url(url, branch):
+def get_license_type_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
     license = get_license_from_github_url(url, branch).lower()
-    return get_license_type(license)
+    return parse_license_type(license)
 
 
-def get_license_data_from_github_url(url, branch):
+def get_license_data_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
     lic = get_license_from_github_url(url, branch)
     return {
-        "license_type": get_license_type(lic),
+        "license_type": parse_license_type(lic),
         "license_text": lic
     }
 
 
-def get_desktop_from_github_url(url, branch):
+def get_desktop_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
     url = get_desktop_url_from_github_url(url, branch)
     return requests.get(url).text
 
 
 # data parsers
-def get_desktop_json_from_github_url(url, branch):
+def get_desktop_json_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
     desktop = get_desktop_from_github_url(url, branch)
     return desktop_to_json(desktop)
 
 
-def get_readme_json_from_github_url(url, branch):
+def get_readme_json_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
     readme = get_readme_from_github_url(url, branch)
     return readme_to_json(readme)
 
 
-def get_requirements_json_from_github_url(url, branch):
+def get_requirements_json_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
     data = {"python": [], "system": {}, "skill": []}
     try:
         manif = get_manifest_from_github_url(url, branch)
@@ -426,6 +444,7 @@ def get_android_url_from_github_url(url, branch=None):
 
 
 def get_android_json_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
     try:
         url = get_android_url_from_github_url(url, branch)
         return requests.get(url).json()
