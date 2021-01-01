@@ -100,3 +100,7 @@ class GithubAPILicenseNotFound(GithubAPIFileNotFound, GithubLicenseNotFound):
 class GithubAPIRepoNotFound(GithubAPIException):
     """ could not retrieve releases github api endpoints """
 
+
+class GithubAPIRateLimited(GithubAPIException):
+    """ API rate limit exceeded """
+

@@ -73,3 +73,4 @@ def desktop_to_json(desktop):
         val = l.replace(k + "=", "")
         data[k] = val
     return data
+

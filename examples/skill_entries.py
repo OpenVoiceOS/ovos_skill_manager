@@ -20,11 +20,6 @@ s = SkillEntry.from_github_url(url)
 print(s.as_json)
 
 
-# parse .json from file (pling style)
-path = "pling.json"
-s = SkillEntry.from_json(path)
-print(s.as_json)
-
 # parse .json from github url to file (all urls work assuming json in standard location)
 url = "https://github.com/JarbasSkills/skill-wolfie/blob/master/__init__.py"
 url = "https://github.com/JarbasSkills/skill-wolfie"

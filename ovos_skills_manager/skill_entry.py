@@ -3,9 +3,8 @@ from os.path import isfile
 from ovos_skills_manager.session import SESSION as requests
 from ovos_skills_manager.exceptions import GithubInvalidUrl, \
     JSONDecodeError, GithubJsonNotFound, GithubInvalidBranch
-from ovos_skills_manager.github.raw import parse_github_url, \
-    download_url_from_github_url, get_requirements_json_from_github_url, \
-    branch_from_github_url
+from ovos_skills_manager.github import download_url_from_github_url, \
+    get_branch, get_skill_data, get_requirements
 from ovos_utils.json_helper import merge_dict
 from ovos_utils.skills import blacklist_skill, whitelist_skill, \
     make_priority_skill, get_skills_folder
@@ -53,7 +52,7 @@ class SkillEntry:
             if "github" in url:
                 branch = data.get("branch")
                 try:
-                    github_data = parse_github_url(url, branch)
+                    github_data = get_skill_data(url, branch)
                     data = merge_dict(data, github_data, merge_lists=True,
                                       skip_empty=True, no_dupes=True)
                 except GithubInvalidUrl as e:
@@ -62,8 +61,7 @@ class SkillEntry:
 
     @staticmethod
     def from_github_url(url, branch=None):
-        data = parse_github_url(url, branch)
-        return SkillEntry.from_json(data, False)
+        return SkillEntry.from_json({"url": url, "branch": branch}, True)
 
     # properties
     @property
@@ -126,7 +124,7 @@ class SkillEntry:
     @property
     def requirements(self):
         return self.as_json.get("requirements") or \
-               get_requirements_json_from_github_url(self.url, self.branch)
+               get_requirements(self.url, self.branch)
 
     @property
     def license(self):
@@ -203,7 +201,7 @@ class SkillEntry:
             LOG.info('Installing required skills')
         for s in skills:
             try:
-                branch = branch_from_github_url(s)
+                branch = get_branch(s)
             except GithubInvalidBranch:
                 LOG.warning("skill branch not specified for {skill}, "
                             "falling back to '{branch}'".
