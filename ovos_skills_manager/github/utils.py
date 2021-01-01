@@ -10,9 +10,11 @@ class GithubUrls(str, Enum):
     BLOB = URL + "/blob/{branch}"
     README = BLOB + "/README.md"
     LICENSE = BLOB + "/LICENSE"
-    SKILL_JSON = BLOB + "/res/desktop/skill.json"
+    SKILL_JSON = BLOB + "/skill.json"
+    ANDROID_JSON = BLOB + "/android.json"
     DESKTOP_FILE = BLOB + "/res/desktop/{repo}.desktop"
     ICON = BLOB + "/res/icon/{icon}"
+    LOGO = BLOB + "/ui/{logo}"
     SKILL = BLOB + "/__init__.py"
     MANIFEST = BLOB + "/manifest.yml"
     REQUIREMENTS = BLOB + "/requirements.txt"
@@ -35,13 +37,17 @@ GITHUB_LICENSE_FILES = ["LICENSE", "LICENSE.txt", "UNLICENSE",
 
 GITHUB_ICON_FILES = ["res/icon/{repo}", "res/icon/{repo}.png",
                      "res/icon/{repo}.svg", "res/icon/{repo}.jpg"]
-GITHUB_JSON_FILES = ["res/desktop/skill.json", "skill.json"]
+GITHUB_JSON_FILES = ["skill.json", "res/desktop/skill.json"]
+GITHUB_ANDROID_FILES = ["android.json", "res/desktop/android.json"]
 GITHUB_DESKTOP_FILES = ["res/desktop/{repo}.desktop", "{repo}.desktop"]
 GITHUB_MANIFEST_FILES = ["manifest.yml"]
 GITHUB_REQUIREMENTS_FILES = ["requirements.txt"]
 GITHUB_SKILL_REQUIREMENTS_FILES = ["skill_requirements.txt"]
 GITHUB_REQUIREMENTS_SCRIPT_FILES = ["requirements.sh"]
 GITHUB_SKILL_INIT_FILES = ["__init__.py"]
+GITHUB_LOGO_FILES = ["ui/logo.png", "logo.png", "ui/{repo}.png",
+                     "ui/{repo}.svg", "ui/{repo}.jpg", "{repo}.png",
+                     "{repo}.svg", "{repo}.jpg"]
 
 
 # url utils

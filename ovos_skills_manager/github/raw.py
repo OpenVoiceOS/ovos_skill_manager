@@ -24,9 +24,18 @@ GITHUB_ICON_LOCATIONS = [
     GithubUrls.BLOB + "/res/icon/{repo}.jpg"
 ]
 
+GITHUB_LOGO_LOCATIONS = [
+    GithubUrls.BLOB + "/" + logo for logo in GITHUB_LOGO_FILES
+]
+
 GITHUB_JSON_LOCATIONS = [
-    GithubUrls.BLOB + "/res/desktop/skill.json",
-    GithubUrls.BLOB + "/skill.json"
+    GithubUrls.BLOB + "/skill.json",
+    GithubUrls.BLOB + "/res/desktop/skill.json"
+
+]
+
+GITHUB_ANDROID_JSON_LOCATIONS = [
+    GithubUrls.BLOB + "/" + path for path in GITHUB_ANDROID_FILES
 ]
 
 
@@ -123,21 +132,6 @@ def get_desktop_url_from_github_url(url, branch):
         if requests.get(url).status_code == 200:
             return url
     raise GithubDesktopNotFound
-
-
-def download_url_from_github_url(url, branch):
-    # specific file
-    try:
-        return blob2raw(url)
-    except GithubInvalidUrl:
-        pass
-    # full git repo
-    branch = branch or get_branch_from_github_url(url)
-    author, repo = author_repo_from_github_url(url)
-    url = GithubUrls.DOWNLOAD.format(author=author, branch=branch, repo=repo)
-    if requests.get(url).status_code == 200:
-        return url
-    raise GithubInvalidUrl
 
 
 def get_icon_url_from_github_url(url, branch):
@@ -391,3 +385,31 @@ def get_skill_from_github_url(url, branch=None):
     elif "unknown" in data["license"]:
         data["tags"].append("no-license")
     return data
+
+
+def get_logo_url_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
+    for template in GITHUB_LOGO_LOCATIONS:
+        try:
+            return match_url_template(url, template, branch)
+        except GithubInvalidUrl:
+            pass
+
+    raise GithubAPIFileNotFound
+
+
+def get_android_url_from_github_url(url, branch=None):
+    branch = branch or get_branch_from_github_url(url)
+    for template in GITHUB_ANDROID_JSON_LOCATIONS:
+        try:
+            return match_url_template(url, template, branch)
+        except GithubInvalidUrl:
+            pass
+
+    raise GithubAPIFileNotFound
+
+
+def get_android_json_from_github_url(url, branch=None):
+    url = get_android_url_from_github_url(url, branch)
+    return requests.get(url).json()
+

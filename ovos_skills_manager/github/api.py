@@ -20,6 +20,7 @@ class GithubAPI(str, Enum):
     LICENSE_DATA = LICENSE_LIST + "/{license_type}"
     REPO = BASE + "/repos/{owner}/{repo}"
     REPO_LICENSE = REPO + "/license"
+    REPO_README = REPO + "/readme"
     REPO_RELEASES = REPO + "/tags"
     REPO_FILE = REPO + '/contents/{file}'
 
@@ -29,7 +30,7 @@ def get_repo_data_from_github_api(url, branch=None):
     author, repo = author_repo_from_github_url(url)
     url = GithubAPI.REPO.format(owner=author, repo=repo)
     try:
-        data = requests.get(url).json()
+        data = requests.get(url, params={"ref": branch}).json()
     except Exception as e:
         raise GithubAPIRepoNotFound
     if "API rate limit exceeded" in data.get("message", ""):
@@ -41,7 +42,7 @@ def get_license_data_from_github_api(url, branch=None):
     author, repo = author_repo_from_github_url(url)
     url = GithubAPI.REPO_LICENSE.format(owner=author, repo=repo)
     try:
-        data = requests.get(url).json()
+        data = requests.get(url, params={"ref": branch}).json()
     except Exception as e:
         raise GithubAPILicenseNotFound
     if "API rate limit exceeded" in data.get("message", ""):
@@ -53,7 +54,7 @@ def get_repo_releases_from_github_api(url, branch=None):
     try:
         author, repo = author_repo_from_github_url(url)
         url = GithubAPI.REPO_RELEASES.format(owner=author, repo=repo)
-        data = requests.get(url).json()
+        data = requests.get(url, params={"ref": branch}).json()
     except Exception as e:
         raise GithubAPIReleasesNotFound(str(e))
     if isinstance(data, dict):
@@ -79,7 +80,7 @@ def get_license_url_from_github_api(url, branch=None):
         pass
     for dst in GITHUB_LICENSE_FILES:
         try:
-            data = get_file_from_github_api(url, dst)
+            data = get_file_from_github_api(url, dst, branch)
         except GithubAPIFileNotFound:
             continue
         if "API rate limit exceeded" in data.get("message", ""):
@@ -91,7 +92,12 @@ def get_license_url_from_github_api(url, branch=None):
 # data getters
 def get_branch_from_github_api(url, branch=None):
     try:
-        data = get_repo_data_from_github_api(url)
+        # implicit in url
+        return get_branch_from_github_url(url)
+    except GithubInvalidBranch:
+        pass
+    try:
+        data = get_repo_data_from_github_api(url, branch)
         if "API rate limit exceeded" in data.get("message", ""):
             raise GithubAPIRateLimited
         return data['default_branch']
@@ -105,8 +111,9 @@ def get_latest_release_from_api(url, branch=None):
 
 def get_file_from_github_api(url, filepath, branch=None):
     author, repo = author_repo_from_github_url(url)
+    branch = branch or get_branch_from_github_api(url)
     url = GithubAPI.REPO_FILE.format(owner=author, repo=repo, file=filepath)
-    data = requests.get(url).json()
+    data = requests.get(url, params={"ref": branch}).json()
     if "API rate limit exceeded" in data.get("message", ""):
         raise GithubAPIRateLimited
     if data.get("message", "") != 'Not Found':
@@ -115,21 +122,48 @@ def get_file_from_github_api(url, filepath, branch=None):
 
 
 def get_readme_url_from_github_api(url, branch=None):
+    author, repo = author_repo_from_github_url(url)
+    default_url = GithubAPI.REPO_README.format(owner=author, repo=repo)
+    try:
+        data = requests.get(default_url, params={"ref": branch}).json()
+        if "API rate limit exceeded" in data.get("message", ""):
+            raise GithubAPIRateLimited
+        return data["html_url"]
+    except Exception as e:
+        pass # check files individually
+
     for dst in GITHUB_README_FILES:
         try:
-            data = get_file_from_github_api(url, dst)
+            data = get_file_from_github_api(url, dst, branch)
         except GithubAPIFileNotFound:
             continue
         if "API rate limit exceeded" in data.get("message", ""):
             raise GithubAPIRateLimited
-        return data["'html_url'"]
+        return data["html_url"]
     raise GithubAPIReadmeNotFound
 
 
 def get_readme_from_github_api(url, branch=None):
+    author, repo = author_repo_from_github_url(url)
+    default_url = GithubAPI.REPO_README.format(owner=author, repo=repo)
+    try:
+        data = requests.get(default_url, params={"ref": branch}).json()
+        if "API rate limit exceeded" in data.get("message", ""):
+            raise GithubAPIRateLimited
+        readme = data["content"]
+        if data["encoding"] == "base64":
+            return base64.b64decode(readme).decode("utf-8")
+        # TODO Raise UnknownEncoding?
+        return readme
+    except GithubAPIRateLimited:
+        raise
+    except Exception as e:
+        pass
+
+    # check files individually
     for dst in GITHUB_README_FILES:
         try:
-            data = get_file_from_github_api(url, dst)
+            data = get_file_from_github_api(url, dst, branch)
         except GithubAPIFileNotFound:
             continue
         if "API rate limit exceeded" in data.get("message", ""):
@@ -137,6 +171,7 @@ def get_readme_from_github_api(url, branch=None):
         readme = data["content"]
         if data["encoding"] == "base64":
             return base64.b64decode(readme).decode("utf-8")
+        # TODO Raise UnknownEncoding?
         return readme
     raise GithubAPIReadmeNotFound
 
@@ -165,10 +200,11 @@ def get_license_from_github_api(url, branch=None):
     except Exception as e:
         pass
     for dst in GITHUB_LICENSE_FILES:
-        data = get_file_from_github_api(url, dst)
+        data = get_file_from_github_api(url, dst, branch)
         text = data["content"]
         if data["encoding"] == "base64":
             return base64.b64decode(text).decode("utf-8")
+        # TODO Raise UnknownEncoding?
         return text
     raise GithubAPILicenseNotFound
 
@@ -178,7 +214,7 @@ def get_requirements_from_github_api(url, branch=None):
     content = None
     for dst in GITHUB_REQUIREMENTS_FILES:
         try:
-            data = get_file_from_github_api(url, dst.format(repo=repo))
+            data = get_file_from_github_api(url, dst.format(repo=repo), branch)
         except GithubAPIFileNotFound:
             continue
         if "API rate limit exceeded" in data.get("message", ""):
@@ -186,6 +222,7 @@ def get_requirements_from_github_api(url, branch=None):
         content = data["content"]
         if data["encoding"] == "base64":
             content = base64.b64decode(content).decode("utf-8")
+        # TODO Raise UnknownEncoding?
     if not content:
         raise GithubAPIFileNotFound
     return [t for t in content.split("\n")
@@ -197,7 +234,7 @@ def get_skill_requirements_from_github_api(url, branch=None):
     content = None
     for dst in GITHUB_SKILL_REQUIREMENTS_FILES:
         try:
-            data = get_file_from_github_api(url, dst.format(repo=repo))
+            data = get_file_from_github_api(url, dst.format(repo=repo), branch)
         except GithubAPIFileNotFound:
             continue
         if "API rate limit exceeded" in data.get("message", ""):
@@ -205,6 +242,7 @@ def get_skill_requirements_from_github_api(url, branch=None):
         content = data["content"]
         if data["encoding"] == "base64":
             content = base64.b64decode(content).decode("utf-8")
+        # TODO Raise UnknownEncoding?
     if not content:
         raise GithubAPIFileNotFound
     return [t for t in content.split("\n")
@@ -216,7 +254,7 @@ def get_manifest_from_github_api(url, branch=None):
     content = None
     for dst in GITHUB_MANIFEST_FILES:
         try:
-            data = get_file_from_github_api(url, dst.format(repo=repo))
+            data = get_file_from_github_api(url, dst.format(repo=repo), branch)
         except GithubAPIFileNotFound:
             continue
         if "API rate limit exceeded" in data.get("message", ""):
@@ -224,6 +262,7 @@ def get_manifest_from_github_api(url, branch=None):
         content = data["content"]
         if data["encoding"] == "base64":
             content = base64.b64decode(content).decode("utf-8")
+        # TODO Raise UnknownEncoding?
     if not content:
         raise GithubAPIFileNotFound
     return validate_manifest(content)
@@ -233,7 +272,7 @@ def get_json_url_from_github_api(url, branch=None):
     author, repo = author_repo_from_github_url(url)
     for dst in GITHUB_JSON_FILES:
         try:
-            data = get_file_from_github_api(url, dst.format(repo=repo))
+            data = get_file_from_github_api(url, dst.format(repo=repo), branch)
         except GithubAPIFileNotFound:
             continue
         if "API rate limit exceeded" in data.get("message", ""):
@@ -246,7 +285,7 @@ def get_skill_json_from_github_api(url, branch=None):
     author, repo = author_repo_from_github_url(url)
     for dst in GITHUB_JSON_FILES:
         try:
-            data = get_file_from_github_api(url, dst.format(repo=repo))
+            data = get_file_from_github_api(url, dst.format(repo=repo), branch)
         except GithubAPIFileNotFound:
             continue
         if "API rate limit exceeded" in data.get("message", ""):
@@ -255,6 +294,7 @@ def get_skill_json_from_github_api(url, branch=None):
         if data["encoding"] == "base64":
             json_data = base64.b64decode(content).decode("utf-8")
         else:
+            # TODO Raise UnknownEncoding?
             json_data = content
         return json.loads(json_data)
     raise GithubAPIFileNotFound
@@ -264,7 +304,7 @@ def get_desktop_url_from_github_api(url, branch=None):
     author, repo = author_repo_from_github_url(url)
     for dst in GITHUB_DESKTOP_FILES:
         try:
-            data = get_file_from_github_api(url, dst.format(repo=repo))
+            data = get_file_from_github_api(url, dst.format(repo=repo), branch)
         except GithubAPIFileNotFound:
             continue
         if "API rate limit exceeded" in data.get("message", ""):
@@ -277,7 +317,7 @@ def get_desktop_from_github_api(url, branch=None):
     author, repo = author_repo_from_github_url(url)
     for dst in GITHUB_DESKTOP_FILES:
         try:
-            data = get_file_from_github_api(url, dst.format(repo=repo))
+            data = get_file_from_github_api(url, dst.format(repo=repo), branch)
         except GithubAPIFileNotFound:
             continue
         if "API rate limit exceeded" in data.get("message", ""):
@@ -285,13 +325,14 @@ def get_desktop_from_github_api(url, branch=None):
         readme = data["content"]
         if data["encoding"] == "base64":
             return base64.b64decode(readme).decode("utf-8")
+        # TODO Raise UnknownEncoding?
         return readme
     raise GithubAPIFileNotFound
 
 
 # data parsers
 def get_readme_json_from_api(url, branch=None):
-    readme = get_readme_from_github_api(url)
+    readme = get_readme_from_github_api(url, branch)
     return readme_to_json(readme)
 
 
@@ -303,7 +344,7 @@ def get_desktop_json_from_api(url, branch=None):
 def get_requirements_json_from_github_api(url, branch=None):
     data = {"python": [], "system": {}, "skill": []}
     try:
-        manif = get_manifest_from_github_api(url)
+        manif = get_manifest_from_github_api(url, branch)
         data = manif['dependencies'] or {"python": [], "system": {},
                                          "skill": []}
     except GithubAPIFileNotFound:
@@ -354,7 +395,7 @@ def get_skill_from_api(url, branch=None, strict=False):
 
     # augment with readme data
     try:
-        data = merge_dict(data, get_readme_json_from_api(url),
+        data = merge_dict(data, get_readme_json_from_api(url, branch),
                           merge_lists=True, skip_empty=True, no_dupes=True)
     except GithubAPIReadmeNotFound:
         pass
@@ -378,10 +419,53 @@ def get_icon_url_from_github_api(url, branch=None):
     author, repo = author_repo_from_github_url(url)
     for dst in GITHUB_ICON_FILES:
         try:
-            data = get_file_from_github_api(url, dst.format(repo=repo))
+            data = get_file_from_github_api(url, dst.format(repo=repo), branch)
         except GithubAPIFileNotFound:
             continue
         if "API rate limit exceeded" in data.get("message", ""):
             raise GithubAPIRateLimited
         return data["download_url"]
     raise GithubAPIReadmeNotFound
+
+
+def get_logo_url_from_github_api(url, branch=None):
+    author, repo = author_repo_from_github_url(url)
+    for dst in GITHUB_LOGO_FILES:
+        try:
+            data = get_file_from_github_api(url, dst.format(repo=repo), branch)
+        except GithubAPIFileNotFound:
+            continue
+        if "API rate limit exceeded" in data.get("message", ""):
+            raise GithubAPIRateLimited
+        return data["download_url"]
+    raise GithubAPIReadmeNotFound
+
+
+def get_android_url_from_github_api(url, branch=None):
+    for dst in GITHUB_ANDROID_FILES:
+        try:
+            data = get_file_from_github_api(url, dst, branch)
+        except GithubAPIFileNotFound:
+            continue
+        if "API rate limit exceeded" in data.get("message", ""):
+            raise GithubAPIRateLimited
+        return data["download_url"]
+    raise GithubAPIReadmeNotFound
+
+
+def get_android_json_from_github_api(url, branch=None):
+    for dst in GITHUB_ANDROID_FILES:
+        try:
+            data = get_file_from_github_api(url, dst, branch)
+        except GithubAPIFileNotFound:
+            continue
+        if "API rate limit exceeded" in data.get("message", ""):
+            raise GithubAPIRateLimited
+        android = data["content"]
+        if data["encoding"] == "base64":
+            return json.loads(base64.b64decode(android).decode("utf-8"))
+        # TODO Raise UnknownEncoding?
+        return android
+    raise GithubAPIReadmeNotFound
+
+

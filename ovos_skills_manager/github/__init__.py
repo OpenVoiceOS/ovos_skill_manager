@@ -76,10 +76,8 @@ def get_skill_data(url, branch=None):
 
 
 def get_branch(url):
-    try:
-        return get_branch_from_github_api(url)
-    except GithubAPIException:
-        return get_branch_from_github_url(url)
+    # this also tries branch_from_url for implicit branches
+    return get_branch_from_github_api(url)
 
 
 def get_repo_data(url):
@@ -250,3 +248,24 @@ def get_icon(url, branch=None):
         return get_icon_url_from_github_url(url, branch)
 
 
+# handle logo
+def get_logo(url, branch=None):
+    try:
+        return get_logo_url_from_github_api(url, branch)
+    except GithubAPIException:
+        return get_logo_url_from_github_url(url, branch)
+
+
+# handle android
+def get_android_url(url, branch=None):
+    try:
+        return get_android_url_from_github_api(url, branch)
+    except GithubAPIException:
+        return get_android_url_from_github_url(url, branch)
+
+
+def get_android_json(url, branch=None):
+    try:
+        return get_android_json_from_github_api(url, branch)
+    except GithubAPIException:
+        return get_android_json_from_github_url(url, branch)
