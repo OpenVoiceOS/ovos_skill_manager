@@ -9,11 +9,14 @@ class TestGithubUrlParsing(unittest.TestCase):
     def test_normalize_url(self):
         normie = "https://github.com/JarbasSkills/skill-wolfie"
         raw = "https://raw.githubusercontent.com/JarbasSkills/skill-wolfie"
+        api = "https://api.github.com/repos/JarbasSkills/skill-wolfie"
         urls = [
-            normie, raw,
+            normie, raw, api,
             normie + "/blob/master/__init__.py",
             normie + "/blob/v0.1/res/desktop/skill.json",
-            raw + "/v0.1/res/desktop/skill.json"
+            raw + "/v0.1/res/desktop/skill.json",
+            api + "/commits/09de4133f8d53230f93b61b5fd8e8267f4b0aec4",
+            api + "/zipball/v0.1", api + "/tarball/v0.1"
         ]
         for url in urls:
             self.assertEqual(normalize_github_url(url), normie)
