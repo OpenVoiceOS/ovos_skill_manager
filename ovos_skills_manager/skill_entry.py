@@ -2,7 +2,7 @@ import json
 from os.path import isfile
 from ovos_skills_manager.session import SESSION as requests
 from ovos_skills_manager.exceptions import GithubInvalidUrl, \
-    JSONDecodeError, GithubJsonNotFound, GithubInvalidBranch
+    JSONDecodeError, GithubFileNotFound, GithubInvalidBranch
 from ovos_skills_manager.github import download_url_from_github_url, \
     get_branch, get_skill_data, get_requirements
 from ovos_utils.json_helper import merge_dict
@@ -35,7 +35,7 @@ class SkillEntry:
                         res = requests.get(url).text
                         data = json.loads(res)
                     except JSONDecodeError:
-                        raise GithubJsonNotFound
+                        raise GithubFileNotFound
             elif isfile(data):
                 with open(data) as f:
                     data = json.load(f)

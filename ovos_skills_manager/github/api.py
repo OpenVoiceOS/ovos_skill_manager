@@ -424,7 +424,7 @@ def get_skill_from_api(url, branch=None, strict=False):
             'android_icon': icon,
             'android_name': skill_name_from_github_url(url),
             'android_handler': '{repo}.{author}.home'.format(repo=repo,
-                                                             author=author)}
+                                                             author=author.lower())}
     # augment tags
     if "tags" not in data:
         data["tags"] = []

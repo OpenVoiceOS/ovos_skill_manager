@@ -95,10 +95,13 @@ def get_json_url_from_github_url(url, branch):
             pass
     # try direct url
     try:
-        return blob2raw(url)
+        raw_url = blob2raw(url)
+        if requests.get(raw_url).status_code == 200:
+            return raw_url
     except GithubInvalidUrl:
-        if requests.get(url).status_code == 200:
-            return url
+        pass
+    if requests.get(url).status_code == 200:
+        return url
     raise GithubFileNotFound
 
 
@@ -239,9 +242,14 @@ def get_skill_json_from_github_url(url, branch):
         url = blob2raw(url)
     except GithubInvalidUrl:
         raise GithubFileNotFound
-
-    res = requests.get(url).text
-    return json.loads(res)
+    try:
+        res = requests.get(url).text
+        return json.loads(res)
+    except:
+        # this might happen if branch is considered valid
+        # eg, for skill-ddg v0.1.0
+        # v0.1 url resolves, but raw url does not
+        raise GithubFileNotFound
 
 
 def get_readme_from_github_url(url, branch):
@@ -431,6 +439,6 @@ def get_android_json_from_github_url(url, branch=None):
         return {'android_icon': icon,
                 'android_name': skill_name_from_github_url(url),
                 'android_handler': '{repo}.{author}.home'.format(repo=repo,
-                                                                 author=author)
+                                                                 author=author.lower())
                 }
 
