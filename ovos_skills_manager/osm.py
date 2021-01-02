@@ -10,7 +10,7 @@ from ovos_skills_manager.exceptions import UnknownAppstore
 
 class OVOSSkillsManager:
     def __init__(self):
-        self.config = JsonStorageXDG("OVOS-SkillsManager.json")
+        self.config = JsonStorageXDG("OVOS-SkillsManager")
         if "appstores" not in self.config:
             self.config["appstores"] = {
                 "ovos": {
