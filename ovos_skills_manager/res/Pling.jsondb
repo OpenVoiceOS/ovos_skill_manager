@@ -1,0 +1,4018 @@
+{
+    "Pling": [
+        {
+            "skillname": "Youtube Player",
+            "authorname": "AIIX",
+            "foldername": "youtube-skill",
+            "url": "https://github.com/AIIX/youtube-skill",
+            "branch": "master",
+            "warning": "",
+            "desktopFile": true,
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "platform_mark2",
+                "platform_plasmoid",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "Hey Mycroft Search Youtube For Metallica",
+                "Youtube paradise city by guns and roses",
+                "Youtube metallica",
+                "Hey Mycroft Youtube Metallica",
+                "Pause youtube",
+                "Resume youtube",
+                "Hey Mycroft Pause Youtube",
+                "Hey Mycroft Resume Youtube"
+            ],
+            "logo": "https://cn.opendesktop.org/cache/770x540-0/img/9/2/c/6/78914ead090d1ec2674e7c9f927d68b57e28.png",
+            "category": "Media",
+            "created": "2019-11-13T07:29:49+00:00",
+            "modified": "2020-06-03T07:46:00+00:00",
+            "description": "Play and Stream Youtube Videos",
+            "tags": [
+                "gui",
+                "AudioStreaming",
+                "Media",
+                "Youtube",
+                "permissive-license",
+                "youtube",
+                "mycroft-phone",
+                "mycroft-bigscreen",
+                "skills",
+                "YoutubeVideos",
+                "VideoStreaming",
+                "Video",
+                "addon",
+                "GUI",
+                "original-product",
+                "mycroft",
+                "apache-license",
+                "Music",
+                "mycroft-mk2"
+            ],
+            "version": "1.0",
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1336153",
+            "license": "apache-2.0",
+            "short_description": "Play and stream youtube videos",
+            "last_updated": "2020-12-22T04:54:34Z",
+            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/video.svg",
+            "credits": [
+                "Aix (@aiix)"
+            ],
+            "categories": [
+                "Media"
+            ],
+            "requirements": {
+                "python": [
+                    "bs4",
+                    "timeago",
+                    "python-dateutil",
+                    "requests_cache",
+                    "git+https://github.com/nficano/pytube",
+                    "json_database",
+                    "requests>=1.1",
+                    "pafy",
+                    "youtube-dl"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/AIIX/youtube-skill/new-ui/res/icon/youtube-skill.png",
+                "android_name": "Youtube Skill",
+                "android_handler": "youtube-skill.aiix.home"
+            }
+        },
+        {
+            "skillname": "Soundcloud Player",
+            "authorname": "AIIX",
+            "foldername": "soundcloud-audio-player",
+            "url": "https://github.com/AIIX/soundcloud-audio-player",
+            "branch": "master",
+            "desktopFile": true,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "platform_mark2",
+                "platform_plasmoid",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "Pause/Resume soundcloud",
+                "Hey Mycroft Soundcloud Metallica",
+                "Hey Mycroft Pause Soundcloud",
+                "Hey Mycroft Resume Soundcloud",
+                "Soundcloud metallica",
+                "Soundcloud paradise city by guns and roses"
+            ],
+            "logo": "https://cn.opendesktop.org/cache/770x540-0/img/9/8/f/f/0f4864757c543dc3591c5a5a496c2061c0d9.png",
+            "category": "Music",
+            "created": "2019-12-23T12:14:15+00:00",
+            "modified": "2020-06-03T08:19:23+00:00",
+            "description": "SoundCloud is a music and podcast streaming platform that lets you listen to millions of songs from around the world, This skill enables you to stream and search for your favorite soundcloud tracks on your device.",
+            "tags": [
+                "Online",
+                "MusicSearch",
+                "gui",
+                "SongSearch",
+                "Streaming",
+                "Songs",
+                "permissive-license",
+                "MusicPlayer",
+                "mycroft-phone",
+                "skill",
+                "mycroft-bigscreen",
+                "Soundcloud",
+                "soundcloud",
+                "Sound",
+                "addon",
+                "GUI",
+                "MusicStreaming",
+                "original-product",
+                "mycroft",
+                "apache-license",
+                "Music",
+                "mycroft-mk2"
+            ],
+            "version": "1.0",
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1346946",
+            "license": "apache-2.0",
+            "short_description": "Play songs and music from soundcloud",
+            "last_updated": "2020-12-22T05:01:51Z",
+            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/headphones.svg",
+            "credits": [
+                "Aix (@AIIX)"
+            ],
+            "categories": [
+                "Music"
+            ],
+            "requirements": {
+                "python": [
+                    "pafy",
+                    "requests>=1.1",
+                    "youtube-dl"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "/res/icon/soundcloud-skill.png",
+                "android_name": "Soundcloud",
+                "android_handler": "soundcloud-audio-player.aiix.home"
+            }
+        },
+        {
+            "skillname": "Youtube Player",
+            "authorname": "AIIX",
+            "foldername": "bitchute-skill",
+            "url": "https://github.com/AIIX/bitchute-skill",
+            "branch": "master",
+            "desktopFile": true,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "platform_mark2",
+                "platform_plasmoid",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "Bitchute Nightstep Music",
+                "Bitchute Gorillaz",
+                "Hey Mycroft Bit Metallica",
+                "Hey Mycroft Search Bit For Metallica",
+                "Hey Mycroft Pause Youtube",
+                "Hey Mycroft Resume Youtube",
+                "Pause Bitchute"
+            ],
+            "logo": "https://cn.opendesktop.org/cache/770x540-0/img/5/8/d/d/8401dd73db47e19535e89f3778923ac51bd6.jpg",
+            "category": "Media",
+            "created": "2020-02-25T07:01:21+00:00",
+            "modified": "2020-06-03T08:25:25+00:00",
+            "description": "Play and Stream Bitchute Videos",
+            "tags": [
+                "viral-license",
+                "gaming",
+                "AudioStreaming",
+                "BitchuteVideos",
+                "Media",
+                "Youtube",
+                "mycroft-phone",
+                "mycroft-bigscreen",
+                "VideoStreaming",
+                "Video",
+                "bitchute",
+                "addon",
+                "GUI",
+                "original-product",
+                "gplv3",
+                "mycroft",
+                "Music",
+                "mycroft-mk2",
+                "music"
+            ],
+            "version": "1.0",
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1362744",
+            "license": "gpl-3.0",
+            "short_description": "Play and stream Bitchute videos",
+            "last_updated": "2020-03-17T14:50:25Z",
+            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/video.svg",
+            "credits": [
+                "Aix (@aiix)"
+            ],
+            "categories": [
+                "Media"
+            ],
+            "requirements": {
+                "python": [
+                    "bs4",
+                    "requests>=1.1",
+                    "youtube-dl"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/AIIX/bitchute-skill/master/res/icon/bitchute-skill.png",
+                "android_name": "Bitchute Skill",
+                "android_handler": "bitchute-skill.aiix.home"
+            }
+        },
+        {
+            "skillname": "Twitch Streams",
+            "authorname": "AIIX",
+            "foldername": "twitch-streams",
+            "url": "https://github.com/AIIX/twitch-streams",
+            "branch": "master",
+            "warning": "",
+            "desktopFile": true,
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "platform_mark2",
+                "platform_plasmoid",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "Play Twitch Stream By [User]",
+                "Show Twitch Streams",
+                "Hey Mycroft Play Twitch Stream By [User]",
+                "Hey Mycroft Show Twitch Streams"
+            ],
+            "logo": "https://cn.opendesktop.org/cache/770x540-0/img/6/6/0/0/4e1d5f3950305fa65667b4d51ceeb52f7131.png",
+            "category": "Media",
+            "created": "2020-06-12T07:17:45+00:00",
+            "modified": "2020-06-12T07:18:04+00:00",
+            "description": "Play Live Twitch Streams",
+            "tags": [
+                "live",
+                "AudioStreaming",
+                "Media",
+                "mycroft-phone",
+                "LiveStreams",
+                "mycroft-bigscreen",
+                "skills",
+                "twitch",
+                "VideoStreaming",
+                "Video",
+                "addon",
+                "GUI",
+                "original-product",
+                "gplv3",
+                "mycroft",
+                "Music",
+                "no-license",
+                "Twitch",
+                "mycroft-mk2"
+            ],
+            "version": "1.0",
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1392895",
+            "license": "unknown",
+            "icon": "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/svgs/brands/twitch.svg",
+            "short_description": "Play Live Twitch Streams",
+            "credits": [
+                "Aix (@aiix)"
+            ],
+            "categories": [
+                "Media"
+            ],
+            "requirements": {
+                "python": [
+                    "python-dateutil",
+                    "python-twitch-client",
+                    "streamlink",
+                    "timeago"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "/res/icon/twitch-streams.png",
+                "android_name": "Twitch Streams",
+                "android_handler": "twitchstreams.aiix.home"
+            }
+        },
+        {
+            "skillname": "Peertube Skill",
+            "authorname": "AIIX",
+            "foldername": "peertube-skill",
+            "url": "https://github.com/AIIX/peertube-skill",
+            "branch": "main",
+            "warning": "",
+            "desktopFile": true,
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "platform_mark2",
+                "platform_plasmoid",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "Hey Mycroft Show me what's trending on Peertube",
+                "Hey Mycroft Search Peertube For Metallica",
+                "Hey Mycroft Peertube Metallica",
+                "Peertube Metallica",
+                "Show me what's trending on Peertube",
+                "Search Peertube for Guns & Roses"
+            ],
+            "logo": "https://cn.opendesktop.org/cache/770x540-0/img/8/e/8/7/41038723e57a30fafe3572b27d2dd75e6f09733b0c48d18b440d1ae45ebac60f4cd3.png",
+            "category": "Media",
+            "created": "2020-11-11T17:44:41+00:00",
+            "modified": "2020-11-11T17:44:58+00:00",
+            "description": "Play and Stream PeerTube Videos, Supports Following Instances:\nPeertube UK Instance\n * Peertube Austrian Instance\n * Peertube Scandinavian Instance\n * Peertube European Instance\n * Peertube Italian Instance",
+            "tags": [
+                "peertube",
+                "AudioStreaming",
+                "videos",
+                "multimedia",
+                "Media",
+                "mycroft-phone",
+                "mycroft-bigscreen",
+                "PeerTubeVideos",
+                "VideoStreaming",
+                "Video",
+                "PeerTube",
+                "addon",
+                "GUI",
+                "original-product",
+                "mycroft",
+                "apache-license",
+                "Music",
+                "no-license",
+                "mycroft-mk2",
+                "music"
+            ],
+            "version": "1.0",
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1444313",
+            "license": "unknown",
+            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/video.svg",
+            "short_description": "Peertube Skill for Browsing Peertube instances & Streaming Peertube Videos",
+            "credits": [
+                "Aix (@aiix)"
+            ],
+            "categories": [
+                "Media"
+            ],
+            "requirements": {
+                "python": [
+                    "git+https://framagit.org/framasoft/peertube/clients/python.git",
+                    "python-dateutil",
+                    "json_database",
+                    "requests>=1.1",
+                    "youtube-dl",
+                    "xdg",
+                    "timeago"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "/res/icon/peertube-skill.png",
+                "android_name": "Peertube",
+                "android_handler": "peertube-skill.aiix.home"
+            }
+        },
+        {
+            "skillname": "skill-stephen-hawking",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-stephen-hawking",
+            "url": "https://github.com/JarbasSkills/skill-stephen-hawking",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": "true",
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "Quote from Stephen Hawking",
+                "When was Stephen Hawking born?",
+                "When did Stephen Hawking die?"
+            ],
+            "logo": "https://cn.opendesktop.org/cache/770x540-0/img/7/0/0/4/32a8757ed1235586220ace33876997e3fe9f.jpg",
+            "category": "Information",
+            "created": "2020-06-08T18:12:50+00:00",
+            "modified": "2020-06-14T17:36:27+00:00",
+            "description": "\"My goal is simple. It is a complete understanding of the universe,\nwhy it is as it is and why it exists at all.\"\n\n  -- Stephen Hawking, 1942 - 2018\n  \n![](gui.png)",
+            "tags": [
+                "original-product",
+                "mit-license",
+                "quotes",
+                "mycroft",
+                "Information",
+                "espeak",
+                "skills",
+                "no-license",
+                "addon",
+                "tribute"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1391544",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-stephen-hawking/icon.png",
+            "short_description": "Tribute to Stephen Hawking",
+            "credits": [
+                "JarbasAl"
+            ],
+            "categories": [
+                "Information"
+            ],
+            "requirements": {
+                "system": {
+                    "all": "espeak"
+                },
+                "python": [],
+                "skill": []
+            },
+            "android": {
+                "android_icon": null,
+                "android_name": "Stephen Hawking Skill",
+                "android_handler": "skill-stephen-hawking.jarbasskills.home"
+            },
+            "name": "Stephen Hawking Tribute Skill"
+        },
+        {
+            "skillname": "Laugh",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-laugh",
+            "url": "https://github.com/JarbasSkills/skill-laugh",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm",
+                "arm64",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "Laugh like Alexa",
+                "evil laugh",
+                "can you laugh"
+            ],
+            "logo": "https://cn.opendesktop.org/cache/770x540-0/img/1/5/8/9/761c28e3961035a100a7b177aafd6452908a.jpg",
+            "category": "Entertainment",
+            "created": "2020-06-08T20:20:59+00:00",
+            "modified": "2020-06-14T17:36:09+00:00",
+            "description": "Laugh randomly or when requested, gender configurable on home.mycroft.ai",
+            "tags": [
+                "halloween",
+                "original-product",
+                "laugh",
+                "entertainment",
+                "repeating",
+                "mycroft",
+                "apache-license",
+                "funny",
+                "haunted",
+                "skills",
+                "no-license",
+                "addon",
+                "Entertainment"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1391552",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-laugh/res/icon/laugh_icon.png",
+            "short_description": "Makes Mycroft laugh like a maniac",
+            "credits": [
+                "[@JarbasAl](https://jarbasal.github.io)\n[SoundBible](http://soundbible.com/suggest.php?q=laugh&x=0&y=0)\n[FreeSound](https://freesound.org/search/?q=female+evil+laugh)"
+            ],
+            "categories": [
+                "Entertainment"
+            ],
+            "requirements": {
+                "python": [],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "laugh_icon",
+                "android_name": "Laugh Skill",
+                "android_handler": "skill-laugh.jarbasskills.home"
+            }
+        },
+        {
+            "skillname": "skill-confucius-quotes",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-confucius-quotes",
+            "url": "https://github.com/JarbasSkills/skill-confucius-quotes",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": "false",
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "What would Confucius say",
+                "When did Confucius die",
+                "When was Confucius born",
+                "Who is Confucius",
+                "Quote from Confucius"
+            ],
+            "logo": "https://cn.opendesktop.org/cache/770x540-0/img/9/a/0/a/911c8e22a76e9202708adff045237691ee41.jpg",
+            "category": "Information",
+            "created": "2020-06-09T14:41:51+00:00",
+            "modified": "2020-12-21T10:50:38+00:00",
+            "description": "Quote from Confucius\n  \n![](gui.png)",
+            "tags": [
+                "original-product",
+                "quotes",
+                "mycroft",
+                "apache-license",
+                "Information",
+                "mycroft-phone",
+                "skills",
+                "mycroft-bigscreen",
+                "no-license",
+                "addon",
+                "mycroft-mk2"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1391873",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-confucius-quotes/res/icon/confucius.png",
+            "credits": [
+                "JarbasAl"
+            ],
+            "categories": [
+                "Information"
+            ],
+            "requirements": {
+                "python": [],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": null,
+                "android_name": "Confucius Quotes Skill",
+                "android_handler": "skill-confucius-quotes.jarbasskills.home"
+            },
+            "name": "Confucius Quotes Skill"
+        },
+        {
+            "skillname": "skill-apod",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-apod",
+            "url": "https://github.com/JarbasSkills/skill-apod",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "explain",
+                "foo",
+                "Astronomy picture of the day",
+                "bahr"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-apod/master/logo.png",
+            "category": "Entertainment",
+            "created": "2020-06-09T15:28:17+00:00",
+            "modified": "2020-06-14T17:35:51+00:00",
+            "description": "NASA's Astronomy Picture of the Day\n  \n![](gui.png)",
+            "tags": [
+                "original-product",
+                "apod",
+                "picture",
+                "mycroft",
+                "apache-license",
+                "skill",
+                "no-license",
+                "addon",
+                "astronomy",
+                "nasa",
+                "Entertainment"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1391890",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-apod/icon.png",
+            "credits": [
+                "JarbasAi",
+                "[NASA](https://apod.nasa.gov/apod/astropix.html)"
+            ],
+            "categories": [
+                "Entertainment"
+            ],
+            "requirements": {
+                "python": [
+                    "mtranslate",
+                    "requests",
+                    "requests-cache"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-apod/master/res/icon/icon.png",
+                "android_name": "Apod Skill",
+                "android_handler": "skill-apod.jarbasskills.home"
+            },
+            "name": "Astronomy Picture of the Day Skill"
+        },
+        {
+            "skillname": "skill-bandcamp",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-bandcamp",
+            "url": "https://github.com/JarbasSkills/skill-bandcamp",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "play compressorhead",
+                "play freezing moon by mayhem",
+                "play {album} album",
+                "search bandcamp for black metal",
+                "play center of all infinity album",
+                "play {track} by {artist}",
+                "play EP by naxatras",
+                "play {artist/album/genre/track}",
+                "search bandcamp for {artist/album/genre/track}",
+                "play {album} by {artist}",
+                "play astronaut problems"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-bandcamp/master/logo.png",
+            "category": "Entertainment",
+            "created": "2020-06-11T06:04:59+00:00",
+            "modified": "2020-06-14T17:33:31+00:00",
+            "description": "Bandcamp skill for your hipster music needs\n\n![](./screenshot.png)",
+            "tags": [
+                "original-product",
+                "bandcamp",
+                "mycroft",
+                "apache-license",
+                "skills",
+                "no-license",
+                "addon",
+                "music",
+                "Entertainment"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1392471",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-bandcamp/icon.png",
+            "credits": [
+                "JarbasAl"
+            ],
+            "categories": [
+                "Entertainment"
+            ],
+            "requirements": {
+                "python": [
+                    "auto_regex>=0.3.3",
+                    "py_bandcamp>=0.5.0"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": null,
+                "android_name": "Bandcamp Skill",
+                "android_handler": "skill-bandcamp.jarbasskills.home"
+            },
+            "name": "Bandcamp Skill"
+        },
+        {
+            "skillname": "skill-quote-of-day",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-quote-of-day",
+            "url": "https://github.com/JarbasSkills/skill-quote-of-day",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "inspirational quote for today",
+                "funny quote of the day",
+                "where do you get your quotes",
+                "can your quotes be trusted",
+                "quote of the day",
+                "who said that"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-quote-of-day/master/logo.png",
+            "category": "entertainment",
+            "created": "2020-06-13T22:08:02+00:00",
+            "modified": "2020-06-13T22:08:11+00:00",
+            "description": "![](./screenie.png)\n![](./screenie2.png)\n\nIncludes idle screen",
+            "tags": [
+                "original-product",
+                "quotes",
+                "entertainment",
+                "mycroft",
+                "apache-license",
+                "skill",
+                "no-license",
+                "api",
+                "addon",
+                "quote"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1393542",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-quote-of-day/icon.png",
+            "short_description": "Quote of the day from [They said so](https://theysaidso.com/quote-of-the-day/)",
+            "credits": [
+                "JarbasAl"
+            ],
+            "categories": [
+                "entertainment"
+            ],
+            "requirements": {
+                "python": [
+                    "mtranslate",
+                    "requests"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": null,
+                "android_name": "Quote Of Day Skill",
+                "android_handler": "skill-quote-of-day.jarbasskills.home"
+            },
+            "name": "Quote of the Day Skill"
+        },
+        {
+            "skillname": "skill-pickup-lines",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-pickup-lines",
+            "url": "https://github.com/JarbasSkills/skill-pickup-lines",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "where do you get your pickup lines",
+                "say a lord of the rings pickup line",
+                "say a geeky pickup line",
+                "tell me a pickup line"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-pickup-lines/master/logo.png",
+            "category": "entertainment",
+            "created": "2020-06-13T23:01:22+00:00",
+            "modified": "2020-06-13T23:01:30+00:00",
+            "description": "![](./screenie.png)\n![](./screenie1.png)\n\nIncludes idle screen",
+            "tags": [
+                "original-product",
+                "entertainment",
+                "mycroft",
+                "funny",
+                "apache-license",
+                "skill",
+                "no-license",
+                "addon",
+                "pickup"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1393547",
+            "license": "unknown",
+            "short_description": "![](./logo.png)",
+            "credits": [
+                "JarbasAl"
+            ],
+            "categories": [
+                "entertainment"
+            ],
+            "requirements": {
+                "python": [
+                    "mtranslate",
+                    "requests",
+                    "bs4"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": null,
+                "android_name": "Pickup Lines Skill",
+                "android_handler": "skill-pickup-lines.jarbasskills.home"
+            },
+            "name": "Pickup Lines Skill"
+        },
+        {
+            "skillname": "skill-algorithmic-art",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-algorithmic-art",
+            "url": "https://github.com/JarbasSkills/skill-algorithmic-art",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "draw a picture"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-algorithmic-art/master/logo.png",
+            "category": "Entertainment",
+            "created": "2020-06-14T17:26:50+00:00",
+            "modified": "2020-06-14T17:26:58+00:00",
+            "description": "Creating art from math\n\nsee example generated pictures in [samples folder](./samples)\n\n![](./screenshot.png)",
+            "tags": [
+                "original-product",
+                "art",
+                "mycroft",
+                "pictures",
+                "apache-license",
+                "skills",
+                "idle",
+                "no-license",
+                "addon",
+                "Entertainment"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1393912",
+            "license": "unknown",
+            "short_description": "Idle screen skill for mycroft mark2",
+            "credits": [
+                "JarbasAl",
+                "Inspired by [Random (Psychedelic) Art](https://jeremykun.com/2012/01/01/random-psychedelic-art/)"
+            ],
+            "categories": [
+                "Entertainment"
+            ],
+            "requirements": {
+                "python": [],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": null,
+                "android_name": "Algorithmic Art Skill",
+                "android_handler": "skill-algorithmic-art.jarbasskills.home"
+            },
+            "name": "Algorithmic Art Skill"
+        },
+        {
+            "skillname": "skill-xkcd",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-xkcd",
+            "url": "https://github.com/JarbasSkills/skill-xkcd",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "show me the latest xkcd comic",
+                "random xkcd",
+                "display comic number 2020",
+                "open the xkcd website",
+                "how many xkcd comics"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-xkcd/master/logo.png",
+            "category": "Entertainment",
+            "created": "2020-06-16T13:54:22+00:00",
+            "modified": "2020-06-16T13:54:31+00:00",
+            "description": "Comics from [xkcd](https://xkcd.com/)\n\nCan be used as idle screen for mark2\n \n\n![](screenie.png)\n\n![](screenie2.png)\n\n![](screenie3.png)\n\n![](website.png)",
+            "tags": [
+                "original-product",
+                "mycroft",
+                "apache-license",
+                "mark2",
+                "mycroft-phone",
+                "mycroft-bigscreen",
+                "skills",
+                "no-license",
+                "addon",
+                "comics",
+                "mycroft-mk2",
+                "xkcd",
+                "Entertainment"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1394593",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-xkcd/icon.png",
+            "short_description": "![](./logo.png)",
+            "credits": [
+                "JarbasAi",
+                "[xkcd](https://xkcd.com/)"
+            ],
+            "categories": [
+                "Entertainment"
+            ],
+            "requirements": {
+                "python": [
+                    "requests"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-xkcd/master/res/icon/skill-xkcd.png",
+                "android_name": "Xkcd Skill",
+                "android_handler": "skill-xkcd.jarbasskills.home"
+            },
+            "name": "Xkcd Comics Skill"
+        },
+        {
+            "skillname": "skill-natgeo-pod",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-natgeo-pod",
+            "url": "https://github.com/JarbasSkills/skill-natgeo-pod",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "National Geographic picture of the day",
+                "explain"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-natgeo-pod/master/logo.png",
+            "category": "Entertainment",
+            "created": "2020-06-25T16:56:24+00:00",
+            "modified": "2020-06-25T18:42:38+00:00",
+            "description": "[National Geographic Picture of the Day](https://www.nationalgeographic.com/photography/photo-of-the-day/)\n  \nCan be used as idle screen\n\n![](gui.png)",
+            "tags": [
+                "original-product",
+                "mycroft",
+                "pictures",
+                "apache-license",
+                "mark2",
+                "skill",
+                "idle",
+                "no-license",
+                "addon",
+                "Entertainment"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1397567",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-natgeo-pod/icon.png",
+            "credits": [
+                "JarbasAi",
+                "[National Geographic](https://www.nationalgeographic.com/photography/photo-of-the-day/)"
+            ],
+            "categories": [
+                "Entertainment"
+            ],
+            "requirements": {
+                "python": [
+                    "mtranslate",
+                    "requests"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-natgeo-pod/master/res/icon/icon.png",
+                "android_name": "Natgeo Pod Skill",
+                "android_handler": "skill-natgeo-pod.jarbasskills.home"
+            },
+            "name": "National Geographic Picture of the Day Skill"
+        },
+        {
+            "skillname": "skill-parrot",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-parrot",
+            "url": "https://github.com/JarbasSkills/skill-parrot",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "Tell me what I just said.",
+                "Repeat that",
+                "repeat Once upon a midnight dreary, while I pondered, weak and weary, Over many a quaint and curious volume of forgotten lore",
+                "Can you repeat that?",
+                "What did I just say?",
+                "Repeat what you just said",
+                "stop parrot",
+                "say Goodnight, Gracie",
+                "speak I can say anything you'd like!",
+                "stop repeating me",
+                "repeat everything you hear",
+                "start parrot"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-parrot/master/logo.png",
+            "category": "Entertainment",
+            "created": "2020-07-05T21:38:57+00:00",
+            "modified": "2020-07-05T23:47:40+00:00",
+            "description": "Turn Mycroft into a parrot. Speak a phrase and listen to it repeated in Mycroft's selected voice.\n\n    \"Hey Mycroft, start parrot\"\n    \"hello\"\n    hello\n    \"what\"\n    what\n    \"who are you\"\n    who are you\n    \"Stop parrot\"\n\nAlso provides an idle screen with parrot images and a random previous STT transcription\n\nNOTES:\nThis will blacklist and replace the functionality of [MycroftAI/skill-speak](https://github.com/MycroftAI/skill-speak), see [Issue#24](https://github.com/MycroftAI/skill-speak/issues/24)\n * This will blacklist and replace the functionality of [MatthewScholefield/skill-repeat-recent](https://github.com/MatthewScholefield/skill-repeat-recent)\n * When asking to repeat what was previously said source is taken into consideration, if you ask in cli, gui, hivemind or STT response will vary accordingly, ie. using voice satellite wont respond with STT from device, only same source is taken into consideration\n * Previous transcriptions are not persisted to disk",
+            "tags": [
+                "converse",
+                "original-product",
+                "Tutorial",
+                "mycroft",
+                "apache-license",
+                "parrot",
+                "mycroft-phone",
+                "skill",
+                "test",
+                "mycroft-bigscreen",
+                "echo",
+                "Template",
+                "no-license",
+                "addon",
+                "repeat",
+                "mycroft-mk2",
+                "Debug",
+                "Entertainment"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1400315",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-parrot/icon.png",
+            "short_description": "Turn Mycroft into a echoing parrot!",
+            "credits": [
+                "JarbasAl",
+                "[MatthewScholefield/skill-repeat-recent](https://github.com/MatthewScholefield/skill-repeat-recent)"
+            ],
+            "categories": [
+                "Entertainment"
+            ],
+            "requirements": {
+                "python": [],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-parrot/master/res/icon/icon.png",
+                "android_name": "Parrot Skill",
+                "android_handler": "skill-parrot.jarbasskills.home"
+            },
+            "name": "Parrot Skill"
+        },
+        {
+            "skillname": "skill-futurism-cartoons",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-futurism-cartoons",
+            "url": "https://github.com/JarbasSkills/skill-futurism-cartoons",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "random futurism cartoon,",
+                "show me the latest futurism comic,",
+                "show me the latest futurism comic",
+                "random futurism cartoon",
+                "how many futurism comics"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-futurism-cartoons/master/logo.png",
+            "category": "Entertainment",
+            "created": "2020-08-06T13:17:27+00:00",
+            "modified": "2020-08-06T13:17:38+00:00",
+            "description": "Comics from [futurism cartoons](https://www.instagram.com/futurismcartoons/)\n\nCan be used as idle screen for mark2\n\n\n![](gui.png)\n![](gui2.png)",
+            "tags": [
+                "original-product",
+                "mycroft",
+                "apache-license",
+                "mycroft-phone",
+                "skill",
+                "skills",
+                "cartoon",
+                "mycroft-bigscreen",
+                "no-license",
+                "addon",
+                "mycroft-mk2",
+                "comic",
+                "Entertainment"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1410005",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-futurism-cartoons/res/icon/icon.png",
+            "short_description": "![](logo.png)",
+            "categories": [
+                "Entertainment"
+            ],
+            "requirements": {
+                "python": [
+                    "pynstagram>=0.2.0"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "skill-icon.png",
+                "android_name": "Futurism Cartoons Skill",
+                "android_handler": "skill-futurism-cartoons.jarbasskills.home"
+            },
+            "name": "Futurism Cartoons Skill"
+        },
+        {
+            "skillname": "skill-old-world-radio",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-old-world-radio",
+            "url": "https://github.com/JarbasSkills/skill-old-world-radio",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "play vintage radio",
+                "play old world radio"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-old-world-radio/master/ui/logo.png",
+            "category": "Entertainment",
+            "created": "2020-08-10T14:28:52+00:00",
+            "modified": "2020-08-10T14:29:02+00:00",
+            "description": "![](./ui/logo.png)",
+            "tags": [
+                "original-product",
+                "addon",
+                "mycroft",
+                "apache-license",
+                "fallout",
+                "mycroft-phone",
+                "entertainment\"",
+                "audio",
+                "skills",
+                "mycroft-bigscreen",
+                "no-license",
+                "radio",
+                "mycroft-mk2",
+                "music",
+                "Entertainment"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1411250",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-old-world-radio/res/icon/icon.png",
+            "short_description": "Old world radio",
+            "credits": [
+                "JarbasAl",
+                "[Old World Radio](https://www.youtube.com/channel/UCihCtNZnFkG62U4na9JsPJQ)"
+            ],
+            "categories": [
+                "Entertainment"
+            ],
+            "requirements": {
+                "python": [
+                    "youtube-dl"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-old-world-radio/master/res/icon/icon.png",
+                "android_name": "Old World Radio Skill",
+                "android_handler": "skill-old-world-radio.jarbasskills.home"
+            },
+            "name": "Old World Radio Skill"
+        },
+        {
+            "skillname": "skill-hppodcraft",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-hppodcraft",
+            "url": "https://github.com/JarbasSkills/skill-hppodcraft",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "play the temple by lovecraft",
+                "read the call of cthulhu",
+                "play lovecraft podcast",
+                "play the call of cthulhu",
+                "play lovecraft podcast episode #N"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-hppodcraft/master/ui/logo.png",
+            "category": "Entertainment",
+            "created": "2020-08-12T16:28:20+00:00",
+            "modified": "2020-08-12T16:28:30+00:00",
+            "description": "![](./ui/logo.png)\n\nEach week, hosts Chad Fifer and Chris Lackey discuss a piece of weird fiction.\nTalented voice actors bring the text to life. \nMusic and sound effects create atmosphere while occasional guest experts show up to make things classy.\n\nFull story readings are also available alongside podcasts\nTHE HAUNTER OF THE DARK by H.P. Lovecraft\n * FROM BEYOND by H.P. Lovecraft\n * THE PICTURE IN THE HOUSE by H.P. Lovecraft\n * THE CATS OF ULTHAR by H.P. Lovecraft\n * COOL AIR by H.P. Lovecraft\n * THE CALL OF CTHULHU by H.P. Lovecraft\n * THE HOUND by H.P. Lovecraft\n * THE TEMPLE by H.P. Lovecraft\n * PICKMAN’S MODEL by H.P. Lovecraft\n * THE STATEMENT OF RANDOLPH CARTER by H.P. Lovecraft\n * THE YELLOW WALLPAPER by Charlotte Perkins Gilman\n * THE WHISPERER IN DARKNESS by H.P. Lovecraft\n * ONE SMALL, VALUABLE THING by Chad Fifer",
+            "tags": [
+                "original-product",
+                "lovecraft",
+                "entertainment",
+                "mycroft",
+                "apache-license",
+                "podcast",
+                "mycroft-phone",
+                "audio",
+                "skills",
+                "mycroft-bigscreen",
+                "audiobook",
+                "books",
+                "addon",
+                "podcasts",
+                "no-license",
+                "mycroft-mk2",
+                "Entertainment"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1411995",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-hppodcraft/res/icon/icon.png",
+            "short_description": "The H.P. Lovecraft Literary Podcast has been creating podcasts and audio productions since 2009",
+            "credits": [
+                "JarbasAl",
+                "[The H.P. Lovecraft Literary Podcast](https://hppodcraft.com/)"
+            ],
+            "categories": [
+                "Entertainment"
+            ],
+            "requirements": {
+                "python": [
+                    "feedparser"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-hppodcraft/master/res/icon/icon.png",
+                "android_name": "Hppodcraft Skill",
+                "android_handler": "skill-hppodcraft.jarbasskills.home"
+            },
+            "name": "H. P. Lovecraft Literary Podcast Skill"
+        },
+        {
+            "skillname": "skill-epic-horror-theatre",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-epic-horror-theatre",
+            "url": "https://github.com/JarbasSkills/skill-epic-horror-theatre",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "play innsmouth audiobook",
+                "read the shadow over innsmouth",
+                "read the color out of space",
+                "read lovecraft",
+                "play mountains of madness book"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-epic-horror-theatre/master/ui/logo.png",
+            "category": "Entertainment",
+            "created": "2020-08-17T23:05:50+00:00",
+            "modified": "2020-08-17T23:06:02+00:00",
+            "description": "![](./ui/logo.png)\n\nThis skill brings to you:\na radio drama adaptation of H.P. Lovecraft's classic tale, The Color Out Of Space directed by Ron N. Butler and published by the Atlanta Radio Theatre Company! Written in March 1927, tonight's tale details the misadventures of a surveyor from Boston who goes to Arkham, Massachusetts to learn the truth behind a shunned place the locals call the blasted heath\n * a radio drama adaptation of H.P. Lovecraft's classic and titular tale, At The Mountains of Madness! Written in 1931 and finally serialized in 1936, today's horrifying tale follows a team of archaeologists, led by Professor William Dyer from Miskatonic University, as they go to Antarctica and discover secrets about the history of life on Earth that are as mind-boggling as they are terrifying.\n * a radio drama adaptation of H.P. Lovecraft's the eponymous tale, The Shadow Over Innsmouth, written by the legendary O.G. of horror H.P. Lovecraft in late 1931 and once again adapted to audio by the Atlanta Theater Radio Company. In tonight's tale, we follow a youth on his coming-of-age tour through New England, where on his antiquarian adventures, he hears stories of a little town in Massachusetts clouded with rumors of pirate treasure, vicious plagues, and its strange-looking furtive people. The truth, however, is more personal and much more horrifying than our narrator could dare to fear it could possibly be...",
+            "tags": [
+                "original-product",
+                "lovecraft",
+                "entertainment",
+                "mycroft",
+                "apache-license",
+                "mycroft-phone",
+                "audio",
+                "radio theatre",
+                "mycroft-bigscreen",
+                "skills",
+                "audiobook",
+                "books",
+                "addon",
+                "no-license",
+                "mycroft-mk2",
+                "Entertainment"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1413570",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-epic-horror-theatre/res/icon/icon.png",
+            "short_description": "Radio drama adaptions of H. P. Lovecraft",
+            "credits": [
+                "JarbasAl",
+                "[Epic Horror Theatre](https://www.youtube.com/channel/UCt3yjI_o-5HBwwyuUDNB65w)"
+            ],
+            "categories": [
+                "Entertainment"
+            ],
+            "requirements": {
+                "python": [],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-epic-horror-theatre/master/res/icon/icon.png",
+                "android_name": "Epic Horror Theatre Skill",
+                "android_handler": "skill-epic-horror-theatre.jarbasskills.home"
+            },
+            "name": "Epic Horror Theatre Skill"
+        },
+        {
+            "skillname": "skill-dagon",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-dagon",
+            "url": "https://github.com/JarbasSkills/skill-dagon",
+            "branch": "v0.2.1",
+            "desktopFile": true,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "play dagon audiobook",
+                "play lovecraft video",
+                "play dagon",
+                "play dagon by lovecraft",
+                "read dagon",
+                "play the dagon video",
+                "play dagon audio drama",
+                "play dagon video"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-dagon/v0.2.1/ui/logo.png",
+            "category": "Entertainment",
+            "created": "2020-08-26T21:17:10+00:00",
+            "modified": "2020-12-29T19:08:51+00:00",
+            "description": "This skill brings to you an adaption of Dagon, by H. P. Lovecraft\n\nAn illustrated reading of 'Dagon' by H.P. Lovecraft. Read by Mike Bennett, illustrated by Christopher Steininger.\n\"Dagon\" is a short story by American author H. P. Lovecraft. It was written in July 1917 and is one of the first stories that Lovecraft wrote as an adult. It was first published in the November 1919 edition of The Vagrant. Dagon was later published in Weird Tales.\n\nIllustrated by Christopher Edwin Steininger\n\n\n![](./gui.gif)",
+            "tags": [
+                "story",
+                "original-product",
+                "lovecraft",
+                "entertainment",
+                "mycroft",
+                "apache-license",
+                "mycroft-phone",
+                "audio",
+                "radio theatre",
+                "mycroft-bigscreen",
+                "books",
+                "audiobook",
+                "no-license",
+                "addon",
+                "video",
+                "mycroft-mk2",
+                "Entertainment"
+            ],
+            "version": "v0.2.1",
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1416131",
+            "license": "unknown",
+            "download_url": "https://github.com/JarbasSkills/skill-dagon/archive/v0.2.1.tar.gz",
+            "icon": "https://github.com/JarbasSkills/skill-dagon/res/icon/dagon.png",
+            "short_description": "Adaption of Dagon, by H. P. Lovecraft",
+            "credits": [
+                "JarbasAl",
+                "[DAGON by H. P. Lovecraft (youtube)](https://www.youtube.com/watch?v=Gv1I0y6PHfg)"
+            ],
+            "categories": [
+                "Entertainment"
+            ],
+            "requirements": {
+                "python": [
+                    "ovos_utils>=0.0.4",
+                    "pafy",
+                    "youtube-dl"
+                ],
+                "skill": [
+                    "https://github.com/JarbasSkills/skill-better-playback-control"
+                ],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-dagon/v0.2.1/res/icon/dagon.png",
+                "android_name": "Dagon Skill",
+                "android_handler": "skill-dagon.jarbasskills.home"
+            },
+            "name": "Dagon, A Lovecraft Story Skill"
+        },
+        {
+            "skillname": "skill-wayne-june-lovecraft",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-wayne-june-lovecraft",
+            "url": "https://github.com/JarbasSkills/skill-wayne-june-lovecraft",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "read the thing on the doorstep",
+                "read the shunned house",
+                "play the tomb audiobook",
+                "play the tomb by lovecraft",
+                "read the thing on the doorstep by lovecraft",
+                "read the shunned house by wayne june"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-wayne-june-lovecraft/master/ui/logo.png",
+            "category": "Entertainment",
+            "created": "2020-08-27T02:48:01+00:00",
+            "modified": "2020-08-27T03:08:44+00:00",
+            "description": "Included readings are:\nThe Thing on the Doorstep is a horror short story by American writer H. P. Lovecraft, part of the Cthulhu Mythos universe. It was written in August 1933, and first published in the January 1937 issue of Weird Tales. Daniel Upton, the story's narrator, explains that he has killed his best friend, Edward Derby, and that he hopes his account will prove that he is not a murderer. \n * The Tomb is a fictional short story by American writer H. P. Lovecraft, written in June 1917 and first published in the March 1922 issue of The Vagrant. It tells the story of Jervas Dudley, who becomes obsessed with a mausoleum near his childhood home.\n * The Shunned House is a horror fiction novelette by American author H. P. Lovecraft, written on October 16–19, 1924. It was first published in the October 1937 issue of Weird Tales. For many years, the narrator and his uncle, Dr. Elihu Whipple, have nurtured a fascination with an old abandoned house on Benefit Street. Dr. Whipple has made extensive records tracking the mysterious, yet apparently coincidental, sickness and death of many who have lived in the house for over one hundred years.",
+            "tags": [
+                "original-product",
+                "lovecraft",
+                "entertainment",
+                "mycroft",
+                "apache-license",
+                "reading",
+                "mycroft-phone",
+                "skill",
+                "audio",
+                "mycroft-bigscreen",
+                "radio theatre",
+                "audiobook",
+                "books",
+                "addon",
+                "no-license",
+                "mycroft-mk2",
+                "Entertainment"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1416233",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-wayne-june-lovecraft/res/icon/icon.png",
+            "short_description": "Wayne June readings of H. P. Lovecraft",
+            "credits": [
+                "JarbasAl",
+                "[Wayne June](https://www.youtube.com/playlist?list=PL9C5Y9_z1PmYqy9EqoKBnjcPxMspWCkiX)"
+            ],
+            "categories": [
+                "Entertainment"
+            ],
+            "requirements": {
+                "python": [
+                    "pafy",
+                    "youtube-dl"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-wayne-june-lovecraft/master/res/icon/icon.png",
+                "android_name": "Wayne June Lovecraft Skill",
+                "android_handler": "skill-wayne-june-lovecraft.jarbasskills.home"
+            },
+            "name": "Wayne June Lovecraft Readings Skill"
+        },
+        {
+            "skillname": "skill-icanhazdadjokes",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-icanhazdadjokes",
+            "url": "https://github.com/JarbasSkills/skill-icanhazdadjokes",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "can you tell jokes",
+                "make me laugh",
+                "do you know any chuck norris jokes",
+                "do you know any jokes",
+                "tell me a joke",
+                "tell me a joke about dentists",
+                "say a joke"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-icanhazdadjokes/master/ui/logo.png",
+            "category": "Entertainment",
+            "created": "2020-12-17T13:10:36+00:00",
+            "modified": "2020-12-17T13:10:48+00:00",
+            "description": "Brighten your day with dad humor.  \n\n _WARNING:  Laughter is not guaranteed, but eye rolls are likely._\n\nWorks in all languages\n\nNOTE: this will automatically blacklist the official mycroft skill",
+            "tags": [
+                "original-product",
+                "laugh",
+                "mycroft",
+                "apache-license",
+                "funny",
+                "jokes",
+                "humor",
+                "mycroft-phone",
+                "mycroft-bigscreen",
+                "skills",
+                "humour",
+                "no-license",
+                "addon",
+                "joke",
+                "mycroft-mk2",
+                "Entertainment"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1460970",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-icanhazdadjokes/res/icon/dadjokes.png",
+            "short_description": "Let Mycroft brighten your day with a little humor from [icanhazdadjoke](icanhazdadjoke.com)",
+            "categories": [
+                "Entertainment"
+            ],
+            "requirements": {
+                "python": [
+                    "google_trans_new",
+                    "pyjokes"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-icanhazdadjokes/master/res/icon/dadjokes.png",
+                "android_name": "Icanhazdadjokes Skill",
+                "android_handler": "skill-icanhazdadjokes.jarbasskills.home"
+            },
+            "name": "Jokes"
+        },
+        {
+            "skillname": "unsplash-wallpaper-plasma-skill",
+            "authorname": "AIIX",
+            "foldername": "unsplash-wallpaper-plasma-skill",
+            "url": "https://github.com/AIIX/unsplash-wallpaper-plasma-skill",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm",
+                "arm64",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "change wallpaper type aircrafts",
+                "change wallpaper abstract",
+                "new wallpaper type nature",
+                "new wallpaper sports"
+            ],
+            "logo": "https://cn.opendesktop.org/cache/770x540-0/img/e/0/5/d/347c4c56102fd41829913e14c832c3f1252d.jpg",
+            "category": "Configuration",
+            "created": "2017-10-02T06:56:00+00:00",
+            "modified": "2020-06-03T09:58:08+00:00",
+            "description": "This skill allows users to use unsplash images as wallpapers based on their category of choice (nature, sports, aircrafts, etc) on the plasma desktop.\n\n#### Installation of skill:\n\n#### Installation of requirements:\n##### Fedora: \n\n##### Kubuntu / KDE Neon: \n\n\n##### How To Use:\nDownload or Clone Git\n * Create /opt/mycroft/skills folder if it does not exist\n * Extract Downloaded Skill into a folder. unsplash-wallpaper-plasma-skill. (Clone does not require this step)\n * Copy the unsplash-wallpaper-plasma-skill folder to /opt/mycroft/skills/ folder\n * sudo dnf install dbus-python\n * From terminal: cp -R /usr/lib64/python2.7/site-packages/dbus* /home/$USER/.virtualenvs/mycroft/lib/python2.7/site-packages/\n * From terminal: cp /usr/lib64/python2.7/site-packages/_dbus* /home/$USER/.virtualenvs/mycroft/lib/python2.7/site-packages/\n * sudo apt install python-dbus\n * From terminal: cp -R /usr/lib/python2.7/dist-packages/dbus* /home/$USER/.virtualenvs/mycroft/lib/python2.7/site-packages/\n * From terminal: cp /usr/lib/python2.7/dist-packages/_dbus* /home/$USER/.virtualenvs/mycroft/lib/python2.7/site-packages/\n * For other distributions:\n * Python Dbus and Python Psutil package is required and copying the Python Dbus folder and lib from your system python install over to /home/$USER/.virtualenvs/mycroft/lib/python2.7/site-packages/.\n * Hey Mycroft, change wallpaper type aircrafts\n * Hey Mycroft, change wallpaper abstract\n * Hey Mycroft, new wallpaper type nature\n * Hey Mycroft, new wallpaper sports ",
+            "tags": [
+                "mycroft-phone",
+                "mycroft-bigscreen",
+                "no-license",
+                "addon",
+                "mycroft-mk2"
+            ],
+            "version": "1.0",
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1193621",
+            "license": "unknown",
+            "short_description": "This skill allows users to use unsplash images as wallpapers based on their category of choice (nature, sports, aircrafts, etc) on the plasma desktop.",
+            "requirements": {
+                "python": [],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": null,
+                "android_name": "Unsplash Wallpaper Plasma Skill",
+                "android_handler": "unsplash-wallpaper-plasma-skill.aiix.home"
+            }
+        },
+        {
+            "skillname": "nodered-skill",
+            "authorname": "jarbasai",
+            "foldername": "mycroft-node-red",
+            "url": "https://github.com/JarbasSkills/mycroft-node-red",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm",
+                "arm64",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "ping node red"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/mycroft-node-red/master/logo.png",
+            "category": "Configuration",
+            "created": "2020-06-02T17:36:53+00:00",
+            "modified": "2020-06-05T11:56:32+00:00",
+            "description": "![](./logo.png)\n\n[Node Red](https://nodered.org/) - Mycroft interface\n\nbeginners and non technical users can now leverage visual programming and easily extend mycroft functionality\n\n  * [Installing node red](#installing-node-red)\n    + [Firewall](#firewall)\n    + [Launch Node red](#launch-node-red)\n  * [Import base flows](#import-base-flows)\n  * [Configure Websocket](#configure-websocket)\n  * [Build Intents](#build-intents)\n  * [Webui](#webui)\n  * [Debug](#debug)\n[Additional Setup](#additional-setup)\n * [Extra functionality](#extra-functionality)",
+            "tags": [
+                "original-product",
+                "mycroft",
+                "apache-license",
+                "skills",
+                "no-license",
+                "addon",
+                "nodered"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1389655",
+            "license": "unknown",
+            "short_description": "![](./logo.png)",
+            "requirements": {
+                "python": [
+                    "json_database",
+                    "jarbas_utils",
+                    "jarbas_hive_mind_red>=0.1.6"
+                ],
+                "skill": [
+                    "https://github.com/JarbasSkills/skill-hivemind"
+                ],
+                "system": {}
+            },
+            "android": {
+                "android_icon": null,
+                "android_name": "Mycroft Node Red Skill",
+                "android_handler": "mycroft-node-red.jarbasskills.home"
+            },
+            "name": "NodeRed Skill"
+        },
+        {
+            "skillname": "skill-hivemind",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-hivemind",
+            "url": "https://github.com/JarbasSkills/skill-hivemind",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": "false",
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "[Mattermost Bridge](https://github.com/JarbasHiveMind/HiveMind_mattermost_bridge)",
+                "[Flask Chatroom](https://github.com/JarbasHiveMind/HiveMind-flask-chatroom)",
+                "[HackChat Bridge](https://github.com/JarbasHiveMind/HiveMind-HackChatBridge)",
+                "[Twitch Bridge](https://github.com/JarbasHiveMind/HiveMind-twitch-bridge)",
+                "[Webchat](https://github.com/JarbasHiveMind/HiveMind-webchat)",
+                "[Remote Cli](https://github.com/JarbasHiveMind/HiveMind-cli)",
+                "[Voice Satellite](https://github.com/JarbasHiveMind/HiveMind-voice-sat)"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-hivemind/master/logo.png",
+            "category": "Configuration",
+            "created": "2020-06-09T22:04:58+00:00",
+            "modified": "2020-06-14T17:35:34+00:00",
+            "description": "![](./logo.png)\n\nMycroft skill for [HiveMind-core](https://github.com/JarbasHiveMind/HiveMind-core)\n\nAllows the HiveMind ecosystem to talk to a Mycroft instance",
+            "tags": [
+                "original-product",
+                "mesh",
+                "mycroft",
+                "apache-license",
+                "skill",
+                "no-license",
+                "addon",
+                "networking",
+                "clients"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1391962",
+            "license": "unknown",
+            "short_description": "![](./logo.png)",
+            "requirements": {
+                "python": [
+                    "json_database",
+                    "jarbas_utils",
+                    "jarbas_hive_mind",
+                    "jarbas_hive_mind>=0.10.4"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": null,
+                "android_name": "Hivemind Skill",
+                "android_handler": "skill-hivemind.jarbasskills.home"
+            },
+            "name": "HiveMind Skill"
+        },
+        {
+            "skillname": "skill-mock-backend",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-mock-backend",
+            "url": "https://github.com/JarbasSkills/skill-mock-backend",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "restore mycroft backend",
+                "what backend are you using",
+                "disable mycroft backend"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-mock-backend/master/logo.png",
+            "category": "configuration",
+            "created": "2020-06-14T22:10:54+00:00",
+            "modified": "2020-06-14T22:11:04+00:00",
+            "description": "Just install the skill and backend will be disabled\n\nPRIVACY NOTE: you need to setup your own STT, by default it will use google\n\n[kaldi](https://github.com/HelloChatterbox/speech2text/blob/dev/speech2text/engines/kaldi.py) and [deepspeech](https://github.com/HelloChatterbox/speech2text/blob/dev/speech2text/engines/ds.py) are supported\n\nThis is beta, some skills WILL break, you will lose:\nweb skill settings interface\n * web device configuration interface\n * wolfram alpha proxy \n * open weather map proxy \n * geolocation api\n * send emails functionality (unless configured in mock_backend.conf)",
+            "tags": [
+                "original-product",
+                "privacy",
+                "mycroft",
+                "apache-license",
+                "configuration",
+                "skill",
+                "backend",
+                "no-license",
+                "addon",
+                "mock"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1393956",
+            "license": "unknown",
+            "short_description": "![](./logo.png)",
+            "credits": [
+                "JarbasAl"
+            ],
+            "categories": [
+                "configuration"
+            ],
+            "requirements": {
+                "python": [
+                    "jarbas_utils",
+                    "mock-mycroft-backend>=0.2.2"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": null,
+                "android_name": "Mock Backend Skill",
+                "android_handler": "skill-mock-backend.jarbasskills.home"
+            },
+            "name": "Mock Backend Skill"
+        },
+        {
+            "skillname": "skill-tts-control",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-tts-control",
+            "url": "https://github.com/JarbasSkills/skill-tts-control",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "text to speech demo",
+                "change voice to amazon",
+                "change voice to richard",
+                "change voice to whisper",
+                "change voice to female",
+                "what is the current voice",
+                "change voice to kusal",
+                "available voice engines",
+                "change voice to alan black",
+                "change voice to google",
+                "change voice to alan pope"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-tts-control/master/logo.png",
+            "category": "Configuration",
+            "created": "2020-07-06T05:24:17+00:00",
+            "modified": "2020-07-06T05:24:32+00:00",
+            "description": "allows to change or retrieve info about Text to Speech by voice",
+            "tags": [
+                "original-product",
+                "speech",
+                "mycroft",
+                "apache-license",
+                "tts",
+                "mycroft-phone",
+                "mycroft-bigscreen",
+                "skills",
+                "config",
+                "no-license",
+                "addon",
+                "mycroft-mk2"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1400418",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-tts-control/icon.png",
+            "short_description": "allows to change or retrieve info about Text to Speech by voice",
+            "requirements": {
+                "python": [
+                    "text2speech>=0.1.2"
+                ],
+                "system": {
+                    "all": "espeak"
+                },
+                "skill": []
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-tts-control/master/res/icon/icon.png",
+                "android_name": "Tts Control Skill",
+                "android_handler": "skill-tts-control.jarbasskills.home"
+            },
+            "name": "Text To Speech Control Skill"
+        },
+        {
+            "skillname": "skill-wallpapers",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-wallpapers",
+            "url": "https://github.com/JarbasSkills/skill-wallpapers",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "new wallpaper",
+                "show me a picture",
+                "show me a picture with dogs",
+                "make that my wallpaper",
+                "change wallpaper to nature"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-wallpapers/master/logo.png",
+            "category": "Configuration",
+            "created": "2020-07-06T23:54:17+00:00",
+            "modified": "2020-07-06T23:54:29+00:00",
+            "description": "![](./logo.png)\n\nPictures from selected subreddits\n\n![](./gui.png)\n![](./gui2.png)\n![](./gui3.png)\n![](./gui.gif)",
+            "tags": [
+                "original-product",
+                "mycroft",
+                "apache-license",
+                "pictures",
+                "background",
+                "skill",
+                "no-license",
+                "addon",
+                "wallpaper"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1400676",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-wallpapers/icon.png",
+            "short_description": "![](./logo.png)",
+            "requirements": {
+                "python": [
+                    "wallpaper_finder>=0.1.1"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-wallpapers/master/res/icon/icon.png",
+                "android_name": "Wallpapers Skill",
+                "android_handler": "skill-wallpapers.jarbasskills.home"
+            },
+            "name": "WallpapersSkill"
+        },
+        {
+            "skillname": "skill-KITT-skin",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-KITT-skin",
+            "url": "https://github.com/JarbasSkills/skill-KITT-skin",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-KITT-skin/master/logo.png",
+            "category": "Entertainment",
+            "created": "2020-08-02T12:11:49+00:00",
+            "modified": "2020-08-02T12:12:01+00:00",
+            "description": "Turn your mark2 into KITT from knight rider\n\n![](./skin.gif)",
+            "tags": [
+                "original-product",
+                "skin",
+                "mycroft",
+                "apache-license",
+                "mark2",
+                "idle",
+                "no-license",
+                "addon",
+                "mycroft-mk2",
+                "wallpaper",
+                "Entertainment"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1408838",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-KITT-skin/res/icon/icon.png",
+            "short_description": "A skin for the mark2",
+            "categories": [
+                "Entertainment"
+            ],
+            "requirements": {
+                "python": [],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": null,
+                "android_name": "Kitt Skin Skill",
+                "android_handler": "skill-KITT-skin.jarbasskills.home"
+            },
+            "name": "KITT Skin"
+        },
+        {
+            "skillname": "skill-mouse-jiggler",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-mouse-jiggler",
+            "url": "https://github.com/JarbasSkills/skill-mouse-jiggler",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "Enable mouse jiggler",
+                "Stop mouse activity",
+                "Disable mouse jiggler",
+                "Start mouse activity"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-mouse-jiggler/master/logo.png",
+            "category": "Configuration",
+            "created": "2020-08-10T12:38:27+00:00",
+            "modified": "2020-08-10T12:38:42+00:00",
+            "description": "A Mouse Jiggler prevents your computer from going to sleep while you work or play. \n\nThis skill creates constant mouse activity so your computer won't go idle and trigger screen savers or sleep mode—eliminating the need to log in repeatedly.\n \n![](https://raw.githubusercontent.com/OpenJarbas/jiggle/master/xkcd.png)",
+            "tags": [
+                "original-product",
+                "activity",
+                "mycroft",
+                "apache-license",
+                "mouse",
+                "Configuration",
+                "configuration",
+                "skills",
+                "idle",
+                "no-license",
+                "addon"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1411195",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-mouse-jiggler/res/icon/icon.png",
+            "short_description": "Mouse Jiggler prevents your computer from going to sleep",
+            "credits": [
+                "JarbasAl",
+                "[Command Line Fu](https://xkcd.com/196/) by [xkcd](https://xkcd.com) is licensed under [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)"
+            ],
+            "categories": [
+                "Configuration"
+            ],
+            "requirements": {
+                "python": [
+                    "jiggle"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-mouse-jiggler/master/res/icon/icon.png",
+                "android_name": "Mouse Jiggler Skill",
+                "android_handler": "skill-mouse-jiggler.jarbasskills.home"
+            },
+            "name": "Mouse Jiggler Skill"
+        },
+        {
+            "skillname": "skill-email-commands",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-email-commands",
+            "url": "https://github.com/JarbasSkills/skill-email-commands",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-email-commands/master/logo.png",
+            "category": "Configuration",
+            "created": "2020-09-13T11:04:23+00:00",
+            "modified": "2020-09-13T11:07:28+00:00",
+            "description": "Allows you to send commands to mycroft by email, inspired by [this blog post](https://medium.com/@thesanjeetc/want-to-control-something-with-siri-heres-how-bae98aceb586)\n \n ![](./gui.gif)",
+            "tags": [
+                "original-product",
+                "mycroft",
+                "apache-license",
+                "Configuration",
+                "email",
+                "mycroft-phone",
+                "skill",
+                "configuration",
+                "mycroft-bigscreen",
+                "no-license",
+                "addon",
+                "mycroft-mk2",
+                "commands",
+                "remote"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1421786",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-email-commands/res/icon/icon.png",
+            "short_description": "Control Mycroft by email",
+            "credits": [
+                "JarbasAl"
+            ],
+            "categories": [
+                "Configuration"
+            ],
+            "requirements": {
+                "python": [
+                    "mail_monitor>=0.5"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": null,
+                "android_name": "Email Commands Skill",
+                "android_handler": "skill-email-commands.jarbasskills.home"
+            },
+            "name": "Email Commands Skill"
+        },
+        {
+            "skillname": "skill-better-playback-control",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-better-playback-control",
+            "url": "https://github.com/JarbasSkills/skill-better-playback-control",
+            "branch": "v0.1",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "Play game Planet Fall",
+                "Play a lovecraft audiobook",
+                "Next song",
+                "Play trailer for The Land Before Time",
+                "Play Pandora",
+                "Play NASA TV channel",
+                "Next track",
+                "Play Soma FM internet radio",
+                "Previous track",
+                "Play This Week in Tech podcast",
+                "Resume",
+                "Pause",
+                "Play music the gods made heavy metal",
+                "Play dagon lovecraft visual comic",
+                "Play a horror movie",
+                "Play my summer playlist",
+                "Play {your favorite category} porn",
+                "Previous song",
+                "Play a cat video",
+                "Play Portuguese News"
+            ],
+            "logo": "https://cn.opendesktop.org/cache/770x540-0/img/2/4/9/2/ba5318df54e64a9574d7eb3e85354ed1eb6804a9faaf58d3cd6dcc9a13ee167e0493.png",
+            "category": "Media",
+            "created": "2020-12-29T17:43:02+00:00",
+            "modified": "2020-12-29T17:43:17+00:00",
+            "description": "This Skill doesn't do anything by itself, but it provides an important common\nlanguage for audio playback skills.  By handling simple phrases like\n'pause', this one Skill can turn around and rebroadcast the [messagebus](https://mycroft.ai/documentation/message-bus/)\ncommand `mycroft.audio.service.pause`, allowing several music services to share\ncommon terminology such as \"pause\".\n\nAdditionally, this implements the common Play handler.  This allows playback\nservices to negotiate which is best suited to play back a specific request.\n\nWhat's New??\n    - better handling of playback status, see [MycroftAI/mycroft-core#2619](https://github.com/MycroftAI/mycroft-core/pull/2619) and [MycroftAI/mycroft-core#2674](https://github.com/MycroftAI/mycroft-core/pull/2674)\n    - playback now has a \"media type\" see [mycroft-core/issues/2658](https://github.com/MycroftAI/mycroft-core/issues/2658)\n    - depending on intent additional info is used to help playback selection\n    - integrates with video / media skills, no longer focused on music only\n    - When told to \"play\" if music is paused now it restarts see [skill-playback-control/issues/18](https://github.com/MycroftAI/skill-playback-control/issues/18)\n    - improves the common play framework handling, timeout is now configurable,\n      default is 5 seconds, previoulsy many skills failed to play because \n      the timeout was too small\nTrack Status - [skill-playback-control/pull/35](https://github.com/MycroftAI/skill-playback-control/pull/35)\n * MatchType - [skill-playback-control/pull/32](https://github.com/MycroftAI/skill-playback-control/pull/32) and [mycroft-core/pull/2660](https://github.com/MycroftAI/mycroft-core/pull/2660)\n * Resume - [skill-playback-control/pull/38](https://github.com/MycroftAI/skill-playback-control/pull/38)\n * Timeout - [skill-playback-control/pull/33](https://github.com/MycroftAI/skill-playback-control/pull/33)",
+            "tags": [
+                "media",
+                "podcasts",
+                "config",
+                "pause",
+                "Media",
+                "mycroft-phone",
+                "mycroft-bigscreen",
+                "video",
+                "playback",
+                "games",
+                "audiobooks",
+                "next",
+                "addon",
+                "original-product",
+                "system",
+                "mycroft",
+                "apache-license",
+                "play",
+                "no-license",
+                "movies",
+                "resume",
+                "mycroft-mk2",
+                "music"
+            ],
+            "version": "v0.1",
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1465426",
+            "license": "unknown",
+            "download_url": "https://github.com/JarbasSkills/skill-better-playback-control/archive/v0.1.tar.gz",
+            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/play.svg",
+            "short_description": "Better Common playback control system",
+            "credits": [
+                "Mycroft AI (@MycroftAI)\nJarbas AI"
+            ],
+            "categories": [
+                "Media"
+            ],
+            "requirements": {
+                "python": [
+                    "ovos_utils>=0.0.4"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": null,
+                "android_name": "Better Playback Control Skill",
+                "android_handler": "skill-better-playback-control.jarbasskills.home"
+            },
+            "name": "Better Playback Control"
+        },
+        {
+            "skillname": "skill-monkey-patcher",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-monkey-patcher",
+            "url": "https://github.com/JarbasSkills/skill-monkey-patcher",
+            "branch": "v0.1",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [],
+            "logo": "https://cn.opendesktop.org/cache/770x540-0/img/6/3/e/9/0df614f85b29eeda98e1f6b2109c1def72067592c2dd31a4fac9c1d0b72a37b51d0e.png",
+            "category": "Configuration",
+            "created": "2020-12-29T17:51:33+00:00",
+            "modified": "2020-12-29T17:51:49+00:00",
+            "description": "Contributing to Mycroft is a bit of a fight with upstream\n\nthis skill applies a bunch of monkey patches at runtime to add/fix things \nnot merged into mycroft-core, full details in [ovos_utils PR#15](https://github.com/OpenVoiceOS/ovos_utils/pull/15)\n\n### Patches\n\n`MycroftSkill` and `FallbackSkill` patches:\n\n    - enable `SkillApi` from https://github.com/MycroftAI/mycroft-core/pull/1822\n    - enable `ovos_utils.intents.ConverseTracker`\n\n\n`SkillGUI` patches:\n\nVideo playback from https://github.com/MycroftAI/mycroft-core/pull/2683\n\nSkill settings from https://github.com/MycroftAI/mycroft-core/pull/2698\n\n`CommonPlaySkill` patches:\nadd MycroftSkill.handle_skill_deactivated from https://github.com/MycroftAI/mycroft-core/pull/1468 (improved)\n * patch MycroftSkill.bind\n * patch MycroftSkill.voc_match https://github.com/MycroftAI/mycroft-core/pull/2675\n * patch MycroftSkill.gui to use patched SkillGUI (see bellow)\n * patch MycroftSkill.init_dialog to use ovos_utils.lang.get_language_dir\n * patch MycroftSkill.load_vocab_files to use ovos_utils.lang.get_language_dir\n * patch MycroftSkill.load_regex_files to use ovos_utils.lang.get_language_dir\n * add SkillGUI.play_video\n * add SkillGUI.is_video_displayed\n * add SkillGUI.playback_status\n * add SkillGUI.pause_video\n * add SkillGUI.resume_video\n * add SkillGUI.stop_video\n * add SkillGUI.register_settings\n * add SkillGUI.show_settings\n * add CPSMatchType from https://github.com/MycroftAI/mycroft-core/pull/2660",
+            "tags": [
+                "original-product",
+                "monkey-patch",
+                "fix",
+                "patches",
+                "mycroft",
+                "apache-license",
+                "Configuration",
+                "updates",
+                "mycroft-phone",
+                "mycroft-bigscreen",
+                "no-license",
+                "addon",
+                "patch",
+                "mycroft-mk2",
+                "monkey"
+            ],
+            "version": "v0.1",
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1465427",
+            "license": "unknown",
+            "download_url": "https://github.com/JarbasSkills/skill-monkey-patcher/archive/v0.1.tar.gz",
+            "icon": "https://github.com/JarbasSkills/skill-monkey-patcher/desktop/icon/monkey_patch.png",
+            "short_description": "Applies patches to mycroft-core at runtime",
+            "credits": [
+                "JarbasAI"
+            ],
+            "categories": [
+                "Configuration"
+            ],
+            "requirements": {
+                "python": [
+                    "ovos_utils>=0.0.4"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": null,
+                "android_name": "Monkey Patcher Skill",
+                "android_handler": "skill-monkey-patcher.jarbasskills.home"
+            },
+            "name": "Monkey Patcher"
+        },
+        {
+            "skillname": "skill-monkey-patch-tester",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-monkey-patch-tester",
+            "url": "https://github.com/JarbasSkills/skill-monkey-patch-tester",
+            "branch": "v0.1",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "are the patches working",
+                "Are you monkey patched"
+            ],
+            "logo": "https://cn.opendesktop.org/cache/770x540-0/img/6/9/c/c/b2a51a87042415ae18b82f7fe8e516677e2608a7dde68b406706499903fc4e447c14.png",
+            "category": "Configuration",
+            "created": "2020-12-29T18:00:50+00:00",
+            "modified": "2020-12-29T18:01:11+00:00",
+            "description": "Contributing to Mycroft is a bit of a fight with upstream, this skill tests \nthat the MonkeyPatches were applied correctly, full details in [ovos_utils PR#15](https://github.com/OpenVoiceOS/ovos_utils/pull/15)",
+            "tags": [
+                "original-product",
+                "update",
+                "monkey-patch",
+                "fix",
+                "apache-license",
+                "Configuration",
+                "no-license",
+                "config",
+                "addon",
+                "patch",
+                "diagnostic"
+            ],
+            "version": "v0.1",
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1465429",
+            "license": "unknown",
+            "download_url": "https://github.com/JarbasSkills/skill-monkey-patch-tester/archive/v0.1.tar.gz",
+            "icon": "https://github.com/JarbasSkills/skill-monkey-patch-tester/desktop/icon/monkey_patch.png",
+            "short_description": "Test if [monkey patches](https://github.com/JarbasSkills/skill-monkey-patcher) were applied successfully",
+            "credits": [
+                "JarbasAI"
+            ],
+            "categories": [
+                "Configuration"
+            ],
+            "requirements": {
+                "python": [
+                    "ovos_utils>=0.0.4"
+                ],
+                "skill": [
+                    "https://github.com/JarbasSkills/skill-monkey-patcher"
+                ],
+                "system": {}
+            },
+            "android": {
+                "android_icon": null,
+                "android_name": "Monkey Patch Tester Skill",
+                "android_handler": "skill-monkey-patch-tester.jarbasskills.home"
+            },
+            "name": "Monkey Patch Tester"
+        },
+        {
+            "skillname": "Food Wizard",
+            "authorname": "AIIX",
+            "foldername": "food-wizard",
+            "url": "https://github.com/AIIX/food-wizard",
+            "branch": "master",
+            "desktopFile": true,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "platform_mark2",
+                "platform_plasmoid",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "Show recipes with apple and honey",
+                "Hey Mycroft read recipe mexican chicken lime soup",
+                "Hey Mycroft show recipes with chicken, honey and lime",
+                "Hey Mycroft show recipes with apple and honey",
+                "Show recipes with chicken, honey and lime"
+            ],
+            "logo": "https://cn.opendesktop.org/cache/770x540-0/img/e/3/0/5/90cd78670d1e911a33356c0f47b9d9dd23bf.png",
+            "category": "Information",
+            "created": "2019-11-14T23:55:46+00:00",
+            "modified": "2020-06-03T09:55:42+00:00",
+            "description": "Get popular recipes and how to cook directions based on combination of Ingredient keywords",
+            "tags": [
+                "original-product",
+                "Ingredients",
+                "gplv3",
+                "mycroft",
+                "food",
+                "KDE",
+                "Food",
+                "Information",
+                "mycroft-phone",
+                "skills",
+                "mycroft-bigscreen",
+                "Cooking",
+                "no-license",
+                "addon",
+                "Plasmoid",
+                "Recipes",
+                "mycroft-mk2",
+                "GUI"
+            ],
+            "version": "1.0",
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1336547",
+            "license": "unknown",
+            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/coffee.svg",
+            "short_description": "Get Popular Food & Cooking Recipes On The Go",
+            "credits": [
+                "Aix (@aiix)"
+            ],
+            "categories": [
+                "Information"
+            ],
+            "requirements": {
+                "python": [
+                    "unidecode"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "/res/icon/foodwizz.png",
+                "android_name": "Food Wizard",
+                "android_handler": "food-wizard.aiix.home"
+            }
+        },
+        {
+            "skillname": "Wikidata",
+            "authorname": "AIIX",
+            "foldername": "skill-wikidata",
+            "url": "https://github.com/AIIX/skill-wikidata",
+            "branch": "newapi",
+            "desktopFile": true,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "platform_mark2",
+                "platform_plasmoid",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "Where was Bill Gates born",
+                "What is Linus Torvalds date of birth",
+                "What is Abraham Lincoln date of death",
+                "What is the occupation of Linus Torvalds",
+                "How old is Steve Jobs",
+                "What is Steve Jobs spouse name"
+            ],
+            "logo": "https://cn.opendesktop.org/cache/770x540-0/img/b/3/f/0/8b10f6d22d93d3c44b52cc72cdc3a7f6862d.png",
+            "category": "Information",
+            "created": "2020-06-03T08:13:14+00:00",
+            "modified": "2020-06-03T08:13:36+00:00",
+            "description": "Get current and historic facts & information about a person from Wikidata.",
+            "tags": [
+                "person",
+                "gui",
+                "information",
+                "mycroft-phone",
+                "skill",
+                "deathdate",
+                "mycroft-bigscreen",
+                "facts",
+                "birthdate",
+                "query",
+                "wikipedia",
+                "addon",
+                "original-product",
+                "gplv3",
+                "wikidata",
+                "mycroft",
+                "spouse",
+                "history",
+                "Information",
+                "wiki",
+                "no-license",
+                "mycroft-mk2",
+                "occupation"
+            ],
+            "version": "1.0",
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1389861",
+            "license": "unknown",
+            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/digital-tachograph.svg",
+            "short_description": "Get facts about a person from Wikidata",
+            "credits": [
+                "Aix (@aiix)"
+            ],
+            "categories": [
+                "Information"
+            ],
+            "requirements": {
+                "python": [
+                    "arrow",
+                    "requests>=1.1",
+                    "beautifulsoup4"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": null,
+                "android_name": "Wikidata Skill",
+                "android_handler": "skill-wikidata.aiix.home"
+            }
+        },
+        {
+            "skillname": "Sky Stream",
+            "authorname": "AIIX",
+            "foldername": "skystream",
+            "url": "https://github.com/AIIX/skystream",
+            "branch": "master",
+            "warning": "",
+            "desktopFile": true,
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "platform_mark2",
+                "platform_plasmoid",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "Hey Mycroft Play Sky Live News",
+                "Open Sky Live Stream",
+                "Show Sky Live Stream",
+                "Hey Mycroft Show Sky Live Stream"
+            ],
+            "logo": "https://cn.opendesktop.org/cache/770x540-0/img/1/1/1/9/82653bfaa46317638d7a857598e1ae229c38.png",
+            "category": "Media",
+            "created": "2020-07-03T03:50:24+00:00",
+            "modified": "2020-07-03T03:53:27+00:00",
+            "description": "Play Live News from Sky News",
+            "tags": [
+                "live",
+                "AudioStreaming",
+                "Media",
+                "mycroft-phone",
+                "LiveStreams",
+                "mycroft-bigscreen",
+                "skills",
+                "VideoStreaming",
+                "Video",
+                "mycroft-mk2",
+                "addon",
+                "GUI",
+                "SkyNews",
+                "original-product",
+                "gplv3",
+                "mycroft",
+                "Music",
+                "no-license",
+                "skynews"
+            ],
+            "version": "1.0",
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1399481",
+            "license": "unknown",
+            "icon": "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/svgs/regular/newspaper.svg",
+            "short_description": "Play Live News from Sky News",
+            "credits": [
+                "Aix (@aiix)"
+            ],
+            "categories": [
+                "Media"
+            ],
+            "requirements": {
+                "python": [],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "/res/icon/skystream.png",
+                "android_name": "Sky Stream",
+                "android_handler": "skystream.aiix.home"
+            }
+        },
+        {
+            "skillname": "skill-8fact",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-8fact",
+            "url": "https://github.com/JarbasSkills/skill-8fact",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": "false",
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "where do you get your facts",
+                "how many facts do you have in your database",
+                "can your facts be trusted",
+                "random fact"
+            ],
+            "logo": "https://cn.opendesktop.org/cache/770x540-0/img/9/3/0/6/fb92af6888c36c705c602cb71eaa1821517b.jpg",
+            "category": "Information",
+            "created": "2020-06-09T13:51:15+00:00",
+            "modified": "2020-06-13T23:26:58+00:00",
+            "description": "random facts scrapped from https://www.instagram.com/8fact/\n\n![](./screenie1.png)\n![](./screenie.png)",
+            "tags": [
+                "original-product",
+                "entertainment",
+                "mycroft",
+                "apache-license",
+                "Information",
+                "facts",
+                "skills",
+                "no-license",
+                "addon"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1391848",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-8fact/icon.png",
+            "short_description": "Random Facts",
+            "credits": [
+                "JarbasAl"
+            ],
+            "categories": [
+                "Information"
+            ],
+            "requirements": {
+                "python": [
+                    "mtranslate",
+                    "py8fact>=0.1.1"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": null,
+                "android_name": "8Fact Skill",
+                "android_handler": "skill-8fact.jarbasskills.home"
+            },
+            "name": "8Fact Skill"
+        },
+        {
+            "skillname": "skill-blue-marble",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-blue-marble",
+            "url": "https://github.com/JarbasSkills/skill-blue-marble",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "show me earth from space",
+                "tell me about Earth Polychromatic Imaging Camera",
+                "open the epic website from nasa",
+                "Animate that",
+                "Daily Blue Marble",
+                "Blue Marble of the Day",
+                "what is the location of DSCOVR spacecraft"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-blue-marble/master/logo.png",
+            "category": "Information",
+            "created": "2020-06-15T21:31:06+00:00",
+            "modified": "2020-07-05T12:27:21+00:00",
+            "description": "[Earth Polychromatic Imaging Camera](https://epic.gsfc.nasa.gov/) provides near real time pictures of earth from orbit\n  \nCan be used as idle screen for mark2\n \n![](gui.gif)\n![](gui.png)\n![](website.png)",
+            "tags": [
+                "original-product",
+                "satellite",
+                "mycroft",
+                "apache-license",
+                "Information",
+                "mycroft-phone",
+                "space",
+                "mycroft-bigscreen",
+                "no-license",
+                "addon",
+                "nasa",
+                "mycroft-mk2",
+                "epic"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1394361",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-blue-marble/icon.png",
+            "short_description": "![](./logo.png)",
+            "credits": [
+                "JarbasAi",
+                "[NASA](https://apod.nasa.gov/apod/astropix.html)"
+            ],
+            "categories": [
+                "Information"
+            ],
+            "requirements": {
+                "python": [
+                    "requests",
+                    "requests_cache",
+                    "pillow"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "icon.png",
+                "android_name": "Blue Marble Skill",
+                "android_handler": "skill-blue-marble.jarbasskills.home"
+            },
+            "name": " Daily Blue Marble Skill"
+        },
+        {
+            "skillname": "skill-chandra-xray",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-chandra-xray",
+            "url": "https://github.com/JarbasSkills/skill-chandra-xray",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "picture from chandra x ray observatory",
+                "tell me about chandra x ray observatory",
+                "latest nasa x ray observatory picture",
+                "explain"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-chandra-xray/master/logo.png",
+            "category": "Entertainment",
+            "created": "2020-06-25T18:35:49+00:00",
+            "modified": "2020-06-25T18:41:20+00:00",
+            "description": "Pictures from NASA's [Chandra X-ray Observatory](https://www.nasa.gov/mission_pages/chandra/main/index.html)\n  \nCan be used as idle screen for the mark2\n\n![](gui.png)\n![](gui0.png)\n![](gui1.png)\n![](gui2.png)",
+            "tags": [
+                "original-product",
+                "mycroft",
+                "apache-license",
+                "space",
+                "skills",
+                "no-license",
+                "addon",
+                "chandra",
+                "nasa",
+                "Entertainment"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1397576",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-chandra-xray/icon.png",
+            "credits": [
+                "JarbasAi",
+                "[NASA](https://www.nasa.gov/mission_pages/chandra/main/index.html)"
+            ],
+            "categories": [
+                "Entertainment"
+            ],
+            "requirements": {
+                "python": [
+                    "mtranslate",
+                    "feedparser"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-chandra-xray/master/res/icon/icon.png",
+                "android_name": "Chandra Xray Skill",
+                "android_handler": "skill-chandra-xray.jarbasskills.home"
+            },
+            "name": "Chandra X-ray Observatory Skill"
+        },
+        {
+            "skillname": "skill-iss-location",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-iss-location",
+            "url": "https://github.com/JarbasSkills/skill-iss-location",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "When is the ISS passing over",
+                "tell me about international space station",
+                "Where is the ISS",
+                "Tell me about the ISS",
+                "how many persons on board of the space station",
+                "Who is on board of the space station"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-iss-location/master/logo.png",
+            "category": "Information",
+            "created": "2020-06-26T00:08:10+00:00",
+            "modified": "2020-06-26T01:45:34+00:00",
+            "description": "Track the location of the ISS\n  \n![](./gui.png)\n![](./gui2.png)\n![](./gui3.png)\n\nCan be used as idle screen in a mark2",
+            "tags": [
+                "original-product",
+                "mycroft",
+                "apache-license",
+                "Information",
+                "space",
+                "mycroft-phone",
+                "skills",
+                "mycroft-bigscreen",
+                "no-license",
+                "iss",
+                "addon",
+                "nasa",
+                "mycroft-mk2"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1397610",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-iss-location/iss2.png",
+            "credits": [
+                "JarbasAl"
+            ],
+            "categories": [
+                "Information"
+            ],
+            "requirements": {
+                "python": [
+                    "https://github.com/matplotlib/basemap/archive/master.zip",
+                    "requests-cache",
+                    "pillow",
+                    "mtranslate",
+                    "requests",
+                    "matplotlib"
+                ],
+                "system": {
+                    "all": "libgeos-dev"
+                },
+                "skill": []
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-iss-location/master/res/icon/icon.png",
+                "android_name": "Iss Location Skill",
+                "android_handler": "skill-iss-location.jarbasskills.home"
+            },
+            "name": "ISS Tracker Skill"
+        },
+        {
+            "skillname": "skill-viirs",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-viirs",
+            "url": "https://github.com/JarbasSkills/skill-viirs",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "show me london from space",
+                "increase zoom",
+                "zoom in",
+                "show my house from space last month",
+                "next picture",
+                "explain the holes in the equator",
+                "why so many clouds",
+                "zoom out",
+                "talk about Visible Infrared Imaging Radiometer Suite",
+                "previous picture",
+                "show my location from space",
+                "set zoom to maximum"
+            ],
+            "logo": "https://cn.opendesktop.org/cache/770x540-0/img/e/e/e/6/d60f618ba381ba0815ad5e31319a6aac2ec3.jpg",
+            "category": "Entertainment",
+            "created": "2020-06-26T18:51:28+00:00",
+            "modified": "2020-06-26T23:31:15+00:00",
+            "description": "Near real time Satellite imagery from NASA's [Visible Infrared Imaging Radiometer Suite](https://wiki.earthdata.nasa.gov/display/GIBS/2015/12/10/VIIRS+is+Here)\n  \nCan be used as idle screen for the mark2\n\n![](gui.png)\n![](gui1.png)\n![](gui2.png)\n![](gui3.png)",
+            "tags": [
+                "original-product",
+                "satellite",
+                "mycroft",
+                "apache-license",
+                "mycroft-phone",
+                "space",
+                "mycroft-bigscreen",
+                "skills",
+                "no-license",
+                "addon",
+                "nasa",
+                "mycroft-mk2",
+                "Entertainment"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1397846",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-viirs/icon.png",
+            "credits": [
+                "JarbasAi",
+                "[NASA](https://wiki.earthdata.nasa.gov/display/GIBS/2015/12/10/VIIRS+is+Here)"
+            ],
+            "categories": [
+                "Entertainment"
+            ],
+            "requirements": {
+                "python": [
+                    "requests",
+                    "geocoder"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-viirs/master/res/icon/icon.png",
+                "android_name": "Viirs Skill",
+                "android_handler": "skill-viirs.jarbasskills.home"
+            },
+            "name": "Visible Infrared Imaging Radiometer Suite Skill"
+        },
+        {
+            "skillname": "skill-hubble-telescope",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-hubble-telescope",
+            "url": "https://github.com/JarbasSkills/skill-hubble-telescope",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "did hubble find any planets",
+                "can hubble take pictures of earth",
+                "who was hubble",
+                "is hubble data public",
+                "how does hubble work",
+                "explain",
+                "can hubble see things on the moon",
+                "picture from hubble site",
+                "why was hubble created",
+                "Where is hubble looking at  -",
+                "Can we see live photos from Hubble",
+                "tell me about the hubble telescope",
+                "Are the colors in hubble images real",
+                "what is hubble space telescope mission ",
+                "Where is hubble looking at",
+                "Where is the hubble telescope",
+                "picture from hubble telescope",
+                "what are hubble's instruments",
+                "what is hubble space telescope mission"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-hubble-telescope/master/logo.png",
+            "category": "Entertainment",
+            "created": "2020-06-28T21:06:43+00:00",
+            "modified": "2020-06-28T21:06:54+00:00",
+            "description": "Pictures from [Hubble Space Telescope](https://hubblesite.org/)\n  \nCan be used as idle screen for the mark2\n\n![](gui.png)\n![](gui6.png)\n![](gui1.png)\n![](gui2.png)\n![](gui3.png)\n![](gui4.png)\n![](gui5.png)",
+            "tags": [
+                "original-product",
+                "mycroft",
+                "apache-license",
+                "background",
+                "hubble",
+                "space",
+                "mycroft-phone",
+                "skills",
+                "mycroft-bigscreen",
+                "no-license",
+                "addon",
+                "mycroft-mk2",
+                "Entertainment"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1398376",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-hubble-telescope/icon.png",
+            "credits": [
+                "JarbasAi",
+                "[Hubble Space Telescope](https://hubblesite.org/)"
+            ],
+            "categories": [
+                "Entertainment"
+            ],
+            "requirements": {
+                "python": [
+                    "mtranslate",
+                    "requests_cache"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "icon.png",
+                "android_name": "Hubble Telescope Skill",
+                "android_handler": "skill-hubble-telescope.jarbasskills.home"
+            },
+            "name": "Hubble Space Telescope Skill"
+        },
+        {
+            "skillname": "skill-webb-telescope",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-webb-telescope",
+            "url": "https://github.com/JarbasSkills/skill-webb-telescope",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "Where is webb looking at",
+                "can webb take pictures of earth",
+                "Can we see live photos from webb",
+                "can webb see things on the moon",
+                "Where is the webb telescope",
+                "tell me about the james webb telescope",
+                "what are webb's instruments",
+                "did webb find any planets",
+                "tell me about the webb telescope",
+                "is webb data public",
+                "why was webb created",
+                "what is webb space telescope mission",
+                "picture from james webb telescope",
+                "explain",
+                "Are the colors in webb images real",
+                "picture from webb telescope",
+                "how does webb work"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-webb-telescope/master/logo.png",
+            "category": "Entertainment",
+            "created": "2020-06-29T10:25:29+00:00",
+            "modified": "2020-06-29T10:25:43+00:00",
+            "description": "Pictures from [James Webb Space Telescope](https://webbtelescope.org/)\n  \nCan be used as idle screen for the mark2\n\n![](./gui.png)\n![](./gui1.png)\n![](./gui2.png)",
+            "tags": [
+                "original-product",
+                "mycroft",
+                "apache-license",
+                "mycroft-phone",
+                "space",
+                "skill",
+                "mycroft-bigscreen",
+                "no-license",
+                "Entertainment",
+                "addon",
+                "nasa",
+                "mycroft-mk2",
+                "telescope"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1398468",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-webb-telescope/icon.png",
+            "short_description": "![](./logo.png)",
+            "credits": [
+                "JarbasAi",
+                "[Webb Space Telescope](https://www.jwst.nasa.gov/)"
+            ],
+            "categories": [
+                "Entertainment"
+            ],
+            "requirements": {
+                "python": [
+                    "mtranslate",
+                    "requests_cache"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-webb-telescope/master/res/icon/icon.png",
+                "android_name": "Webb Telescope Skill",
+                "android_handler": "skill-webb-telescope.jarbasskills.home"
+            },
+            "name": "James Webb Space Telescope Skill"
+        },
+        {
+            "skillname": "skill-helioviewer",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-helioviewer",
+            "url": "https://github.com/JarbasSkills/skill-helioviewer",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "show me a picture of the solar corona",
+                "how many sunspots yesterday",
+                "Live picture of the sun",
+                "how many sunspots 3 days ago",
+                "animate that",
+                "whats the number of sunspots",
+                "next picture",
+                "ultraviolet sun picture for 2 million degrees",
+                "ultraviolet sun picture at 2 million degrees",
+                "show me magnetic field of the sun",
+                "ultraviolet picture of the heliosphere",
+                "previous picture",
+                "open helioviewer"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-helioviewer/master/logo.png",
+            "category": "Information",
+            "created": "2020-06-29T12:51:45+00:00",
+            "modified": "2020-07-03T17:30:21+00:00",
+            "description": "Daily sunspot data from [Sunspot Index and Long-term Solar Observations](http://sidc.be/silso/home) and pictures from NASA's [Solar and Heliospheric Observatory](https://sohowww.nascom.nasa.gov/sunspots/)\n  \nCan be used as idle screen for the mark2\n\n![](gui7.png)\n![](gui.png)\n![](gui2.png)\n![](gui3.png)\n![](gui4.png)\n![](gui.gif)\n![](gui6.png)",
+            "tags": [
+                "original-product",
+                "mycroft",
+                "apache-license",
+                "helioviewer",
+                "Information",
+                "mycroft-phone",
+                "space",
+                "mycroft-bigscreen",
+                "skills",
+                "no-license",
+                "sun",
+                "addon",
+                "nasa",
+                "mycroft-mk2"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1398482",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-helioviewer/icon.png",
+            "short_description": "![](./logo.jpg)",
+            "credits": [
+                "JarbasAi",
+                "[HelioViewer](https://helioviewer.org/)",
+                "[SOHO](https://sohowww.nascom.nasa.gov/sunspots/)",
+                "[SILSO](http://sidc.be/silso/home)"
+            ],
+            "categories": [
+                "Information"
+            ],
+            "requirements": {
+                "python": [
+                    "bs4",
+                    "requests_cache",
+                    "ffmpy",
+                    "pillow",
+                    "requests"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-helioviewer/master/res/icon/icon.png",
+                "android_name": "Helioviewer Skill",
+                "android_handler": "skill-helioviewer.jarbasskills.home"
+            },
+            "name": "Helioviewer Skill"
+        },
+        {
+            "skillname": "skill-space-news",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-space-news",
+            "url": "https://github.com/JarbasSkills/skill-space-news",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "open website",
+                "more news",
+                "space news from 15 days ago",
+                "news about space"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-space-news/master/logo.png",
+            "category": "Information",
+            "created": "2020-06-29T15:31:45+00:00",
+            "modified": "2020-06-29T18:41:01+00:00",
+            "description": "All the latest news about Space!\n\nSources:\n\nCan be used as idle screen for the mark2\n\n![](gui.png)\n![](gui1.png)\n![](gui3.png)\n![](gui4.png)\n[Space News](https://spacenews.com/)\n * [ESA RSS feeds](http://www.esa.int/Services/RSS_Feeds)\n * [NASA RSS feeds](https://www.nasa.gov/content/nasa-rss-feeds)\n * [spaceflight-news-api](https://spaceflightnewsapi.net/)\n * [hubble site feeds](http://hubblesite.org/api/documentation#external_feed)",
+            "tags": [
+                "original-product",
+                "mycroft",
+                "apache-license",
+                "gui",
+                "mycroft-phone",
+                "space",
+                "Information",
+                "mycroft-bigscreen",
+                "skills",
+                "no-license",
+                "addon",
+                "nasa",
+                "mycroft-mk2",
+                "news"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1398498",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-space-news/icon.png",
+            "credits": [
+                "JarbasAi",
+                "[Space News](https://spacenews.com/)",
+                "[ESA RSS feeds](http://www.esa.int/Services/RSS_Feeds)",
+                "[NASA RSS feeds](https://www.nasa.gov/content/nasa-rss-feeds)",
+                "[spaceflight-news-api](https://spaceflightnewsapi.net/)",
+                "[hubble site feeds](http://hubblesite.org/api/documentation#external_feed)"
+            ],
+            "categories": [
+                "Information"
+            ],
+            "requirements": {
+                "python": [
+                    "mtranslate",
+                    "feedparser",
+                    "requests_cache",
+                    "bs4"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-space-news/master/res/icon/icon.png",
+                "android_name": "Space News Skill",
+                "android_handler": "skill-space-news.jarbasskills.home"
+            },
+            "name": "Space News"
+        },
+        {
+            "skillname": "skill-rocket-launch",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-rocket-launch",
+            "url": "https://github.com/JarbasSkills/skill-rocket-launch",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "tell me more",
+                "when is the next rocket launch"
+            ],
+            "logo": "https://cn.opendesktop.org/cache/770x540-0/img/4/6/2/4/0747f712adbbb2934f5d102552d42cc4d739.png",
+            "category": "Information",
+            "created": "2020-06-29T21:24:57+00:00",
+            "modified": "2020-06-29T21:25:08+00:00",
+            "description": "This skill interacts with https://launchlibrary.net/ api to return the latest space launch.\n\n![](gui.png)",
+            "tags": [
+                "original-product",
+                "mycroft",
+                "apache-license",
+                "gui",
+                "space",
+                "mycroft-phone",
+                "Information",
+                "skills",
+                "mycroft-bigscreen",
+                "no-license",
+                "addon",
+                "information",
+                "mycroft-mk2"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1398525",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-rocket-launch/icon.png",
+            "credits": [
+                "JarbasAi",
+                "[msev](https://github.com/marksev1/Mycroft-SpaceLaunch-Skill)",
+                "[praxeo](https://github.com/praxeo/mycroft_spaceflightnow_skill)"
+            ],
+            "categories": [
+                "Information"
+            ],
+            "requirements": {
+                "python": [],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-rocket-launch/master/res/icon/icon.png",
+                "android_name": "Rocket Launch Skill",
+                "android_handler": "skill-rocket-launch.jarbasskills.home"
+            },
+            "name": "Rocket Launches"
+        },
+        {
+            "skillname": "skill-space-stuff",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-space-stuff",
+            "url": "https://github.com/JarbasSkills/skill-space-stuff",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "plot orbital debris"
+            ],
+            "logo": "https://cn.opendesktop.org/cache/770x540-0/img/d/c/6/8/4b1fb7192d6f6bfbcdd397bfe084e2e0bd3b.jpg",
+            "category": "Information",
+            "created": "2020-07-01T14:39:52+00:00",
+            "modified": "2020-07-01T14:40:05+00:00",
+            "description": "![](./gui1.png)\n![](./gui.png)",
+            "tags": [
+                "original-product",
+                "mycroft",
+                "apache-license",
+                "gui",
+                "space",
+                "mycroft-phone",
+                "debris",
+                "skills",
+                "mycroft-bigscreen",
+                "Information",
+                "no-license",
+                "addon",
+                "nasa",
+                "mycroft-mk2"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1399007",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-space-stuff/icon.png",
+            "short_description": "WORK IN PROGRESS",
+            "categories": [
+                "Information"
+            ],
+            "requirements": {
+                "python": [
+                    "pexpect"
+                ],
+                "system": {
+                    "all": "php7.4-cli"
+                },
+                "skill": []
+            },
+            "android": {
+                "android_icon": "icon.png",
+                "android_name": "Space Stuff Skill",
+                "android_handler": "skill-space-stuff.jarbasskills.home"
+            },
+            "name": "Space Debris Tracker"
+        },
+        {
+            "skillname": "skill-asteroid-tracker",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-asteroid-tracker",
+            "url": "https://github.com/JarbasSkills/skill-asteroid-tracker",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "show asteroid orbits"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-asteroid-tracker/master/logo.png",
+            "category": "Information",
+            "created": "2020-07-01T14:45:30+00:00",
+            "modified": "2020-07-01T14:45:55+00:00",
+            "description": "![](gui.png)\n![](gui2.png)\n![](gui3.png)\n![](gui.gif)",
+            "tags": [
+                "original-product",
+                "mycroft",
+                "apache-license",
+                "solar_system",
+                "gui",
+                "mycroft-phone",
+                "space",
+                "Information",
+                "mycroft-bigscreen",
+                "skills",
+                "no-license",
+                "addon",
+                "nasa",
+                "mycroft-mk2",
+                "asteroids",
+                "neo"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1399010",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-asteroid-tracker/icon.png",
+            "short_description": "WORK IN PROGRESS",
+            "categories": [
+                "Information"
+            ],
+            "requirements": {
+                "python": [
+                    "requests",
+                    "requests-cache"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "icon.png",
+                "android_name": "Asteroid Tracker Skill",
+                "android_handler": "skill-asteroid-tracker.jarbasskills.home"
+            },
+            "name": "Asteroid Tracker"
+        },
+        {
+            "skillname": "skill-countries",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-countries",
+            "url": "https://github.com/JarbasSkills/skill-countries",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "what is the size of portugal",
+                "where is portuguese spoken",
+                "what is the currency of portugal",
+                "what is the population of portugal",
+                "what is the timezone of portugal",
+                "what are the people that live in portugal called",
+                "what is the capital of portugal",
+                "where is portugal located at",
+                "what is the language of portugal",
+                "what are the countries in europe",
+                "how many countries do you know about",
+                "what are the borders of portugal"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-countries/master/logo.png",
+            "category": "Information",
+            "created": "2020-07-03T14:54:26+00:00",
+            "modified": "2020-07-03T14:54:37+00:00",
+            "description": "![](logo.png)\n\ndata about countries from http://restcountries.eu/",
+            "tags": [
+                "original-product",
+                "mycroft",
+                "world",
+                "apache-license",
+                "skills",
+                "no-license",
+                "addon",
+                "countries"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1399702",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-countries/icon.png",
+            "short_description": "![](logo.png)",
+            "credits": [
+                "JarbasAI"
+            ],
+            "requirements": {
+                "python": [
+                    "future",
+                    "langcodes",
+                    "git+https://github.com/poswald/python-money",
+                    "requests-cache",
+                    "six",
+                    "scipy",
+                    "python-restcountries",
+                    "auto_regex>=0.3.3",
+                    "cython",
+                    "pillow",
+                    "mtranslate",
+                    "requests",
+                    "pyshp",
+                    "cartopy",
+                    "matplotlib",
+                    "numpy"
+                ],
+                "system": {
+                    "all": [
+                        "libgeos-dev",
+                        "libproj-dev",
+                        "proj-data",
+                        "proj-bin"
+                    ]
+                },
+                "skill": []
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-countries/master/res/icon/icon.png",
+                "android_name": "Countries Skill",
+                "android_handler": "skill-countries.jarbasskills.home"
+            },
+            "name": "Countries"
+        },
+        {
+            "skillname": "skill-wikihow",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-wikihow",
+            "url": "https://github.com/JarbasSkills/skill-wikihow",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "how to boil an egg",
+                "explain better",
+                "give me a random how to",
+                "repeat",
+                "tell me more"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-wikihow/master/logo.png",
+            "category": "Daily",
+            "created": "2020-07-05T19:00:16+00:00",
+            "modified": "2020-07-05T19:00:26+00:00",
+            "description": "Ever wondered about how to boil an egg, or the best way to brush your teeths. This skill enables\nMycroft to anser a lot of \"how to\" questions with step by step guide. More detailed\ninformation can be asked afterwods.\n\nInformation is comming from [wikihow.com](https://www.wikihow.com/)\n\n![](gui2.gif)\n![](gui.gif)",
+            "tags": [
+                "original-product",
+                "mycroft",
+                "apache-license",
+                "howto",
+                "how",
+                "Information",
+                "wiki",
+                "skill",
+                "mycroft-phone",
+                "mycroft-bigscreen",
+                "Daily",
+                "no-license",
+                "addon",
+                "mycroft-mk2",
+                "guide"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1400302",
+            "license": "unknown",
+            "icon": "icon.png",
+            "short_description": "How to do nearly everything.",
+            "credits": [
+                "JarbasAI",
+                "[Wikihow](https://www.wikihow.com/)"
+            ],
+            "categories": [
+                "Daily",
+                "Information"
+            ],
+            "requirements": {
+                "python": [
+                    "pywikihow>=0.5.7"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "skill-xkcd.png",
+                "android_name": "Wikihow Skill",
+                "android_handler": "skill-wikihow.jarbasskills.home"
+            },
+            "name": "Wikihow Skill"
+        },
+        {
+            "skillname": "skill-euronews",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-euronews",
+            "url": "https://github.com/JarbasSkills/skill-euronews",
+            "branch": "v0.2",
+            "desktopFile": true,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "play news in spanish",
+                "play news in portuguese",
+                "play euronews"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-euronews/v0.2/ui/logo.png",
+            "category": "Information",
+            "created": "2020-08-27T00:25:10+00:00",
+            "modified": "2020-12-29T19:37:40+00:00",
+            "description": "European news for Mycroft\n\nSupported Languages:\n\n\n![](./gui.gif)\nEnglish\n * Portuguese\n * Italian\n * Spanish\n * French\n * German",
+            "tags": [
+                "original-product",
+                "mycroft",
+                "apache-license",
+                "Information",
+                "mycroft-phone",
+                "skills",
+                "stream",
+                "mycroft-mk2",
+                "mycroft-bigscreen",
+                "addon",
+                "no-license",
+                "euronews",
+                "news"
+            ],
+            "version": "v0.2",
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1416158",
+            "license": "unknown",
+            "download_url": "https://github.com/JarbasSkills/skill-euronews/archive/v0.2.tar.gz",
+            "icon": "https://github.com/JarbasSkills/skill-euronews/res/icon/euronews.png",
+            "short_description": "Live news from Euronews",
+            "credits": [
+                "JarbasAl",
+                "[Euronews](https://www.youtube.com/user/euronewsnetwork/channels)"
+            ],
+            "categories": [
+                "Information"
+            ],
+            "requirements": {
+                "python": [
+                    "ovos_utils>=0.0.4",
+                    "pafy",
+                    "youtube-dl"
+                ],
+                "skill": [
+                    "https://github.com/JarbasSkills/skill-better-playback-control"
+                ],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-euronews/v0.2/res/icon/euronews.png",
+                "android_name": "Euronews Skill",
+                "android_handler": "skill-euronews.jarbasskills.home"
+            },
+            "name": "Euro News Skill"
+        },
+        {
+            "skillname": "skill-ddg",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-ddg",
+            "url": "https://github.com/JarbasSkills/skill-ddg",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "when was stephen hawking born",
+                "who is elon musk",
+                "continue",
+                "ask the duck about the big bang",
+                "tell me more"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-ddg/master/ui/logo.png",
+            "category": "Information",
+            "created": "2020-12-17T12:54:48+00:00",
+            "modified": "2020-12-17T12:55:07+00:00",
+            "description": "Uses the [DuckDuckGo API](https://duckduckgo.com/api) to provide information. \n\nNOTE: this is meant a better alternative to the official duck duck go skill, it will be blacklisted",
+            "tags": [
+                "original-product",
+                "search-engine",
+                "query",
+                "mycroft",
+                "apache-license",
+                "searchengine",
+                "Information",
+                "mycroft-phone",
+                "skills",
+                "mycroft-bigscreen",
+                "no-license",
+                "internet",
+                "addon",
+                "duckduckgo",
+                "mycroft-mk2",
+                "search"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1460967",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-ddg/res/icon/ddg.png",
+            "short_description": "Use DuckDuckGo to answer questions",
+            "categories": [
+                "Information"
+            ],
+            "requirements": {
+                "python": [
+                    "google_trans_new",
+                    "requests",
+                    "RAKEkeywords"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-ddg/master/res/icon/ddg.png",
+                "android_name": "Ddg Skill",
+                "android_handler": "skill-ddg.jarbasskills.home"
+            },
+            "name": "DuckDuckGo"
+        },
+        {
+            "skillname": "skill-wolfie",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-wolfie",
+            "url": "https://github.com/JarbasSkills/skill-wolfie",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "How tall is Mount Everest?",
+                "ask the wolf what is the speed of light",
+                "What is Madonna's real name?",
+                "When was The Rocky Horror Picture Show released?",
+                "What's 18 times 4?",
+                "How many inches in a meter?"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-wolfie/master/ui/logo.png",
+            "category": "Information",
+            "created": "2020-12-17T13:01:05+00:00",
+            "modified": "2020-12-17T13:01:17+00:00",
+            "description": "Ask general-knowledge queries of your Mycroft device. \nCommonQuery skill for [Wolfram Alpha](https://wolframalpha.com). \nYou'll be surprised by how much it knows!\n\nYou can also explicitly request to \"ask the wolf\"\n\nNOTE: this is meant to be a better alternative to the official mycroft skill, it will blacklist the official skill!!",
+            "tags": [
+                "original-product",
+                "general",
+                "mycroft",
+                "apache-license",
+                "knowledge",
+                "Information",
+                "mycroft-phone",
+                "mycroft-bigscreen",
+                "skills",
+                "wolfram-alpha",
+                "no-license",
+                "addon",
+                "information",
+                "general-knowledge",
+                "mycroft-mk2",
+                "query"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1460968",
+            "license": "unknown",
+            "icon": "https://github.com/JarbasSkills/skill-wolfie/res/icon/wolfie.png",
+            "short_description": "Use Wolfram Alpha for general knowledge questions",
+            "categories": [
+                "Information"
+            ],
+            "requirements": {
+                "python": [
+                    "google_trans_new",
+                    "requests>=2.13.0"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-wolfie/master/res/icon/wolfie.png",
+                "android_name": "Wolfie Skill",
+                "android_handler": "skill-wolfie.jarbasskills.home"
+            },
+            "name": "Wolfram Alpha"
+        },
+        {
+            "skillname": "skill-voip",
+            "authorname": "jarbasskills",
+            "foldername": "skill-voip",
+            "url": "https://github.com/JarbasSkills/skill-voip",
+            "branch": "master",
+            "desktopFile": false,
+            "warning": "",
+            "systemDeps": true,
+            "platforms": [
+                "arm64",
+                "arm",
+                "i386",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "reject all calls",
+                "Do not handle calls automatically",
+                "call bob",
+                "call bob and say Open Source is AWESOME",
+                "call X and say Y",
+                "reject call",
+                "hang up",
+                "mute call",
+                "restart sip",
+                "accept call and say Y",
+                "sip login",
+                "list contacts",
+                "Call status",
+                "answer all calls",
+                "accept call",
+                "hold call",
+                "answer all calls with Y",
+                "call X",
+                "how many contacts",
+                "List contacts",
+                "unmute call",
+                "resume call"
+            ],
+            "logo": "https://cn.opendesktop.org/cache/770x540-0/img/0/5/c/4/c4b59c55193008d0dc80958d89ab2ce9627f.png",
+            "category": "Productivity",
+            "created": "2020-06-02T12:52:24+00:00",
+            "modified": "2020-07-08T03:39:44+00:00",
+            "description": "Add VOIP capabilities to Mycroft using Baresip\n\n![](./voip.gif)",
+            "tags": [
+                "original-product",
+                "sip",
+                "mycroft",
+                "apache-license",
+                "gui",
+                "mycroft-phone",
+                "mycroft-bigscreen",
+                "skills",
+                "no-license",
+                "addon",
+                "mycroft-mk2",
+                "voip"
+            ],
+            "version": null,
+            "appstore": "pling.opendesktop",
+            "appstore_url": "https://store.kde.org/p/1389611",
+            "license": "unknown",
+            "short_description": "Add VOIP capabilities to Mycroft using Baresip",
+            "credits": [
+                "This work as been sponsored by Matt Keys, [eZuce Inc](https://ezuce.com/)\n\nThe GUI was made by [AIIX](https://github.com/AIIX/)\n\n<meta name=\"ocs-site-verification\" content=\"8b4504b05f4c0b263ff59f5e4919a6e4\" />"
+            ],
+            "requirements": {
+                "python": [
+                    "json_database>=0.1.3",
+                    "baresipy>=0.1.4"
+                ],
+                "system": {
+                    "all": "baresip"
+                },
+                "skill": []
+            },
+            "android": {
+                "android_icon": "voip-skill",
+                "android_name": "Voip Skill",
+                "android_handler": "skill-voip.jarbasskills.home"
+            },
+            "name": "VoIP Skill"
+        }
+    ]
+}

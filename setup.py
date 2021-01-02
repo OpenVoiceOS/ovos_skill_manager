@@ -21,7 +21,7 @@ setup(
                       "click"],
     include_package_data=True,
     author_email='jarbasai@mailfence.com',
-    description='open voice OS skill manager',
+    description='Open Voice OS skill manager',
     entry_points='''
         [console_scripts]
         osm-sync=ovos_skills_manager.scripts.sync:sync
