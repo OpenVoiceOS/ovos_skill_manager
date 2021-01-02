@@ -40,7 +40,8 @@ class OVOSSkillsManager:
     def get_active_appstores(self):
         stores = {}
         for appstore_name in self.config["appstores"]:
-            stores[appstore_name] = self.get_appstore(appstore_name)
+            if self.config["appstores"][appstore_name]["active"]:
+                stores[appstore_name] = self.get_appstore(appstore_name)
         return stores
 
     def get_appstore(self, name):
@@ -89,6 +90,10 @@ class OVOSSkillsManager:
     def enable_appstore(self, appstore):
         appstore = self.validate_appstore_name(appstore)
         self.config["appstores"][appstore]["active"] = True
+
+    def set_appstore_priority(self, appstore, priority):
+        appstore = self.validate_appstore_name(appstore)
+        self.config["appstores"][appstore]["priority"] = priority
 
     def disable_appstore(self, appstore):
         appstore = self.validate_appstore_name(appstore)

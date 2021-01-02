@@ -6,6 +6,6 @@ from ovos_skills_manager.appstores.ovos import OVOSstore
 from ovos_skills_manager.osm import OVOSSkillsManager
 from ovos_utils.log import LOG
 
-LOG.set_level("DEBUG")
+LOG.set_level("INFO")
 
 

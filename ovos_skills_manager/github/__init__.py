@@ -29,13 +29,14 @@ def get_skill_data(url, branch=None):
         api_data = get_repo_data(url)
         data["branch"] = api_data['default_branch']
         data["short_description"] = api_data['description']
-        data["license"] = api_data["license"]["key"]
         data["foldername"] = api_data["name"]
         data["last_updated"] = api_data['updated_at']
         data["url"] = api_data["html_url"]
         data["authorname"] = api_data["owner"]["login"]
         branch = branch or api_data['default_branch']
-    except GithubSkillEntryError as e:
+        if "license" in data:
+            data["license"] = api_data["license"]["key"]
+    except:
         pass
 
     # augment with releases data
@@ -108,14 +109,14 @@ def get_branch(url):
 
 def get_branch_from_github_releases(url, branch=None):
     try:
-        return get_branch_from_skil_json_github_api(url, branch)
+        return get_branch_from_skill_json_github_api(url, branch)
     except GithubAPIRateLimited:
         return get_branch_from_latest_release_github_url(url)
 
 
 def get_branch_from_skill_json(url, branch=None):
     try:
-        return get_branch_from_skil_json_github_api(url, branch)
+        return get_branch_from_skill_json_github_api(url, branch)
     except GithubAPIRateLimited:
         return get_branch_from_skill_json_github_url(url)
 

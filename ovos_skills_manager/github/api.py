@@ -364,7 +364,7 @@ def get_requirements_json_from_github_api(url, branch=None):
     return data
 
 
-def get_branch_from_skil_json_github_api(url, branch=None):
+def get_branch_from_skill_json_github_api(url, branch=None):
     try:
         json_data = get_skill_json_from_github_api(url, branch)
         return json_data.get("branch") or branch
@@ -377,7 +377,7 @@ def get_skill_from_api(url, branch=None, strict=False):
 
     # extract branch from .json, should branch take precedence?
     # i think so because user explicitly requested it
-    branch = get_branch_from_skil_json_github_api(url, branch)
+    branch = get_branch_from_skill_json_github_api(url, branch)
 
     try:
         api_data = get_repo_data_from_github_api(url, branch)

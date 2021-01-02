@@ -9,7 +9,7 @@ from os import remove
 
 
 class AbstractAppstore:
-    def __init__(self, name, parse_github=True):
+    def __init__(self, name, parse_github=False):
         self.name = name
         self.db = JsonDatabaseXDG(name)
         self.parse_github = parse_github
@@ -70,41 +70,61 @@ class AbstractAppstore:
                               fuzzy=True, thresh=0.85, ignore_case=True):
         query = Query(self.db)
         query.contains_value('skillname', name, fuzzy, thresh, ignore_case)
+        results = query.result
+        for idx in range(0, len(results)):
+            if "appstore" not in results[idx]:
+                results[idx]["appstore"] = self.name
         if as_json:
             return query.result
-        return [SkillEntry.from_json(s, False) for s in query.result]
+        return [SkillEntry.from_json(s, False) for s in results]
 
     def search_skills_by_url(self, url, as_json=False):
         query = Query(self.db)
         query.equal("url", url)
+        results = query.result
+        for idx in range(0, len(results)):
+            if "appstore" not in results[idx]:
+                results[idx]["appstore"] = self.name
         if as_json:
             return query.result
-        return [SkillEntry.from_json(s, False) for s in query.result]
+        return [SkillEntry.from_json(s, False) for s in results]
 
     def search_skills_by_category(self, category, as_json=False,
                                   fuzzy=True, thresh=0.85, ignore_case=True):
         query = Query(self.db)
         query.contains_value('category', category, fuzzy, thresh)
+        results = query.result
+        for idx in range(0, len(results)):
+            if "appstore" not in results[idx]:
+                results[idx]["appstore"] = self.name
         if as_json:
             return query.result
-        return [SkillEntry.from_json(s, False) for s in query.result]
+        return [SkillEntry.from_json(s, False) for s in results]
 
     def search_skills_by_author(self, authorname, as_json=False,
                                 fuzzy=True, thresh=0.85, ignore_case=True):
         query = Query(self.db)
         query.value_contains_token('authorname', authorname,
                                    fuzzy, thresh, ignore_case)
+        results = query.result
+        for idx in range(0, len(results)):
+            if "appstore" not in results[idx]:
+                results[idx]["appstore"] = self.name
         if as_json:
             return query.result
-        return [SkillEntry.from_json(s, False) for s in query.result]
+        return [SkillEntry.from_json(s, False) for s in results]
 
     def search_skills_by_tag(self, tag, as_json=False,
                              fuzzy=True, thresh=0.85, ignore_case=True):
         query = Query(self.db)
         query.contains_value('tags', tag, fuzzy, thresh, ignore_case)
+        results = query.result
+        for idx in range(0, len(results)):
+            if "appstore" not in results[idx]:
+                results[idx]["appstore"] = self.name
         if as_json:
             return query.result
-        return [SkillEntry.from_json(s, False) for s in query.result]
+        return [SkillEntry.from_json(s, False) for s in results]
 
     def search_skills_by_description(self, value, as_json=False,
                                      fuzzy=True, thresh=0.85,
@@ -112,9 +132,13 @@ class AbstractAppstore:
         query = Query(self.db)
         query.value_contains_token('description', value,
                                    fuzzy, thresh, ignore_case)
+        results = query.result
+        for idx in range(0, len(results)):
+            if "appstore" not in results[idx]:
+                results[idx]["appstore"] = self.name
         if as_json:
             return query.result
-        return [SkillEntry.from_json(s, False) for s in query.result]
+        return [SkillEntry.from_json(s, False) for s in results]
 
     def search_skills(self, query, as_json=False, fuzzy=True, thresh=0.85,
                       ignore_case=True):

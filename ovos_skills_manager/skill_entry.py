@@ -69,6 +69,10 @@ class SkillEntry:
         return self.as_json.get("url")
 
     @property
+    def appstore(self):
+        return self.as_json.get("appstore") or "unknown"
+
+    @property
     def skill_name(self):
         return self.as_json.get("skillname") or self.as_json.get("name")
 
@@ -114,7 +118,7 @@ class SkillEntry:
 
     @property
     def branch(self):
-        return self.as_json.get("branch")
+        return self.as_json.get("branch") or get_branch(self.url)
 
     @property
     def download_url(self):
