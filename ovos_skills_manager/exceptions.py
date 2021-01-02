@@ -1,6 +1,10 @@
 from json.decoder import JSONDecodeError
 
 
+class SkillEntryError(ValueError):
+    """ malformed skill entry """
+
+
 class SkillRequirementsException(RuntimeError):
     """ Skill requirements installation failed """
 
@@ -9,7 +13,7 @@ class PipException(SkillRequirementsException):
     """ failed to run pip """
 
 
-class GithubSkillEntryError(ValueError):
+class GithubSkillEntryError(SkillEntryError):
     """ failed to understand github skill"""
 
 
@@ -83,4 +87,3 @@ class GithubAPIRepoNotFound(GithubAPIException):
 
 class GithubAPIRateLimited(GithubAPIException):
     """ API rate limit exceeded """
-

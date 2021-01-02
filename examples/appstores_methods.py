@@ -9,15 +9,15 @@ for skill in get_pling_skills(parse_github=False):
 
 exit()
 for skill in get_ovos_skills():
-    pprint(skill.as_json)
+    pprint(skill.json)
 
 for skill in get_mycroft_marketplace_skills("20.08"):
-    pprint(skill.as_json)
+    pprint(skill.json)
 
 
 
 for skill in get_andlos_list_skills():
-    pprint(skill.as_json)
+    pprint(skill.json)
 
 
 

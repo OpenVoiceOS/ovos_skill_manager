@@ -1,24 +1,27 @@
 import json
-from os.path import isfile
+from os.path import isfile, expanduser, join
 from ovos_skills_manager.session import SESSION as requests
 from ovos_skills_manager.exceptions import GithubInvalidUrl, \
-    JSONDecodeError, GithubFileNotFound, GithubInvalidBranch
+    JSONDecodeError, GithubFileNotFound
 from ovos_skills_manager.github import download_url_from_github_url, \
-    get_branch, get_skill_data, get_requirements
+    get_branch, get_skill_data, get_requirements, get_desktop
 from ovos_utils.json_helper import merge_dict
 from ovos_utils.skills import blacklist_skill, whitelist_skill, \
     make_priority_skill, get_skills_folder
 from ovos_skill_installer import install_skill
 from ovos_skills_manager.requirements import install_system_deps, pip_install
 from ovos_utils.log import LOG
+from ovos_utils.enclosure import detect_enclosure
+import shutil
 
 
 class SkillEntry:
     def __init__(self, data=None):
         self._data = data or {}
+        self._desktop_file = ""
 
     @property
-    def as_json(self):
+    def json(self):
         return self._data
 
     # constructors
@@ -66,49 +69,49 @@ class SkillEntry:
     # properties
     @property
     def url(self):
-        return self.as_json.get("url")
+        return self.json.get("url")
 
     @property
     def appstore(self):
-        return self.as_json.get("appstore") or "unknown"
+        return self.json.get("appstore") or "unknown"
 
     @property
     def skill_name(self):
-        return self.as_json.get("skillname") or self.as_json.get("name")
+        return self.json.get("skillname") or self.json.get("name")
 
     @property
     def skill_short_description(self):
-        return self.as_json.get("short_description") or \
+        return self.json.get("short_description") or \
                self.skill_description.split(".")[0].split("\n")[0]
 
     @property
     def skill_description(self):
-        return self.as_json.get("description") or self.skill_name
+        return self.json.get("description") or self.skill_name
 
     @property
     def skill_folder(self):
-        return self.as_json.get("foldername") or self.url.split("/")[-1]
+        return self.json.get("foldername") or self.url.split("/")[-1]
 
     @property
     def skill_category(self):
-        return self.as_json.get("category") or "VoiceApp"
+        return self.json.get("category") or "VoiceApp"
 
     @property
     def skill_icon(self):
         # TODO bundle a default icon
-        return self.as_json.get("icon") or "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/robot.svg"
+        return self.json.get("icon") or "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/robot.svg"
 
     @property
     def skill_author(self):
-        return self.as_json.get("authorname")
+        return self.json.get("authorname")
 
     @property
     def skill_tags(self):
-        return self.as_json.get("tags", [])
+        return self.json.get("tags", [])
 
     @property
     def skill_examples(self):
-        return self.as_json.get("examples", [])
+        return self.json.get("examples", [])
 
     @property
     def homescreen_msg(self):
@@ -118,21 +121,39 @@ class SkillEntry:
 
     @property
     def branch(self):
-        return self.as_json.get("branch") or get_branch(self.url)
+        return self.json.get("branch") or get_branch(self.url)
+
+    @property
+    def branch_overrides(self):
+        return self.json.get("branch_overrides") or {}
 
     @property
     def download_url(self):
-        return self.as_json.get("download_url") or \
+        return self.json.get("download_url") or \
                download_url_from_github_url(self.url, self.branch)
 
     @property
     def requirements(self):
-        return self.as_json.get("requirements") or \
+        return self.json.get("requirements") or \
                get_requirements(self.url, self.branch)
 
     @property
     def license(self):
-        return self.as_json.get("license") or "unknown"
+        return self.json.get("license") or "unknown"
+
+    @property
+    def desktop_file(self):
+        # dont want it in json data, lazily download only once when first
+        # needed
+        if self._desktop_file:
+            return self._desktop_file
+        try:
+            self._desktop_file = get_desktop(self.url, self.branch)
+            return self._desktop_file
+        except:
+            LOG.error("Could not retrieve .desktop file, it will be auto "
+                      "generated")
+            return self.generate_desktop_file()
 
     # generators
     def generate_desktop_json(self):
@@ -197,22 +218,28 @@ class SkillEntry:
         file = self.skill_folder + "." + self.download_url.split(".")[-1]
         return install_skill(self.download_url, folder, file)
 
-    def install(self, folder=None, default_branch="master"):
+    def install(self, folder=None, default_branch="master", platform=None):
+        if self.branch_overrides:
+            try:
+                platform = platform or detect_enclosure()
+            except Exception as e:
+                LOG.error("Failed to detect platform")
+                raise e
+            if platform in self.branch_overrides:
+                branch = self.branch_overrides[platform]
+                if branch != self.branch:
+                    LOG.info("Detected platform specific branch:" + branch)
+                    skill = SkillEntry.from_github_url(self.url, branch)
+                    return skill.install(folder, default_branch)
+
         LOG.info("Installing skill: {url} from branch: {branch}".format(
             url=self.url, branch=self.branch))
         skills = self.requirements.get("skill", [])
         if skills:
             LOG.info('Installing required skills')
         for s in skills:
-            try:
-                branch = get_branch(s)
-            except GithubInvalidBranch:
-                LOG.warning("skill branch not specified for {skill}, "
-                            "falling back to '{branch}'".
-                            format(branch=default_branch, skill=s))
-                branch = default_branch
-            skill = SkillEntry.from_github_url(s, branch)
-            skill.install(folder)
+            skill = SkillEntry.from_github_url(s)
+            skill.install(folder, default_branch)
 
         system = self.requirements.get("system")
         if system:
@@ -225,7 +252,28 @@ class SkillEntry:
             pip_install(pyth)
 
         LOG.info("Downloading " + self.url)
-        return self.download(folder)
+        updated = self.download(folder)
+        if self.json.get("desktopFile"):
+            LOG.info("Creating desktop entry")
+            # TODO support system wide? /usr/local/XXX ?
+            desktop_dir = expanduser("~/.local/share/applications")
+            icon_dir = expanduser("~/.local/share/icons")
+
+            # copy the icon
+            icon_file = join(icon_dir, self.skill_icon.split("/")[-1])
+            if self.skill_icon.startswith("http"):
+                content = requests.get(self.skill_icon).content
+                with open(icon_file, "wb") as f:
+                    f.write(content)
+            else:
+                shutil.copyfile(self.skill_icon, icon_file)
+
+            # copy .desktop file
+            desktop_file = join(desktop_dir, self.skill_folder + ".desktop")
+            with open(desktop_file, "w") as f:
+                f.write(self.desktop_file)
+
+        return updated
 
     def update(self, folder=None):
         # convenience method

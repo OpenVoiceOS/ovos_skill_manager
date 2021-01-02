@@ -51,13 +51,13 @@ class AbstractAppstore:
                 item_id = self.db.get_item_id(old_skill)
                 if merge:
                     LOG.debug("Merging skill data")
-                    self.db.merge_item(skill.as_json, item_id)
+                    self.db.merge_item(skill.json, item_id)
                 else:
                     LOG.debug("Removing old skill from db")
                     self.db.remove_item(item_id)
             if not merge:
                 LOG.debug("Adding new skill to db")
-                self.db.add_item(skill.as_json)
+                self.db.add_item(skill.json)
             self.db.commit()
 
     def sync_skills_list_threaded(self, merge=False, new_only=False):
