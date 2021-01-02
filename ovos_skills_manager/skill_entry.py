@@ -226,3 +226,6 @@ class SkillEntry:
     def update(self, folder=None):
         # convenience method
         return self.install(folder)
+
+    def __repr__(self):
+        return self.skill_name + " " + self.url

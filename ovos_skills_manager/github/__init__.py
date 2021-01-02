@@ -81,12 +81,43 @@ def get_skill_data(url, branch=None):
         data["tags"].append("permissive-license")
     elif "unknown" in data["license"]:
         data["tags"].append("no-license")
+
+    # augment with json data
+    # this should take precedence over everything else
+    try:
+        data = merge_dict(data, get_skill_json(url, branch),
+                          merge_lists=True, skip_empty=True, no_dupes=True)
+    except GithubFileNotFound:
+        pass
+
     return data
 
 
 def get_branch(url):
-    # this also tries branch_from_url for implicit branches
-    return get_branch_from_github_api(url)
+    try:
+        return get_branch_from_github_url(url)
+    except GithubInvalidBranch:
+        try:
+            return get_branch_from_skill_json(url)
+        except GithubFileNotFound:
+            try:
+                return get_branch_from_github_releases(url)
+            except GithubAPIRateLimited:
+                return get_branch_from_github_api(url)
+
+
+def get_branch_from_github_releases(url, branch=None):
+    try:
+        return get_branch_from_skil_json_github_api(url, branch)
+    except GithubAPIRateLimited:
+        return get_branch_from_latest_release_github_url(url)
+
+
+def get_branch_from_skill_json(url, branch=None):
+    try:
+        return get_branch_from_skil_json_github_api(url, branch)
+    except GithubAPIRateLimited:
+        return get_branch_from_skill_json_github_url(url)
 
 
 def get_repo_data(url):

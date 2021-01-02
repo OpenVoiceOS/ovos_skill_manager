@@ -101,6 +101,8 @@ def get_branch_from_github_api(url, branch=None):
         if "API rate limit exceeded" in data.get("message", ""):
             raise GithubAPIRateLimited
         return data['default_branch']
+    except GithubAPIRateLimited:
+        raise
     except Exception as e:
         raise GithubAPIInvalidBranch(str(e))
 
@@ -362,8 +364,21 @@ def get_requirements_json_from_github_api(url, branch=None):
     return data
 
 
+def get_branch_from_skil_json_github_api(url, branch=None):
+    try:
+        json_data = get_skill_json_from_github_api(url, branch)
+        return json_data.get("branch") or branch
+    except GithubAPIFileNotFound:
+        return branch
+
+
 def get_skill_from_api(url, branch=None, strict=False):
     data = {}
+
+    # extract branch from .json, should branch take precedence?
+    # i think so because user explicitly requested it
+    branch = get_branch_from_skil_json_github_api(url, branch)
+
     try:
         api_data = get_repo_data_from_github_api(url, branch)
         data["branch"] = branch = api_data['default_branch']
@@ -434,6 +449,14 @@ def get_skill_from_api(url, branch=None, strict=False):
         data["tags"].append("permissive-license")
     elif "unknown" in data["license"]:
         data["tags"].append("no-license")
+
+    # augment with json data
+    # this should take precedence over everything else
+    try:
+        data = merge_dict(data, get_skill_json_from_github_api(url, branch),
+                          merge_lists=True, skip_empty=True, no_dupes=True)
+    except GithubFileNotFound:
+        pass
 
     return data
 

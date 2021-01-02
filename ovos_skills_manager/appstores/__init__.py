@@ -16,7 +16,7 @@ class AbstractAppstore:
         self.bootstrap()
 
     def bootstrap(self):
-        base_db = join(dirname(dirname(__file__)), "res", "bootstrap",
+        base_db = join(dirname(dirname(__file__)), "res", "bootstrap_o",
                        self.db.name + ".jsondb")
         if not len(self.db):
             LOG.info("Bootstrapping {database}, this might take a "

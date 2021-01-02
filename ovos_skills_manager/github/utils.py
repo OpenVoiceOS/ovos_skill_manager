@@ -37,7 +37,8 @@ GITHUB_LICENSE_FILES = ["LICENSE", "LICENSE.txt", "UNLICENSE",
 
 GITHUB_ICON_FILES = ["res/icon/{repo}", "res/icon/{repo}.png",
                      "res/icon/{repo}.svg", "res/icon/{repo}.jpg"]
-GITHUB_JSON_FILES = ["skill.json", "res/desktop/skill.json"]
+GITHUB_JSON_FILES = ["skill.json", "res/desktop/skill.json",
+                     "store/skill.json"]
 GITHUB_ANDROID_FILES = ["android.json", "res/desktop/android.json"]
 GITHUB_DESKTOP_FILES = ["res/desktop/{repo}.desktop", "{repo}.desktop"]
 GITHUB_MANIFEST_FILES = ["manifest.yml"]
@@ -45,9 +46,10 @@ GITHUB_REQUIREMENTS_FILES = ["requirements.txt"]
 GITHUB_SKILL_REQUIREMENTS_FILES = ["skill_requirements.txt"]
 GITHUB_REQUIREMENTS_SCRIPT_FILES = ["requirements.sh"]
 GITHUB_SKILL_INIT_FILES = ["__init__.py"]
-GITHUB_LOGO_FILES = ["ui/logo.png", "logo.png", "ui/{repo}.png",
-                     "ui/{repo}.svg", "ui/{repo}.jpg", "{repo}.png",
-                     "{repo}.svg", "{repo}.jpg"]
+GITHUB_LOGO_FILES = ["ui/logo.png", "logo.png",
+                     "ui/{repo}.png", "ui/{repo}.svg", "ui/{repo}.jpg",
+                     "store/{repo}.png", "store/{repo}.svg", "store/{repo}.jpg",
+                     "{repo}.png",  "{repo}.svg", "{repo}.jpg"]
 
 
 # url utils
@@ -89,6 +91,7 @@ def skill_name_from_github_url(url):
 
 def get_branch_from_github_url(url, validate=False):
     branch = None
+    url = url.replace("/blob/", "/tree/")
     if "/tree/" in url:
         branch = url.split("/tree/")[-1].split("/")[0]
 

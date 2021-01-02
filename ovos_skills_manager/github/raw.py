@@ -18,20 +18,15 @@ GITHUB_LICENSE_LOCATIONS = [
 ]
 
 GITHUB_ICON_LOCATIONS = [
-    GithubUrls.BLOB + "/res/icon/{repo}",
-    GithubUrls.BLOB + "/res/icon/{repo}.png",
-    GithubUrls.BLOB + "/res/icon/{repo}.svg",
-    GithubUrls.BLOB + "/res/icon/{repo}.jpg"
+    GithubUrls.BLOB + "/" + path for path in GITHUB_ICON_FILES
 ]
 
 GITHUB_LOGO_LOCATIONS = [
-    GithubUrls.BLOB + "/" + logo for logo in GITHUB_LOGO_FILES
+    GithubUrls.BLOB + "/" + path for path in GITHUB_LOGO_FILES
 ]
 
 GITHUB_JSON_LOCATIONS = [
-    GithubUrls.BLOB + "/skill.json",
-    GithubUrls.BLOB + "/res/desktop/skill.json"
-
+    GithubUrls.BLOB + "/" + path for path in GITHUB_JSON_FILES
 ]
 
 GITHUB_ANDROID_JSON_LOCATIONS = [
@@ -358,25 +353,19 @@ def get_skill_from_github_url(url, branch=None):
     data["skillname"] = skill_name_from_github_url(url)
     data["requirements"] = get_requirements_json_from_github_url(url, branch)
 
-    # augment with json data
-    try:
-        data = merge_dict(data, get_skill_json_from_github_url(url, branch),
-                          merge_lists=True, skip_empty=True, no_dupes=True)
-    except GithubFileNotFound:
-        pass
+    # extract branch from .json, should branch take precedence?
+    # i think so because user explicitly requested it
+    branch = get_branch_from_skill_json_github_url(url, branch)
 
     # augment with readme data
     try:
         readme_data = get_readme_json_from_github_url(url, branch)
         data = merge_dict(data, readme_data,
                           merge_lists=True, skip_empty=True, no_dupes=True)
-        # json branch should take precedence? i think so because user
-        # explicitly requested it
-        branch = readme_data.get("branch") or branch
     except GithubReadmeNotFound:
         pass
 
-    if branch:
+    if branch:  # final, all sources checked by priority order
         data["branch"] = branch
         data["download_url"] = GithubUrls.DOWNLOAD.format(author=author,
                                                           repo=repo,
@@ -419,6 +408,15 @@ def get_skill_from_github_url(url, branch=None):
         data["tags"].append("permissive-license")
     elif "unknown" in data["license"]:
         data["tags"].append("no-license")
+
+    # augment with json data
+    # this should take precedence over everything else
+    try:
+        data = merge_dict(data, get_skill_json_from_github_url(url, branch),
+                          merge_lists=True, skip_empty=True, no_dupes=True)
+    except GithubFileNotFound:
+        pass
+
     return data
 
 
@@ -461,3 +459,23 @@ def get_android_json_from_github_url(url, branch=None):
                                                                  author=author.lower())
                 }
 
+
+def get_branch_from_skill_json_github_url(url):
+    try:
+        branch = get_branch_from_github_url(url)
+    except GithubInvalidBranch:
+        branch = "master"  # attempt master branch
+    try:
+        json_data = get_skill_json_from_github_url(url, branch)
+        return json_data.get("branch") or branch
+    except:
+        raise GithubFileNotFound
+
+
+def get_branch_from_latest_release_github_url(url):
+    # let's assume latest release
+    try:
+        release = get_repo_releases_from_github_url(url)[0]
+        return release["name"]
+    except:
+        raise GithubFileNotFound
