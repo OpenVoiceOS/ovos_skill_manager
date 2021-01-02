@@ -12,7 +12,7 @@ APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "andlo"]
 @click.option('--priority', type=click.IntRange(0, 100, clamp=True),
               prompt='new appstore priority',
               help='appstore priority, from 0 (highest) to 100 (lowest)')
-def change_prio(appstore, priority):
+def priority(appstore, priority):
     osm = OVOSSkillsManager()
     osm.set_appstore_priority(appstore, priority)
     prompt = "Appstore priorities:\n"
@@ -25,4 +25,4 @@ def change_prio(appstore, priority):
 
 
 if __name__ == '__main__':
-    change_prio()
+    priority()
