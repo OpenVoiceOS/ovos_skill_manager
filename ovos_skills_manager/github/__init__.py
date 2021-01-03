@@ -75,6 +75,13 @@ def get_skill_data(url, branch=None):
     # augment with android data
     data["android"] = get_android_json(url, branch)
 
+    # augment with desktop data
+    try:
+        data["desktop"] = get_desktop_json(url, branch)
+        data["desktopFile"] = True
+    except:
+        data["desktopFile"] = False
+
     # augment tags
     if is_viral(data["license"]):
         data["tags"].append("viral-license")
@@ -82,6 +89,11 @@ def get_skill_data(url, branch=None):
         data["tags"].append("permissive-license")
     elif "unknown" in data["license"]:
         data["tags"].append("no-license")
+
+    try:
+        data["license"] = get_license_type(url, branch)
+    except GithubLicenseNotFound:
+        pass
 
     # augment with json data
     # this should take precedence over everything else

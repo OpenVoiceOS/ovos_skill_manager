@@ -18,7 +18,6 @@ import shutil
 class SkillEntry:
     def __init__(self, data=None):
         self._data = data or {}
-        self._desktop_file = ""
 
     @property
     def json(self):
@@ -143,17 +142,7 @@ class SkillEntry:
 
     @property
     def desktop_file(self):
-        # dont want it in json data, lazily download only once when first
-        # needed
-        if self._desktop_file:
-            return self._desktop_file
-        try:
-            self._desktop_file = get_desktop(self.url, self.branch)
-            return self._desktop_file
-        except:
-            LOG.error("Could not retrieve .desktop file, it will be auto "
-                      "generated")
-            return self.generate_desktop_file()
+        return self.generate_desktop_file()
 
     # generators
     def generate_desktop_json(self):
@@ -169,10 +158,10 @@ class SkillEntry:
                 'X-KDE-StartupNotify': 'false'}
 
     def generate_desktop_file(self):
-        data = self.generate_desktop_json()
+        desktop_json = self.json.get("desktop") or self.generate_desktop_json()
         desktop_file = "[Desktop Entry]"
-        for k in data:
-            desktop_file += "\n" + k + "=" + data[k]
+        for k in desktop_json:
+            desktop_file += "\n" + k + "=" + desktop_json[k]
         return desktop_file
 
     def generate_readme(self):
@@ -259,8 +248,13 @@ class SkillEntry:
             desktop_dir = expanduser("~/.local/share/applications")
             icon_dir = expanduser("~/.local/share/icons")
 
-            # copy the icon
-            icon_file = join(icon_dir, self.skill_icon.split("/")[-1])
+            # copy the files to a unique path, this way duplicate file names
+            # dont overwrite each other, eg, several skills with "icon.png"
+            base_name = ".".join([self.skill_folder, self.skill_author]).lower()
+
+            # copy icon file
+            icon_file = join(icon_dir,
+                             base_name + self.skill_icon.split(".")[-1])
             if self.skill_icon.startswith("http"):
                 content = requests.get(self.skill_icon).content
                 with open(icon_file, "wb") as f:
@@ -269,7 +263,7 @@ class SkillEntry:
                 shutil.copyfile(self.skill_icon, icon_file)
 
             # copy .desktop file
-            desktop_file = join(desktop_dir, self.skill_folder + ".desktop")
+            desktop_file = join(desktop_dir, base_name + ".desktop")
             with open(desktop_file, "w") as f:
                 f.write(self.desktop_file)
 
