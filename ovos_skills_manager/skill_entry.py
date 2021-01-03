@@ -159,6 +159,10 @@ class SkillEntry:
 
     def generate_desktop_file(self):
         desktop_json = self.json.get("desktop") or self.generate_desktop_json()
+        # icon renamed
+        base_name = ".".join([self.skill_folder, self.skill_author]).lower()
+        desktop_json["Icon"] = base_name + self.skill_icon.split(".")[-1]
+
         desktop_file = "[Desktop Entry]"
         for k in desktop_json:
             desktop_file += "\n" + k + "=" + desktop_json[k]
