@@ -79,7 +79,7 @@ def get_skill_data(url, branch=None):
     try:
         data["desktop"] = get_desktop_json(url, branch)
         data["desktopFile"] = True
-    except:
+    except GithubFileNotFound:
         data["desktopFile"] = False
 
     # augment tags

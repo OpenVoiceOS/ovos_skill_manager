@@ -384,11 +384,6 @@ def get_skill_from_github_url(url, branch=None):
         data['systemDeps'] = True
     else:
         data['systemDeps'] = False
-    try:
-        desktop = get_desktop_from_github_url(url, branch)
-        data['desktopFile'] = True
-    except GithubFileNotFound:
-        data['desktopFile'] = False
 
     # find logo
     try:
@@ -398,6 +393,13 @@ def get_skill_from_github_url(url, branch=None):
 
     # augment with android data
     data["android"] = get_android_json_from_github_url(url, branch)
+
+    # augment with desktop data
+    try:
+        data["desktop"] = get_desktop_json_from_github_url(url, branch)
+        data["desktopFile"] = True
+    except GithubFileNotFound:
+        data["desktopFile"] = False
 
     # augment tags
     if "tags" not in data:

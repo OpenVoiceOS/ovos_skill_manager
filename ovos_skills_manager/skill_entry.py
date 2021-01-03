@@ -114,7 +114,7 @@ class SkillEntry:
 
     @property
     def homescreen_msg(self):
-        home_screen_msg = "{skill_folder}.{author}.home"
+        home_screen_msg = "{skill_folder}.{author}.home".lower()
         return home_screen_msg.format(skill_folder=self.skill_folder,
                                       author=self.skill_author)
 
@@ -152,7 +152,7 @@ class SkillEntry:
                 'Exec': 'mycroft-gui-app --hideTextInput --skill' +
                         self.homescreen_msg,
                 'Icon': self.skill_icon,
-                'Categories': self.skill_category,
+                'Categories': "VoiceApp",
                 'StartupNotify': 'false',
                 'X-DBUS-StartupType': 'None',
                 'X-KDE-StartupNotify': 'false'}

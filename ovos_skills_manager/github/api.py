@@ -132,7 +132,7 @@ def get_readme_url_from_github_api(url, branch=None):
             raise GithubAPIRateLimited
         return data["html_url"]
     except Exception as e:
-        pass # check files individually
+        pass  # check files individually
 
     for dst in GITHUB_README_FILES:
         try:
@@ -332,6 +332,11 @@ def get_desktop_from_github_api(url, branch=None):
     raise GithubAPIFileNotFound
 
 
+def get_desktop_json_from_github_api(url, branch=None):
+    desktop = get_desktop_from_github_api(url, branch)
+    return desktop_to_json(desktop)
+
+
 # data parsers
 def get_readme_json_from_api(url, branch=None):
     readme = get_readme_from_github_api(url, branch)
@@ -440,6 +445,14 @@ def get_skill_from_api(url, branch=None, strict=False):
             'android_name': skill_name_from_github_url(url),
             'android_handler': '{repo}.{author}.home'.format(repo=repo,
                                                              author=author.lower())}
+
+    # augment with desktop data
+    try:
+        data["desktop"] = get_desktop_json_from_github_api(url, branch)
+        data["desktopFile"] = True
+    except GithubFileNotFound:
+        data["desktopFile"] = False
+
     # augment tags
     if "tags" not in data:
         data["tags"] = []
@@ -513,5 +526,3 @@ def get_android_json_from_github_api(url, branch=None):
         # TODO Raise UnknownEncoding?
         return android
     raise GithubAPIFileNotFound
-
-
