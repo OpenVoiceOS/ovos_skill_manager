@@ -27,7 +27,9 @@ def get_skill_data(url, branch=None):
     # augment with repo data
     try:
         api_data = get_repo_data(url)
-        data["branch"] = api_data['default_branch']
+        # only replace branch if not found by prev methods
+        branch = branch or api_data['default_branch']
+        data["branch"] = branch
         data["short_description"] = api_data['description']
         data["foldername"] = api_data["name"]
         data["last_updated"] = api_data['updated_at']
@@ -116,6 +118,8 @@ def get_branch(url):
             try:
                 return get_branch_from_github_releases(url)
             except GithubAPIRateLimited:
+                raise GithubInvalidBranch
+            except:
                 return get_branch_from_github_api(url)
 
 
