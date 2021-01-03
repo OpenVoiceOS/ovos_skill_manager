@@ -208,8 +208,16 @@ class SkillEntry:
 
     def download(self, folder=None):
         folder = folder or get_skills_folder()
-        file = self.skill_folder + "." + self.download_url.split(".")[-1]
-        return install_skill(self.download_url, folder, file)
+        if self.download_url.endswith(".tar.gz"):
+            ext = "tar.gz"
+        else:
+            ext = self.download_url.split(".")[-1]
+        file = self.skill_folder + "." + ext
+        # naming convention
+        skill_folder_name = ".".join([self.skill_name, self.skill_author])\
+            .lower().replace(" ", "-")
+        return install_skill(self.download_url, folder, file,
+                             skill_folder_name=skill_folder_name)
 
     def install(self, folder=None, default_branch="master", platform=None):
         if self.branch_overrides:
