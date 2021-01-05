@@ -1,0 +1,218 @@
+{
+    "OVOS": [
+        {
+            "skillname": "skill-ddg",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-ddg",
+            "url": "https://github.com/JarbasSkills/skill-ddg",
+            "branch": "master",
+            "desktopFile": true,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "i386",
+                "arm",
+                "arm64",
+                "x86_64",
+                "ia64"
+            ],
+            "examples": [
+                "continue",
+                "tell me more",
+                "who is elon musk",
+                "when was stephen hawking born",
+                "ask the duck about the big bang"
+            ],
+            "license": "apache-2.0",
+            "requirements": {
+                "python": [
+                    "google_trans_new",
+                    "requests",
+                    "RAKEkeywords"
+                ],
+                "system": {},
+                "skill": []
+            },
+            "download_url": "https://github.com/JarbasSkills/skill-ddg/archive/v0.1.0.tar.gz",
+            "icon": "https://github.com/JarbasSkills/skill-ddg/res/icon/ddg.png",
+            "description": "Uses the [DuckDuckGo API](https://duckduckgo.com/api) to provide information. \n\nNOTE: this is meant a better alternative to the official duck duck go skill, it will be blacklisted",
+            "short_description": "Use DuckDuckGo to answer questions",
+            "category": "Information",
+            "categories": [
+                "Information"
+            ],
+            "tags": [
+                "permissive-license",
+                "Information",
+                "no-license",
+                "query",
+                "search-engine",
+                "searchengine",
+                "duckduckgo"
+            ],
+            "appstore": "OpenVoiceOS",
+            "appstore_url": "https://openvoiceos.github.io/OVOS-skills-store/skill-ddg.json",
+            "version": "v0.1.0",
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-ddg/v0.1.0/ui/logo.png",
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-ddg/v0.1.0/res/icon/ddg.png",
+                "android_name": "Ddg Skill",
+                "android_handler": "skill-ddg.jarbasskills.home"
+            },
+            "desktop": {
+                "Terminal": "false",
+                "Type": "Application",
+                "Name": "DuckDuckGo Skill",
+                "Exec": "mycroft-gui-app --hideTextInput --skill=skill-ddg.jarbasskills.home",
+                "Icon": "ddg.png",
+                "Categories": "VoiceApp",
+                "StartupNotify": "false",
+                "X-DBUS-StartupType": "None",
+                "X-KDE-StartupNotify": "false"
+            },
+            "name": "DuckDuckGo"
+        },
+        {
+            "name": "Wolfram Alpha",
+            "skillname": "skill-wolfie",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-wolfie",
+            "url": "https://github.com/JarbasSkills/skill-wolfie",
+            "branch": "master",
+            "desktopFile": true,
+            "warning": "",
+            "systemDeps": false,
+            "platforms": [
+                "i386",
+                "arm64",
+                "arm",
+                "x86_64",
+                "ia64"
+            ],
+            "download_url": "https://github.com/JarbasSkills/skill-wolfie/archive/v0.1.tar.gz",
+            "examples": [
+                "What is Madonna's real name?",
+                "ask the wolf what is the speed of light",
+                "When was The Rocky Horror Picture Show released?",
+                "How tall is Mount Everest?",
+                "How many inches in a meter?",
+                "What's 18 times 4?"
+            ],
+            "appstore": "OpenVoiceOS",
+            "appstore_url": "https://openvoiceos.github.io/OVOS-skills-store/skill-wolfie.json",
+            "license": "apache-2.0",
+            "tags": [
+                "information",
+                "Information",
+                "query",
+                "wolfram-alpha",
+                "general-knowledge",
+                "no-license"
+            ],
+            "version": "v0.1",
+            "icon": "https://github.com/JarbasSkills/skill-wolfie/res/icon/wolfie.png",
+            "description": "Ask general-knowledge queries of your Mycroft device. \nCommonQuery skill for [Wolfram Alpha](https://wolframalpha.com). \nYou'll be surprised by how much it knows!\n\nYou can also explicitly request to \"ask the wolf\"\n\nNOTE: this is meant to be a better alternative to the official mycroft skill, it will blacklist the official skill!!",
+            "short_description": "Use Wolfram Alpha for general knowledge questions",
+            "category": "Information",
+            "categories": [
+                "Information"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-wolfie/v0.1/ui/logo.png",
+            "requirements": {
+                "python": [
+                    "google_trans_new",
+                    "requests>=2.13.0"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-wolfie/v0.1/res/icon/wolfie.png",
+                "android_name": "Wolfie Skill",
+                "android_handler": "skill-wolfie.jarbasskills.home"
+            },
+            "desktop": {
+                "Terminal": "false",
+                "Type": "Application",
+                "Name": "Wolfram Alpha Skill",
+                "Exec": "mycroft-gui-app --hideTextInput --skill=skill-wolfie.jarbasskills.home",
+                "Icon": "wolfie.png",
+                "Categories": "VoiceApp",
+                "StartupNotify": "false",
+                "X-DBUS-StartupType": "None",
+                "X-KDE-StartupNotify": "false"
+            }
+        },
+        {
+            "url": "https://github.com/JarbasSkills/skill-icanhazdadjokes",
+            "branch": "master",
+            "appstore": "OpenVoiceOS",
+            "appstore_url": "https://openvoiceos.github.io/OVOS-skills-store/skill-icanhazdadjokes.json",
+            "authorname": "JarbasSkills",
+            "foldername": "skill-icanhazdadjokes",
+            "license": "apache-2.0",
+            "tags": [
+                "funny",
+                "humour",
+                "Entertainment",
+                "humor",
+                "jokes",
+                "joke",
+                "no-license"
+            ],
+            "version": "v0.1.0",
+            "download_url": "https://github.com/JarbasSkills/skill-icanhazdadjokes/archive/v0.1.0.tar.gz",
+            "icon": "https://github.com/JarbasSkills/skill-icanhazdadjokes/res/icon/dadjokes.png",
+            "skillname": "skill-icanhazdadjokes",
+            "description": "Brighten your day with dad humor.  \n\n _WARNING:  Laughter is not guaranteed, but eye rolls are likely._\n\nWorks in all languages\n\nNOTE: this will automatically blacklist the official mycroft skill",
+            "short_description": "Let Mycroft brighten your day with a little humor from [icanhazdadjoke](icanhazdadjoke.com)",
+            "examples": [
+                "say a joke",
+                "can you tell jokes",
+                "tell me a joke",
+                "do you know any jokes",
+                "tell me a joke about dentists",
+                "make me laugh",
+                "do you know any chuck norris jokes"
+            ],
+            "category": "Entertainment",
+            "categories": [
+                "Entertainment"
+            ],
+            "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-icanhazdadjokes/v0.1.0/ui/logo.png",
+            "requirements": {
+                "python": [
+                    "google_trans_new",
+                    "pyjokes"
+                ],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": "https://raw.githubusercontent.com/JarbasSkills/skill-icanhazdadjokes/v0.1.0/res/icon/dadjokes.png",
+                "android_name": "Icanhazdadjokes Skill",
+                "android_handler": "skill-icanhazdadjokes.jarbasskills.home"
+            },
+            "desktop": {
+                "Terminal": "false",
+                "Type": "Application",
+                "Name": "Jokes Skill",
+                "Exec": "mycroft-gui-app --hideTextInput --skill=skill-icanhazdadjokes.jarbasskills.home",
+                "Icon": "dadjokes.png",
+                "Categories": "VoiceApp",
+                "StartupNotify": "false",
+                "X-DBUS-StartupType": "None",
+                "X-KDE-StartupNotify": "false"
+            },
+            "desktopFile": true,
+            "name": "Jokes",
+            "platforms": [
+                "arm",
+                "arm64",
+                "i386",
+                "x86_64",
+                "ia64"
+            ]
+        }
+    ]
+}
