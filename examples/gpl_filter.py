@@ -19,6 +19,8 @@ for s in appstore.search_skills_by_tag("viral-license"):
     # The LGPL prevents code flow from code under LGPL into other works being under different OSI compliant licenses.
     # The LGPL however allows to non-LGPL works to link against a LGPL work.
     # As the LGPL does not allow code merging the OSSCC does not recommend to use the LGPL for new projects.
+    #
+    # Additional note: The applicability of the LGPL's linking exception to interpreted languages like Python is unclear. As of this writing, the issue has not been tested in court.
 
     # GPLv3
     # The GPLv3 has been published in June 2007. The GPLv3 no longer contains claims that are comparable to section 8 of the GPL, so the GPLv3 is a true OSS license.
@@ -36,11 +38,11 @@ for s in appstore.search_skills_by_tag("viral-license"):
     # The EPL permits only contributions and anhancements to the original work but does not allow to use code from a EPL licensed work in another work.
     # So the EPL is even more restrictive than the GPL.
     # For this reason, the OSSCC does not recommend to use the EPL for new projects.
-    print(s.url, "is viral! License", s.license)
+    print(s.url, "has a viral license! This might be a problem. License:", s.license)
 
 
 for s in appstore.search_skills_by_tag("permissive-license"):
-    print(s.url, "is permissive, it is a good skill! License", s.license)
+    print(s.url, "is permissively licensed! This is good. License:", s.license)
 
 
 for s in appstore.search_skills_by_tag("no-license"):
