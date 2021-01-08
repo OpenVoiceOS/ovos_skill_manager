@@ -46,7 +46,8 @@ LICENSE_MATCHERS = {
     "vim": "VIM LICENSE",
     "wtfpl": "DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE",
     "rpsl-1.0": "RealNetworks Public Source License Version 1.0",
-    "apsl-2.0": "APPLE PUBLIC SOURCE LICENSE Version 2.0"
+    "apsl-2.0": "APPLE PUBLIC SOURCE LICENSE Version 2.0",
+    "neongecko": "Friendly Licensing: No charge, open source royalty free use of the Neon AI software source"
 }
 
 
