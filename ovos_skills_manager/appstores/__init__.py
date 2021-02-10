@@ -164,7 +164,7 @@ class AbstractAppstore:
                                                thresh, ignore_case)
         desc_skills = self.search_skills_by_description(query, as_json, fuzzy,
                                                         thresh, ignore_case)
-        res = desc_skills + tag_skills
+        res = desc_skills + tag_skills  # TODO: This may include duplicates DM
         if res:
             return res
 

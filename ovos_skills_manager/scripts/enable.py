@@ -2,7 +2,7 @@ import click
 from ovos_skills_manager import OVOSSkillsManager
 
 
-APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "andlo", "all"]
+APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "andlo", "neon", "all"]
 
 
 @click.command()
