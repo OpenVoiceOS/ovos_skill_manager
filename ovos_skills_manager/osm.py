@@ -5,6 +5,7 @@ from ovos_skills_manager.appstores.mycroft_marketplace import \
     MycroftMarketplace
 from ovos_skills_manager.appstores.pling import Pling
 from ovos_skills_manager.appstores.ovos import OVOSstore
+from ovos_skills_manager.appstores.neon import NeonSkills
 from ovos_skills_manager.exceptions import UnknownAppstore
 
 
@@ -28,6 +29,12 @@ class OVOSSkillsManager:
                     "url": "https://apps.plasma-bigscreen.org/",
                     "parse_github": False,
                     "priority": 10},
+                "neon": {
+                    "active": False,
+                    "url": "https://github.com/NeonGeckoCom/neon-skills-submodules/",
+                    "parse_github": False,
+                    "auth_token": None,  # TODO: Update this somewhere DM
+                    "priority": 50},
                 "andlo_skill_list": {
                     "active": False,
                     "url": "https://andlo.gitbook.io/mycroft-skills-list/",
@@ -61,6 +68,8 @@ class OVOSSkillsManager:
             return AndloSkillList
         elif name in ["ovos", "ovos_appstore", "ovos_marketplace"]:
             return OVOSstore
+        elif name in ["neon", "neon_gecko", "neon_skills"]:
+            return NeonSkills
         else:
             raise UnknownAppstore
 
@@ -83,6 +92,8 @@ class OVOSSkillsManager:
             appstore = "andlo_skill_list"
         elif appstore in ["ovos", "ovos_appstore", "ovos_marketplace"]:
             appstore = "ovos"
+        elif appstore in ["neon", "neon_gecko", "neon_skills"]:
+            return "neon"
         elif appstore not in self.config["appstores"]:
             raise UnknownAppstore
         return appstore
@@ -94,6 +105,10 @@ class OVOSSkillsManager:
     def set_appstore_priority(self, appstore, priority):
         appstore = self.validate_appstore_name(appstore)
         self.config["appstores"][appstore]["priority"] = priority
+
+    def set_appstore_token(self, appstore, token):
+        appstore = self.validate_appstore_name(appstore)
+        self.config["appstores"][appstore]["token"] = token
 
     def disable_appstore(self, appstore):
         appstore = self.validate_appstore_name(appstore)

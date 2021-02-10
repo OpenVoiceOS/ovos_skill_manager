@@ -3,7 +3,7 @@ from ovos_skills_manager import SkillEntry, OVOSSkillsManager
 
 SEARCH_OPTIONS = ['all', 'name', 'url', 'category', 'author', 'tag',
                   'description']
-APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "andlo", "default", "all"]
+APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "andlo", "neon", "default", "all"]
 
 
 def search_skill(method, query, fuzzy, no_ignore_case, thresh, appstore):
