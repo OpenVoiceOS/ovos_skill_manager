@@ -33,7 +33,7 @@ class OVOSSkillsManager:
                     "active": False,
                     "url": "https://github.com/NeonGeckoCom/neon-skills-submodules/",
                     "parse_github": False,
-                    "auth_token": None,  # TODO: Update this somewhere DM
+                    "auth_token": None,
                     "priority": 50},
                 "andlo_skill_list": {
                     "active": False,
