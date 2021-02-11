@@ -106,9 +106,9 @@ class OVOSSkillsManager:
         appstore = self.validate_appstore_name(appstore)
         self.config["appstores"][appstore]["priority"] = priority
 
-    def set_appstore_token(self, appstore, token):
+    def set_appstore_auth_token(self, appstore, token):
         appstore = self.validate_appstore_name(appstore)
-        self.config["appstores"][appstore]["token"] = token
+        self.config["appstores"][appstore]["auth_token"] = token
 
     def disable_appstore(self, appstore):
         appstore = self.validate_appstore_name(appstore)

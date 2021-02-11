@@ -14,7 +14,7 @@ APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "neon", "andlo"]
               help='GitHub Personal Access Token')
 def add_auth(appstore, token):
     osm = OVOSSkillsManager()
-    osm.set_appstore_token(appstore, token)
+    osm.set_appstore_auth_token(appstore, token)
     prompt = f"Appstore token:\n{token}"
     click.echo(prompt)
     click.confirm('Save changes?', abort=True)
