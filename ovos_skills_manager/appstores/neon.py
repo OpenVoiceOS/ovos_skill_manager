@@ -35,5 +35,5 @@ class NeonSkills(AbstractAppstore):
         Gets the github auth token
         """
         config = JsonStorageXDG("OVOS-SkillsManager")
-        token = config["neon"].get("auth_token")
+        token = config["appstores"]["neon"].get("token")
         return token
