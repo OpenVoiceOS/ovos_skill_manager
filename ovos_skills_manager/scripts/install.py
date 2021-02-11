@@ -81,7 +81,8 @@ def install(method, skill, fuzzy, no_ignore_case, thresh, appstore, search,
         skills = search_skill(method, skill, fuzzy, no_ignore_case,
                               thresh, appstore)
     else:
-        skills = [SkillEntry.from_github_url(skill, branch)]
+        auth_token = OVOSSkillsManager().appstores[appstore].get("auth_token")
+        skills = [SkillEntry.from_github_url(skill, branch, auth_token)]
 
     if not len(skills):
         click.echo("NO RESULTS")
