@@ -128,8 +128,11 @@ class SkillEntry:
 
     @property
     def download_url(self):
-        return self.json.get("download_url") or \
-               download_url_from_github_url(self.url, self.branch)
+        if self.auth_token:
+            return self.json.get("download_url", self.api_url)
+        else:
+            return self.json.get("download_url") or \
+                   download_url_from_github_url(self.url, self.branch)
 
     @property
     def api_url(self):
@@ -137,8 +140,12 @@ class SkillEntry:
 
     @property
     def requirements(self):
-        return self.json.get("requirements") or \
-               get_requirements(self.url, self.branch)
+        if self.auth_token:
+            # TODO: Make get_requirements compatible with private git DM
+            return self.json.get("requirements", {})
+        else:
+            return self.json.get("requirements") or \
+                   get_requirements(self.url, self.branch)
 
     @property
     def license(self):
@@ -218,6 +225,8 @@ class SkillEntry:
         folder = folder or get_skills_folder()
         if self.download_url.endswith(".tar.gz"):
             ext = "tar.gz"
+        elif self.api_url and "zipball" in self.api_url:
+            ext = "zip"
         else:
             ext = self.download_url.split(".")[-1]
         file = self.skill_folder + "." + ext
