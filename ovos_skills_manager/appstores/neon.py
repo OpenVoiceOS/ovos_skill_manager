@@ -22,18 +22,9 @@ def get_neon_skills(parse_github=False, skiplist=None, token=None):
 
 class NeonSkills(AbstractAppstore):
     def __init__(self, parse_github=False):
-        super().__init__("Neon", parse_github, self.get_auth())
+        super().__init__("Neon", parse_github)
 
     def get_skills_list(self, skiplist=None):
         skiplist = skiplist or []
         return get_neon_skills(parse_github=self.parse_github,
                                skiplist=skiplist, token=self.auth_token)
-
-    @staticmethod
-    def get_auth():
-        """
-        Gets the github auth token
-        """
-        config = JsonStorageXDG("OVOS-SkillsManager")
-        token = config["appstores"]["neon"].get("token")
-        return token

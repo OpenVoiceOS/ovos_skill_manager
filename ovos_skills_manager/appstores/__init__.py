@@ -1,4 +1,4 @@
-from json_database import JsonDatabaseXDG
+from json_database import JsonDatabaseXDG, JsonStorageXDG
 from json_database.search import Query
 from ovos_utils import create_daemon
 from ovos_utils.log import LOG
@@ -13,8 +13,16 @@ class AbstractAppstore:
         self.name = name
         self.db = JsonDatabaseXDG(name)
         self.parse_github = parse_github
-        self.auth_token = auth_token
+        self.auth_token = auth_token or self.get_auth()
         self.bootstrap()
+
+    def get_auth(self):
+        """
+        Gets the github auth token
+        """
+        config = JsonStorageXDG("OVOS-SkillsManager")
+        token = config["appstores"][self.name].get("token")
+        return token
 
     def bootstrap(self):
         base_db = join(dirname(dirname(__file__)), "res", "bootstrap_o",

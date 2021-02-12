@@ -23,6 +23,7 @@ class GithubAPI(str, Enum):
     REPO_README = REPO + "/readme"
     REPO_RELEASES = REPO + "/tags"
     REPO_FILE = REPO + '/contents/{file}'
+    REPO_ZIP = REPO + '/zipball/{branch}'
 
 
 # Github API methods
