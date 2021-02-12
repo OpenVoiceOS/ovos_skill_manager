@@ -7,6 +7,7 @@ from ovos_skills_manager.appstores.pling import Pling
 from ovos_skills_manager.appstores.ovos import OVOSstore
 from ovos_skills_manager.appstores.neon import NeonSkills
 from ovos_skills_manager.exceptions import UnknownAppstore
+from ovos_skills_manager.session import set_auth_token
 
 
 class OVOSSkillsManager:
@@ -190,6 +191,13 @@ class OVOSSkillsManager:
                                                             fuzzy, thresh,
                                                             ignore_case):
                 yield skill
+
+    def install_skill(self, skill):
+        """
+        Installs a SkillEntry with any required auth_token
+        """
+        set_auth_token(self.config["appstores"][skill.appstore].get("auth_token"))
+        skill.install()
 
     def __iter__(self):
         for store in self.appstores:
