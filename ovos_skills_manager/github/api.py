@@ -11,7 +11,7 @@ from ovos_skills_manager.licenses import parse_license_type, is_viral, \
     is_permissive
 from ovos_skills_manager.utils import desktop_to_json, readme_to_json
 from ovos_skills_manager.requirements import validate_manifest
-from ovos_skills_manager.session import API_SESSION as requests
+from ovos_skills_manager.session import SESSION as requests
 import base64
 import json
 from enum import Enum
