@@ -4,7 +4,7 @@ from ovos_skills_manager.session import SESSION as requests
 from ovos_skills_manager.exceptions import GithubInvalidUrl, \
     JSONDecodeError, GithubFileNotFound
 from ovos_skills_manager.github import download_url_from_github_url, \
-    get_branch, get_skill_data, get_requirements, get_desktop, api_url_from_github_url
+    get_branch, get_skill_data, get_requirements, api_url_from_github_url
 from ovos_utils.json_helper import merge_dict
 from ovos_utils.skills import blacklist_skill, whitelist_skill, \
     make_priority_skill, get_skills_folder
@@ -62,8 +62,8 @@ class SkillEntry:
         return SkillEntry(data)
 
     @staticmethod
-    def from_github_url(url, branch=None, auth_token=None):
-        return SkillEntry.from_json({"url": url, "branch": branch, "auth_token": auth_token}, True)
+    def from_github_url(url, branch=None):
+        return SkillEntry.from_json({"url": url, "branch": branch}, True)
 
     # properties
     @property
@@ -128,24 +128,17 @@ class SkillEntry:
 
     @property
     def download_url(self):
-        if self.auth_token:
-            return self.json.get("download_url", self.api_url)
-        else:
-            return self.json.get("download_url") or \
-                   download_url_from_github_url(self.url, self.branch)
+        return self.json.get("download_url") or \
+               download_url_from_github_url(self.url, self.branch)
 
     @property
     def api_url(self):
-        return api_url_from_github_url(self.url, self.branch, self.auth_token)
+        return api_url_from_github_url(self.url, self.branch)
 
     @property
     def requirements(self):
-        if self.auth_token:
-            # TODO: Make get_requirements compatible with private git DM
-            return self.json.get("requirements", {})
-        else:
-            return self.json.get("requirements") or \
-                   get_requirements(self.url, self.branch)
+        return self.json.get("requirements") or \
+               get_requirements(self.url, self.branch)
 
     @property
     def license(self):
@@ -154,10 +147,6 @@ class SkillEntry:
     @property
     def desktop_file(self):
         return self.generate_desktop_file()
-
-    @property
-    def auth_token(self):
-        return self.json.get("auth_token")
 
     # generators
     def generate_desktop_json(self):
@@ -184,7 +173,8 @@ class SkillEntry:
         return desktop_file
 
     def generate_readme(self):
-        template = """# <img src='{icon}' card_color='#000000' width='50' height='50' style='vertical-align:bottom'/> {title}
+        template = \
+            """# <img src='{icon}' card_color='#000000' width='50' height='50' style='vertical-align:bottom'/> {title}
 {one_liner}
 
 ## About
@@ -233,12 +223,9 @@ class SkillEntry:
         # naming convention
         skill_folder_name = ".".join([self.skill_name, self.skill_author])\
             .lower().replace(" ", "-")
-        if self.auth_token:
-            url = self.api_url
-        else:
-            url = self.download_url
+        url = self.download_url
         return install_skill(url, folder, file,
-                             skill_folder_name=skill_folder_name, github_token=self.auth_token)
+                             skill_folder_name=skill_folder_name)
 
     def install(self, folder=None, default_branch="master", platform=None):
         if self.branch_overrides:
@@ -251,7 +238,7 @@ class SkillEntry:
                 branch = self.branch_overrides[platform]
                 if branch != self.branch:
                     LOG.info("Detected platform specific branch:" + branch)
-                    skill = SkillEntry.from_github_url(self.url, branch, self.auth_token)
+                    skill = SkillEntry.from_github_url(self.url, branch)
                     return skill.install(folder, default_branch)
 
         LOG.info("Installing skill: {url} from branch: {branch}".format(
@@ -260,7 +247,7 @@ class SkillEntry:
         if skills:
             LOG.info('Installing required skills')
         for s in skills:
-            skill = SkillEntry.from_github_url(s, auth_token=self.auth_token)
+            skill = SkillEntry.from_github_url(s)
             skill.install(folder, default_branch)
 
         system = self.requirements.get("system")

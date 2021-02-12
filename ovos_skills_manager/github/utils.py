@@ -1,5 +1,7 @@
 from ovos_skills_manager.exceptions import *
 from ovos_utils import camel_case_split
+
+from ovos_skills_manager.github import GithubAPI
 from ovos_skills_manager.session import SESSION as requests
 from enum import Enum
 
@@ -20,7 +22,6 @@ class GithubUrls(str, Enum):
     REQUIREMENTS = BLOB + "/requirements.txt"
     SKILL_REQUIREMENTS = BLOB + "/skill_requirements.txt"
     DOWNLOAD = URL + "/archive/{branch}.zip"
-    API = "https://api.github.com/repos/{author}/{repo}/zipball/{branch}"
     DOWNLOAD_TARBALL = URL + "/archive/{branch}.tar.gz"
     TAGS = URL + "/tags"
     RELEASES = URL + "/releases"
@@ -140,8 +141,8 @@ def api_url_from_github_url(url, branch=None, token=None):
 
     # full git repo
     branch = branch or get_branch_from_github_url(url)
-    author, repo = author_repo_from_github_url(url)
-    url = GithubUrls.API.format(author=author, branch=branch, repo=repo)
+    owner, repo = author_repo_from_github_url(url)
+    url = GithubAPI.REPO_ZIP.format(owner=owner, branch=branch, repo=repo)
     headers = {"Accept": "application/vnd.github.v3.raw"}
     if token:
         headers["Authorization"] = f"token {token}"
