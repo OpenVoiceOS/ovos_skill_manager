@@ -1,9 +1,11 @@
-from json_database import JsonDatabaseXDG
+from json_database import JsonDatabaseXDG, JsonStorageXDG
 from json_database.search import Query
 from ovos_utils import create_daemon
 from ovos_utils.log import LOG
 from os.path import join, dirname, isfile
 from ovos_skills_manager import SkillEntry
+from ovos_skills_manager.exceptions import AuthenticationError
+from ovos_skills_manager.session import set_auth_token, clear_auth_token
 import shutil
 from os import remove
 
@@ -13,7 +15,23 @@ class AbstractAppstore:
         self.name = name
         self.db = JsonDatabaseXDG(name)
         self.parse_github = parse_github
-        self.bootstrap()
+        try:
+            self.bootstrap()
+        except AuthenticationError:
+            pass
+
+    def authenticate(self, auth_token=None, bootstrap=True):
+        if auth_token is None:
+            config = JsonStorageXDG("OVOS-SkillsManager")["appstores"][self.name]
+            auth_token = config.get("token")
+        if auth_token:
+            set_auth_token(auth_token)
+            if bootstrap:
+                self.bootstrap()
+
+    @staticmethod
+    def clear_authentication():
+        clear_auth_token()
 
     def bootstrap(self):
         base_db = join(dirname(dirname(__file__)), "res", "bootstrap_o",
@@ -74,13 +92,14 @@ class AbstractAppstore:
         for idx in range(0, len(results)):
             if "appstore" not in results[idx]:
                 results[idx]["appstore"] = self.name
+
         if as_json:
             return query.result
         return [SkillEntry.from_json(s, False) for s in results]
 
     def search_skills_by_url(self, url, as_json=False):
         query = Query(self.db)
-        query.equal("url", url)
+        query.equal("url", url, ignore_case=True)
         results = query.result
         for idx in range(0, len(results)):
             if "appstore" not in results[idx]:
@@ -164,7 +183,7 @@ class AbstractAppstore:
                                                thresh, ignore_case)
         desc_skills = self.search_skills_by_description(query, as_json, fuzzy,
                                                         thresh, ignore_case)
-        res = desc_skills + tag_skills
+        res = desc_skills + tag_skills  # TODO: This may include duplicates DM
         if res:
             return res
 

@@ -2,7 +2,7 @@ import click
 from ovos_skills_manager import OVOSSkillsManager
 from pprint import pformat
 
-APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "andlo", "all", "default"]
+APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "andlo", "neon", "all", "default"]
 
 
 @click.command()

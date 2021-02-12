@@ -1,6 +1,10 @@
 from json.decoder import JSONDecodeError
 
 
+class AuthenticationError(ValueError):
+    """ unauthorized """
+
+
 class SkillEntryError(ValueError):
     """ malformed skill entry """
 
