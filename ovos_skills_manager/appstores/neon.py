@@ -1,16 +1,13 @@
-from json_database import JsonStorageXDG
-
 from ovos_skills_manager.skill_entry import SkillEntry
 from ovos_skills_manager.appstores import AbstractAppstore
+from ovos_skills_manager.session import SESSION as requests
 import json
-import requests
 
 
-def get_neon_skills(parse_github=False, skiplist=None, token=None):
+def get_neon_skills(parse_github=False, skiplist=None):
     skiplist = skiplist or []
     skills_url = "https://api.github.com/repos/NeonGeckoCom/neon-skills-submodules/contents/skill-metadata.json"
-    skill_json = json.loads(requests.get(skills_url, headers={"Authorization": f"token {token}",
-                                                              "Accept": "application/vnd.github.v3.raw"}).text)
+    skill_json = json.loads(requests.get(skills_url).text)
     for skill in skill_json.values():
         if skill["url"] in skiplist:
             continue
@@ -27,4 +24,4 @@ class NeonSkills(AbstractAppstore):
     def get_skills_list(self, skiplist=None):
         skiplist = skiplist or []
         return get_neon_skills(parse_github=self.parse_github,
-                               skiplist=skiplist, token=self.auth_token)
+                               skiplist=skiplist)

@@ -1,5 +1,6 @@
 import click
 from ovos_skills_manager import OVOSSkillsManager
+from ovos_skills_manager.session import set_auth_token
 
 SEARCH_OPTIONS = ['all', 'name', 'url', 'category', 'author', 'tag',
                   'description']
@@ -8,6 +9,7 @@ APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "andlo", "neon", "default", "all
 
 def search_skill(method, query, fuzzy, no_ignore_case, thresh, appstore):
     osm = OVOSSkillsManager()
+    set_auth_token(osm.appstores[appstore].get("auth_token"))
 
     ignore_case = not no_ignore_case
     thresh = thresh / 100

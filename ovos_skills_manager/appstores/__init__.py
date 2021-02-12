@@ -4,25 +4,27 @@ from ovos_utils import create_daemon
 from ovos_utils.log import LOG
 from os.path import join, dirname, isfile
 from ovos_skills_manager import SkillEntry
+from ovos_skills_manager.session import set_auth_token
 import shutil
 from os import remove
 
 
 class AbstractAppstore:
-    def __init__(self, name, parse_github=False, auth_token=None):
+    def __init__(self, name, parse_github=False):
         self.name = name
         self.db = JsonDatabaseXDG(name)
         self.parse_github = parse_github
-        self.auth_token = auth_token or self.get_auth()
+        self.auth_token = self.get_auth()
         self.bootstrap()
 
+    @staticmethod
     def get_auth(self):
         """
         Gets the github auth token
         """
         config = JsonStorageXDG("OVOS-SkillsManager")
         token = config["appstores"][self.name].get("token")
-        return token
+        set_auth_token(token)
 
     def bootstrap(self):
         base_db = join(dirname(dirname(__file__)), "res", "bootstrap_o",
@@ -83,8 +85,6 @@ class AbstractAppstore:
         for idx in range(0, len(results)):
             if "appstore" not in results[idx]:
                 results[idx]["appstore"] = self.name
-            if self.auth_token:
-                results[idx]["auth_token"] = self.auth_token
 
         if as_json:
             return query.result
@@ -97,8 +97,6 @@ class AbstractAppstore:
         for idx in range(0, len(results)):
             if "appstore" not in results[idx]:
                 results[idx]["appstore"] = self.name
-            if self.auth_token:
-                results[idx]["auth_token"] = self.auth_token
         if as_json:
             return query.result
         return [SkillEntry.from_json(s, False) for s in results]
@@ -111,8 +109,6 @@ class AbstractAppstore:
         for idx in range(0, len(results)):
             if "appstore" not in results[idx]:
                 results[idx]["appstore"] = self.name
-            if self.auth_token:
-                results[idx]["auth_token"] = self.auth_token
         if as_json:
             return query.result
         return [SkillEntry.from_json(s, False) for s in results]
@@ -126,8 +122,6 @@ class AbstractAppstore:
         for idx in range(0, len(results)):
             if "appstore" not in results[idx]:
                 results[idx]["appstore"] = self.name
-            if self.auth_token:
-                results[idx]["auth_token"] = self.auth_token
         if as_json:
             return query.result
         return [SkillEntry.from_json(s, False) for s in results]
@@ -140,8 +134,6 @@ class AbstractAppstore:
         for idx in range(0, len(results)):
             if "appstore" not in results[idx]:
                 results[idx]["appstore"] = self.name
-            if self.auth_token:
-                results[idx]["auth_token"] = self.auth_token
         if as_json:
             return query.result
         return [SkillEntry.from_json(s, False) for s in results]
@@ -156,8 +148,6 @@ class AbstractAppstore:
         for idx in range(0, len(results)):
             if "appstore" not in results[idx]:
                 results[idx]["appstore"] = self.name
-            if self.auth_token:
-                results[idx]["auth_token"] = self.auth_token
         if as_json:
             return query.result
         return [SkillEntry.from_json(s, False) for s in results]

@@ -130,7 +130,7 @@ def download_url_from_github_url(url, branch=None):
     raise GithubInvalidUrl
 
 
-def api_url_from_github_url(url, branch=None, token=None):
+def api_zip_url_from_github_url(url, branch=None, token=None):
     # specific file
     try:
         url = blob2raw(url)
@@ -143,10 +143,7 @@ def api_url_from_github_url(url, branch=None, token=None):
     branch = branch or get_branch_from_github_url(url)
     owner, repo = author_repo_from_github_url(url)
     url = GithubAPI.REPO_ZIP.format(owner=owner, branch=branch, repo=repo)
-    headers = {"Accept": "application/vnd.github.v3.raw"}
-    if token:
-        headers["Authorization"] = f"token {token}"
-    if requests.get(url, headers=headers).status_code == 200:
+    if requests.get(url).status_code == 200:
         return url
 
     raise GithubInvalidUrl
