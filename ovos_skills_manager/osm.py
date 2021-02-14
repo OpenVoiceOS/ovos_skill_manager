@@ -93,7 +93,7 @@ class OVOSSkillsManager:
         elif appstore in ["ovos", "ovos_appstore", "ovos_marketplace"]:
             appstore = "ovos"
         elif appstore in ["neon", "neon_gecko", "neon_skills"]:
-            return "neon"
+            appstore = "neon"
         elif appstore not in self.config["appstores"]:
             raise UnknownAppstore
         return appstore
@@ -211,9 +211,13 @@ class OVOSSkillsManager:
         """
         Installs a SkillEntry with any required auth_token
         """
-        skill.appstore.authenticate()
+        try:
+            self.validate_appstore_name(skill.appstore)
+            store = self.get_appstore(skill.appstore)
+            store.authenticate(bootstrap=False)
+        except:
+            pass
         skill.install()
-        skill.appstore.clear_authentication()
 
     def __iter__(self):
         for store in self.appstores:
