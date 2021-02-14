@@ -5,7 +5,7 @@ from ovos_utils.log import LOG
 from os.path import join, dirname, isfile
 from ovos_skills_manager import SkillEntry
 from ovos_skills_manager.exceptions import AuthenticationError
-from ovos_skills_manager.session import set_auth_token, clear_auth_token
+from ovos_skills_manager.session import set_github_token, clear_github_token
 import shutil
 from os import remove
 
@@ -25,13 +25,13 @@ class AbstractAppstore:
             config = JsonStorageXDG("OVOS-SkillsManager")["appstores"][self.name]
             auth_token = config.get("token")
         if auth_token:
-            set_auth_token(auth_token)
+            set_github_token(auth_token)
             if bootstrap:
                 self.bootstrap()
 
     @staticmethod
     def clear_authentication():
-        clear_auth_token()
+        clear_github_token()
 
     def bootstrap(self):
         base_db = join(dirname(dirname(__file__)), "res", "bootstrap_o",

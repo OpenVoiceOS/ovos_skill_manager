@@ -1,6 +1,6 @@
 import click
 from ovos_skills_manager import SkillEntry, OVOSSkillsManager
-from ovos_skills_manager.session import set_auth_token
+from ovos_skills_manager.session import set_github_token
 
 SEARCH_OPTIONS = ['all', 'name', 'url', 'category', 'author', 'tag',
                   'description']
@@ -72,7 +72,7 @@ def search_skill(method, query, fuzzy, no_ignore_case, thresh, appstore):
               help='ignore upper/lower case, default ignore')
 def install(method, skill, fuzzy, no_ignore_case, thresh, appstore, search,
             branch, folder):
-    set_auth_token(OVOSSkillsManager().appstores[appstore].get("auth_token"))
+    set_github_token(OVOSSkillsManager().appstores[appstore].get("auth_token"))
     if search:
         skills = search_skill(method, skill, fuzzy, no_ignore_case,
                               thresh, appstore)

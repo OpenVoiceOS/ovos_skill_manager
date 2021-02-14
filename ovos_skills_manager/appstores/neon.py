@@ -2,13 +2,12 @@ from ovos_skills_manager.skill_entry import SkillEntry
 from ovos_skills_manager.appstores import AbstractAppstore
 from ovos_skills_manager.session import SESSION as requests
 from ovos_skills_manager.exceptions import AuthenticationError
-import json
 
 
 def get_neon_skills(parse_github=False, skiplist=None):
     skiplist = skiplist or []
     skills_url = "https://api.github.com/repos/NeonGeckoCom/neon-skills-submodules/contents/skill-metadata.json"
-    skill_json = json.loads(requests.get(skills_url).text)
+    skill_json = requests.get(skills_url).json()
     if skill_json.get("message") == 'Not Found':
         raise AuthenticationError
     for skill in skill_json.values():
