@@ -7,7 +7,6 @@ from ovos_skills_manager.appstores.pling import Pling
 from ovos_skills_manager.appstores.ovos import OVOSstore
 from ovos_skills_manager.appstores.neon import NeonSkills
 from ovos_skills_manager.exceptions import UnknownAppstore
-from ovos_skills_manager.session import set_auth_token
 
 
 class OVOSSkillsManager:
@@ -120,11 +119,13 @@ class OVOSSkillsManager:
         for appstore_name in stores:
             LOG.info("Syncing skills from " + appstore_name)
             store = stores[appstore_name]
+            store.authenticate()
             if threaded:
                 t = store.sync_skills_list_threaded(merge, new_only)
                 self._threads.append(t)
             else:
                 store.sync_skills_list(merge, new_only)
+                store.clear_authentication()
 
     @property
     def total_skills(self):
@@ -144,60 +145,75 @@ class OVOSSkillsManager:
     def search_skills(self, name, as_json=False, fuzzy=True, thresh=0.85,
                       ignore_case=True):
         for store in self.appstores:
+            store.authenticate()
             for skill in store.search_skills(name, as_json, fuzzy,  thresh,
                                              ignore_case):
                 yield skill
+            store.clear_authentication()
 
     def search_skills_by_name(self, name, as_json=False,
                               fuzzy=True, thresh=0.85, ignore_case=True):
         for store in self.appstores:
+            store.authenticate()
             for skill in store.search_skills_by_name(name, as_json, fuzzy,
                                                      thresh, ignore_case):
                 yield skill
+            store.clear_authentication()
 
     def search_skills_by_url(self, url, as_json=False):
         for store in self.appstores:
+            store.authenticate()
             for skill in store.search_skills_by_url(url, as_json):
                 yield skill
+            store.clear_authentication()
 
     def search_skills_by_category(self, category, as_json=False,
                                   fuzzy=True, thresh=0.85, ignore_case=True):
         for store in self.appstores:
+            store.authenticate()
             for skill in store.search_skills_by_category(category, as_json,
                                                          fuzzy, thresh,
                                                          ignore_case):
                 yield skill
+            store.clear_authentication()
 
     def search_skills_by_author(self, authorname, as_json=False,
                                 fuzzy=True, thresh=0.85, ignore_case=True):
         for store in self.appstores:
+            store.authenticate()
             for skill in store.search_skills_by_author(authorname, as_json,
                                                        fuzzy, thresh,
                                                        ignore_case):
                 yield skill
+            store.clear_authentication()
 
     def search_skills_by_tag(self, tag, as_json=False,
                              fuzzy=True, thresh=0.85, ignore_case=True):
         for store in self.appstores:
+            store.authenticate()
             for skill in store.search_skills_by_tag(tag, as_json, fuzzy,
                                                     thresh, ignore_case):
                 yield skill
+            store.clear_authentication()
 
     def search_skills_by_description(self, value, as_json=False,
                                      fuzzy=True, thresh=0.85,
                                      ignore_case=True):
         for store in self.appstores:
+            store.authenticate()
             for skill in store.search_skills_by_description(value, as_json,
                                                             fuzzy, thresh,
                                                             ignore_case):
                 yield skill
+            store.clear_authentication()
 
     def install_skill(self, skill):
         """
         Installs a SkillEntry with any required auth_token
         """
-        set_auth_token(self.config["appstores"][skill.appstore].get("auth_token"))
+        skill.appstore.authenticate()
         skill.install()
+        skill.appstore.clear_authentication()
 
     def __iter__(self):
         for store in self.appstores:

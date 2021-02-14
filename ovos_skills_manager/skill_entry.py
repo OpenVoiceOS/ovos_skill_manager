@@ -133,8 +133,11 @@ class SkillEntry:
 
     @property
     def requirements(self):
-        return self.json.get("requirements") or \
-               get_requirements(self.url, self.branch)
+        try:
+            return self.json.get("requirements") or \
+                   get_requirements(self.url, self.branch)
+        except GithubFileNotFound:
+            return {}
 
     @property
     def license(self):
@@ -220,7 +223,7 @@ class SkillEntry:
         skill_folder_name = ".".join([self.skill_name, self.skill_author])\
             .lower().replace(" ", "-")
         url = self.download_url
-        return install_skill(url, folder, file,
+        return install_skill(url, folder, file, session=requests,
                              skill_folder_name=skill_folder_name)
 
     def install(self, folder=None, default_branch="master", platform=None):

@@ -9,3 +9,8 @@ def set_auth_token(token):
         "Accept": "application/vnd.github.v3.raw",
         "Authorization": f"token {token}"
     }
+
+
+def clear_auth_token():
+    global SESSION
+    SESSION.headers = {}

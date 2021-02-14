@@ -4,7 +4,8 @@ from ovos_utils import create_daemon
 from ovos_utils.log import LOG
 from os.path import join, dirname, isfile
 from ovos_skills_manager import SkillEntry
-from ovos_skills_manager.session import set_auth_token
+from ovos_skills_manager.exceptions import AuthenticationError
+from ovos_skills_manager.session import set_auth_token, clear_auth_token
 import shutil
 from os import remove
 
@@ -14,17 +15,23 @@ class AbstractAppstore:
         self.name = name
         self.db = JsonDatabaseXDG(name)
         self.parse_github = parse_github
-        self.auth_token = self.get_auth()
-        self.bootstrap()
+        try:
+            self.bootstrap()
+        except AuthenticationError:
+            pass
+
+    def authenticate(self, auth_token=None, bootstrap=True):
+        if auth_token is None:
+            config = JsonStorageXDG("OVOS-SkillsManager")["appstores"][self.name]
+            auth_token = config.get("token")
+        if auth_token:
+            set_auth_token(auth_token)
+            if bootstrap:
+                self.bootstrap()
 
     @staticmethod
-    def get_auth(self):
-        """
-        Gets the github auth token
-        """
-        config = JsonStorageXDG("OVOS-SkillsManager")
-        token = config["appstores"][self.name].get("token")
-        set_auth_token(token)
+    def clear_authentication():
+        clear_auth_token()
 
     def bootstrap(self):
         base_db = join(dirname(dirname(__file__)), "res", "bootstrap_o",

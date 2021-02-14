@@ -1,7 +1,7 @@
 from ovos_skills_manager.exceptions import *
 from ovos_utils import camel_case_split
 
-from ovos_skills_manager.github import GithubAPI
+
 from ovos_skills_manager.session import SESSION as requests
 from enum import Enum
 
@@ -124,25 +124,6 @@ def download_url_from_github_url(url, branch=None):
     branch = branch or get_branch_from_github_url(url)
     author, repo = author_repo_from_github_url(url)
     url = GithubUrls.DOWNLOAD.format(author=author, branch=branch, repo=repo)
-    if requests.get(url).status_code == 200:
-        return url
-
-    raise GithubInvalidUrl
-
-
-def api_zip_url_from_github_url(url, branch=None, token=None):
-    # specific file
-    try:
-        url = blob2raw(url)
-        if requests.get(url).status_code == 200:
-            return url
-    except GithubInvalidUrl:
-        pass
-
-    # full git repo
-    branch = branch or get_branch_from_github_url(url)
-    owner, repo = author_repo_from_github_url(url)
-    url = GithubAPI.REPO_ZIP.format(owner=owner, branch=branch, repo=repo)
     if requests.get(url).status_code == 200:
         return url
 
