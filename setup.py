@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='ovos-skills-manager',
-    version='0.0.1',
+    version='0.0.2',
     packages=['ovos_skills_manager',
               'ovos_skills_manager.github',
               'ovos_skills_manager.appstores',
@@ -31,5 +31,6 @@ setup(
         osm-disable=ovos_skills_manager.scripts.disable:disable
         osm-priority=ovos_skills_manager.scripts.priority:priority
         osm-print=ovos_skills_manager.scripts.config_print:print_config
+        osm-auth=ovos_skills_manager.scripts.add_auth:add_auth
     ''',
 )

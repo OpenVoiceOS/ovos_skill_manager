@@ -1,7 +1,7 @@
 from ovos_utils.log import LOG
 from ovos_utils.json_helper import merge_dict
 from ovos_skills_manager.github.utils import author_repo_from_github_url, \
-    get_branch_from_github_url, skill_name_from_github_url, \
+    get_branch_from_github_url, skill_name_from_github_url, blob2raw, \
     GITHUB_README_FILES, GITHUB_ANDROID_FILES, GITHUB_LOGO_FILES, \
     GITHUB_ICON_FILES, GITHUB_JSON_FILES, GITHUB_DESKTOP_FILES, \
     GITHUB_MANIFEST_FILES, GITHUB_LICENSE_FILES, \
@@ -28,7 +28,26 @@ class GithubAPI(str, Enum):
     REPO_README = REPO + "/readme"
     REPO_RELEASES = REPO + "/tags"
     REPO_FILE = REPO + '/contents/{file}'
+    REPO_ZIP = REPO + '/zipball/{branch}'
 
+
+def api_zip_url_from_github_url(url, branch=None, token=None):
+    # specific file
+    try:
+        url = blob2raw(url)
+        if requests.get(url).status_code == 200:
+            return url
+    except GithubInvalidUrl:
+        pass
+
+    # full git repo
+    branch = branch or get_branch_from_github_url(url)
+    owner, repo = author_repo_from_github_url(url)
+    url = GithubAPI.REPO_ZIP.format(owner=owner, branch=branch, repo=repo)
+    if requests.get(url).status_code == 200:
+        return url
+
+    raise GithubInvalidUrl
 
 # Github API methods
 def get_repo_data_from_github_api(url, branch=None):

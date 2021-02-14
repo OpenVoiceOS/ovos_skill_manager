@@ -4,7 +4,7 @@ from ovos_skills_manager.session import SESSION as requests
 from ovos_skills_manager.exceptions import GithubInvalidUrl, \
     JSONDecodeError, GithubFileNotFound
 from ovos_skills_manager.github import download_url_from_github_url, \
-    get_branch, get_skill_data, get_requirements, get_desktop
+    get_branch, get_skill_data, get_requirements
 from ovos_utils.json_helper import merge_dict
 from ovos_utils.skills import blacklist_skill, whitelist_skill, \
     make_priority_skill, get_skills_folder
@@ -133,8 +133,11 @@ class SkillEntry:
 
     @property
     def requirements(self):
-        return self.json.get("requirements") or \
-               get_requirements(self.url, self.branch)
+        try:
+            return self.json.get("requirements") or \
+                   get_requirements(self.url, self.branch)
+        except GithubFileNotFound:
+            return {}
 
     @property
     def license(self):
@@ -169,7 +172,8 @@ class SkillEntry:
         return desktop_file
 
     def generate_readme(self):
-        template = """# <img src='{icon}' card_color='#000000' width='50' height='50' style='vertical-align:bottom'/> {title}
+        template = \
+            """# <img src='{icon}' card_color='#000000' width='50' height='50' style='vertical-align:bottom'/> {title}
 {one_liner}
 
 ## About
@@ -210,13 +214,16 @@ class SkillEntry:
         folder = folder or get_skills_folder()
         if self.download_url.endswith(".tar.gz"):
             ext = "tar.gz"
+        elif "zipball" in self.download_url:
+            ext = "zip"
         else:
             ext = self.download_url.split(".")[-1]
         file = self.skill_folder + "." + ext
         # naming convention
         skill_folder_name = ".".join([self.skill_name, self.skill_author])\
             .lower().replace(" ", "-")
-        return install_skill(self.download_url, folder, file,
+        url = self.download_url
+        return install_skill(url, folder, file, session=requests,
                              skill_folder_name=skill_folder_name)
 
     def install(self, folder=None, default_branch="master", platform=None):
