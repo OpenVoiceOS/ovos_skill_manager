@@ -121,6 +121,7 @@ class OVOSSkillsManager:
             store = stores[appstore_name]
             store.authenticate()
             if threaded:
+                # TODO this will cause auth issues
                 t = store.sync_skills_list_threaded(merge, new_only)
                 self._threads.append(t)
             else:
@@ -211,6 +212,7 @@ class OVOSSkillsManager:
         """
         Installs a SkillEntry with any required auth_token
         """
+        store = None
         try:
             self.validate_appstore_name(skill.appstore)
             store = self.get_appstore(skill.appstore)
@@ -218,6 +220,8 @@ class OVOSSkillsManager:
         except:
             pass
         skill.install()
+        if store:
+            store.clear_authentication()
 
     def __iter__(self):
         for store in self.appstores:
