@@ -65,7 +65,7 @@ def get_pling_skills(parse_github=False, skiplist=None):
 
 class Pling(AbstractAppstore):
     def __init__(self, parse_github=False):
-        super().__init__("Pling", parse_github)
+        super().__init__("Pling", parse_github, appstore_id="pling")
 
     def get_skills_list(self, skiplist=None):
         skiplist = skiplist or []

@@ -28,7 +28,7 @@ def get_ovos_skills(parse_github=False, skiplist=None):
 
 class OVOSstore(AbstractAppstore):
     def __init__(self, parse_github=False):
-        super().__init__("OVOS", parse_github)
+        super().__init__("OVOS", parse_github, appstore_id="ovos")
 
     def get_skills_list(self, skiplist=None):
         skiplist = skiplist or []

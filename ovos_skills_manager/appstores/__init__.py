@@ -5,14 +5,18 @@ from ovos_utils.log import LOG
 from os.path import join, dirname, isfile
 from ovos_skills_manager import SkillEntry
 from ovos_skills_manager.exceptions import AuthenticationError
-from ovos_skills_manager.session import set_auth_token, clear_auth_token
+from ovos_skills_manager.session import set_github_token, clear_github_token
 import shutil
+import re
 from os import remove
 
 
 class AbstractAppstore:
-    def __init__(self, name, parse_github=False):
+    def __init__(self, name, parse_github=False, appstore_id=None):
         self.name = name
+        default_id = re.sub(r'[^\w]', ' ',
+                            name.lower().replace("_", " ").replace("-", " "))
+        self.appstore_id = appstore_id or default_id
         self.db = JsonDatabaseXDG(name)
         self.parse_github = parse_github
         try:
@@ -22,16 +26,16 @@ class AbstractAppstore:
 
     def authenticate(self, auth_token=None, bootstrap=True):
         if auth_token is None:
-            config = JsonStorageXDG("OVOS-SkillsManager")["appstores"][self.name]
-            auth_token = config.get("token")
+            auth_token = JsonStorageXDG("OVOS-SkillsManager")["appstores"]\
+                .get(self.appstore_id, {}).get("auth_token")
         if auth_token:
-            set_auth_token(auth_token)
+            set_github_token(auth_token)
             if bootstrap:
                 self.bootstrap()
 
     @staticmethod
     def clear_authentication():
-        clear_auth_token()
+        clear_github_token()
 
     def bootstrap(self):
         base_db = join(dirname(dirname(__file__)), "res", "bootstrap_o",
@@ -91,7 +95,7 @@ class AbstractAppstore:
         results = query.result
         for idx in range(0, len(results)):
             if "appstore" not in results[idx]:
-                results[idx]["appstore"] = self.name
+                results[idx]["appstore"] = self.appstore_id
 
         if as_json:
             return query.result
@@ -103,7 +107,7 @@ class AbstractAppstore:
         results = query.result
         for idx in range(0, len(results)):
             if "appstore" not in results[idx]:
-                results[idx]["appstore"] = self.name
+                results[idx]["appstore"] = self.appstore_id
         if as_json:
             return query.result
         return [SkillEntry.from_json(s, False) for s in results]
@@ -115,7 +119,7 @@ class AbstractAppstore:
         results = query.result
         for idx in range(0, len(results)):
             if "appstore" not in results[idx]:
-                results[idx]["appstore"] = self.name
+                results[idx]["appstore"] = self.appstore_id
         if as_json:
             return query.result
         return [SkillEntry.from_json(s, False) for s in results]
@@ -128,7 +132,7 @@ class AbstractAppstore:
         results = query.result
         for idx in range(0, len(results)):
             if "appstore" not in results[idx]:
-                results[idx]["appstore"] = self.name
+                results[idx]["appstore"] = self.appstore_id
         if as_json:
             return query.result
         return [SkillEntry.from_json(s, False) for s in results]
@@ -140,7 +144,7 @@ class AbstractAppstore:
         results = query.result
         for idx in range(0, len(results)):
             if "appstore" not in results[idx]:
-                results[idx]["appstore"] = self.name
+                results[idx]["appstore"] = self.appstore_id
         if as_json:
             return query.result
         return [SkillEntry.from_json(s, False) for s in results]
@@ -154,7 +158,7 @@ class AbstractAppstore:
         results = query.result
         for idx in range(0, len(results)):
             if "appstore" not in results[idx]:
-                results[idx]["appstore"] = self.name
+                results[idx]["appstore"] = self.appstore_id
         if as_json:
             return query.result
         return [SkillEntry.from_json(s, False) for s in results]

@@ -46,7 +46,7 @@ def get_andlos_list_skills(parse_github=False, skiplist=None):
 
 class AndloSkillList(AbstractAppstore):
     def __init__(self, parse_github=False):
-        super().__init__("AndloSkillList", parse_github)
+        super().__init__("AndloSkillList", parse_github, appstore_id="andlo")
 
     def get_skills_list(self, skiplist=None):
         skiplist = skiplist or []
