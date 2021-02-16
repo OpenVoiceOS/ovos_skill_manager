@@ -101,6 +101,26 @@ class AbstractAppstore:
             return query.result
         return [SkillEntry.from_json(s, False) for s in results]
 
+    def search_skills_by_id(self, skill_id, as_json=False, fuzzy=False,
+                            thresh=0.85, ignore_case=True):
+        """ skill_id is repo.author , case insensitive,
+        searchs by name and filters results by author """
+        name = ".".join(skill_id.split(".")[:-1])
+        author = skill_id.rsplit('.', 1)[1]
+
+        query = Query(self.db)
+        query.contains_value('skillname', name, fuzzy, thresh, ignore_case)
+        query.value_contains_token('authorname', author, fuzzy, thresh,
+                                   ignore_case)
+        results = query.result
+        for idx in range(0, len(results)):
+            if "appstore" not in results[idx]:
+                results[idx]["appstore"] = self.appstore_id
+
+        if as_json:
+            return query.result
+        return [SkillEntry.from_json(s, False) for s in results]
+
     def search_skills_by_url(self, url, as_json=False):
         query = Query(self.db)
         query.equal("url", url, ignore_case=True)

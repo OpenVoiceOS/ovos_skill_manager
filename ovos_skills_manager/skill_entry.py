@@ -1,5 +1,5 @@
 import json
-from os.path import isfile, expanduser, join
+from os.path import isfile, expanduser, join, isdir
 from ovos_skills_manager.session import SESSION as requests
 from ovos_skills_manager.exceptions import GithubInvalidUrl, \
     JSONDecodeError, GithubFileNotFound
@@ -24,8 +24,8 @@ class SkillEntry:
         # a unique identifier
         # github_repo.github_author , case insensitive
         # should be guaranteed to be unique
-        author = self.skill_author
-        repo = self.skill_folder
+        author = self.skill_author.lower()
+        repo = self.skill_folder.lower()
         return repo + "." + author
 
     @property
@@ -234,14 +234,14 @@ class SkillEntry:
         else:
             ext = self.download_url.split(".")[-1]
         file = self.skill_folder + "." + ext
-        # naming convention
-        skill_folder_name = ".".join([self.skill_name, self.skill_author])\
-            .lower().replace(" ", "-")
         url = self.download_url
         return install_skill(url, folder, file, session=requests,
-                             skill_folder_name=skill_folder_name)
+                             skill_folder_name=self.uuid)
 
-    def install(self, folder=None, default_branch="master", platform=None):
+    def install(self, folder=None, default_branch="master", platform=None,
+                update=True):
+        if not update and self.is_previously_installed(folder):
+            return False
         if self.branch_overrides:
             try:
                 platform = platform or detect_enclosure()
@@ -293,9 +293,8 @@ class SkillEntry:
                 content = requests.get(self.skill_icon).content
                 with open(icon_file, "wb") as f:
                     f.write(content)
-            else:
-                if isfile(self.skill_icon):
-                    shutil.copyfile(self.skill_icon, icon_file)
+            elif isfile(self.skill_icon):
+                shutil.copyfile(self.skill_icon, icon_file)
 
             # copy .desktop file
             desktop_file = join(desktop_dir, base_name + ".desktop")
@@ -304,9 +303,13 @@ class SkillEntry:
 
         return updated
 
-    def update(self, folder=None):
+    def update(self, folder=None, default_branch="master", platform=None):
         # convenience method
-        return self.install(folder)
+        return self.install(folder, default_branch, platform, update=True)
+
+    def is_previously_installed(self, folder=None):
+        folder = folder or get_skills_folder()
+        return isdir(join(folder, self.uuid))
 
     def __repr__(self):
         return self.skill_name + " " + self.url
