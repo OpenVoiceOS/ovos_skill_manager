@@ -1,4 +1,5 @@
 from ovos_utils.log import LOG
+from ovos_utils.json_helper import merge_dict
 from json_database import JsonStorageXDG
 from ovos_skills_manager.appstores.andlo import AndloSkillList
 from ovos_skills_manager.appstores.mycroft_marketplace import \
@@ -12,37 +13,45 @@ from ovos_skills_manager.exceptions import UnknownAppstore
 class OVOSSkillsManager:
     def __init__(self):
         self.config = JsonStorageXDG("OVOS-SkillsManager")
+        default_config = {
+            "ovos": {
+                "active": True,
+                "url": "https://github.com/OpenVoiceOS/OVOS-appstore",
+                "parse_github": False,
+                "priority": 1},
+            "mycroft_marketplace": {
+                "active": False,
+                "url": "https://market.mycroft.ai/",
+                "parse_github": False,
+                "priority": 5},
+            "pling": {
+                "active": False,
+                "url": "https://apps.plasma-bigscreen.org/",
+                "parse_github": False,
+                "priority": 10},
+            "neon": {
+                "active": False,
+                "url": "https://github.com/NeonGeckoCom/neon-skills-submodules/",
+                "parse_github": False,
+                "auth_token": None,
+                "priority": 50},
+            "andlo_skill_list": {
+                "active": False,
+                "url": "https://andlo.gitbook.io/mycroft-skills-list/",
+                "parse_github": False,
+                "priority": 100}
+        }
+
         if "appstores" not in self.config:
             # NOTE, below should match Appstore.appstore_id
-            self.config["appstores"] = {
-                "ovos": {
-                    "active": True,
-                    "url": "https://github.com/OpenVoiceOS/OVOS-appstore",
-                    "parse_github": False,
-                    "priority": 1},
-                "mycroft_marketplace": {
-                    "active": False,
-                    "url": "https://market.mycroft.ai/",
-                    "parse_github": False,
-                    "priority": 5},
-                "pling": {
-                    "active": False,
-                    "url": "https://apps.plasma-bigscreen.org/",
-                    "parse_github": False,
-                    "priority": 10},
-                "neon": {
-                    "active": False,
-                    "url": "https://github.com/NeonGeckoCom/neon-skills-submodules/",
-                    "parse_github": False,
-                    "auth_token": None,
-                    "priority": 50},
-                "andlo_skill_list": {
-                    "active": False,
-                    "url": "https://andlo.gitbook.io/mycroft-skills-list/",
-                    "parse_github": False,
-                    "priority": 100}
-            }
+            self.config["appstores"] = default_config
             self.save_config()
+        self.config["appstores"] = merge_dict(self.config["appstores"],
+                                              default_config,
+                                              merge_lists=True,
+                                              new_only=True,
+                                              no_dupes=True)
+        self.save_config()
         self._threads = []
 
     def get_active_appstores(self):
