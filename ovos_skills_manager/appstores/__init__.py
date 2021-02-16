@@ -14,7 +14,9 @@ from os import remove
 class AbstractAppstore:
     def __init__(self, name, parse_github=False, appstore_id=None):
         self.name = name
-        self.appstore_id = appstore_id or re.sub(r'[^\w]', ' ', name.lower())
+        default_id = re.sub(r'[^\w]', ' ',
+                            name.lower().replace("_", " ").replace("-", " "))
+        self.appstore_id = appstore_id or default_id
         self.db = JsonDatabaseXDG(name)
         self.parse_github = parse_github
         try:
@@ -24,8 +26,8 @@ class AbstractAppstore:
 
     def authenticate(self, auth_token=None, bootstrap=True):
         if auth_token is None:
-            config = JsonStorageXDG("OVOS-SkillsManager")["appstores"][self.appstore_id]
-            auth_token = config.get("auth_token")
+            auth_token = JsonStorageXDG("OVOS-SkillsManager")["appstores"]\
+                .get(self.appstore_id, {}).get("auth_token")
         if auth_token:
             set_github_token(auth_token)
             if bootstrap:
