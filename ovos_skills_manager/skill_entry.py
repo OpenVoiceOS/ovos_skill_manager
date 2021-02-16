@@ -20,6 +20,15 @@ class SkillEntry:
         self._data = data or {}
 
     @property
+    def uuid(self):
+        # a unique identifier
+        # github_repo.github_author , case insensitive
+        # should be guaranteed to be unique
+        author = self.skill_author
+        repo = self.skill_folder
+        return repo + "." + author
+
+    @property
     def json(self):
         return self._data
 
