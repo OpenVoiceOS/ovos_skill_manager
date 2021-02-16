@@ -6,17 +6,31 @@ import base64
 import json
 
 
-def get_neon_skills(parse_github=False, skiplist=None):
+def get_neon_skills_from_api(parse_github=False, skiplist=None):
     skiplist = skiplist or []
     skills_url = "https://api.github.com/repos/NeonGeckoCom/neon-skills-submodules/contents/skill-metadata.json"
     skill_json = requests.get(skills_url).json()
-    if skill_json.get("message") == 'Not Found':
+    if skill_json.get("message") == 'Not Found' or "API rate limit exceeded" \
+            in skill_json.get("message"):
         raise AuthenticationError
 
     if skill_json.get("encoding") == "base64":
         json_str = base64.b64decode(skill_json["content"]).decode("utf-8")
         skill_json = json.loads(json_str)
 
+    for skill in skill_json.values():
+        if skill["url"] in skiplist:
+            continue
+        skill["appstore"] = "Neon"
+        skill["appstore_url"] = skills_url
+        yield SkillEntry.from_json(skill,
+                                   parse_github=parse_github)
+
+
+def get_neon_skills(parse_github=False, skiplist=None):
+    skiplist = skiplist or []
+    skills_url = "https://raw.githubusercontent.com/NeonGeckoCom/neon-skills-submodules/master/skill-metadata.json?token=AOJKQZXUZELNJESFKZUHPITAGVWQ2"
+    skill_json = requests.get(skills_url).json()
     for skill in skill_json.values():
         if skill["url"] in skiplist:
             continue
@@ -33,4 +47,4 @@ class NeonSkills(AbstractAppstore):
     def get_skills_list(self, skiplist=None):
         skiplist = skiplist or []
         return get_neon_skills(parse_github=self.parse_github,
-                               skiplist=skiplist)
+                                        skiplist=skiplist)

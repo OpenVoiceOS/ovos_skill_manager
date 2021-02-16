@@ -48,7 +48,6 @@ class OVOSSkillsManager:
             self.save_config()
         self.config["appstores"] = merge_dict(self.config["appstores"],
                                               default_config,
-                                              merge_lists=True,
                                               new_only=True,
                                               no_dupes=True)
         self.save_config()
@@ -172,7 +171,8 @@ class OVOSSkillsManager:
             store.authenticate()
             for skill in store.search_skills(name, as_json, fuzzy,  thresh,
                                              ignore_case):
-                if skill.skill_author == author:
+                if (skill.skill_author.lower() == author.lower() and ignore_case) or \
+                        skill.skill_author == author:
                     store.clear_authentication()
                     return skill
             store.clear_authentication()
