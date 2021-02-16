@@ -13,6 +13,7 @@ class OVOSSkillsManager:
     def __init__(self):
         self.config = JsonStorageXDG("OVOS-SkillsManager")
         if "appstores" not in self.config:
+            # NOTE, below should match Appstore.appstore_id
             self.config["appstores"] = {
                 "ovos": {
                     "active": True,
@@ -46,15 +47,15 @@ class OVOSSkillsManager:
 
     def get_active_appstores(self):
         stores = {}
-        for appstore_name in self.config["appstores"]:
-            if self.config["appstores"][appstore_name]["active"]:
-                stores[appstore_name] = self.get_appstore(appstore_name)
+        for appstore_id in self.config["appstores"]:
+            if self.config["appstores"][appstore_id]["active"]:
+                stores[appstore_id] = self.get_appstore(appstore_id)
         return stores
 
-    def get_appstore(self, name):
-        if self.config["appstores"][name]["active"]:
-            parse_github = self.config["appstores"][name]["parse_github"]
-            store = self.name_to_appstore(name)
+    def get_appstore(self, appstore_id):
+        if self.config["appstores"][appstore_id]["active"]:
+            parse_github = self.config["appstores"][appstore_id]["parse_github"]
+            store = self.name_to_appstore(appstore_id)
             return store(parse_github=parse_github)
         return None
 
@@ -76,9 +77,9 @@ class OVOSSkillsManager:
     def save_config(self):
         self.config.store()
 
-    def clear_cache(self, appstore_name=None):
-        if appstore_name:
-            self.get_appstore(appstore_name).clear_cache()
+    def clear_cache(self, appstore_id=None):
+        if appstore_id:
+            self.get_appstore(appstore_id).clear_cache()
         else:
             for appstore in self.appstores:
                 appstore.clear_cache()
@@ -98,27 +99,27 @@ class OVOSSkillsManager:
             raise UnknownAppstore
         return appstore
 
-    def enable_appstore(self, appstore):
-        appstore = self.validate_appstore_name(appstore)
-        self.config["appstores"][appstore]["active"] = True
+    def enable_appstore(self, appstore_id):
+        appstore_id = self.validate_appstore_name(appstore_id)
+        self.config["appstores"][appstore_id]["active"] = True
 
-    def set_appstore_priority(self, appstore, priority):
-        appstore = self.validate_appstore_name(appstore)
-        self.config["appstores"][appstore]["priority"] = priority
+    def set_appstore_priority(self, appstore_id, priority):
+        appstore_id = self.validate_appstore_name(appstore_id)
+        self.config["appstores"][appstore_id]["priority"] = priority
 
-    def set_appstore_auth_token(self, appstore, token):
-        appstore = self.validate_appstore_name(appstore)
-        self.config["appstores"][appstore]["auth_token"] = token
+    def set_appstore_auth_token(self, appstore_id, token):
+        appstore_id = self.validate_appstore_name(appstore_id)
+        self.config["appstores"][appstore_id]["auth_token"] = token
 
-    def disable_appstore(self, appstore):
-        appstore = self.validate_appstore_name(appstore)
-        self.config["appstores"][appstore]["active"] = False
+    def disable_appstore(self, appstore_id):
+        appstore_id = self.validate_appstore_name(appstore_id)
+        self.config["appstores"][appstore_id]["active"] = False
 
     def sync_appstores(self, merge=False, new_only=True, threaded=False):
         stores = self.get_active_appstores()
-        for appstore_name in stores:
-            LOG.info("Syncing skills from " + appstore_name)
-            store = stores[appstore_name]
+        for appstore_id in stores:
+            LOG.info("Syncing skills from " + appstore_id)
+            store = stores[appstore_id]
             store.authenticate()
             if threaded:
                 # TODO this will cause auth issues
@@ -135,11 +136,11 @@ class OVOSSkillsManager:
     @property
     def appstores(self):
         stores = []
-        for s in self.config["appstores"]:
-            store = self.get_appstore(s)
+        for appstore_id in self.config["appstores"]:
+            store = self.get_appstore(appstore_id)
             if not store:
                 continue
-            priority = self.config["appstores"][s]["priority"]
+            priority = self.config["appstores"][appstore_id]["priority"]
             stores.append((store, priority))
         return [s[0] for s in sorted(stores, key=lambda k: k[1])]
 

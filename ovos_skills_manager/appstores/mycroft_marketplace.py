@@ -79,7 +79,8 @@ def get_mycroft_marketplace_skills(branch=None, parse_github=False,
 
 class MycroftMarketplace(AbstractAppstore):
     def __init__(self, parse_github=False):
-        super().__init__("MycroftMarketplace", parse_github)
+        super().__init__("MycroftMarketplace", parse_github,
+                         appstore_id="mycroft_marketplace")
 
     def get_skills_list(self, skiplist=None):
         return get_mycroft_marketplace_skills(
