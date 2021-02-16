@@ -25,7 +25,7 @@ class AbstractAppstore:
     def authenticate(self, auth_token=None, bootstrap=True):
         if auth_token is None:
             config = JsonStorageXDG("OVOS-SkillsManager")["appstores"][self.appstore_id]
-            auth_token = config.get("token")
+            auth_token = config.get("auth_token")
         if auth_token:
             set_github_token(auth_token)
             if bootstrap:
