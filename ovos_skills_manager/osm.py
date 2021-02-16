@@ -162,6 +162,21 @@ class OVOSSkillsManager:
                 yield skill
             store.clear_authentication()
 
+    def search_skills_by_id(self, skill_id, as_json=False, fuzzy=True,
+                            thresh=0.85,
+                      ignore_case=True):
+        """ skill_id is repo.author , case insensitive,
+        searchs by name and filters results by author """
+        name, author = skill_id.split(".")
+        for store in self.appstores:
+            store.authenticate()
+            for skill in store.search_skills(name, as_json, fuzzy,  thresh,
+                                             ignore_case):
+                if skill.skill_author == author:
+                    store.clear_authentication()
+                    return skill
+            store.clear_authentication()
+
     def search_skills_by_name(self, name, as_json=False,
                               fuzzy=True, thresh=0.85, ignore_case=True):
         for store in self.appstores:
@@ -175,8 +190,8 @@ class OVOSSkillsManager:
         for store in self.appstores:
             store.authenticate()
             for skill in store.search_skills_by_url(url, as_json):
-                yield skill
-            store.clear_authentication()
+                store.clear_authentication()
+                return skill
 
     def search_skills_by_category(self, category, as_json=False,
                                   fuzzy=True, thresh=0.85, ignore_case=True):
