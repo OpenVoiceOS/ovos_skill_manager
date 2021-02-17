@@ -293,7 +293,7 @@ class SkillEntry:
                 content = requests.get(self.skill_icon).content
                 with open(icon_file, "wb") as f:
                     f.write(content)
-            else:
+            elif isfile(self.skill_icon):
                 shutil.copyfile(self.skill_icon, icon_file)
 
             # copy .desktop file
