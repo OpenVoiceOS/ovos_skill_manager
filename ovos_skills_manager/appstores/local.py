@@ -12,7 +12,7 @@ from ovos_skills_manager.requirements import validate_manifest
 from ovos_utils.json_helper import merge_dict
 import json
 from os import listdir, walk
-from os.path import join, isdir
+from os.path import join, isdir, isfile
 
 
 def get_local_skills(parse_github=False, skiplist=None):
@@ -37,14 +37,14 @@ def get_local_skills(parse_github=False, skiplist=None):
 
         # parse git info
         gitinfo = join(path, ".git/config")
-        with open(gitinfo) as f:
-            for l in f.readlines():
-
-                if l.strip().startswith("url ="):
-                    skill["url"] = l.split("url =")[-1].strip()
-                if l.strip().startswith("[branch "):
-                    skill["branch"] = l.split("branch")[-1]\
-                        .replace('"', "").strip()
+        if isfile(gitinfo):
+            with open(gitinfo) as f:
+                for l in f.readlines():
+                    if l.strip().startswith("url ="):
+                        skill["url"] = l.split("url =")[-1].strip()
+                    if l.strip().startswith("[branch "):
+                        skill["branch"] = l.split("branch")[-1]\
+                            .replace('"', "").strip()
 
         for rtdir, foldrs, files in walk(join(skills, fold)):
             for f in files:
