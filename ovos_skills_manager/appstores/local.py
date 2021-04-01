@@ -5,7 +5,7 @@ from ovos_skills_manager.github.utils import GITHUB_README_FILES, \
     GITHUB_ICON_FILES, GITHUB_JSON_FILES, GITHUB_DESKTOP_FILES, \
     GITHUB_LOGO_FILES, GITHUB_REQUIREMENTS_FILES, \
     GITHUB_SKILL_REQUIREMENTS_FILES, GITHUB_LICENSE_FILES, \
-    GITHUB_MANIFEST_FILES
+    GITHUB_MANIFEST_FILES, author_repo_from_github_url
 from ovos_skills_manager.utils import readme_to_json
 from ovos_utils.skills import get_skills_folder
 from ovos_skills_manager.requirements import validate_manifest
@@ -23,17 +23,24 @@ def get_local_skills(parse_github=False, skiplist=None):
         path = join(skills, fold)
         if not isdir(path) or fold in skiplist:
             continue
-        repo, author = fold.split(".")
+
         skill = {
             "appstore": "InstalledSkills",
             "appstore_url": skills,
-            "skillname": repo,
             "skill_id": fold,
-            'authorname': author,
-            'url': f'https://github.com/{author}/{repo}',
             "foldername": fold,
             "requirements": {"python": [], "system": [], "skill": []}
         }
+
+        # if installed by msm/osm will obey this convention
+        if "." in fold:
+            try:
+                repo, author = fold.split(".")
+                skill["skillname"] = repo
+                skill["authorname"] = author
+                skill["url"] = f'https://github.com/{author}/{repo}'
+            except: # TODO replace with some clever check ?
+                pass
 
         # parse git info
         gitinfo = join(path, ".git/config")
@@ -42,6 +49,8 @@ def get_local_skills(parse_github=False, skiplist=None):
                 for l in f.readlines():
                     if l.strip().startswith("url ="):
                         skill["url"] = l.split("url =")[-1].strip()
+                        skill["authorname"], skill["skillname"] = \
+                            author_repo_from_github_url(skill["url"])
                     if l.strip().startswith("[branch "):
                         skill["branch"] = l.split("branch")[-1]\
                             .replace('"', "").strip()

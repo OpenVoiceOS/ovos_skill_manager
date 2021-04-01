@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='ovos-skills-manager',
-    version='0.0.2',
+    version='0.0.3a1',
     packages=['ovos_skills_manager',
               'ovos_skills_manager.github',
               'ovos_skills_manager.appstores',
