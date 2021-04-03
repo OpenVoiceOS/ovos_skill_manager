@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='ovos-skills-manager',
-    version='0.0.2',
+    version='0.0.3a1',
     packages=['ovos_skills_manager',
               'ovos_skills_manager.github',
               'ovos_skills_manager.appstores',
@@ -14,7 +14,7 @@ setup(
                       "json_database>=0.5.1",
                       "requests",
                       "requests-cache",
-                      "ovos_utils>=0.0.4",
+                      "ovos_utils>=0.0.7",
                       "pako>=0.2.3",
                       "PyYaml",
                       "bs4",
