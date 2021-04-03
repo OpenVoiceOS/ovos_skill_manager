@@ -8,17 +8,23 @@ from ovos_skills_manager.appstores.pling import Pling
 from ovos_skills_manager.appstores.ovos import OVOSstore
 from ovos_skills_manager.appstores.neon import NeonSkills
 from ovos_skills_manager.exceptions import UnknownAppstore
+from ovos_skills_manager.appstores.local import InstalledSkills, get_skills_folder
 
 
 class OVOSSkillsManager:
     def __init__(self):
         self.config = JsonStorageXDG("OVOS-SkillsManager")
         default_config = {
+            "local": {
+                "active": True,
+                "url": get_skills_folder(),
+                "parse_github": False,
+                "priority": 1},
             "ovos": {
                 "active": True,
                 "url": "https://github.com/OpenVoiceOS/OVOS-appstore",
                 "parse_github": False,
-                "priority": 1},
+                "priority": 2},
             "mycroft_marketplace": {
                 "active": False,
                 "url": "https://market.mycroft.ai/",
@@ -79,6 +85,9 @@ class OVOSSkillsManager:
             return OVOSstore
         elif name in ["neon", "neon_gecko", "neon_skills"]:
             return NeonSkills
+        elif name in ["local", "local_skills", "installed",
+                      "installed_skills"]:
+            return InstalledSkills
         else:
             raise UnknownAppstore
 
@@ -103,6 +112,9 @@ class OVOSSkillsManager:
             appstore = "ovos"
         elif appstore in ["neon", "neon_gecko", "neon_skills"]:
             appstore = "neon"
+        elif appstore in ["local", "local_skills", "installed",
+                          "installed_skills"]:
+            appstore = "local"
         elif appstore not in self.config["appstores"]:
             raise UnknownAppstore
         return appstore
