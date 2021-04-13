@@ -1,7 +1,7 @@
 import unittest
 from ovos_skills_manager.github import get_branch_from_github_releases, \
     get_branch_from_github_url, get_branch_from_skill_json_github_url, \
-    get_branch_from_skill_json, get_branch_from_github_api, get_branch, \
+    get_branch_from_skill_json, get_main_branch_from_github_api, get_branch, \
     get_branch_from_skill_json_github_api, \
     get_branch_from_latest_release_github_url
 from ovos_skills_manager.exceptions import GithubInvalidBranch, \

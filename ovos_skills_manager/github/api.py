@@ -115,7 +115,7 @@ def get_license_url_from_github_api(url, branch=None):
 
 
 # data getters
-def get_branch_from_github_api(url, branch=None):
+def get_main_branch_from_github_api(url, branch=None):
     try:
         # implicit in url
         return get_branch_from_github_url(url)
@@ -147,7 +147,7 @@ def get_branch_from_latest_release_github_api(url, branch=None):
 
 def get_file_from_github_api(url, filepath, branch=None):
     author, repo = author_repo_from_github_url(url)
-    branch = branch or get_branch_from_github_api(url)
+    branch = branch or get_main_branch_from_github_api(url)
     url = GithubAPI.REPO_FILE.format(owner=author, repo=repo, file=filepath)
     data = requests.get(url, params={"ref": branch}).json()
     if "API rate limit exceeded" in data.get("message", ""):

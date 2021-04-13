@@ -108,21 +108,6 @@ def get_skill_data(url, branch=None):
     return data
 
 
-def get_branch(url):
-    try:
-        return get_branch_from_github_url(url)
-    except GithubInvalidBranch:
-        try:
-            return get_branch_from_skill_json(url)
-        except GithubFileNotFound:
-            try:
-                return get_branch_from_github_releases(url)
-            except GithubAPIRateLimited:
-                raise GithubInvalidBranch
-            except:
-                return get_branch_from_github_api(url)
-
-
 def get_branch_from_github_releases(url, branch=None):
     try:
         return get_branch_from_latest_release_github_api(url)
@@ -135,6 +120,31 @@ def get_branch_from_skill_json(url, branch=None):
         return get_branch_from_skill_json_github_api(url, branch)
     except GithubAPIRateLimited:
         return get_branch_from_skill_json_github_url(url)
+
+
+def get_branch(url):
+    try:
+        return get_branch_from_github_url(url)
+    except GithubInvalidBranch:
+        return get_main_branch(url)
+
+
+def get_main_branch(url):
+    url = normalize_github_url(url)
+    try:
+        return get_main_branch_from_github_api(url)
+    except:
+        try:
+            return get_main_branch_from_github_url(url)
+        except:
+            try:
+                return get_branch_from_github_releases(url)
+            except:
+                try:
+                    return get_branch_from_skill_json(url)
+                except:
+                    pass
+    raise GithubInvalidBranch
 
 
 def get_repo_data(url):

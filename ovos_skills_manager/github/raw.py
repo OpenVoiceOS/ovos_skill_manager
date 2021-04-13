@@ -7,6 +7,8 @@ from ovos_utils.json_helper import merge_dict
 import json
 import yaml
 import bs4
+import base64
+
 
 # Manual Extraction
 GITHUB_README_LOCATIONS = [
@@ -33,6 +35,12 @@ GITHUB_ANDROID_JSON_LOCATIONS = [
     GithubUrls.BLOB + "/" + path for path in GITHUB_ANDROID_FILES
 ]
 
+
+def get_main_branch_from_github_url(url):
+    url = normalize_github_url(url)
+    html = requests.get(url).text
+    encoded = html.split("default-branch=\"")[1].split('"')[0]
+    return base64.b64decode(encoded).decode("utf-8")
 
 def cache_repo_requests(url, branch=None):
     # this looks dumb, but offers a good speed up since this package uses
@@ -462,16 +470,19 @@ def get_android_json_from_github_url(url, branch=None):
                 }
 
 
-def get_branch_from_skill_json_github_url(url):
+def get_branch_from_skill_json_github_url(url, branch=None):
     try:
-        branch = get_branch_from_github_url(url)
+        branch = branch or get_branch_from_github_url(url)
     except GithubInvalidBranch:
         branch = "master"  # attempt master branch
     try:
         json_data = get_skill_json_from_github_url(url, branch)
-        return json_data.get("branch") or branch
+        branch = json_data.get("branch")
+        if not branch:
+            raise GithubInvalidBranch
     except:
         raise GithubFileNotFound
+    return branch
 
 
 def get_branch_from_latest_release_github_url(url):
