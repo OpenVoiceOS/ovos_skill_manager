@@ -98,6 +98,8 @@ def get_branch_from_github_url(url, validate=False):
         branch = url.split("/tree/")[-1].split("/")[0]
     if "/commit/" in url:
         branch = url.split("/commit/")[-1].split("/")[0]
+    if "/tag/" in url:
+        branch = url.split("/tag/")[-1].split("/")[0]
 
     if branch:
         if validate:

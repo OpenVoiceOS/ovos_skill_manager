@@ -475,9 +475,15 @@ def get_branch_from_skill_json_github_url(url):
 
 
 def get_branch_from_latest_release_github_url(url):
-    # let's assume latest release
-    try:
-        release = get_repo_releases_from_github_url(url)[0]
-        return release["name"]
-    except:
-        raise GithubFileNotFound
+    final_url = get_latest_release_github_url(url)
+    return get_branch_from_github_url(final_url)
+
+
+def get_latest_release_github_url(url):
+    url = normalize_github_url(url)
+    url += "/releases/latest"
+    final_url = requests.get(url).url
+    if final_url.endswith("/releases"):
+        raise GithubInvalidBranch(f"no releases for {url}")
+    return final_url
+

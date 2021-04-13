@@ -136,6 +136,15 @@ def get_latest_release_from_api(url, branch=None):
     return get_repo_releases_from_github_api(url)[0]
 
 
+def get_branch_from_latest_release_github_api(url, branch=None):
+    try:
+        return get_latest_release_from_api(url)["name"]
+    except IndexError:
+        raise GithubInvalidBranch(f"no releases for {url}")
+    except Exception as e:
+        raise GithubAPIRateLimited
+
+
 def get_file_from_github_api(url, filepath, branch=None):
     author, repo = author_repo_from_github_url(url)
     branch = branch or get_branch_from_github_api(url)
