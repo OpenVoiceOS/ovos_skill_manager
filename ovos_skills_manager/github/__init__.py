@@ -125,7 +125,7 @@ def get_branch(url):
 
 def get_branch_from_github_releases(url, branch=None):
     try:
-        return get_branch_from_skill_json_github_api(url, branch)
+        return get_branch_from_latest_release_github_api(url)
     except GithubAPIRateLimited:
         return get_branch_from_latest_release_github_url(url)
 

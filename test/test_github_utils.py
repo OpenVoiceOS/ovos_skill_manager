@@ -37,6 +37,18 @@ class TestGithubUrlParsing(unittest.TestCase):
             GithubInvalidBranch, get_branch_from_github_url, normie
         )
 
+        normie = "https://github.com/JarbasSkills/skill-dagon"
+        # implicit tag in url
+        self.assertEqual(
+            get_branch_from_github_url(normie + "/releases/tag/v0.4.0"),
+            "v0.4.0"
+        )
+        # implicit commit in url
+        self.assertEqual(
+            get_branch_from_github_url(normie + "/commit/1cdb0b9d2f2cc855dae281f719da0a0833d29cad"),
+            "1cdb0b9d2f2cc855dae281f719da0a0833d29cad"
+        )
+
     def test_author_repo_from_url(self):
         url = "https://github.com/JarbasSkills/skill-wolfie"
         self.assertEqual(author_repo_from_github_url(url),
@@ -87,7 +99,7 @@ class TestGithubUrlParsing(unittest.TestCase):
         self.assertEqual(download_url_from_github_url(url, branch=branch), dl)
 
 
-# NOTE bellow make actual http requests
+# NOTE below make actual http requests
 class TestGithubUrlValidation(unittest.TestCase):
 
     def test_branch(self):
