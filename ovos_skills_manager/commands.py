@@ -68,8 +68,7 @@ def enable(appstore):
 
 #region install
 @osm_commands.command()
-@click.option('--skill', prompt='skill to install (url or search term)',
-              help='skill to install')
+@click.argument('skill', required=False)
 @click.option('--branch', type=str,
               help='select skill github branch to use')
 @click.option('--folder', type=str, default="/opt/mycroft/skills",
@@ -92,6 +91,8 @@ def enable(appstore):
               help='ignore upper/lower case, default ignore')
 def install(method, skill, fuzzy, no_ignore_case, thresh, appstore, search,
             branch, folder):
+    if skill is None:
+        skill = click.prompt('skill to install (url or search term)')
     _install.install(method, skill, fuzzy, no_ignore_case, thresh, appstore, search,
             branch, folder)
 #endregion install
