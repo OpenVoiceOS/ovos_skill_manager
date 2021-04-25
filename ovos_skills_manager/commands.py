@@ -23,7 +23,7 @@ from ovos_skills_manager.scripts import \
 
 #region COMMAND DEFINITIONS
 
-@click.group(name='osm', cls=DefaultGroup)
+@click.group(name='osm', cls=DefaultGroup, help="See also: osm COMMAND --help")
 def osm_commands():
     pass
 
