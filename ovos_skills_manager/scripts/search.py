@@ -48,22 +48,7 @@ def search_skill(method, query, fuzzy, no_ignore_case, thresh, appstore):
     return skills
 
 
-@click.command()
-@click.option('--query', prompt='search term',
-              help='Search a skill with this query')
-@click.option('--method', default="all",  # case_sensitive=False,
-              type=click.Choice(SEARCH_OPTIONS),
-              help='match this metadata field when searching')
-@click.option('--appstore', default="default",  # case_sensitive=False,
-              type=click.Choice(APPSTORE_OPTIONS),
-              help='search a specific appstore, by default searches '
-                   'appstores enabled in config file')
-@click.option('--fuzzy/--exact', default=True, help='exact or fuzzy matching')
-@click.option('--thresh', type=click.IntRange(0, 100, clamp=True), default=80,
-              help='fuzzy matching threshold from 0 (everything is a match) '
-                   'to 100 (exact match)')
-@click.option('--no-ignore-case', default=False, is_flag=True,
-              help='ignore upper/lower case')
+
 def search(method, query, fuzzy, no_ignore_case, thresh, appstore):
     skills = search_skill(method, query, fuzzy, no_ignore_case,
                           thresh, appstore)

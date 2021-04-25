@@ -5,10 +5,6 @@ from pprint import pformat
 APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "andlo", "neon", "all", "default"]
 
 
-@click.command()
-@click.option('--appstore', default="all",
-              type=click.Choice(APPSTORE_OPTIONS),
-              help='print config of a specific appstore')
 def print_config(appstore):
     osm = OVOSSkillsManager()
     if appstore == "all":
