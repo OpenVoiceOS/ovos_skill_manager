@@ -49,7 +49,6 @@ def search_skill(method, query, fuzzy, no_ignore_case, thresh, appstore):
 
 def install(method, skill, fuzzy, no_ignore_case, thresh, appstore, search,
             branch, folder):
-    set_github_token(OVOSSkillsManager().appstores[appstore].get("auth_token"))
     if search:
         skills = search_skill(method, skill, fuzzy, no_ignore_case,
                               thresh, appstore)

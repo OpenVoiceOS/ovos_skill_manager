@@ -24,6 +24,6 @@ setup(
     description='Open Voice OS skill manager',
     entry_points='''
         [console_scripts]
-        osm=ovos_skills_manager.__main__:osm_commands
+        osm=ovos_skills_manager.commands:osm_commands
     ''',
 )
