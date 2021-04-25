@@ -20,17 +20,12 @@ from ovos_skills_manager.scripts import \
     sync as _sync
 #endregion
 
-#region COMMAND GROUP DEFINITIONS
-@click.group(name='osm', cls=DefaultGroup, default='\0', default_if_no_args=True)
-def osm_commands():
-    pass
-
-@osm_commands.command('\0', hidden=True)
-def _osm():
-    click.echo("this is the default if no args are passed to osm")
-# endregion COMMAND GROUP DEFINITIONS
 
 #region COMMAND DEFINITIONS
+
+@click.group(name='osm', cls=DefaultGroup)
+def osm_commands():
+    pass
 
 #region add-auth
 @osm_commands.command()
