@@ -92,7 +92,7 @@ def enable(appstore):
 def install(method, skill, fuzzy, no_ignore_case, thresh, appstore, search,
             branch, folder):
     if skill is None:
-        skill = click.prompt('skill to install (url or search term)')
+        skill = click.prompt('Skill to install (url or search term)')
     _install.install(method, skill, fuzzy, no_ignore_case, thresh, appstore, search,
             branch, folder)
 #endregion install
@@ -111,8 +111,7 @@ def priority(appstore, priority):
 
 #region search
 @osm_commands.command()
-@click.option('--query', prompt='search term',
-              help='Search a skill with this query')
+@click.argument('query', required=False)
 @click.option('--method', default="all",  # case_sensitive=False,
               type=click.Choice(_search.SEARCH_OPTIONS),
               help='match this metadata field when searching')
@@ -127,6 +126,8 @@ def priority(appstore, priority):
 @click.option('--no-ignore-case', default=False, is_flag=True,
               help='ignore upper/lower case')
 def search(method, query, fuzzy, no_ignore_case, thresh, appstore):
+    if query is None:
+        query = click.prompt('Search term')
     _search.search(method, query, fuzzy, no_ignore_case, thresh, appstore)
 #endregion search
 
