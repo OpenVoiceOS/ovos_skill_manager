@@ -28,7 +28,7 @@ def osm_commands():
     pass
 
 #region add-auth
-@osm_commands.command()
+@osm_commands.command(help='Add an auth token')
 @click.option('--appstore', prompt='select appstore',
               type=click.Choice(_add_auth.APPSTORE_OPTIONS),
               help='add auth token for a specific appstore')
@@ -40,7 +40,7 @@ def add_auth(appstore, token):
 #endregion add-auth
 
 #region config
-@osm_commands.command()
+@osm_commands.command(help="Print an appstore's config")
 @click.option('--appstore', default="all",
               type=click.Choice(_config_print.APPSTORE_OPTIONS),
               help='print config of a specific appstore')
@@ -49,25 +49,27 @@ def print_config(appstore):
 #endregion config
 
 #region disable
-@osm_commands.command()
-@click.option('--appstore', prompt='select appstore to disable',
-              type=click.Choice(_disable.APPSTORE_OPTIONS),
-              help='disable a specific appstore')
+@osm_commands.command(help='Disable an appstore')
+@click.argument('appstore', required=False)
 def disable(appstore):
+    if appstore is None:
+        appstore = click.prompt('select appstore to enable',
+                    type=click.Choice(_enable.APPSTORE_OPTIONS))
     _disable.disable(appstore)
 #endregion disable
 
 #region enable
-@osm_commands.command()
-@click.option('--appstore', prompt='select appstore to enable',
-              type=click.Choice(_enable.APPSTORE_OPTIONS),
-              help='enable a specific appstore')
+@osm_commands.command(help='Enable an appstore')
+@click.argument('appstore', required=False)
 def enable(appstore):
+    if appstore is None:
+        appstore = click.prompt('select appstore to enable',
+                    type=click.Choice(_enable.APPSTORE_OPTIONS))
     _enable.enable(appstore)
 #endregion enable
 
 #region install
-@osm_commands.command()
+@osm_commands.command(help='Install a Skill')
 @click.argument('skill', required=False)
 @click.option('--branch', type=str,
               help='select skill github branch to use')
@@ -75,11 +77,11 @@ def enable(appstore):
               help='path where skill will be installed, default /opt/mycroft/skills')
 @click.option('--search', default=False, is_flag=True,
               help="search appstores, otherwise assume it's a github url")
-@click.option('--appstore', default="default",  # case_sensitive=False,
+@click.option('--appstore', default="default",
               type=click.Choice(_install.APPSTORE_OPTIONS),
               help='search a specific appstore, default search '
                    'appstores enabled in config file')
-@click.option('--method', default="all",  # case_sensitive=False,
+@click.option('--method', default="all",
               type=click.Choice(_install.SEARCH_OPTIONS),
               help='match this metadata field when searching')
 @click.option('--fuzzy/--exact', default=True,
@@ -98,7 +100,7 @@ def install(method, skill, fuzzy, no_ignore_case, thresh, appstore, search,
 #endregion install
 
 #region priority
-@osm_commands.command()
+@osm_commands.command(help="Set an appstore's priority")
 @click.option('--appstore', prompt='select appstore',
               type=click.Choice(_priority.APPSTORE_OPTIONS),
               help='change priority of a specific appstore')
@@ -110,12 +112,12 @@ def priority(appstore, priority):
 #endregion priority
 
 #region search
-@osm_commands.command()
+@osm_commands.command(help='Search for Skills')
 @click.argument('query', required=False)
-@click.option('--method', default="all",  # case_sensitive=False,
+@click.option('--method', default="all",
               type=click.Choice(_search.SEARCH_OPTIONS),
               help='match this metadata field when searching')
-@click.option('--appstore', default="default",  # case_sensitive=False,
+@click.option('--appstore', default="default",
               type=click.Choice(_search.APPSTORE_OPTIONS),
               help='search a specific appstore, by default searches '
                    'appstores enabled in config file')
@@ -132,8 +134,8 @@ def search(method, query, fuzzy, no_ignore_case, thresh, appstore):
 #endregion search
 
 #region sync
-@osm_commands.command()
-@click.option('--appstore', default="default",  # case_sensitive=False,
+@osm_commands.command(help="Sync Skill catalogs")
+@click.option('--appstore', default="default",
               type=click.Choice(_sync.APPSTORE_OPTIONS),
               help='sync a specific appstore, default syncs'
                    ' appstores enabled in config file')
