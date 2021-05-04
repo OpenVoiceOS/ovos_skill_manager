@@ -5,19 +5,6 @@ from ovos_skills_manager import OVOSSkillsManager
 APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "andlo", "neon", "default", "all"]
 
 
-@click.command()
-@click.option('--appstore', default="default",  # case_sensitive=False,
-              type=click.Choice(APPSTORE_OPTIONS),
-              help='sync a specific appstore, default syncs'
-                   ' appstores enabled in config file')
-@click.option('--rebuild', default=False, is_flag=True,
-              help='rebuild skill database, if not set only sync data for new '
-                   'skills')
-@click.option('--merge', default=False, is_flag=True,
-              help='merge skill data, if not set replaces skill entries')
-@click.option('--github', default=False, is_flag=True,
-              help='augment skill data from github, by default only saves '
-                   'data provided directly by the appstore')
 def sync(appstore, rebuild, merge, github):
     osm = OVOSSkillsManager()
     if github:

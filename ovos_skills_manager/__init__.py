@@ -9,5 +9,3 @@ from ovos_skills_manager.osm import OVOSSkillsManager
 from ovos_utils.log import LOG
 
 LOG.set_level("INFO")
-
-

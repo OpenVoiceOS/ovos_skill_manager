@@ -24,13 +24,6 @@ setup(
     description='Open Voice OS skill manager',
     entry_points='''
         [console_scripts]
-        osm-sync=ovos_skills_manager.scripts.sync:sync
-        osm-search=ovos_skills_manager.scripts.search:search
-        osm-install=ovos_skills_manager.scripts.install:install
-        osm-enable=ovos_skills_manager.scripts.enable:enable
-        osm-disable=ovos_skills_manager.scripts.disable:disable
-        osm-priority=ovos_skills_manager.scripts.priority:priority
-        osm-print=ovos_skills_manager.scripts.config_print:print_config
-        osm-auth=ovos_skills_manager.scripts.add_auth:add_auth
+        osm=ovos_skills_manager.commands:osm_commands
     ''',
 )

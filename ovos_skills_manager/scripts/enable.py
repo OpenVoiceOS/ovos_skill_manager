@@ -1,14 +1,9 @@
 import click
 from ovos_skills_manager import OVOSSkillsManager
 
-
 APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "andlo", "neon", "all"]
 
 
-@click.command()
-@click.option('--appstore', prompt='select appstore to enable',
-              type=click.Choice(APPSTORE_OPTIONS),
-              help='enable a specific appstore')
 def enable(appstore):
     osm = OVOSSkillsManager()
     original = osm.get_active_appstores()
