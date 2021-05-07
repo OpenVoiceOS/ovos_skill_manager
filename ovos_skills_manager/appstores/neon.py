@@ -11,7 +11,7 @@ def get_neon_skills_from_api(parse_github=False, skiplist=None):
     skills_url = "https://api.github.com/repos/NeonGeckoCom/neon-skills-submodules/contents/skill-metadata.json"
     skill_json = requests.get(skills_url).json()
     if skill_json.get("message") == 'Not Found' or "API rate limit exceeded" \
-            in skill_json.get("message"):
+            in skill_json.get("message", ""):
         raise AuthenticationError
 
     if skill_json.get("encoding") == "base64":
@@ -29,7 +29,7 @@ def get_neon_skills_from_api(parse_github=False, skiplist=None):
 
 def get_neon_skills(parse_github=False, skiplist=None):
     skiplist = skiplist or []
-    skills_url = "https://raw.githubusercontent.com/NeonGeckoCom/neon-skills-submodules/master/skill-metadata.json?token=AOJKQZXUZELNJESFKZUHPITAGVWQ2"
+    skills_url = "https://raw.githubusercontent.com/NeonGeckoCom/neon-skills-submodules/master/skill-metadata.json"
     skill_json = requests.get(skills_url).json()
     for skill in skill_json.values():
         if skill["url"] in skiplist:
