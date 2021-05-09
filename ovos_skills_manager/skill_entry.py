@@ -1,5 +1,9 @@
 import json
+import shutil
+
 from os.path import isfile, expanduser, join, isdir
+from re import match as re_match
+
 from ovos_skills_manager.session import SESSION as requests
 from ovos_skills_manager.exceptions import GithubInvalidUrl, \
     JSONDecodeError, GithubFileNotFound
@@ -12,7 +16,6 @@ from ovos_skill_installer import install_skill
 from ovos_skills_manager.requirements import install_system_deps, pip_install
 from ovos_utils.log import LOG
 from ovos_utils.enclosure import detect_enclosure
-import shutil
 
 
 class SkillEntry:
@@ -72,6 +75,9 @@ class SkillEntry:
 
     @staticmethod
     def from_github_url(url, branch=None):
+        if not branch:
+            if re_match(".*/tree/.*(.git)?", url):
+                branch = url[url.rindex('/')+1:].strip('.git')
         return SkillEntry.from_json({"url": url, "branch": branch}, True)
 
     # properties
