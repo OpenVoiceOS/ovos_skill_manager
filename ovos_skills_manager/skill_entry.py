@@ -2,11 +2,10 @@ import json
 import shutil
 
 from os.path import isfile, expanduser, join, isdir
-from re import match as re_match
 
 from ovos_skills_manager.session import SESSION as requests
 from ovos_skills_manager.exceptions import GithubInvalidUrl, \
-    JSONDecodeError, GithubFileNotFound
+    JSONDecodeError, GithubFileNotFound, GithubInvalidBranch
 from ovos_skills_manager.github import download_url_from_github_url, \
     get_branch, get_skill_data, get_requirements
 from ovos_utils.json_helper import merge_dict
@@ -42,8 +41,13 @@ class SkillEntry:
             if data.startswith("http"):
                 url = data
                 if "github" in url:
-                    # url parsed in github info step bellow
                     data = {"url": url}
+                    try:
+                        data["branch"] = get_branch(url)
+                    except GithubInvalidBranch:
+                        # repo is parsed in github info step below,
+                        # might detect branch if other ways (eg, skill.json)
+                        pass
                 else:
                     try:
                         res = requests.get(url).text
@@ -75,9 +79,7 @@ class SkillEntry:
 
     @staticmethod
     def from_github_url(url, branch=None):
-        if not branch:
-            if re_match(".*/tree/.*(.git)?", url):
-                branch = url[url.rindex('/')+1:].strip('.git')
+        branch = branch or get_branch(url)
         return SkillEntry.from_json({"url": url, "branch": branch}, True)
 
     # properties

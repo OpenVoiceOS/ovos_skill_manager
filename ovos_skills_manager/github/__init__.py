@@ -102,7 +102,6 @@ def get_skill_data(url, branch=None):
     try:
         data = merge_dict(data, get_skill_json(url, branch),
                           merge_lists=True, skip_empty=True, no_dupes=True)
-        data["branch"] = branch
     except GithubFileNotFound:
         pass
 
