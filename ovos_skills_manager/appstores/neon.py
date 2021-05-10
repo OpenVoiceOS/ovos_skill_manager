@@ -41,10 +41,10 @@ def get_neon_skills(parse_github=False, skiplist=None):
 
 
 class NeonSkills(AbstractAppstore):
-    def __init__(self, parse_github=False):
-        super().__init__("Neon", parse_github, appstore_id="neon")
+    def __init__(self, *args, **kwargs):
+        super().__init__("Neon", appstore_id="neon", *args, **kwargs)
 
     def get_skills_list(self, skiplist=None):
         skiplist = skiplist or []
         return get_neon_skills(parse_github=self.parse_github,
-                                        skiplist=skiplist)
+                               skiplist=skiplist)

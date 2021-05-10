@@ -56,21 +56,31 @@ class OVOSSkillsManager:
                                               default_config,
                                               new_only=True,
                                               no_dupes=True)
+        self._boostrap_tracker = {}
         self.save_config()
         self._threads = []
 
-    def get_active_appstores(self):
+    def get_active_appstores(self, bootstrap=False):
         stores = {}
         for appstore_id in self.config["appstores"]:
             if self.config["appstores"][appstore_id]["active"]:
-                stores[appstore_id] = self.get_appstore(appstore_id)
+                if bootstrap and appstore_id not in self._boostrap_tracker:
+                    self._boostrap_tracker[appstore_id] = True
+                elif bootstrap and appstore_id in self._boostrap_tracker:
+                    bootstrap = False
+                stores[appstore_id] = self.get_appstore(appstore_id,
+                                                        bootstrap=bootstrap)
         return stores
 
-    def get_appstore(self, appstore_id):
+    def get_appstore(self, appstore_id, bootstrap=True):
         if self.config["appstores"][appstore_id]["active"]:
             parse_github = self.config["appstores"][appstore_id]["parse_github"]
             store = self.name_to_appstore(appstore_id)
-            return store(parse_github=parse_github)
+            if bootstrap and appstore_id not in self._boostrap_tracker:
+                self._boostrap_tracker[appstore_id] = True
+            elif bootstrap and appstore_id in self._boostrap_tracker:
+                bootstrap = False
+            return store(parse_github=parse_github, bootstrap=bootstrap)
         return None
 
     @staticmethod
