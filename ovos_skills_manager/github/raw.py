@@ -42,22 +42,6 @@ def get_main_branch_from_github_url(url):
     encoded = html.split("default-branch=\"")[1].split('"')[0]
     return base64.b64decode(encoded).decode("utf-8")
 
-def cache_repo_requests(url, branch=None):
-    # this looks dumb, but offers a good speed up since this package uses
-    # requests_cache
-    # TODO solve rate limiting
-    # for t in GithubUrls:
-    #         def cache():
-    #             try:
-    #                 match_url_template(url, t, branch)
-    #             except GithubInvalidUrl:
-    #                 pass
-    #             except Exception as e:
-    #                 LOG.exception(e)
-    #
-    #         create_daemon(cache)
-    return
-
 
 def get_repo_releases_from_github_url(url):
     author, repo = author_repo_from_github_url(url)

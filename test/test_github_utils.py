@@ -48,6 +48,11 @@ class TestGithubUrlParsing(unittest.TestCase):
             get_branch_from_github_url(normie + "/commit/1cdb0b9d2f2cc855dae281f719da0a0833d29cad"),
             "1cdb0b9d2f2cc855dae281f719da0a0833d29cad"
         )
+        # pip style
+        self.assertEqual(
+            get_branch_from_github_url(normie + "@dev"),
+            "dev"
+        )
 
     def test_author_repo_from_url(self):
         url = "https://github.com/JarbasSkills/skill-wolfie"
