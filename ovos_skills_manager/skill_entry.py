@@ -68,9 +68,9 @@ class SkillEntry:
         if parse_github:
             url = data.get("url", "")
             if "github" in url:
-                branch = data.get("branch")
+                data["branch"] = data.get("branch") or get_branch(url)
                 try:
-                    github_data = get_skill_data(url, branch)
+                    github_data = get_skill_data(url, data["branch"])
                     data = merge_dict(data, github_data, merge_lists=True,
                                       skip_empty=True, no_dupes=True)
                 except GithubInvalidUrl as e:
