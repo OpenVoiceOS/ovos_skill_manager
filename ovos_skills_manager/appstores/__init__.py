@@ -40,7 +40,7 @@ class AbstractAppstore:
         clear_github_token()
 
     def bootstrap(self, new_only=True):
-        base_db = join(dirname(dirname(__file__)), "res", "bootstrap_o",
+        base_db = join(dirname(dirname(__file__)), "res",
                        self.db.name + ".jsondb")
         if not len(self.db):
             LOG.info("Bootstrapping {database}, this might take a "
