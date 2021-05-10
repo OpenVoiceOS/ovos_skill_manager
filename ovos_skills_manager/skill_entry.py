@@ -42,12 +42,8 @@ class SkillEntry:
                 url = data
                 if "github" in url:
                     data = {"url": url}
-                    try:
-                        data["branch"] = get_branch(url)
-                    except GithubInvalidBranch:
-                        # repo is parsed in github info step below,
-                        # might detect branch if other ways (eg, skill.json)
-                        pass
+                    # repo is parsed in github info step below,
+                    # branch detected when parsing data dict
                 else:
                     try:
                         res = requests.get(url).text
