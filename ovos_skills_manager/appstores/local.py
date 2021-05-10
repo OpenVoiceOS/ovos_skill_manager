@@ -94,8 +94,9 @@ def get_local_skills(parse_github=False, skiplist=None):
 
 
 class InstalledSkills(AbstractAppstore):
-    def __init__(self, parse_github=False):
-        super().__init__("InstalledSkills", parse_github, appstore_id="local")
+    def __init__(self, *args, **kwargs):
+        super().__init__("InstalledSkills", appstore_id="local",
+                         *args, **kwargs)
 
     def get_skills_list(self, skiplist=None):
         skiplist = skiplist or []

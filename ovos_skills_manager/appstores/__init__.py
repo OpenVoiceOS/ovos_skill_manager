@@ -12,17 +12,19 @@ from os import remove
 
 
 class AbstractAppstore:
-    def __init__(self, name, parse_github=False, appstore_id=None):
+    def __init__(self, name, parse_github=False, appstore_id=None,
+                 bootstrap=False):
         self.name = name
         default_id = re.sub(r'[^\w]', ' ',
                             name.lower().replace("_", " ").replace("-", " "))
         self.appstore_id = appstore_id or default_id
         self.db = JsonDatabaseXDG(name)
         self.parse_github = parse_github
-        try:
-            self.bootstrap()
-        except AuthenticationError:
-            pass
+        if bootstrap:
+            try:
+                self.bootstrap()
+            except AuthenticationError:
+                pass
 
     def authenticate(self, auth_token=None, bootstrap=True):
         if auth_token is None:
@@ -37,8 +39,8 @@ class AbstractAppstore:
     def clear_authentication():
         clear_github_token()
 
-    def bootstrap(self):
-        base_db = join(dirname(dirname(__file__)), "res", "bootstrap_o",
+    def bootstrap(self, new_only=True):
+        base_db = join(dirname(dirname(__file__)), "res",
                        self.db.name + ".jsondb")
         if not len(self.db):
             LOG.info("Bootstrapping {database}, this might take a "
@@ -49,7 +51,7 @@ class AbstractAppstore:
                 self.db.reset()
             else:
                 LOG.debug("Downloading skill list")
-                self.sync_skills_list()
+                self.sync_skills_list(new_only=new_only)
 
     def clear_cache(self):
         if isfile(self.db.path):
