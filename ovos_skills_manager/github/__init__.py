@@ -120,6 +120,16 @@ def get_skill_data(url, branch=None):
     if explicit_branch:
         LOG.debug(f"explicit branch in url selected: {branch}")
         data["branch"] = explicit_branch
+
+    if data.get("download_url"):
+        LOG.warning("the skill provides a download url, this is dangerous "
+                    "and OSM will discard it, skill.json should only define "
+                    "github url and branch, the download_url will be "
+                    "auto-generated"
+                    )
+        LOG.debug(f"discarded url: {data['download_url']}")
+        data.pop("download_url")
+
     return data
 
 
