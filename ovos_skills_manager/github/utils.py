@@ -96,10 +96,12 @@ def get_branch_from_github_url(url, validate=False):
     url = url.replace("/blob/", "/tree/")
     if "/tree/" in url:
         branch = url.split("/tree/")[-1].split("/")[0]
-    if "/commit/" in url:
+    elif "/commit/" in url:
         branch = url.split("/commit/")[-1].split("/")[0]
-    if "/tag/" in url:
+    elif "/tag/" in url:
         branch = url.split("/tag/")[-1].split("/")[0]
+    elif "@" in url:
+        branch = url.split("@")[-1]
 
     if branch:
         if validate:

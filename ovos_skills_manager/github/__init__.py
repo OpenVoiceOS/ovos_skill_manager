@@ -15,7 +15,14 @@ from ovos_skills_manager.utils import desktop_to_json, readme_to_json
 
 def get_skill_data(url, branch=None):
     author, repo = author_repo_from_github_url(url)
-    branch = branch or get_branch(url)
+    explicit_branch = branch
+    if not branch:
+        try:
+            branch = get_branch_from_github_url(url)
+            explicit_branch = branch
+        except GithubInvalidBranch:
+            branch = get_main_branch(url)
+
     data = {
         "authorname": author,
         "foldername": repo,
@@ -29,6 +36,7 @@ def get_skill_data(url, branch=None):
         api_data = get_repo_data(url)
         # only replace branch if not found by prev methods
         branch = branch or api_data['default_branch']
+        LOG.debug(f"default branch extracted from github api: {branch}")
         data["branch"] = branch
         data["short_description"] = api_data['description']
         data["foldername"] = api_data["name"]
@@ -55,6 +63,8 @@ def get_skill_data(url, branch=None):
         elif len(releases) > 0:
             data["version"] = data["branch"] = branch = releases[0]["name"]
             data["download_url"] = releases[0]["tarball_url"]
+            LOG.debug(f"default branch extracted from github releases:"
+                      f" {branch}")
     except GithubSkillEntryError as e:
         pass
 
@@ -102,9 +112,14 @@ def get_skill_data(url, branch=None):
     try:
         data = merge_dict(data, get_skill_json(url, branch),
                           merge_lists=True, skip_empty=True, no_dupes=True)
+        branch = data.get("branch")
+        LOG.debug(f"default branch extracted from json: {branch}")
     except GithubFileNotFound:
         pass
 
+    if explicit_branch:
+        LOG.debug(f"explicit branch in url selected: {branch}")
+        data["branch"] = explicit_branch
     return data
 
 

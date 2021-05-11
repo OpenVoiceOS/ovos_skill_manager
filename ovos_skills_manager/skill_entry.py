@@ -1,10 +1,13 @@
 import json
+import shutil
+
 from os.path import isfile, expanduser, join, isdir
+
 from ovos_skills_manager.session import SESSION as requests
 from ovos_skills_manager.exceptions import GithubInvalidUrl, \
-    JSONDecodeError, GithubFileNotFound
+    JSONDecodeError, GithubFileNotFound, GithubInvalidBranch
 from ovos_skills_manager.github import download_url_from_github_url, \
-    get_branch, get_skill_data, get_requirements
+    get_branch, get_skill_data, get_requirements, get_branch_from_github_url
 from ovos_utils.json_helper import merge_dict
 from ovos_utils.skills import blacklist_skill, whitelist_skill, \
     make_priority_skill, get_skills_folder
@@ -12,7 +15,6 @@ from ovos_skill_installer import install_skill
 from ovos_skills_manager.requirements import install_system_deps, pip_install
 from ovos_utils.log import LOG
 from ovos_utils.enclosure import detect_enclosure
-import shutil
 
 
 class SkillEntry:
@@ -39,8 +41,9 @@ class SkillEntry:
             if data.startswith("http"):
                 url = data
                 if "github" in url:
-                    # url parsed in github info step bellow
                     data = {"url": url}
+                    # repo is parsed in github info step below,
+                    # branch detected when parsing data dict
                 else:
                     try:
                         res = requests.get(url).text
@@ -61,9 +64,8 @@ class SkillEntry:
         if parse_github:
             url = data.get("url", "")
             if "github" in url:
-                branch = data.get("branch")
                 try:
-                    github_data = get_skill_data(url, branch)
+                    github_data = get_skill_data(url, data.get("branch"))
                     data = merge_dict(data, github_data, merge_lists=True,
                                       skip_empty=True, no_dupes=True)
                 except GithubInvalidUrl as e:
@@ -71,8 +73,9 @@ class SkillEntry:
         return SkillEntry(data)
 
     @staticmethod
-    def from_github_url(url, branch=None):
-        return SkillEntry.from_json({"url": url, "branch": branch}, True)
+    def from_github_url(url, branch=None, parse_github=True):
+        return SkillEntry.from_json({"url": url, "branch": branch},
+                                    parse_github=parse_github)
 
     # properties
     @property
