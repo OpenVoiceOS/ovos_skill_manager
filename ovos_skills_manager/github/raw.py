@@ -336,7 +336,7 @@ def get_skill_from_github_url(url, branch=None):
             try:
                 release = get_repo_releases_from_github_url(url)[0]
                 data["branch"] = data["version"] = branch = release["name"]
-                data["download_url"] = release["tarball_url"]
+                #data["download_url"] = release["tarball_url"]
             except GithubInvalidBranch:
                 pass  # unknown branch...
 
@@ -359,9 +359,9 @@ def get_skill_from_github_url(url, branch=None):
 
     if branch:  # final, all sources checked by priority order
         data["branch"] = branch
-        data["download_url"] = GithubUrls.DOWNLOAD.format(author=author,
-                                                          repo=repo,
-                                                          branch=branch)
+        #data["download_url"] = GithubUrls.DOWNLOAD.format(author=author,
+        #                                                  repo=repo,
+        #                                                  branch=branch)
 
     try:
         data["license"] = get_license_type_from_github_url(url, branch)

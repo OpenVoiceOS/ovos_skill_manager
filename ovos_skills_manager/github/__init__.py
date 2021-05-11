@@ -57,12 +57,12 @@ def get_skill_data(url, branch=None):
             for r in releases:
                 if r["name"] == branch or r["commit"]["sha"] == branch:
                     data["version"] = r["name"]
-                    data["download_url"] = r["tarball_url"]
+                    # data["download_url"] = r["tarball_url"]
                     break
         # just pick latest release if branch not defined
         elif len(releases) > 0:
             data["version"] = data["branch"] = branch = releases[0]["name"]
-            data["download_url"] = releases[0]["tarball_url"]
+            # data["download_url"] = releases[0]["tarball_url"]
             LOG.debug(f"default branch extracted from github releases:"
                       f" {branch}")
     except GithubSkillEntryError as e:
