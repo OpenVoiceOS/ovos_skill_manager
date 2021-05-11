@@ -6,6 +6,8 @@ from os.path import join, dirname, isfile
 from ovos_skills_manager import SkillEntry
 from ovos_skills_manager.exceptions import AuthenticationError
 from ovos_skills_manager.session import set_github_token, clear_github_token
+from ovos_skills_manager.github import get_branch_from_github_url,\
+    normalize_github_url, GithubInvalidBranch
 import shutil
 import re
 from os import remove
@@ -125,14 +127,23 @@ class AbstractAppstore:
 
     def search_skills_by_url(self, url, as_json=False):
         query = Query(self.db)
+        try:
+            # if branch implicit in url, be sure to use it!
+            branch = get_branch_from_github_url(url)
+        except GithubInvalidBranch:
+            branch = None
+        url = normalize_github_url(url)
         query.equal("url", url, ignore_case=True)
         results = query.result
         for idx in range(0, len(results)):
             if "appstore" not in results[idx]:
                 results[idx]["appstore"] = self.appstore_id
+            if branch:
+                # TODO what if branch does not exist? should throw exception
+                results[idx]["branch"] = branch
         if as_json:
             return query.result
-        return [SkillEntry.from_json(s, False) for s in results]
+        return [SkillEntry.from_json(s, parse_github=False) for s in results]
 
     def search_skills_by_category(self, category, as_json=False,
                                   fuzzy=True, thresh=0.85, ignore_case=True):
