@@ -57,12 +57,12 @@ def get_skill_data(url, branch=None):
             for r in releases:
                 if r["name"] == branch or r["commit"]["sha"] == branch:
                     data["version"] = r["name"]
-                    data["download_url"] = r["tarball_url"]
+                    # data["download_url"] = r["tarball_url"]
                     break
         # just pick latest release if branch not defined
         elif len(releases) > 0:
             data["version"] = data["branch"] = branch = releases[0]["name"]
-            data["download_url"] = releases[0]["tarball_url"]
+            # data["download_url"] = releases[0]["tarball_url"]
             LOG.debug(f"default branch extracted from github releases:"
                       f" {branch}")
     except GithubSkillEntryError as e:
@@ -120,6 +120,16 @@ def get_skill_data(url, branch=None):
     if explicit_branch:
         LOG.debug(f"explicit branch in url selected: {branch}")
         data["branch"] = explicit_branch
+
+    if data.get("download_url"):
+        # TODO deprecate this warning
+        LOG.warning("the skill.json provides a download url, this used to be "
+                    "supported but it is dangerous and OSM will discard it, "
+                    "skill.json should only define github url and branch, "
+                    "the download_url will be auto-generated")
+        LOG.debug(f"discarded url: {data['download_url']}")
+        data.pop("download_url")
+
     return data
 
 

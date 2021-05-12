@@ -448,11 +448,11 @@ def get_skill_from_api(url, branch=None, strict=False):
             for r in releases:
                 if r["name"] == branch or r["commit"]["sha"] == branch:
                     data["version"] = r["name"]
-                    data["download_url"] = r["tarball_url"]
+                    #data["download_url"] = r["tarball_url"]
                     break
         else:
             data["version"] = releases[0]["name"]
-            data["download_url"] = releases[0]["tarball_url"]
+            #data["download_url"] = releases[0]["tarball_url"]
     except GithubAPIException as e:
         LOG.error("Failed to retrieve releases data from github api")
         if strict:

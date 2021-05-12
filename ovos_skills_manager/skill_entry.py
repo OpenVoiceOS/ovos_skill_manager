@@ -140,14 +140,13 @@ class SkillEntry:
 
     @property
     def download_url(self):
-        """ provided in .json file """
-        return self.json.get("download_url") or \
-               download_url_from_github_url(self.url, self.branch)
+        """ generated from github url directly"""
+        return download_url_from_github_url(self.url, self.branch)
 
     @property
     def default_download_url(self):
-        """ generated from github url directly"""
-        return download_url_from_github_url(self.url, self.branch)
+        """ sugar / backwards compat """
+        return self.download_url
 
     @property
     def requirements(self):
