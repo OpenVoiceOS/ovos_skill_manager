@@ -259,6 +259,12 @@ class SkillEntry:
 
         LOG.info("Installing skill: {url} from branch: {branch}".format(
             url=self.url, branch=self.branch))
+
+        # TODO: This is just patching a bug in requirements parsing DM
+        if isinstance(self.requirements, list):
+            LOG.warning(self.requirements)
+            self._data["requirements"] = {"python": self.requirements}
+
         skills = self.requirements.get("skill", [])
         if skills:
             LOG.info('Installing required skills')
