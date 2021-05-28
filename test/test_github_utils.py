@@ -4,7 +4,7 @@ from ovos_skills_manager.github.utils import *
 # TODO setup a test skill repo, since a random url can simply vanish
 
 
-class TestGithubUrlParsing(unittest.TestCase):
+class TestGithubUtils(unittest.TestCase):
 
     def test_normalize_url(self):
         normie = "https://github.com/JarbasSkills/skill-wolfie"
@@ -186,3 +186,7 @@ class TestGithubUrlValidation(unittest.TestCase):
         self.assertEqual(match_url_template(url, template), match)
 
         # TODO manifest, skill_requirements, desktop, icon, skill_json
+
+
+if __name__ == '__main__':
+    unittest.main()

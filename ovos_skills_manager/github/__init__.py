@@ -110,6 +110,7 @@ def get_skill_data(url, branch=None):
     # augment with json data
     # this should take precedence over everything else
     try:
+        data["requirements"]["system"] = {k: v.split() for k, v in data["requirements"].get("system", {}).items()}
         data = merge_dict(data, get_skill_json(url, branch),
                           merge_lists=True, skip_empty=True, no_dupes=True)
         branch = data.get("branch")

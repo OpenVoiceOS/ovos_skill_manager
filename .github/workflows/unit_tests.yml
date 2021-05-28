@@ -1,0 +1,40 @@
+# This workflow will run unit tests
+
+name: Run Unit Tests
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  unit_tests:
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8, 3.9]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-timeout pytest-cov
+
+      - name: Test Github Branch Parsing
+        run: |
+          pytest tests/test_github_branch_parsing.py
+
+      - name: Test Github Utils
+        run: |
+          pytest tests/test_github_utils.py
+
+      - name: Test License Parsing
+        run: |
+          pytest tests/test_licenses.py
+
+      - name: Test Skill Entry
+        run: |
+          pytest tests/test_skill_entry.py

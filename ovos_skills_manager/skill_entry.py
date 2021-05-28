@@ -74,6 +74,8 @@ class SkillEntry:
 
     @staticmethod
     def from_github_url(url, branch=None, parse_github=True):
+        if '@' in url:
+            url, branch = url.split('@')
         return SkillEntry.from_json({"url": url, "branch": branch},
                                     parse_github=parse_github)
 
@@ -260,11 +262,6 @@ class SkillEntry:
         LOG.info("Installing skill: {url} from branch: {branch}".format(
             url=self.url, branch=self.branch))
 
-        # TODO: This is just patching a bug in requirements parsing DM
-        if isinstance(self.requirements, list):
-            LOG.warning(self.requirements)
-            self._data["requirements"] = {"python": self.requirements}
-
         skills = self.requirements.get("skill", [])
         if skills:
             LOG.info('Installing required skills')
@@ -321,3 +318,6 @@ class SkillEntry:
 
     def __repr__(self):
         return self.skill_name + " " + self.url
+
+    def __eq__(self, other):
+        return self.json == other.json
