@@ -1,4 +1,8 @@
+import os
+import sys
 import unittest
+
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from ovos_skills_manager.scripts.search import search_skill
 
 # APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "andlo", "default", "all"]
