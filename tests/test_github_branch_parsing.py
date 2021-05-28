@@ -15,58 +15,65 @@ from ovos_skills_manager.exceptions import GithubInvalidBranch, \
 
 
 class TestGithubBranchParsing(unittest.TestCase):
+    def test_get_branch_from_url_invalid(self):
+        with self.assertRaises(GithubInvalidBranch):
+            get_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test")
+        with self.assertRaises(GithubInvalidBranch):
+            get_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test/tree/INVALID_BRANCH", True)
+        with self.assertRaises(GithubInvalidBranch):
+            get_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test@INVALID_BRANCH", True)
 
-    def test_branch_from_url(self):
-        url_no_branch = "https://github.com/JarbasSkills/skill-ddg"
-        url_branch = "https://github.com/JarbasSkills/skill-ddg/tree/v0.1.0"
-        blob_url = "https://github.com/OpenVoiceOS/OVOS-skills-store/blob" \
-                   "/f4ab4ea00e47955798c9906c8c03807391bc20f0/skill-icanhazdadjokes.json"
-
-        self.assertEqual(get_branch_from_github_url(url_branch), "v0.1.0")
-        self.assertEqual(get_branch_from_github_url(blob_url),
-                         "f4ab4ea00e47955798c9906c8c03807391bc20f0")
-        self.assertRaises(
-            GithubInvalidBranch, get_branch_from_github_url, url_no_branch
-        )
-
-    def test_branch_from_json(self):
-        master = "https://github.com/JarbasSkills/skill-ddg"
-        v04 = "https://github.com/JarbasSkills/skill-dagon"  # TODO: This needs to be a test repo! DM
-        url_branch = "https://github.com/JarbasSkills/skill-dagon/tree/v0.2"
-        json_url = "https://github.com/OpenVoiceOS/OVOS-skills-store/blob/" \
-                   "f4ab4ea00e47955798c9906c8c03807391bc20f0/skill-icanhazdadjokes.json"
-        no_json = "https://github.com/mycroftai/skill-hello-world"
-        no_json_url = "https://github.com/mycroftai/skill-hello-world/tree/20.02"
-        self.assertEqual(get_branch_from_skill_json_github_url(master),
+    def test_get_branch_from_url_tree(self):
+        self.assertEqual(get_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test/tree/v0.1", True),
+                         "v0.1")
+        self.assertEqual(get_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test/tree/v0.1.1", True),
+                         "v0.1.1")
+        self.assertEqual(get_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test/tree/master", True),
                          "master")
-        self.assertEqual(get_branch_from_skill_json_github_url(v04),
-                         "v0.4.0")
-        self.assertEqual(get_branch_from_skill_json_github_url(url_branch),
-                         "v0.2")
-        self.assertEqual(get_branch_from_skill_json_github_url(json_url),
-                         "v0.1.0")
-        self.assertRaises(
-            GithubFileNotFound, get_branch_from_skill_json_github_url, no_json
-        )
-        self.assertRaises(GithubFileNotFound,
-                          get_branch_from_skill_json_github_url, no_json_url
-                          )
 
-    def test_branch_from_release(self):
-        # TODO: Test repo to parse here!
-        master = "https://github.com/JarbasSkills/skill-ddg"
-        v03 = "https://github.com/JarbasSkills/skill-dagon"
-        url_branch = "https://github.com/JarbasSkills/skill-dagon/tree/v0.2"
-        no_release = "https://github.com/mycroftai/skill-hello-world"
-        self.assertEqual(get_branch_from_latest_release_github_url(master),
-                         "v0.1.0")
-        # self.assertEqual(get_branch_from_latest_release_github_url(v03),
-        #                  "v0.2.1")
-        # self.assertEqual(get_branch_from_latest_release_github_url(url_branch),
-        #                  "v0.2.1")
-        self.assertRaises(GithubInvalidBranch,
-                          get_branch_from_latest_release_github_url, no_release
-                          )
+    def test_get_branch_from_url_at(self):
+        self.assertEqual(get_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test@v0.1", True),
+                         "v0.1")
+        self.assertEqual(get_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test@v0.1.1", True),
+                         "v0.1.1")
+        self.assertEqual(get_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test@master", True),
+                         "master")
+
+    def test_get_branch_from_commit(self):
+        self.assertEqual(get_branch_from_github_url(
+            "https://github.com/NeonDaniel/skill-osm-test/commit/06fabb262077d80c32ffd12ed1092bb914658067", True),
+            "06fabb262077d80c32ffd12ed1092bb914658067")
+
+    def test_get_branch_from_blob(self):
+        self.assertEqual(get_branch_from_github_url(
+            "https://github.com/NeonDaniel/skill-osm-test/blob/v0.1/skill.json", True), "v0.1")
+
+    def test_branch_from_json_default_branch(self):
+        self.assertEqual(get_branch_from_skill_json_github_url("https://github.com/NeonDaniel/skill-osm-test"), "v0.1")
+
+    def test_branch_from_json_matching_branch(self):
+        self.assertEqual(get_branch_from_skill_json_github_url("https://github.com/NeonDaniel/skill-osm-test@v0.1"),
+                         "v0.1")
+
+    def test_branch_from_json_not_matching_branch(self):
+        self.assertEqual(get_branch_from_skill_json_github_url("https://github.com/NeonDaniel/skill-osm-test@v0.1.1"),
+                         "v0.1")
+
+    def test_branch_from_latest_release(self):
+        latest = "v0.1.1"
+
+        default = get_branch_from_latest_release_github_url("https://github.com/NeonDaniel/skill-osm-test")
+        self.assertEqual(default, latest)
+        old_release = get_branch_from_latest_release_github_url("https://github.com/NeonDaniel/skill-osm-test@v0.1")
+        self.assertEqual(old_release, latest)
+        dev_branch = get_branch_from_latest_release_github_url("https://github.com/NeonDaniel/skill-osm-test/tree/dev")
+        self.assertEqual(dev_branch, latest)
+
+    def test_branch_from_json_invalid(self):
+        with self.assertRaises(GithubFileNotFound):
+            get_branch_from_skill_json_github_url("https://github.com/NeonDaniel/skill-osm-test/tree/no_json")
+        with self.assertRaises(GithubFileNotFound):
+            get_branch_from_skill_json_github_url("https://github.com/NeonDaniel/skill-osm-test@no_json")
 
 
 if __name__ == '__main__':

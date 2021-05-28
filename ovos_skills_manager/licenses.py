@@ -140,7 +140,6 @@ def _is_mit(lic):
 
 
 def parse_license_type(lic):
-    # TODO: If this is a github repo, they have an api: https://docs.github.com/en/rest/reference/licenses
     # assumptions
     # - license header is somewhere in the first 10 lines
     # - license list is ordered in a way that first match NEEDS to override others
