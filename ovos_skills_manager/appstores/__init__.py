@@ -72,7 +72,8 @@ class AbstractAppstore:
         if new_only:
             skiplist = [s["url"] for s in self.db if s.get("url")]
 
-        for skill in self.get_skills_list(skiplist=skiplist):
+        skills = self.get_skills_list(skiplist=skiplist) or []
+        for skill in skills:
             LOG.info("Synced skill: " + skill.url)
 
             for old_skill in self.search_skills_by_url(skill.url,
