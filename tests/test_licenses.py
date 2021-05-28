@@ -1,4 +1,8 @@
+import os
+import sys
 import unittest
+
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from ovos_skills_manager.github import get_license_type
 from ovos_skills_manager.licenses import is_permissive, is_viral, parse_license_type
 

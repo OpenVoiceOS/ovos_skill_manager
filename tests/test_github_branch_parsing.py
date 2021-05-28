@@ -1,4 +1,8 @@
+import os
+import sys
 import unittest
+
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from ovos_skills_manager.github import \
     get_branch_from_github_url, get_branch_from_skill_json_github_url, \
     get_branch_from_latest_release_github_url

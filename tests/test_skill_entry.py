@@ -1,4 +1,8 @@
+import os
+import sys
 import unittest
+
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from ovos_skills_manager.skill_entry import SkillEntry
 
 
