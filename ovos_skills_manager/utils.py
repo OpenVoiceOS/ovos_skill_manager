@@ -1,3 +1,19 @@
+def parse_python_dependencies(python_deps: list, token=None):
+    """
+    Parses a dependencies dict to resolve any conflicts, perform any formatting, etc.
+    """
+    # Handle case sensitivity in dependencies and any potentially required auth
+    for i in range(0, len(python_deps)):
+        r = python_deps[i]
+        if "@" in r:
+            parts = [p.lower() if p.strip().startswith("git+http") else p for p in r.split('@')]
+            r = "@".join(parts)
+        if token:
+            if "github.com" in r:
+                r = r.replace("github.com", f"{token}@github.com")
+        python_deps[i] = r
+    return python_deps
+
 
 def readme_to_json(text):
     text = text.replace("\r", "").replace("\t", "") + "\n## "  # marker to

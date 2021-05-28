@@ -38,3 +38,7 @@ jobs:
       - name: Test Skill Entry
         run: |
           pytest tests/test_skill_entry.py
+
+      - name: Test Utils
+        run: |
+          pytest tests/test_utils.py

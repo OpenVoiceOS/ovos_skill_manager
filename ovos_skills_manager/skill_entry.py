@@ -16,6 +16,8 @@ from ovos_skills_manager.requirements import install_system_deps, pip_install
 from ovos_utils.log import LOG
 from ovos_utils.enclosure import detect_enclosure
 
+from ovos_skills_manager.utils import parse_python_dependencies
+
 
 class SkillEntry:
     def __init__(self, data=None):
@@ -68,6 +70,7 @@ class SkillEntry:
                     github_data = get_skill_data(url, data.get("branch"))
                     data = merge_dict(data, github_data, merge_lists=True,
                                       skip_empty=True, no_dupes=True)
+                    parse_python_dependencies(data["requirements"].get("python"), requests.headers.get("Authorization"))
                 except GithubInvalidUrl as e:
                     raise e
         return SkillEntry(data)
