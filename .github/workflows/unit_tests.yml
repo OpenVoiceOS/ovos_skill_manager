@@ -42,3 +42,7 @@ jobs:
       - name: Test Utils
         run: |
           pytest tests/test_utils.py
+
+      - name: Test Search Skill
+        run: |
+          pytest tests/test_search_skill.py
