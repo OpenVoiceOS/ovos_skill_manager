@@ -1,3 +1,5 @@
+import os
+
 from json_database import JsonDatabaseXDG, JsonStorageXDG
 from json_database.search import Query
 from ovos_utils import create_daemon
@@ -45,6 +47,7 @@ class AbstractAppstore:
         base_db = join(dirname(dirname(__file__)), "res",
                        self.db.name + ".jsondb")
         if not len(self.db):
+            os.makedirs(dirname(self.db.path), exist_ok=True)
             LOG.info("Bootstrapping {database}, this might take a "
                      "while!".format(database=self.name))
             if isfile(base_db):
