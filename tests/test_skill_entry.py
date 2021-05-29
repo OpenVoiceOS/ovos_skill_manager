@@ -53,8 +53,7 @@ class TestSkillEntry(unittest.TestCase):
         self.assertEqual(set(entry.requirements["python"]),
                          {"json-requirements", "manifest_requirement", "text_requirements"})
 
-        self.assertEqual(set(entry.requirements["system"]["all"]),
-                         {"json-pkg", "system-manifest-pkg"})
+        self.assertIsInstance(entry.requirements["system"]["all"], str)
 
         self.assertEqual(set(entry.requirements["skill"]),
                          {"json-skill", "manifest-skill"})
@@ -95,6 +94,19 @@ class TestSkillEntry(unittest.TestCase):
 
         self.assertEqual(set(entry.requirements["python"]),
                          {"json-requirements", "manifest_requirement", "text_requirements"})
+
+    def test_requirements_null_json(self):
+        entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test@commented_requirements")
+        requirements = entry.json.pop("requirements")
+        self.assertEqual(requirements, entry.requirements)
+
+        entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test@v0.1")
+        requirements = entry.json.pop("requirements")
+        self.assertEqual(requirements, entry.requirements)
+
+        entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test")
+        requirements = entry.json.pop("requirements")
+        self.assertEqual(requirements, entry.requirements)
 
     # TODO: Find a good method for parsing versions in requirements; for now, requirements installer should handle
     #       compatible versions, this just needs to handle incompatible versions

@@ -157,7 +157,7 @@ class SkillEntry:
     def requirements(self):
         try:
             return self.json.get("requirements") or \
-                   get_requirements(self.url, self.branch)
+                   get_skill_data(self.url, self.branch).get("requirements")
         except GithubFileNotFound:
             return {}
 
