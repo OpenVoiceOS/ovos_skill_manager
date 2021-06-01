@@ -2,13 +2,25 @@ import os
 import sys
 import unittest
 
+
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from ovos_skills_manager.scripts.search import search_skill
+from ovos_skills_manager import MycroftMarketplace, NeonSkills, OVOSstore
 
 # APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "andlo", "default", "all"]
 
 
 class SearchTests(unittest.TestCase):
+    def test_get_skills_mycroft(self):
+        skills = MycroftMarketplace().get_skills_list()
+        self.assertTrue(any(skills))
+
+    def test_get_skills_ovos(self):
+        skills = OVOSstore().get_skills_list()
+        self.assertTrue(any(skills))
+
+    # TODO: get_neon needs auth, use env var + GH secret DM
+
     def test_search_mycroft_all(self):
         # methods = ['all', 'name', 'url', 'category', 'author', 'tag', 'description']
         query = "stock"
