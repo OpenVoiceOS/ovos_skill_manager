@@ -218,6 +218,8 @@ class OVOSSkillsManager:
             for skill in store.search_skills_by_url(url, as_json):
                 store.clear_authentication()
                 return [skill]
+        LOG.warning(f"No results found for: {url}")
+        return []
 
     def search_skills_by_category(self, category, as_json=False,
                                   fuzzy=True, thresh=0.85, ignore_case=True):
