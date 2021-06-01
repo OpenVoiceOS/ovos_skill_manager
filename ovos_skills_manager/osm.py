@@ -11,13 +11,20 @@ from ovos_skills_manager.exceptions import UnknownAppstore
 from ovos_skills_manager.appstores.local import InstalledSkills, get_skills_folder
 
 
+def safe_get_skills_folder():
+    try:
+        return get_skills_folder()
+    except:
+        return ""
+
+
 class OVOSSkillsManager:
     def __init__(self):
         self.config = JsonStorageXDG("OVOS-SkillsManager")
         default_config = {
             "local": {
                 "active": True,
-                "url": get_skills_folder(),
+                "url": safe_get_skills_folder(),
                 "parse_github": False,
                 "priority": 1},
             "ovos": {
