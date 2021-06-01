@@ -10,8 +10,11 @@ from ovos_utils.log import LOG
 
 def get_current_marketplace_branch():
     # TODO check mycroft version for default branch as fallback
-    default_branch = read_mycroft_config().get("skills", {}) \
-        .get("msm", {}).get("repo", {}).get("branch", "20.08")
+    try:
+        default_branch = read_mycroft_config().get("skills", {}) \
+            .get("msm", {}).get("repo", {}).get("branch", "20.08")
+    except FileNotFoundError:
+        default_branch = "20.08"
     return default_branch
 
 
