@@ -12,17 +12,18 @@ from ovos_skills_manager.appstores.ovos import get_ovos_skills
 
 
 class SearchTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        from ovos_skills_manager.appstores.ovos import OVOSstore
+        OVOSstore().sync_skills_list()
+
     def test_get_skills_mycroft(self):
         skills = get_mycroft_marketplace_skills()
-        for skill in skills:
-            print(skill)
-        # self.assertTrue(any(skills))
+        self.assertTrue(any(skills))
 
     def test_get_skills_ovos(self):
         skills = get_ovos_skills()
-        for skill in skills:
-            print(skill)
-        # self.assertTrue(any(skills))
+        self.assertTrue(any(skills))
 
     # TODO: get_neon needs auth, use env var + GH secret DM
 
@@ -93,7 +94,6 @@ class SearchTests(unittest.TestCase):
         thresh = 80
         results = search_skill(method="all", query=query, fuzzy=fuzzy, no_ignore_case=False,
                                thresh=thresh, appstore="ovos")
-        print(results)
         self.assertIsInstance(results, list)
         self.assertTrue(len(results) > 0)
 

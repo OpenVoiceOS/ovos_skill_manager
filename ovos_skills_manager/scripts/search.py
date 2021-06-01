@@ -48,7 +48,6 @@ def search_skill(method, query, fuzzy, no_ignore_case, thresh, appstore):
     return skills
 
 
-
 def search(method, query, fuzzy, no_ignore_case, thresh, appstore):
     skills = search_skill(method, query, fuzzy, no_ignore_case,
                           thresh, appstore)
