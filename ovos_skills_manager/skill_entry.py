@@ -320,6 +320,8 @@ class SkillEntry:
         return isdir(join(folder, self.uuid))
 
     def __repr__(self):
+        if not self.skill_name:
+            return self.url
         return self.skill_name + " " + self.url
 
     def __eq__(self, other):
