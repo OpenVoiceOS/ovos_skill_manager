@@ -1,14 +1,17 @@
-def parse_python_dependencies(python_deps: list, token=None):
+def parse_python_dependencies(python_deps: list, token: str = None) -> list:
     """
-    Parses a dependencies dict to resolve any conflicts, perform any formatting, etc.
+    Parses a dependencies dict to resolve any conflicts, perform any formatting, add authentication, etc.
+    :param python_deps: list of python dependencies to be passed to pip
+    :param token: Optional Github token to authorize access to private repositories hosting dependencies
+    :return: list of parsed dependencies
     """
     # Handle case sensitivity in dependencies and any potentially required auth
     for i in range(0, len(python_deps)):
         r = python_deps[i]
-        if "@" in r:
+        if "@" in r:  # Handle dependencies like: `neon_utils @ git+https://github.com/NeonGeckoCom/neon-skill-utils
             parts = [p.lower() if p.strip().startswith("git+http") else p for p in r.split('@')]
             r = "@".join(parts)
-        if token:
+        if token:  # Add a passed github token into the dependency URL
             if "github.com" in r:
                 r = r.replace("github.com", f"{token}@github.com")
         python_deps[i] = r
