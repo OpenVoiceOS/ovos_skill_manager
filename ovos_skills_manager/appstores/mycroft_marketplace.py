@@ -12,9 +12,9 @@ def get_current_marketplace_branch():
     # TODO check mycroft version for default branch as fallback
     try:
         default_branch = read_mycroft_config().get("skills", {}) \
-            .get("msm", {}).get("repo", {}).get("branch", "20.08")
+            .get("msm", {}).get("repo", {}).get("branch", "21.02")
     except FileNotFoundError:
-        default_branch = "20.08"
+        default_branch = "21.02"
     return default_branch
 
 
