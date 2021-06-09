@@ -1,10 +1,12 @@
+import os
+
 from json_database import JsonDatabaseXDG, JsonStorageXDG
 from json_database.search import Query
 from ovos_utils import create_daemon
 from ovos_utils.log import LOG
 from os.path import join, dirname, isfile
 from ovos_skills_manager import SkillEntry
-from ovos_skills_manager.exceptions import AuthenticationError
+from ovos_skills_manager.exceptions import AuthenticationError, GithubInvalidUrl
 from ovos_skills_manager.session import set_github_token, clear_github_token
 from ovos_skills_manager.github import get_branch_from_github_url,\
     normalize_github_url, GithubInvalidBranch
@@ -45,6 +47,7 @@ class AbstractAppstore:
         base_db = join(dirname(dirname(__file__)), "res",
                        self.db.name + ".jsondb")
         if not len(self.db):
+            os.makedirs(dirname(self.db.path), exist_ok=True)
             LOG.info("Bootstrapping {database}, this might take a "
                      "while!".format(database=self.name))
             if isfile(base_db):
@@ -69,7 +72,8 @@ class AbstractAppstore:
         if new_only:
             skiplist = [s["url"] for s in self.db if s.get("url")]
 
-        for skill in self.get_skills_list(skiplist=skiplist):
+        skills = self.get_skills_list(skiplist=skiplist) or []
+        for skill in skills:
             LOG.info("Synced skill: " + skill.url)
 
             for old_skill in self.search_skills_by_url(skill.url,
@@ -132,7 +136,10 @@ class AbstractAppstore:
             branch = get_branch_from_github_url(url)
         except GithubInvalidBranch:
             branch = None
-        url = normalize_github_url(url)
+        try:
+            url = normalize_github_url(url)
+        except GithubInvalidUrl:
+            return []
         query.equal("url", url, ignore_case=True)
         results = query.result
         for idx in range(0, len(results)):

@@ -457,6 +457,8 @@ def get_android_json_from_github_url(url, branch=None):
 def get_branch_from_skill_json_github_url(url, branch=None):
     try:
         branch = branch or get_branch_from_github_url(url)
+        if '@' in url:
+            url = url.split('@', 1)[0]
     except GithubInvalidBranch:
         branch = "master"  # attempt master branch
     try:

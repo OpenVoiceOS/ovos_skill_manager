@@ -64,6 +64,8 @@ def normalize_github_url(url):
         raise GithubInvalidUrl
     fields = url.replace("https://github.com/", "").split("/")
     author, skillname = fields[:2]
+    if '@' in skillname:
+        skillname = skillname.split('@')[0]
     return "/".join(["https://github.com", author, skillname])
 
 
@@ -101,7 +103,7 @@ def get_branch_from_github_url(url, validate=False):
     elif "/tag/" in url:
         branch = url.split("/tag/")[-1].split("/")[0]
     elif "@" in url:
-        branch = url.split("@")[-1]
+        url, branch = url.split("@", 1)
 
     if branch:
         if validate:

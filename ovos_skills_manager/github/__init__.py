@@ -21,7 +21,7 @@ def get_skill_data(url, branch=None):
             branch = get_branch_from_github_url(url)
             explicit_branch = branch
         except GithubInvalidBranch:
-            branch = get_main_branch(url)
+            branch = get_branch_from_skill_json(url)
 
     data = {
         "authorname": author,
@@ -43,7 +43,6 @@ def get_skill_data(url, branch=None):
         data["last_updated"] = api_data['updated_at']
         data["url"] = api_data["html_url"]
         data["authorname"] = api_data["owner"]["login"]
-        branch = branch or api_data['default_branch']
         if "license" in data:
             data["license"] = api_data["license"]["key"]
     except:
@@ -110,6 +109,7 @@ def get_skill_data(url, branch=None):
     # augment with json data
     # this should take precedence over everything else
     try:
+        data["requirements"]["system"] = {k: v.split() for k, v in data["requirements"].get("system", {}).items()}
         data = merge_dict(data, get_skill_json(url, branch),
                           merge_lists=True, skip_empty=True, no_dupes=True)
         branch = data.get("branch")

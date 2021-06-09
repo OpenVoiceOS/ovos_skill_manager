@@ -9,7 +9,7 @@ APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "andlo", "neon", "default", "all
 
 def search_skill(method, query, fuzzy, no_ignore_case, thresh, appstore):
     osm = OVOSSkillsManager()
-    set_github_token(osm.appstores[appstore].get("auth_token"))
+    set_github_token(osm.config["appstores"].get(appstore, {}).get("auth_token"))
 
     ignore_case = not no_ignore_case
     thresh = thresh / 100
@@ -46,7 +46,6 @@ def search_skill(method, query, fuzzy, no_ignore_case, thresh, appstore):
             query, fuzzy=fuzzy, ignore_case=ignore_case, thresh=thresh)]
 
     return skills
-
 
 
 def search(method, query, fuzzy, no_ignore_case, thresh, appstore):

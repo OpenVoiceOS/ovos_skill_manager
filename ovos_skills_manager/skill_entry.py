@@ -16,6 +16,8 @@ from ovos_skills_manager.requirements import install_system_deps, pip_install
 from ovos_utils.log import LOG
 from ovos_utils.enclosure import detect_enclosure
 
+from ovos_skills_manager.utils import parse_python_dependencies
+
 
 class SkillEntry:
     def __init__(self, data=None):
@@ -68,12 +70,15 @@ class SkillEntry:
                     github_data = get_skill_data(url, data.get("branch"))
                     data = merge_dict(data, github_data, merge_lists=True,
                                       skip_empty=True, no_dupes=True)
+                    parse_python_dependencies(data["requirements"].get("python"), requests.headers.get("Authorization"))
                 except GithubInvalidUrl as e:
                     raise e
         return SkillEntry(data)
 
     @staticmethod
     def from_github_url(url, branch=None, parse_github=True):
+        if '@' in url:
+            url, branch = url.split('@')
         return SkillEntry.from_json({"url": url, "branch": branch},
                                     parse_github=parse_github)
 
@@ -152,7 +157,7 @@ class SkillEntry:
     def requirements(self):
         try:
             return self.json.get("requirements") or \
-                   get_requirements(self.url, self.branch)
+                   get_skill_data(self.url, self.branch).get("requirements")
         except GithubFileNotFound:
             return {}
 
@@ -260,11 +265,6 @@ class SkillEntry:
         LOG.info("Installing skill: {url} from branch: {branch}".format(
             url=self.url, branch=self.branch))
 
-        # TODO: This is just patching a bug in requirements parsing DM
-        if isinstance(self.requirements, list):
-            LOG.warning(self.requirements)
-            self._data["requirements"] = {"python": self.requirements}
-
         skills = self.requirements.get("skill", [])
         if skills:
             LOG.info('Installing required skills')
@@ -320,4 +320,9 @@ class SkillEntry:
         return isdir(join(folder, self.uuid))
 
     def __repr__(self):
+        if not self.skill_name:
+            return self.url
         return self.skill_name + " " + self.url
+
+    def __eq__(self, other):
+        return self.json == other.json
