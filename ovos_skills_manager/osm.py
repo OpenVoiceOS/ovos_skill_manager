@@ -263,13 +263,39 @@ class OVOSSkillsManager:
                 yield skill
             store.clear_authentication()
 
+    @staticmethod
+    def skill_entry_from_url(url: str):
+        """
+        Builds a minimal SkillEntry object from the passed GitHub URL to use for skill installation
+        :param url:
+        :return:
+        """
+        from ovos_skills_manager.github import get_branch_from_github_url, normalize_github_url, get_requirements_json, \
+            get_skill_json, GithubInvalidBranch, GithubFileNotFound
+        from ovos_skills_manager.skill_entry import SkillEntry
+        try:
+            branch = get_branch_from_github_url(url)
+        except GithubInvalidBranch:
+            branch = None
+        url = normalize_github_url(url)
+        requirements = get_requirements_json(url, branch)
+        requirements["system"] = {k: v.split() for k, v in requirements.get("system", {}).items()}
+        try:
+            json = get_skill_json(url, branch)
+            requirements = merge_dict(requirements, json.get("requirements", {}),
+                                      merge_lists=True, skip_empty=True, no_dupes=True)
+        except GithubFileNotFound:
+            pass
+        return SkillEntry.from_json({"url": url,
+                                     "branch": branch,
+                                     "requirements": requirements}, False)
+
     def install_skill_from_url(self, url: str):
         """
         Installs a Skill from the passed url
         :param url: Git url of skill to install (including optional branch spec)
         """
-        from ovos_skills_manager.github import get_skill_entry_from_url
-        skill_entry = get_skill_entry_from_url(url)
+        skill_entry = self.skill_entry_from_url(url)
         self.install_skill(skill_entry)
 
     def install_skill(self, skill: SkillEntry):

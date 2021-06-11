@@ -46,3 +46,7 @@ jobs:
       - name: Test Search Skill
         run: |
           pytest tests/test_search_skill.py
+
+      - name: Test OSM
+        run: |
+          pytest tests/test_osm.py
