@@ -139,7 +139,7 @@ def search(method, query, fuzzy, no_ignore_case, thresh, appstore):
               type=click.Choice(_sync.APPSTORE_OPTIONS),
               help='sync a specific appstore, default syncs'
                    ' appstores enabled in config file')
-@click.option('--rebuild', default=False, is_flag=True,
+@click.option('--rebuild', default=True, is_flag=True,
               help='rebuild skill database, if not set only sync data for new '
                    'skills')
 @click.option('--merge', default=False, is_flag=True,
