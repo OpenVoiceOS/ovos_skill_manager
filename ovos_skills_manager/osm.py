@@ -152,7 +152,7 @@ class OVOSSkillsManager:
         appstore_id = self.validate_appstore_name(appstore_id)
         self.config["appstores"][appstore_id]["active"] = False
 
-    def sync_appstores(self, merge=False, new_only=True, threaded=False):
+    def sync_appstores(self, merge=False, new_only=False, threaded=False):
         stores = self.get_active_appstores()
         for appstore_id in stores:
             LOG.info("Syncing skills from " + appstore_id)
