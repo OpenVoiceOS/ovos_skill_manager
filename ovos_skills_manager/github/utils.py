@@ -1,3 +1,5 @@
+from ovos_utils.json_helper import merge_dict
+
 from ovos_skills_manager.exceptions import *
 from ovos_utils import camel_case_split
 
@@ -166,3 +168,25 @@ def match_url_template(url, template, branch=None):
     if requests.get(url).status_code == 200:
         return blob2raw(url)
     raise GithubInvalidUrl
+
+
+def get_skill_entry_from_url(url: str):
+    from ovos_skills_manager.github import get_branch_from_github_url, normalize_github_url, get_requirements_json, \
+        get_skill_json
+    from ovos_skills_manager.skill_entry import SkillEntry
+    try:
+        branch = get_branch_from_github_url(url)
+    except GithubInvalidBranch:
+        branch = None
+    url = normalize_github_url(url)
+    requirements = get_requirements_json(url, branch)
+    requirements["system"] = {k: v.split() for k, v in requirements.get("system", {}).items()}
+    try:
+        json = get_skill_json(url, branch)
+        requirements = merge_dict(requirements, json.get("requirements", {}),
+                                  merge_lists=True, skip_empty=True, no_dupes=True)
+    except GithubFileNotFound:
+        pass
+    return SkillEntry.from_json({"url": url,
+                                 "branch": branch,
+                                 "requirements": requirements}, False)

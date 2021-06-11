@@ -1,6 +1,8 @@
 from ovos_utils.log import LOG
 from ovos_utils.json_helper import merge_dict
 from json_database import JsonStorageXDG
+
+from ovos_skills_manager import SkillEntry
 from ovos_skills_manager.appstores.andlo import AndloSkillList
 from ovos_skills_manager.appstores.mycroft_marketplace import \
     MycroftMarketplace
@@ -261,7 +263,16 @@ class OVOSSkillsManager:
                 yield skill
             store.clear_authentication()
 
-    def install_skill(self, skill):
+    def install_skill_from_url(self, url: str):
+        """
+        Installs a Skill from the passed url
+        :param url: Git url of skill to install (including optional branch spec)
+        """
+        from ovos_skills_manager.github import get_skill_entry_from_url
+        skill_entry = get_skill_entry_from_url(url)
+        self.install_skill(skill_entry)
+
+    def install_skill(self, skill: SkillEntry):
         """
         Installs a SkillEntry with any required auth_token
         """
