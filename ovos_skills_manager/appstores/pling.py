@@ -46,9 +46,11 @@ def get_pling_skills(parse_github=False, skiplist=None):
     skiplist = skiplist or []
     url = "https://api.kde-look.org/ocs/v1/content/data"
     params = {"categories": "608", "page": 0}
-    xml = requests.get(url, params=params).text
-
-    data = xml2dict(xml)
+    r = requests.get(url, params=params)
+    if r.status_code != 200:
+        LOG.error(f"could not reach pling! status code: {r.status_code}")
+        return
+    data = xml2dict(r.text)
     meta = data["ocs"]["meta"]
     n_pages = int(meta["totalitems"]) // int(meta["itemsperpage"])
 
