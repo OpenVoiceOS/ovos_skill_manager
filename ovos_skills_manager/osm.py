@@ -277,7 +277,7 @@ class OVOSSkillsManager:
         try:
             branch = get_branch_from_github_url(url)
         except GithubInvalidBranch:
-            branch = None  # get_main_branch(url)
+            branch = None
         url = normalize_github_url(url)
         requirements = get_requirements_json(url, branch)
         requirements["system"] = {k: v.split() for k, v in requirements.get("system", {}).items()}

@@ -206,7 +206,7 @@ def get_requirements_json(url, branch=None):
         manif = get_manifest(url, branch)
         data = manif['dependencies'] or {}
     except GithubSkillEntryError:
-        pass
+        LOG.error("Error reading from manifest!")
     data["python"] = data.get("python") or []
     data["skill"] = data.get("skill") or []
     data["system"] = data.get("system") or {}
@@ -214,12 +214,12 @@ def get_requirements_json(url, branch=None):
         req = get_requirements(url, branch)
         data["python"] = list(set(data["python"] + req))
     except GithubSkillEntryError:
-        pass
+        LOG.error("Error reading from requirements files!")
     try:
         skill_req = get_skill_requirements(url, branch)
         data["skill"] = list(set(data["skill"] + skill_req))
     except GithubSkillEntryError:
-        pass
+        LOG.error("Error reading skills requirements!")
     return data
 
 

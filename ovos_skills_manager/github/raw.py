@@ -37,10 +37,14 @@ GITHUB_ANDROID_JSON_LOCATIONS = [
 
 
 def get_main_branch_from_github_url(url):
-    url = normalize_github_url(url)
-    html = requests.get(url).text
-    encoded = html.split("default-branch=\"")[1].split('"')[0]
-    return base64.b64decode(encoded).decode("utf-8")
+    try:
+        url = normalize_github_url(url)
+        html = requests.get(url).text
+        encoded = html.split("default-branch=\"")[1].split('"')[0]
+        return base64.b64decode(encoded).decode("utf-8")
+    except Exception as e:
+        LOG.error(e)
+        raise GithubInvalidUrl
 
 
 def get_repo_releases_from_github_url(url):

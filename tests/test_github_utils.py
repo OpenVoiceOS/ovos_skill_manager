@@ -2,6 +2,8 @@ import os
 import sys
 import unittest
 
+from ovos_skills_manager.github import get_main_branch_from_github_url
+
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from ovos_skills_manager.github.utils import *
 
@@ -57,6 +59,10 @@ class TestGithubUtils(unittest.TestCase):
             get_branch_from_github_url(normie + "@dev"),
             "dev"
         )
+
+    def test_get_main_branch_from_github_url(self):
+        branch = get_main_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test")
+        self.assertEqual(branch, "main")
 
     def test_author_repo_from_url(self):
         url = "https://github.com/JarbasSkills/skill-wolfie"
