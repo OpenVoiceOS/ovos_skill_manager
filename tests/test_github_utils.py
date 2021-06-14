@@ -2,10 +2,10 @@ import os
 import sys
 import unittest
 
-from ovos_skills_manager.github import get_main_branch_from_github_url
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from ovos_skills_manager.github.utils import *
+from ovos_skills_manager.github import get_main_branch_from_github_url
 
 # TODO setup a test skill repo, since a random url can simply vanish
 
