@@ -30,8 +30,11 @@ class TestOvosSkillsManager(unittest.TestCase):
         self.assertEqual(skill_entry.url, "https://github.com/NeonDaniel/skill-osm-test")
         self.assertEqual(skill_entry.branch, "no_json")
         self.assertIsInstance(skill_entry.requirements["python"], list)
+        self.assertTrue(len(skill_entry.requirements["python"]) > 0)
         self.assertIsInstance(skill_entry.requirements["system"], dict)
+        self.assertTrue(len(skill_entry.requirements["system"].keys()) > 0)
         self.assertIsInstance(skill_entry.requirements["skill"], list)
+        self.assertTrue(len(skill_entry.requirements["skill"]) > 0)
         self.assertIsInstance(skill_entry.download_url, str)
         self.assertTrue(skill_entry.download_url.endswith("/no_json.zip"))
 
