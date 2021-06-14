@@ -270,13 +270,13 @@ class OVOSSkillsManager:
         :param url:
         :return:
         """
-        from ovos_skills_manager.github import get_branch_from_github_url, normalize_github_url, get_requirements_json, \
-            get_skill_json, GithubInvalidBranch, GithubFileNotFound
+        from ovos_skills_manager.github import get_branch_from_github_url, normalize_github_url, get_requirements_json,\
+            get_skill_json, get_main_branch, GithubInvalidBranch, GithubFileNotFound
         from ovos_skills_manager.skill_entry import SkillEntry
         try:
             branch = get_branch_from_github_url(url)
         except GithubInvalidBranch:
-            branch = None
+            branch = get_main_branch()
         url = normalize_github_url(url)
         requirements = get_requirements_json(url, branch)
         requirements["system"] = {k: v.split() for k, v in requirements.get("system", {}).items()}
