@@ -234,7 +234,10 @@ def get_manifest_from_github_url(url, branch=None):
 
 
 def get_skill_json_from_github_url(url, branch=None):
-    branch = branch or get_branch_from_github_url(url)
+    try:
+        branch = branch or get_branch_from_github_url(url)
+    except GithubInvalidBranch:
+        branch = get_main_branch_from_github_url(url)
     try:
         url = get_json_url_from_github_url(url, branch)
         url = blob2raw(url)

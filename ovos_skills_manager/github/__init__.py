@@ -45,8 +45,10 @@ def get_skill_data(url, branch=None):
         data["authorname"] = api_data["owner"]["login"]
         if "license" in data:
             data["license"] = api_data["license"]["key"]
-    except:
+    except GithubAPIException:
         pass
+    except Exception as e:
+        LOG.error(e)
 
     # augment with releases data
     try:
