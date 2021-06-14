@@ -44,7 +44,8 @@ class TestOvosSkillsManager(unittest.TestCase):
         self.assertEqual(skill_entry.branch, "v0.1.1")
         self.assertIsInstance(skill_entry.requirements["python"], list)
         self.assertEqual(set(skill_entry.requirements["python"]),
-                         {"json-requirements", "manifest_requirement", "text_requirements"})
+                         {"json-requirements", "manifest_requirement", "text_requirements"},
+                         repr(set(skill_entry.requirements["python"])))
         self.assertIsInstance(skill_entry.requirements["system"], dict)
         self.assertIsInstance(skill_entry.requirements["skill"], list)
         self.assertIsInstance(skill_entry.download_url, str)
