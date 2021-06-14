@@ -4,11 +4,16 @@ import unittest
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from ovos_skills_manager.osm import OVOSSkillsManager
-
+from ovos_skills_manager.session import set_github_token
 osm = OVOSSkillsManager()
 
 
 class TestOvosSkillsManager(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        github_token = os.environ.get("GITHUB_TOKEN")
+        if github_token:
+            set_github_token(github_token)
 
     def test_get_skill_entry_from_url_default_branch(self):
         from ovos_skills_manager import SkillEntry

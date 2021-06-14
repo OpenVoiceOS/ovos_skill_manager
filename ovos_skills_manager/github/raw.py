@@ -41,6 +41,8 @@ def get_main_branch_from_github_url(url):
     try:
         url = normalize_github_url(url)
         html = requests.get(url).text
+        if "<title>Rate limit &middot; GitHub</title>" in html:
+            raise GithubHTTPRateLimited
         encoded = html.split("default-branch=\"")[1].split('"')[0]
         return base64.b64decode(encoded).decode("utf-8")
     except Exception as e:
@@ -54,6 +56,8 @@ def get_repo_releases_from_github_url(url):
     normalized_giturl = normalize_github_url(url)
     url = GithubUrls.TAGS.format(author=author, repo=repo)
     html = requests.get(url).text
+    if "<title>Rate limit &middot; GitHub</title>" in html:
+        raise GithubHTTPRateLimited
     soup = bs4.BeautifulSoup(html, 'html.parser')
     urls = ["https://github.com" + a['href'] for a in soup.find_all('a')
             if a['href'].startswith("/" + author)]
@@ -201,14 +205,21 @@ def manifest_url_from_github_url(url, branch=None):
 def get_requirements_from_github_url(url, branch=None):
     branch = branch or get_branch_from_github_url(url)
     url = requirements_url_from_github_url(url, branch)
-    return [t for t in requests.get(url).text.split("\n")
+    html = requests.get(url).text
+    if "<title>Rate limit &middot; GitHub</title>" in html:
+        raise GithubHTTPRateLimited
+
+    return [t for t in html.split("\n")
             if t.strip() and not t.strip().startswith("#")]
 
 
 def get_skill_requirements_from_github_url(url, branch=None):
     branch = branch or get_branch_from_github_url(url)
     url = skill_requirements_url_from_github_url(url, branch)
-    return [t for t in requests.get(url).text.split("\n")
+    html = requests.get(url).text
+    if "<title>Rate limit &middot; GitHub</title>" in html:
+        raise GithubHTTPRateLimited
+    return [t for t in html.split("\n")
             if t.strip() and not t.strip().startswith("#")]
 
 
@@ -216,6 +227,8 @@ def get_manifest_from_github_url(url, branch=None):
     branch = branch or get_branch_from_github_url(url)
     url = manifest_url_from_github_url(url, branch)
     manifest = requests.get(url).text
+    if "<title>Rate limit &middot; GitHub</title>" in manifest:
+        raise GithubHTTPRateLimited
     data = yaml.safe_load(manifest)
     if not data:
         # most likely just the template full of comments
@@ -251,6 +264,8 @@ def get_skill_json_from_github_url(url, branch=None):
         raise GithubFileNotFound
     try:
         res = requests.get(url).text
+        if "<title>Rate limit &middot; GitHub</title>" in res:
+            raise GithubHTTPRateLimited
         return json.loads(res)
     except:
         # this might happen if branch is considered valid

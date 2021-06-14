@@ -91,3 +91,7 @@ class GithubAPIRepoNotFound(GithubAPIException):
 
 class GithubAPIRateLimited(GithubAPIException):
     """ API rate limit exceeded """
+
+
+class GithubHTTPRateLimited(GithubInvalidUrl):
+    """ HTTP Abuse Detection rate limit"""
