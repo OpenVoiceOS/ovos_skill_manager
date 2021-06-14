@@ -295,8 +295,7 @@ class OVOSSkillsManager:
         Installs a Skill from the passed url
         :param url: Git url of skill to install (including optional branch spec)
         """
-        skill_entry = self.skill_entry_from_url(url)
-        self.install_skill(skill_entry)
+        self.install_skill(self.skill_entry_from_url(url))
 
     def install_skill(self, skill: SkillEntry):
         """

@@ -1,10 +1,6 @@
-from ovos_utils.json_helper import merge_dict
-
 from ovos_skills_manager.exceptions import *
-from ovos_utils import camel_case_split
-
-
 from ovos_skills_manager.session import SESSION as requests
+from ovos_utils import camel_case_split
 from enum import Enum
 
 
