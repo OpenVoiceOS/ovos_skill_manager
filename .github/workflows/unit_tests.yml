@@ -24,25 +24,43 @@ jobs:
           pip install pytest pytest-timeout pytest-cov
 
       - name: Test Github Branch Parsing
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           pytest tests/test_github_branch_parsing.py
 
       - name: Test Github Utils
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           pytest tests/test_github_utils.py
 
       - name: Test License Parsing
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           pytest tests/test_licenses.py
 
       - name: Test Skill Entry
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           pytest tests/test_skill_entry.py
 
       - name: Test Utils
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           pytest tests/test_utils.py
 
       - name: Test Search Skill
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           pytest tests/test_search_skill.py
+
+      - name: Test OSM
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          pytest tests/test_osm.py

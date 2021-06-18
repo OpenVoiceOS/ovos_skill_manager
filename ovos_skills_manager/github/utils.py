@@ -1,8 +1,6 @@
 from ovos_skills_manager.exceptions import *
-from ovos_utils import camel_case_split
-
-
 from ovos_skills_manager.session import SESSION as requests
+from ovos_utils import camel_case_split
 from enum import Enum
 
 
@@ -164,5 +162,8 @@ def match_url_template(url, template, branch=None):
     author, repo = author_repo_from_github_url(url)
     url = template.format(author=author, branch=branch, repo=repo)
     if requests.get(url).status_code == 200:
+        if "<title>Rate limit &middot; GitHub</title>" in requests.get(url).text:
+            raise GithubHTTPRateLimited
         return blob2raw(url)
     raise GithubInvalidUrl
+

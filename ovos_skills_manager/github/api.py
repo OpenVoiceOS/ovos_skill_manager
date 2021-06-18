@@ -49,6 +49,7 @@ def api_zip_url_from_github_url(url, branch=None, token=None):
 
     raise GithubInvalidUrl
 
+
 # Github API methods
 def get_repo_data_from_github_api(url, branch=None):
     author, repo = author_repo_from_github_url(url)
