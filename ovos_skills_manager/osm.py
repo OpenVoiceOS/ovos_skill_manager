@@ -11,6 +11,7 @@ from ovos_skills_manager.appstores.ovos import OVOSstore
 from ovos_skills_manager.appstores.neon import NeonSkills
 from ovos_skills_manager.exceptions import UnknownAppstore
 from ovos_skills_manager.appstores.local import InstalledSkills, get_skills_folder
+from ovos_skills_manager.github import author_repo_from_github_url
 
 
 def safe_get_skills_folder():
@@ -286,21 +287,25 @@ class OVOSSkillsManager:
             requirements = merge_dict(requirements, json.get("requirements", {}),
                                       merge_lists=True, skip_empty=True, no_dupes=True)
         except GithubFileNotFound:
-            pass
+            json = {"authorname": author_repo_from_github_url(url)}
         return SkillEntry.from_json({"url": url,
                                      "branch": branch,
-                                     "requirements": requirements}, False)
+                                     "requirements": requirements,
+                                     "authorname": json.get("authorname")}, False)
 
-    def install_skill_from_url(self, url: str):
+    def install_skill_from_url(self, url: str, skill_dir: str = None):
         """
         Installs a Skill from the passed url
         :param url: Git url of skill to install (including optional branch spec)
+        :param skill_dir: Skills directory to install to (skill unpacked to {folder}/{skill.uuid})
         """
-        self.install_skill(self.skill_entry_from_url(url))
+        self.install_skill(self.skill_entry_from_url(url), skill_dir)
 
-    def install_skill(self, skill: SkillEntry):
+    def install_skill(self, skill: SkillEntry, folder=None):
         """
         Installs a SkillEntry with any required auth_token
+        :param skill: Skill to install
+        :param folder: Skills directory to install to (skill unpacked to {folder}/{skill.uuid})
         """
         store = None
         try:
@@ -309,7 +314,7 @@ class OVOSSkillsManager:
             store.authenticate(bootstrap=False)
         except:
             pass
-        skill.install()
+        skill.install(folder)
         if store:
             store.clear_authentication()
 
