@@ -6,7 +6,7 @@ from os.path import isfile, exists, expanduser, join, isdir
 
 from ovos_skills_manager.session import SESSION as requests
 from ovos_skills_manager.exceptions import GithubInvalidUrl, \
-    JSONDecodeError, GithubFileNotFound, GithubInvalidBranch
+    JSONDecodeError, GithubFileNotFound, GithubInvalidBranch, SkillEntryError
 from ovos_skills_manager.github import download_url_from_github_url, \
     get_branch, get_skill_data, get_requirements, get_branch_from_github_url
 from ovos_utils.json_helper import merge_dict
@@ -29,9 +29,14 @@ class SkillEntry:
         # a unique identifier
         # github_repo.github_author , case insensitive
         # should be guaranteed to be unique
-        author = self.skill_author.lower()
-        repo = self.skill_folder.lower()
-        return repo + "." + author
+        try:
+            author = self.skill_author.lower()
+            repo = self.skill_folder.lower()
+            return repo + "." + author
+        except Exception as e:
+            LOG.error(e)
+            LOG.error(f"author={self.skill_author} folder={self.skill_folder}")
+            raise SkillEntryError(f"Could not build uuid for skill {self.skill_name}")
 
     @property
     def json(self):
