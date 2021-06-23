@@ -287,7 +287,7 @@ class OVOSSkillsManager:
             requirements = merge_dict(requirements, json.get("requirements", {}),
                                       merge_lists=True, skip_empty=True, no_dupes=True)
         except GithubFileNotFound:
-            json = {"authorname": author_repo_from_github_url(url)}
+            json = {"authorname": author_repo_from_github_url(url)[0]}
         return SkillEntry.from_json({"url": url,
                                      "branch": branch,
                                      "requirements": requirements,

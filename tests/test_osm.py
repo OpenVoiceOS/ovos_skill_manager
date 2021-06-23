@@ -38,6 +38,7 @@ class TestOvosSkillsManager(unittest.TestCase):
         self.assertIsInstance(skill_entry.requirements["skill"], list)
         self.assertIsInstance(skill_entry.download_url, str)
         self.assertTrue(skill_entry.download_url.endswith("/main.zip"))
+        self.assertIsInstance(skill_entry.uuid, str)
 
     def test_get_skill_entry_from_url_no_json(self):
         from ovos_skills_manager import SkillEntry
@@ -54,6 +55,7 @@ class TestOvosSkillsManager(unittest.TestCase):
         self.assertTrue(len(skill_entry.requirements["skill"]) > 0)
         self.assertIsInstance(skill_entry.download_url, str)
         self.assertTrue(skill_entry.download_url.endswith("/no_json.zip"))
+        self.assertIsInstance(skill_entry.uuid, str)
 
     def test_get_skill_entry_from_url_release(self):
         from ovos_skills_manager import SkillEntry
@@ -70,8 +72,9 @@ class TestOvosSkillsManager(unittest.TestCase):
         self.assertIsInstance(skill_entry.requirements["skill"], list)
         self.assertIsInstance(skill_entry.download_url, str)
         self.assertTrue(skill_entry.download_url.endswith("/v0.1.1.zip"))
+        self.assertIsInstance(skill_entry.uuid, str)
 
-    def test_install_skill_from_url(self):
+    def test_install_skill_from_url_valid(self):
         osm.install_skill_from_url("https://github.com/NeonDaniel/skill-osm-test@installable", TEST_INSTALL_DIR)
         self.assertTrue(os.path.isdir(os.path.join(TEST_INSTALL_DIR, "skill-osm-test.neondaniel")),
                         os.listdir(TEST_INSTALL_DIR))

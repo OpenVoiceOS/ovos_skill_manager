@@ -11,7 +11,6 @@ class TestSkillEntry(unittest.TestCase):
         entry = SkillEntry.from_github_url("https://github.com/NeonGeckoCom/speed-test.neon/tree/dev")
         self.assertIsInstance(entry.requirements, dict)
         self.assertIsInstance(entry.requirements["python"], list)
-        self.assertIsInstance(entry.uuid, str)
 
     def test_requirements_json_manifest_txt_dep_system_reqs(self):
         entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test/tree/v0.1")
@@ -28,7 +27,6 @@ class TestSkillEntry(unittest.TestCase):
 
         self.assertEqual(entry.branch, "v0.1")
         self.assertEqual(entry.download_url, "https://github.com/NeonDaniel/skill-osm-test/archive/v0.1.zip")
-        self.assertIsInstance(entry.uuid, str)
 
     def test_requirements_json_manifest_txt(self):
         entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test/tree/main")
@@ -46,7 +44,6 @@ class TestSkillEntry(unittest.TestCase):
 
         self.assertEqual(entry.branch, "main")
         self.assertEqual(entry.download_url, "https://github.com/NeonDaniel/skill-osm-test/archive/main.zip")
-        self.assertIsInstance(entry.uuid, str)
 
     def test_implicit_branch(self):
         entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test")
