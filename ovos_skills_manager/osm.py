@@ -268,8 +268,8 @@ class OVOSSkillsManager:
     def skill_entry_from_url(url: str):
         """
         Builds a minimal SkillEntry object from the passed GitHub URL to use for skill installation
-        :param url:
-        :return:
+        :param url: URL of skill to install
+        :return: SkillEntry object with url, branch, requirements, and authorname populated
         """
         from ovos_skills_manager.exceptions import GithubInvalidBranch, GithubFileNotFound
         from ovos_skills_manager.github import get_branch_from_github_url, normalize_github_url, get_requirements_json,\
