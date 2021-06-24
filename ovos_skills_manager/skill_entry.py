@@ -32,9 +32,8 @@ class SkillEntry:
             author = self.skill_author.lower()
             repo = self.skill_folder.lower()
             return repo + "." + author
-        except Exception as e:
+        except ValueError as e:
             LOG.error(e)
-            LOG.error(f"author={self.skill_author} folder={self.skill_folder}")
             raise SkillEntryError(f"Could not build uuid for skill {self.skill_name}")
 
     @property
@@ -111,7 +110,10 @@ class SkillEntry:
 
     @property
     def skill_folder(self):
-        return self.json.get("foldername") or self.url.split("/")[-1]
+        folder = self.json.get("foldername") or self.url.split("/")[-1]
+        if not folder:
+            raise ValueError("foldername is not defined!")
+        return folder
 
     @property
     def skill_category(self):
@@ -124,7 +126,10 @@ class SkillEntry:
 
     @property
     def skill_author(self):
-        return self.json.get("authorname")
+        authorname = self.json.get("authorname")
+        if not authorname:
+            raise ValueError("authorname is not defined!")
+        return authorname
 
     @property
     def skill_tags(self):
