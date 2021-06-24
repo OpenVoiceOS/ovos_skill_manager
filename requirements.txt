@@ -7,3 +7,4 @@ pako>=0.2.3
 PyYaml
 bs4
 click
+click-default-group>=1.2.2
