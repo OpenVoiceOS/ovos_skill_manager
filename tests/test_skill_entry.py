@@ -110,6 +110,13 @@ class TestSkillEntry(unittest.TestCase):
         requirements = entry.json.pop("requirements")
         self.assertEqual(requirements, entry.requirements)
 
+    def test_skill_entry_properties_invalid_entry(self):
+        entry = SkillEntry({})
+        self.assertIsNone(entry.uuid)
+        self.assertIsInstance(entry.json, dict)
+        self.assertIsInstance(repr(entry), str)
+        self.assertEqual(entry, SkillEntry({}))
+
     # TODO: Find a good method for parsing versions in requirements; for now, requirements installer should handle
     #       compatible versions, this just needs to handle incompatible versions
     # def test_requirements_mismatch_versions(self):
