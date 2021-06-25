@@ -1,7 +1,8 @@
 import json
 import shutil
 
-from os.path import isfile, expanduser, join, isdir
+from os import mkdir
+from os.path import isfile, exists, expanduser, join, isdir
 
 from ovos_skills_manager.session import SESSION as requests
 from ovos_skills_manager.exceptions import GithubInvalidUrl, \
@@ -289,6 +290,11 @@ class SkillEntry:
             # TODO support system wide? /usr/local/XXX ?
             desktop_dir = expanduser("~/.local/share/applications")
             icon_dir = expanduser("~/.local/share/icons")
+            # ensure directories exist
+            if not exists(desktop_dir):
+                mkdir(desktop_dir)
+            if not exists(icon_dir):
+                mkdir(icon_dir)
 
             # copy the files to a unique path, this way duplicate file names
             # dont overwrite each other, eg, several skills with "icon.png"
@@ -296,7 +302,7 @@ class SkillEntry:
 
             # copy icon file
             icon_file = join(icon_dir,
-                             base_name + self.skill_icon.split(".")[-1])
+                             base_name + "." + self.skill_icon.split(".")[-1])
             if self.skill_icon.startswith("http"):
                 content = requests.get(self.skill_icon).content
                 with open(icon_file, "wb") as f:
