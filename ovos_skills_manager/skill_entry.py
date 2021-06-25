@@ -5,9 +5,9 @@ from os.path import isfile, expanduser, join, isdir
 
 from ovos_skills_manager.session import SESSION as requests
 from ovos_skills_manager.exceptions import GithubInvalidUrl, \
-    JSONDecodeError, GithubFileNotFound, GithubInvalidBranch, SkillEntryError
+    JSONDecodeError, GithubFileNotFound, SkillEntryError
 from ovos_skills_manager.github import download_url_from_github_url, \
-    get_branch, get_skill_data, get_requirements, get_branch_from_github_url
+    get_branch, get_skill_data
 from ovos_utils.json_helper import merge_dict
 from ovos_utils.skills import blacklist_skill, whitelist_skill, \
     make_priority_skill, get_skills_folder
@@ -28,14 +28,13 @@ class SkillEntry:
         # a unique identifier
         # github_repo.github_author , case insensitive
         # should be guaranteed to be unique
-        try:
-            author = self.skill_author.lower()
-            repo = self.skill_folder.lower()
+        author = self.skill_author.lower() if self.skill_author else None
+        repo = self.skill_folder.lower() if self.skill_folder else None
+        if repo and author:
             return repo + "." + author
-        except ValueError as e:
-            LOG.error(e)
-            raise SkillEntryError(f"OSM installation of {self.skill_name or 'unknown skill'} failed!"
-                                  f" authorname or foldername not defined.")
+        else:
+            LOG.warning(f"repo or author not defined, skill uuid cannot be determined!")
+            return None
 
     @property
     def json(self):
@@ -111,10 +110,7 @@ class SkillEntry:
 
     @property
     def skill_folder(self):
-        folder = self.json.get("foldername") or self.url.split("/")[-1]
-        if not folder:
-            raise ValueError("foldername is not defined!")
-        return folder
+        return self.json.get("foldername") or self.url.split("/")[-1]
 
     @property
     def skill_category(self):
@@ -127,10 +123,7 @@ class SkillEntry:
 
     @property
     def skill_author(self):
-        authorname = self.json.get("authorname")
-        if not authorname:
-            raise ValueError("authorname is not defined!")
-        return authorname
+        return self.json.get("authorname") or self.url.split("/")[-2]
 
     @property
     def skill_tags(self):
@@ -253,8 +246,12 @@ class SkillEntry:
             ext = self.download_url.split(".")[-1]
         file = self.skill_folder + "." + ext
         url = self.download_url
+        skill_dirname = self.uuid
+        if not skill_dirname:
+            raise SkillEntryError(f"OSM installation of {self.skill_name or 'unknown skill'} failed!"
+                                  f" uuid was not defined.")
         return install_skill(url, folder, file, session=requests,
-                             skill_folder_name=self.uuid)
+                             skill_folder_name=skill_dirname)
 
     def install(self, folder=None, default_branch="master", platform=None,
                 update=True):
@@ -328,7 +325,11 @@ class SkillEntry:
 
     def is_previously_installed(self, folder=None):
         folder = folder or get_skills_folder()
-        return isdir(join(folder, self.uuid))
+        skill_dirname = self.uuid
+        if not skill_dirname:
+            raise SkillEntryError(f"OSM installation of {self.skill_name or 'unknown skill'} failed!"
+                                  f" uuid was not defined.")
+        return isdir(join(folder, skill_dirname))
 
     def __repr__(self):
         if not self.skill_name:
