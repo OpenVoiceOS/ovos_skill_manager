@@ -123,7 +123,7 @@ class SkillEntry:
 
     @property
     def skill_author(self):
-        return self.json.get("authorname") or self.url.split("/")[-2]
+        return self.json.get("authorname") or self.url.split("/")[-2] if self.url and "/" in self.url else ""
 
     @property
     def skill_tags(self):
