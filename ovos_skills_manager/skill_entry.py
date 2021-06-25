@@ -34,7 +34,8 @@ class SkillEntry:
             return repo + "." + author
         except ValueError as e:
             LOG.error(e)
-            raise SkillEntryError(f"Could not build uuid for skill {self.skill_name}")
+            raise SkillEntryError(f"OSM installation of {self.skill_name or 'unknown skill'} failed!"
+                                  f" authorname or foldername not defined.")
 
     @property
     def json(self):
