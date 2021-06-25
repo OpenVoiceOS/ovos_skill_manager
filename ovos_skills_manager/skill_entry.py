@@ -333,7 +333,7 @@ class SkillEntry:
 
     def __repr__(self):
         if not self.skill_name:
-            return self.url
+            return self.url or repr(self.json)
         return self.skill_name + " " + self.url
 
     def __eq__(self, other):
