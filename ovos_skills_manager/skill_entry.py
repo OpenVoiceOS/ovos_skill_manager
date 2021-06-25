@@ -110,7 +110,7 @@ class SkillEntry:
 
     @property
     def skill_folder(self):
-        return self.json.get("foldername") or self.url.split("/")[-1]
+        return self.json.get("foldername") or self.url.split("/")[-1] if self.url and "/" in self.url else ""
 
     @property
     def skill_category(self):
