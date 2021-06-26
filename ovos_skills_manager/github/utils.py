@@ -55,11 +55,12 @@ GITHUB_LOGO_FILES = ["ui/logo.png", "logo.png",
 # url utils
 def normalize_github_url(url):
     url = url\
+        .replace("git://", "https://")\
         .replace("https://raw.githubusercontent.com", "https://github.com")\
         .replace("https://api.github.com/repos/", "https://github.com/")\
         .replace(".git", "")
     if not url.startswith("https://github.com/"):
-        raise GithubInvalidUrl
+        raise GithubInvalidUrl(url)
     fields = url.replace("https://github.com/", "").split("/")
     author, skillname = fields[:2]
     if '@' in skillname:
@@ -70,12 +71,12 @@ def normalize_github_url(url):
 def blob2raw(url, validate=False):
     if not url.startswith("https://github.com") and \
             not url.startswith("https://raw.githubusercontent.com"):
-        raise GithubInvalidUrl
+        raise GithubInvalidUrl(url)
     url = url.replace("/blob", ""). \
         replace("https://github.com", "https://raw.githubusercontent.com")
     if validate:
         if requests.get(url).status_code != 200:
-            raise GithubRawUrlNotFound
+            raise GithubRawUrlNotFound(url)
     return url
 
 
@@ -133,7 +134,7 @@ def download_url_from_github_url(url, branch=None):
     if requests.get(url).status_code == 200:
         return url
 
-    raise GithubInvalidUrl
+    raise GithubInvalidUrl(url)
 
 
 def validate_github_skill_url(url, branch=None):
@@ -165,5 +166,5 @@ def match_url_template(url, template, branch=None):
         if "<title>Rate limit &middot; GitHub</title>" in requests.get(url).text:
             raise GithubHTTPRateLimited
         return blob2raw(url)
-    raise GithubInvalidUrl
+    raise GithubInvalidUrl(url)
 

@@ -11,6 +11,7 @@ from ovos_skills_manager.appstores.ovos import OVOSstore
 from ovos_skills_manager.appstores.neon import NeonSkills
 from ovos_skills_manager.exceptions import UnknownAppstore
 from ovos_skills_manager.appstores.local import InstalledSkills, get_skills_folder
+from ovos_skills_manager.github import author_repo_from_github_url
 
 
 def safe_get_skills_folder():
@@ -267,8 +268,8 @@ class OVOSSkillsManager:
     def skill_entry_from_url(url: str):
         """
         Builds a minimal SkillEntry object from the passed GitHub URL to use for skill installation
-        :param url:
-        :return:
+        :param url: URL of skill to install
+        :return: SkillEntry object with url, branch, requirements, and authorname populated
         """
         from ovos_skills_manager.exceptions import GithubInvalidBranch, GithubFileNotFound
         from ovos_skills_manager.github import get_branch_from_github_url, normalize_github_url, get_requirements_json,\
@@ -286,21 +287,25 @@ class OVOSSkillsManager:
             requirements = merge_dict(requirements, json.get("requirements", {}),
                                       merge_lists=True, skip_empty=True, no_dupes=True)
         except GithubFileNotFound:
-            pass
+            json = {"authorname": author_repo_from_github_url(url)[0]}
         return SkillEntry.from_json({"url": url,
                                      "branch": branch,
-                                     "requirements": requirements}, False)
+                                     "requirements": requirements,
+                                     "authorname": json.get("authorname")}, False)
 
-    def install_skill_from_url(self, url: str):
+    def install_skill_from_url(self, url: str, skill_dir: str = None):
         """
         Installs a Skill from the passed url
         :param url: Git url of skill to install (including optional branch spec)
+        :param skill_dir: Skills directory to install to (skill unpacked to {folder}/{skill.uuid})
         """
-        self.install_skill(self.skill_entry_from_url(url))
+        self.install_skill(self.skill_entry_from_url(url), skill_dir)
 
-    def install_skill(self, skill: SkillEntry):
+    def install_skill(self, skill: SkillEntry, folder=None):
         """
         Installs a SkillEntry with any required auth_token
+        :param skill: Skill to install
+        :param folder: Skills directory to install to (skill unpacked to {folder}/{skill.uuid})
         """
         store = None
         try:
@@ -309,7 +314,7 @@ class OVOSSkillsManager:
             store.authenticate(bootstrap=False)
         except:
             pass
-        skill.install()
+        skill.install(folder)
         if store:
             store.clear_authentication()
 

@@ -60,6 +60,7 @@ class TestSkillEntry(unittest.TestCase):
 
         self.assertEqual(entry.branch, "v0.1")
         self.assertEqual(entry.download_url, "https://github.com/NeonDaniel/skill-osm-test/archive/v0.1.zip")
+        self.assertIsInstance(entry.uuid, str)
 
     def test_explicit_branch(self):
         entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test@dev")
@@ -72,6 +73,7 @@ class TestSkillEntry(unittest.TestCase):
 
         self.assertEqual(entry.branch, "dev")
         self.assertEqual(entry.download_url, "https://github.com/NeonDaniel/skill-osm-test/archive/dev.zip")
+        self.assertIsInstance(entry.uuid, str)
 
     def test_equivalent_branch_specs(self):
         tree_spec = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test/tree/dev")
@@ -107,6 +109,13 @@ class TestSkillEntry(unittest.TestCase):
         entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test")
         requirements = entry.json.pop("requirements")
         self.assertEqual(requirements, entry.requirements)
+
+    def test_skill_entry_properties_invalid_entry(self):
+        entry = SkillEntry({})
+        self.assertIsNone(entry.uuid)
+        self.assertIsInstance(entry.json, dict)
+        self.assertIsInstance(repr(entry), str)
+        self.assertEqual(entry, SkillEntry({}))
 
     # TODO: Find a good method for parsing versions in requirements; for now, requirements installer should handle
     #       compatible versions, this just needs to handle incompatible versions
