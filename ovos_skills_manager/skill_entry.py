@@ -331,11 +331,10 @@ class SkillEntry:
 
     def is_previously_installed(self, folder=None):
         folder = folder or get_skills_folder()
-        skill_dirname = self.uuid
-        if not skill_dirname:
-            raise SkillEntryError(f"OSM installation of {self.skill_name or 'unknown skill'} failed!"
-                                  f" uuid was not defined.")
-        return isdir(join(folder, skill_dirname))
+        # TODO If self.uuid is None, this skill entry is somehow malformed,
+        # probably because it was created manually with partial input.
+        # Something should happen in this case, but what?
+        return isdir(join(folder, self.uuid)) if self.uuid else False
 
     def __repr__(self):
         if not self.skill_name:
