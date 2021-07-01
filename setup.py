@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='ovos-skills-manager',
-    version='0.0.8',
+    version='0.0.9a1',
     packages=['ovos_skills_manager',
               'ovos_skills_manager.github',
               'ovos_skills_manager.appstores',
@@ -10,7 +10,7 @@ setup(
     url='https://github.com/OpenVoiceOS/ovos_skill_manager',
     license='Apache-2.0',
     author='JarbasAI',
-    install_requires=["ovos_skill_installer",
+    install_requires=["ovos_skill_installer>=0.0.5",
                       "json_database>=0.5.1",
                       "requests",
                       "requests-cache",
