@@ -5,7 +5,7 @@ from pprint import pformat
 APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "andlo", "neon", "all", "default"]
 
 
-def print_config(appstore):
+def print_config(appstore: str):
     osm = OVOSSkillsManager()
     if appstore == "all":
         prompt = "Appstore configuration:\n" + pformat(osm.config["appstores"])
@@ -21,6 +21,3 @@ def print_config(appstore):
                  pformat(osm.config["appstores"][name])
     click.echo(prompt)
 
-
-if __name__ == '__main__':
-    print_config()

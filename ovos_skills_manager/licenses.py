@@ -51,13 +51,13 @@ LICENSE_MATCHERS = {
 }
 
 
-def is_permissive(license_type):
+def is_permissive(license_type: str):
     if license_type in ["mit", "apache-2.0", "unlicense", "0bsd", "isc"]:
         return True
     return False
 
 
-def is_viral(license_type):
+def is_viral(license_type: str):
     # GPL
     # With a strict view on the OpenSource definition, the GPL would be a non-free license.
     # In GPL section 8, it is permitted to add a clause that could restrict the GPL to give it's permission only to specific groups, but this would be in conflict with section 5 of the OpenSource definition.
@@ -99,7 +99,7 @@ def is_viral(license_type):
     return False
 
 
-def _check_template(lic, template):
+def _check_template(lic: str, template: str) -> bool:
     lines = [l for l in lic.lower().split("\n") if l.strip()]
     lic = ''.join(filter(str.isalpha, lic)).lower()
     t = ''.join(filter(str.isalpha, template)).lower()
@@ -114,7 +114,7 @@ def _check_template(lic, template):
     return False
 
 
-def _is_0bsd(lic):
+def _is_0bsd(lic: str):
     template = """
     Permission to use, copy, modify, and distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
     THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
@@ -122,7 +122,7 @@ def _is_0bsd(lic):
     return _check_template(lic, template)
 
 
-def _is_isc(lic):
+def _is_isc(lic: str):
     template = """
     Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
     THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
@@ -130,7 +130,7 @@ def _is_isc(lic):
     return _check_template(lic, template)
 
 
-def _is_mit(lic):
+def _is_mit(lic: str):
     template = """
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
     The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
@@ -139,7 +139,7 @@ def _is_mit(lic):
     return _check_template(lic, template)
 
 
-def parse_license_type(lic):
+def parse_license_type(lic: str) -> str:
     # assumptions
     # - license header is somewhere in the first 10 lines
     # - license list is ordered in a way that first match NEEDS to override others

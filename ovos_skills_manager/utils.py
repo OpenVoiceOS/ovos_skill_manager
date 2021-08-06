@@ -18,7 +18,9 @@ def parse_python_dependencies(python_deps: list, token: str = None) -> list:
     return python_deps
 
 
-def readme_to_json(text):
+def readme_to_json(text: str) -> dict:
+    """Accepts a README file as a str, and returns a dict representing valid JSON about a skill
+    """
     text = text.replace("\r", "").replace("\t", "") + "\n## "  # marker to
     # end parsing
     data = {}
@@ -82,7 +84,9 @@ def readme_to_json(text):
     return data
 
 
-def desktop_to_json(desktop):
+def desktop_to_json(desktop: str) -> dict:
+    """Accepts a desktop entry as a str, and returns a dict representing valid JSON about a skill
+    """
     lines = desktop.split("\n")
     data = {}
     for l in lines:

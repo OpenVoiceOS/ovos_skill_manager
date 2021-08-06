@@ -7,7 +7,7 @@ SEARCH_OPTIONS = ['all', 'name', 'url', 'category', 'author', 'tag',
 APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "andlo", "neon", "default", "all"]
 
 
-def search_skill(method, query, fuzzy, no_ignore_case, thresh, appstore):
+def search_skill(method: str, query: str, fuzzy: bool, no_ignore_case: bool, thresh: float, appstore: str):
     osm = OVOSSkillsManager()
 
     ignore_case = not no_ignore_case
@@ -47,8 +47,8 @@ def search_skill(method, query, fuzzy, no_ignore_case, thresh, appstore):
     return skills
 
 
-def install(method, skill, fuzzy, no_ignore_case, thresh, appstore, search,
-            branch, folder):
+def install(method: str, skill: str, fuzzy: bool, no_ignore_case: bool, thresh: float, appstore: str, search: bool,
+            branch: str, folder: str):
     if search:
         skills = search_skill(method, skill, fuzzy, no_ignore_case,
                               thresh, appstore)
@@ -91,6 +91,3 @@ def install(method, skill, fuzzy, no_ignore_case, thresh, appstore, search,
                       abort=True)
         skill.install(folder)
 
-
-if __name__ == '__main__':
-    install()

@@ -5,7 +5,7 @@ from ovos_skills_manager import OVOSSkillsManager
 APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "andlo", "neon", "default", "all"]
 
 
-def sync(appstore, rebuild, merge, github):
+def sync(appstore: str, rebuild: bool, merge: bool, github: bool):
     osm = OVOSSkillsManager()
     if github:
         click.echo("WARNING: parsing github can be VERY SLOW!")
@@ -26,6 +26,3 @@ def sync(appstore, rebuild, merge, github):
     click.echo("Active appstores: " + ", ".join(osm.get_active_appstores()))
     osm.sync_appstores(new_only=not rebuild, merge=merge)
 
-
-if __name__ == '__main__':
-    sync()
