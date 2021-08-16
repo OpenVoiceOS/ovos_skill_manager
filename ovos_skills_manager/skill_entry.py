@@ -256,6 +256,8 @@ class SkillEntry:
 
     def install(self, folder=None, default_branch="master", platform=None,
                 update=True):
+        if not folder:
+            folder = get_skills_folder()
         if not update and self.is_previously_installed(folder):
             return False
         if self.branch_overrides:
