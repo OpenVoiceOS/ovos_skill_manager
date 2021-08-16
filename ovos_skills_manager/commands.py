@@ -73,8 +73,8 @@ def enable(appstore):
 @click.argument('skill', required=False)
 @click.option('--branch', type=str,
               help='select skill github branch to use')
-@click.option('--folder', type=str, default="/opt/mycroft/skills",
-              help='path where skill will be installed, default /opt/mycroft/skills')
+@click.option('--folder', type=str, default=None,
+              help='path where skill will be installed, default from assistant config')
 @click.option('--search', default=False, is_flag=True,
               help="search appstores, otherwise assume it's a github url")
 @click.option('--appstore', default="default",
