@@ -1,8 +1,24 @@
+from os import path, remove
 from setuptools import setup
+from setuptools.command.install import install
+
+
+# class UpgradeIfNeeded(install):
+#     def run(self):
+#         from json_database import JsonConfigXDG, JsonStorageXDG
+#         # Migrate config file
+#         old_config = JsonStorageXDG("OVOS-SkillsManager")
+#         if old_config:
+#             new_config = \
+#                 JsonConfigXDG("OVOS-SkillsManager",
+#                               subfolder="OpenVoiceOS").merge(old_config,
+#                                                         skip_empty=False)
+#             new_config.store()
+#             remove(old_config.path)
 
 setup(
     name='ovos-skills-manager',
-    version='0.0.9a4',
+    version='0.0.10a1',
     packages=['ovos_skills_manager',
               'ovos_skills_manager.github',
               'ovos_skills_manager.appstores',
@@ -10,8 +26,9 @@ setup(
     url='https://github.com/OpenVoiceOS/ovos_skill_manager',
     license='Apache-2.0',
     author='JarbasAI',
-    install_requires=["ovos_skill_installer>=0.0.5",
-                      "json_database>=0.5.1",
+    install_requires=["packaging",
+                      "ovos_skill_installer>=0.0.5",
+                      "json_database>=0.5.6",
                       "requests",
                       "requests-cache",
                       "ovos_utils>=0.0.7",
@@ -27,4 +44,7 @@ setup(
         [console_scripts]
         osm=ovos_skills_manager.commands:osm_commands
     ''',
+    # cmdclass={
+    #     'install': UpgradeIfNeeded
+    #     },
 )

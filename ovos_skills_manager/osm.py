@@ -1,7 +1,7 @@
 from ovos_utils.log import LOG
 from ovos_utils.messagebus import Message
 from ovos_utils.json_helper import merge_dict
-from json_database import JsonStorageXDG
+from json_database import JsonConfigXDG
 
 from ovos_skills_manager import SkillEntry
 from ovos_skills_manager.appstores.andlo import AndloSkillList
@@ -24,7 +24,7 @@ def safe_get_skills_folder():
 
 class OVOSSkillsManager:
     def __init__(self, bus=None):
-        self.config = JsonStorageXDG("OVOS-SkillsManager")
+        self.config = JsonConfigXDG("OVOS-SkillsManager")
         default_config = {
             "local": {
                 "active": True,
