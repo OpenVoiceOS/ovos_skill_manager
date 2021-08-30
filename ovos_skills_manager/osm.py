@@ -415,6 +415,10 @@ class OVOSSkillsManager:
             self.validate_appstore_name(skill.appstore)
             store = self.get_appstore(skill.appstore)
             store.authenticate(bootstrap=False)
+        except Exception as e:
+            self.emit("osm.install.error",
+                      {"folder": folder, "skill": skill.json, "error": str(e)})
+        try:
             skill.install(folder)
         except Exception as e:
             self.emit("osm.install.error",
