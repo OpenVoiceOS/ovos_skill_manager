@@ -38,15 +38,14 @@
                 "caffeine",
                 "coffee",
                 "Information",
-                "Daily"
+                "Daily",
+                "no-license"
             ],
             "skillname": "CaffeineWiz",
             "authorname": "NeonGeckoCom",
             "foldername": "caffeinewiz.neon",
             "appstore": "OpenVoiceOS",
             "appstore_url": "https://openvoiceos.github.io/OVOS-skills-store/caffeineWiz.json",
-            "last_updated": "2021-06-09T22:59:49Z",
-            "version": "v0.1.1",
             "credits": [
                 "@NeonGeckoCom\n@reginaneon\n@NeonDaniel"
             ],
@@ -111,11 +110,11 @@
                 "duckduckgo",
                 "query",
                 "Information",
-                "permissive-license"
+                "permissive-license",
+                "no-license"
             ],
             "appstore": "OpenVoiceOS",
             "appstore_url": "https://openvoiceos.github.io/OVOS-skills-store/skill-ddg.json",
-            "last_updated": "2021-05-18T16:48:25Z",
             "version": "v0.1.0",
             "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-ddg/v0.1.0/ui/logo.png",
             "android": {
@@ -140,7 +139,7 @@
             "title": "Launcher",
             "url": "https://github.com/NeonGeckoCom/launcher.neon",
             "summary": "Skill used to launch programs in Ubuntu",
-            "short_description": "Launcher skill",
+            "short_description": "Skill used to launch programs in Ubuntu",
             "description": "This example skill is used to launch desktop applications.",
             "examples": [
                 "launch chrome",
@@ -157,21 +156,21 @@
                 "arm"
             ],
             "branch": "v0.1.0",
-            "license": "other",
+            "license": "unknown",
             "icon": "https://0000.us/klatchat/app/files/neon_images/icons/neon_paw.png",
             "category": null,
             "categories": [
                 ""
             ],
             "tags": [
-                ""
+                "",
+                "no-license"
             ],
             "skillname": "Launcher",
             "authorname": "NeonGeckoCom",
             "foldername": "launcher.neon",
             "appstore": "OpenVoiceOS",
             "appstore_url": "https://openvoiceos.github.io/OVOS-skills-store/Launcher.json",
-            "last_updated": "2021-06-09T22:46:31Z",
             "requirements": {
                 "python": [],
                 "skill": [],
@@ -215,10 +214,10 @@
             "license": "apache-2.0",
             "tags": [
                 "information",
-                "general-knowledge",
-                "Information",
                 "query",
+                "Information",
                 "wolfram-alpha",
+                "general-knowledge",
                 "no-license"
             ],
             "version": "v0.1",
@@ -232,8 +231,8 @@
             "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-wolfie/v0.1/ui/logo.png",
             "requirements": {
                 "python": [
-                    "requests>=2.13.0",
-                    "google_trans_new"
+                    "google_trans_new",
+                    "requests>=2.13.0"
                 ],
                 "skill": [],
                 "system": {}
@@ -288,8 +287,8 @@
                     "lingua-franca~=0.3.1",
                     "spacy~=2.3.1",
                     "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.3.1/en_core_web_sm-2.3.1.tar.gz",
-                    "git+https://github.com/neongeckocom/neon-skill-utils",
-                    "json_database~=0.5.5"
+                    "json_database~=0.5.5",
+                    "git+https://github.com/neongeckocom/neon-skill-utils"
                 ],
                 "system": {},
                 "skill": []
@@ -352,12 +351,12 @@
             "foldername": "skill-icanhazdadjokes",
             "license": "apache-2.0",
             "tags": [
-                "Entertainment",
-                "funny",
-                "jokes",
-                "humor",
                 "joke",
+                "Entertainment",
+                "jokes",
+                "funny",
                 "humour",
+                "humor",
                 "no-license"
             ],
             "version": "v0.1.0",
@@ -381,8 +380,8 @@
             "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-icanhazdadjokes/v0.1.0/ui/logo.png",
             "requirements": {
                 "python": [
-                    "pyjokes",
-                    "google_trans_new"
+                    "google_trans_new",
+                    "pyjokes"
                 ],
                 "skill": [],
                 "system": {}
