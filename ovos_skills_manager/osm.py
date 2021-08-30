@@ -1,4 +1,5 @@
 from ovos_utils.log import LOG
+from ovos_utils.messagebus import Message
 from ovos_utils.json_helper import merge_dict
 from json_database import JsonStorageXDG
 
@@ -22,7 +23,7 @@ def safe_get_skills_folder():
 
 
 class OVOSSkillsManager:
-    def __init__(self):
+    def __init__(self, bus=None):
         self.config = JsonStorageXDG("OVOS-SkillsManager")
         default_config = {
             "local": {
@@ -69,6 +70,16 @@ class OVOSSkillsManager:
         self._boostrap_tracker = {}
         self.save_config()
         self._threads = []
+        self.bus = None
+
+    def bind(self, bus):
+        # mycroft messagebus events
+        self.bus = bus
+
+    def emit(self, event_name, event_data=None):
+        event_data = event_data or {}
+        if self.bus:
+            self.bus.emit(Message(event_name, event_data))
 
     def get_active_appstores(self, bootstrap=False):
         stores = {}
@@ -142,32 +153,40 @@ class OVOSSkillsManager:
     def enable_appstore(self, appstore_id):
         appstore_id = self.validate_appstore_name(appstore_id)
         self.config["appstores"][appstore_id]["active"] = True
+        self.emit("osm.store.enabled", {"store": appstore_id})
 
     def set_appstore_priority(self, appstore_id, priority):
         appstore_id = self.validate_appstore_name(appstore_id)
         self.config["appstores"][appstore_id]["priority"] = priority
+        self.emit("osm.store.priority.change", {"store": appstore_id,
+                                                "priority": priority})
 
     def set_appstore_auth_token(self, appstore_id, token):
         appstore_id = self.validate_appstore_name(appstore_id)
         self.config["appstores"][appstore_id]["auth_token"] = token
+        self.emit("osm.store.token.change", {"store": appstore_id})
 
     def disable_appstore(self, appstore_id):
         appstore_id = self.validate_appstore_name(appstore_id)
         self.config["appstores"][appstore_id]["active"] = False
+        self.emit("osm.store.disabled", {"store": appstore_id})
 
     def sync_appstores(self, merge=False, new_only=False, threaded=False):
         stores = self.get_active_appstores()
+        self.emit("osm.sync.start")
         for appstore_id in stores:
             LOG.info("Syncing skills from " + appstore_id)
-            store = stores[appstore_id]
-            store.authenticate()
-            if threaded:
-                # TODO this will cause auth issues
-                t = store.sync_skills_list_threaded(merge, new_only)
-                self._threads.append(t)
-            else:
+            self.emit("osm.store.sync.start", {"store": appstore_id})
+            try:
+                store = stores[appstore_id]
+                store.authenticate()
                 store.sync_skills_list(merge, new_only)
                 store.clear_authentication()
+            except Exception as e:
+                self.emit("osm.store.sync.error",
+                          {"store": appstore_id, "error": str(e)})
+            self.emit("osm.store.sync.finish", {"store": appstore_id})
+        self.emit("osm.sync.finish")
 
     @property
     def total_skills(self):
@@ -186,83 +205,165 @@ class OVOSSkillsManager:
 
     def search_skills(self, name, as_json=False, fuzzy=True, thresh=0.85,
                       ignore_case=True):
+        self.emit("osm.search.start",
+                  {"query": name, "thresh": thresh, "fuzzy": fuzzy,
+                   "ignore_case": ignore_case, "search_type": "generic"})
         for store in self.appstores:
             store.authenticate()
             for skill in store.search_skills(name, as_json, fuzzy,  thresh,
                                              ignore_case):
+                self.emit("osm.search.store.result",
+                          {"query": name, "thresh": thresh, "fuzzy": fuzzy,
+                           "ignore_case": ignore_case,
+                           "search_type": "generic", "skill": skill.json,
+                           "store": store.appstore_id})
                 yield skill
             store.clear_authentication()
+        self.emit("osm.search.finish",
+                  {"query": name, "thresh": thresh, "fuzzy": fuzzy,
+                   "ignore_case": ignore_case, "search_type": "generic"})
 
     def search_skills_by_id(self, skill_id, as_json=False, fuzzy=False,
                             thresh=0.85, ignore_case=True):
         """ skill_id is repo.author , case insensitive,
         searchs by name and filters results by author """
+        self.emit("osm.search.start",
+                  {"query": skill_id, "thresh": thresh, "fuzzy": fuzzy,
+                   "ignore_case": ignore_case, "search_type": "id"})
         for store in self.appstores:
             store.authenticate()
             for skill in store.search_skills_by_id(skill_id, as_json,
                                                    fuzzy=fuzzy,
                                                    ignore_case=ignore_case,
                                                    thresh=thresh):
+                self.emit("osm.search.store.result",
+                          {"query": skill_id, "thresh": thresh, "fuzzy": fuzzy,
+                           "ignore_case": ignore_case,
+                           "search_type": "id", "skill": skill.json,
+                           "store": store.appstore_id})
                 yield skill
             store.clear_authentication()
+        self.emit("osm.search.finish",
+                  {"query": skill_id, "thresh": thresh, "fuzzy": fuzzy,
+                   "ignore_case": ignore_case, "search_type": "id"})
 
     def search_skills_by_name(self, name, as_json=False,
                               fuzzy=True, thresh=0.85, ignore_case=True):
+        self.emit("osm.search.start",
+                  {"query": name, "thresh": thresh, "fuzzy": fuzzy,
+                   "ignore_case": ignore_case, "search_type": "name"})
         for store in self.appstores:
             store.authenticate()
             for skill in store.search_skills_by_name(name, as_json, fuzzy,
                                                      thresh, ignore_case):
+                self.emit("osm.search.store.result",
+                          {"query": name, "thresh": thresh, "fuzzy": fuzzy,
+                           "ignore_case": ignore_case,
+                           "search_type": "name", "skill": skill.json,
+                           "store": store.appstore_id})
                 yield skill
             store.clear_authentication()
+        self.emit("osm.search.finish",
+                  {"query": name, "thresh": thresh, "fuzzy": fuzzy,
+                   "ignore_case": ignore_case, "search_type": "name"})
 
     def search_skills_by_url(self, url, as_json=False):
+        self.emit("osm.search.start",
+                  {"query": url, "search_type": "url"})
         for store in self.appstores:
             store.authenticate()
             for skill in store.search_skills_by_url(url, as_json):
                 store.clear_authentication()
-                return [skill]
-        LOG.warning(f"No results found for: {url}")
-        return []
+                self.emit("osm.search.finish",
+                          {"query": url, "search_type": "url",
+                           "skill": skill.json})
+                yield skill
+        self.emit("osm.search.finish",
+                  {"query": url, "search_type": "url"})
 
     def search_skills_by_category(self, category, as_json=False,
                                   fuzzy=True, thresh=0.85, ignore_case=True):
+        self.emit("osm.search.start",
+                  {"query": category, "thresh": thresh, "fuzzy": fuzzy,
+                   "ignore_case": ignore_case, "search_type": "category"})
         for store in self.appstores:
             store.authenticate()
             for skill in store.search_skills_by_category(category, as_json,
                                                          fuzzy, thresh,
                                                          ignore_case):
+                self.emit("osm.search.store.result",
+                          {"query": category, "thresh": thresh, "fuzzy": fuzzy,
+                           "ignore_case": ignore_case,
+                           "search_type": "category", "skill": skill.json,
+                           "store": store.appstore_id})
                 yield skill
             store.clear_authentication()
+        self.emit("osm.search.finish",
+                  {"query": category, "thresh": thresh, "fuzzy": fuzzy,
+                   "ignore_case": ignore_case, "search_type": "category"})
 
     def search_skills_by_author(self, authorname, as_json=False,
                                 fuzzy=True, thresh=0.85, ignore_case=True):
+        self.emit("osm.search.start",
+                  {"query": authorname, "thresh": thresh, "fuzzy": fuzzy,
+                   "ignore_case": ignore_case, "search_type": "author"})
         for store in self.appstores:
             store.authenticate()
             for skill in store.search_skills_by_author(authorname, as_json,
                                                        fuzzy, thresh,
                                                        ignore_case):
+                self.emit("osm.search.store.result",
+                          {"query": authorname, "thresh": thresh, "fuzzy": fuzzy,
+                           "ignore_case": ignore_case,
+                           "search_type": "author", "skill": skill.json,
+                           "store": store.appstore_id})
                 yield skill
             store.clear_authentication()
+        self.emit("osm.search.finish",
+                  {"query": authorname, "thresh": thresh, "fuzzy": fuzzy,
+                   "ignore_case": ignore_case, "search_type": "author"})
 
     def search_skills_by_tag(self, tag, as_json=False,
                              fuzzy=True, thresh=0.85, ignore_case=True):
+        self.emit("osm.search.start",
+                  {"query": tag, "thresh": thresh, "fuzzy": fuzzy,
+                   "ignore_case": ignore_case, "search_type": "tag"})
         for store in self.appstores:
             store.authenticate()
             for skill in store.search_skills_by_tag(tag, as_json, fuzzy,
                                                     thresh, ignore_case):
+                self.emit("osm.search.store.result",
+                          {"query": tag, "thresh": thresh, "fuzzy": fuzzy,
+                           "ignore_case": ignore_case,
+                           "search_type": "tag", "skill": skill.json,
+                           "store": store.appstore_id})
                 yield skill
             store.clear_authentication()
+        self.emit("osm.search.finish",
+                  {"query": tag, "thresh": thresh, "fuzzy": fuzzy,
+                   "ignore_case": ignore_case, "search_type": "tag"})
 
     def search_skills_by_description(self, value, as_json=False,
                                      fuzzy=True, thresh=0.85,
                                      ignore_case=True):
+        self.emit("osm.search.start",
+                  {"query": value, "thresh": thresh, "fuzzy": fuzzy,
+                   "ignore_case": ignore_case, "search_type": "description"})
         for store in self.appstores:
             store.authenticate()
             for skill in store.search_skills_by_description(value, as_json,
                                                             fuzzy, thresh,
                                                             ignore_case):
+                self.emit("osm.search.store.result",
+                          {"query": value, "thresh": thresh, "fuzzy": fuzzy,
+                           "ignore_case": ignore_case,
+                           "search_type": "description", "skill": skill.json,
+                           "store": store.appstore_id})
                 yield skill
             store.clear_authentication()
+        self.emit("osm.search.finish",
+                  {"query": value, "thresh": thresh, "fuzzy": fuzzy,
+                   "ignore_case": ignore_case, "search_type": "description"})
 
     @staticmethod
     def skill_entry_from_url(url: str):
@@ -307,16 +408,21 @@ class OVOSSkillsManager:
         :param skill: Skill to install
         :param folder: Skills directory to install to (skill unpacked to {folder}/{skill.uuid})
         """
+        self.emit("osm.install.start",
+                  {"folder": folder, "skill": skill.json})
         store = None
         try:
             self.validate_appstore_name(skill.appstore)
             store = self.get_appstore(skill.appstore)
             store.authenticate(bootstrap=False)
-        except:
-            pass
-        skill.install(folder)
+            skill.install(folder)
+        except Exception as e:
+            self.emit("osm.install.error",
+                      {"folder": folder, "skill": skill.json, "error": str(e)})
         if store:
             store.clear_authentication()
+        self.emit("osm.install.finish",
+                  {"folder": folder, "skill": skill.json})
 
     def __iter__(self):
         for store in self.appstores:
