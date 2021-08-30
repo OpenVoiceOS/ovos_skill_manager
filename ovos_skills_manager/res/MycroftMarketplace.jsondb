@@ -1,61 +1,6 @@
 {
     "MycroftMarketplace": [
         {
-            "skillname": "Pandora",
-            "foldername": "pianobar-skill",
-            "url": "https://github.com/MycroftAI/pianobar-skill",
-            "branch": "16875241376e51aeb87c9dee1115d58e46ae779d",
-            "description": "Pandora provides dynamically generated internet radio streams.  Streams are\ninfluenced by the the traits of the music played and the songs you like\nor skip.\n\nUsing this skill does require a [Pandora.com](https://pandora.com) account.\nSign-up is free with ad-supported streams.",
-            "authorname": "MycroftAI",
-            "examples": [
-                "Skip this song.",
-                "Play Pandora",
-                "Next station.",
-                "Play Today's Hits Radio on Pandora.",
-                "List my stations",
-                "Next song.",
-                "List my stations.",
-                "Play Pandora.",
-                "Skip this song",
-                "Next station",
-                "Next song",
-                "Play Today's Hits Radio on Pandora"
-            ],
-            "category": "Music",
-            "tags": [
-                "Music",
-                "music",
-                "no-license",
-                "pandora",
-                "free"
-            ],
-            "platforms": [
-                "all"
-            ],
-            "short_description": "Listen to the Pandora music service",
-            "license": "unknown",
-            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/music.svg",
-            "credits": [
-                "Mycroft AI (@MycroftAI)"
-            ],
-            "categories": [
-                "Music"
-            ],
-            "requirements": {
-                "python": [
-                    "fuzzywuzzy==0.15.0"
-                ],
-                "skill": [],
-                "system": {}
-            },
-            "android": {
-                "android_icon": null,
-                "android_name": "Pianobar Skill",
-                "android_handler": "pianobar-skill.mycroftai.home"
-            },
-            "desktopFile": true
-        },
-        {
             "skillname": "Unknown Handler",
             "foldername": "fallback-unknown",
             "url": "https://github.com/MycroftAI/fallback-unknown",
@@ -71,10 +16,10 @@
             ],
             "category": "Configuration",
             "tags": [
-                "fallback",
-                "Configuration",
-                "unknown",
                 "system",
+                "unknown",
+                "Configuration",
+                "fallback",
                 "no-license"
             ],
             "platforms": [
@@ -120,12 +65,12 @@
             ],
             "category": "Information",
             "tags": [
-                "fallback",
-                "information",
                 "general-knowledge",
                 "Information",
-                "query",
                 "wolfram-alpha",
+                "fallback",
+                "query",
+                "information",
                 "no-license"
             ],
             "platforms": [
@@ -142,9 +87,9 @@
             ],
             "requirements": {
                 "python": [
+                    "wolframalpha==3.0",
                     "requests>=2.13.0",
-                    "mtranslate",
-                    "wolframalpha==3.0"
+                    "mtranslate"
                 ],
                 "skill": [],
                 "system": {}
@@ -161,7 +106,7 @@
             "skillname": "Set alarms",
             "foldername": "skill-alarm",
             "url": "https://github.com/MycroftAI/skill-alarm",
-            "branch": "29128967c3c85e6705cd7ad86b3d7d7fbd37be4e",
+            "branch": "25ecc0261abee644257a81f20f020bb92f462970",
             "description": "Set a single use alarm, daily alarms, or weekly recurring alarms.\n\n You can choose from five different alarm sounds:\n * Constant Beep\n * Four rapid beeps\n * Escalating beeps\n * Alarm bell\n * Gentle chimes",
             "authorname": "MycroftAI",
             "examples": [
@@ -237,12 +182,12 @@
             ],
             "category": "Configuration",
             "tags": [
-                "record",
-                "Configuration",
                 "configuration",
+                "record",
+                "audio",
+                "Configuration",
                 "microphone",
                 "record-audio",
-                "audio",
                 "no-license"
             ],
             "platforms": [
@@ -295,11 +240,11 @@
             ],
             "category": "Configuration",
             "tags": [
-                "system",
-                "config",
                 "configuration",
                 "update-config",
+                "config",
                 "Configuration",
+                "system",
                 "no-license"
             ],
             "platforms": [
@@ -316,8 +261,8 @@
             ],
             "requirements": {
                 "python": [
-                    "requests>=2.13.0",
-                    "humanhash3"
+                    "humanhash3",
+                    "requests>=2.13.0"
                 ],
                 "skill": [],
                 "system": {}
@@ -334,7 +279,7 @@
             "skillname": "Date and Time",
             "foldername": "skill-date-time",
             "url": "https://github.com/MycroftAI/skill-date-time",
-            "branch": "fdec596ec93638f30d04d01d7b2d3ce432fe732a",
+            "branch": "c8e602bfcc8ba72d9acabf81683314f3ff789ca1",
             "description": "Get the local time or time for major cities around the world.  Times\nare given in 12-hour (2:30 pm) or 24-hour format (14:30) based on the\nTime Format setting at [Home](https://home.mycroft.ai/#/setting/basic)\n\nTime can optionally be shown on a display, like a digital clock.  See\nthe [Skill Setting](https://home.mycroft.ai/#/skill).",
             "authorname": "MycroftAI",
             "examples": [
@@ -350,11 +295,11 @@
             "category": "Daily",
             "tags": [
                 "time",
-                "clock",
-                "world-clock",
-                "world-time",
                 "date-time",
+                "world-time",
+                "clock",
                 "date",
+                "world-clock",
                 "Daily",
                 "no-license"
             ],
@@ -372,11 +317,11 @@
             ],
             "requirements": {
                 "python": [
-                    "tzlocal==1.3",
-                    "pytz==2017.2",
                     "geocoder",
-                    "holidays",
-                    "timezonefinder"
+                    "tzlocal==1.3",
+                    "timezonefinder",
+                    "pytz==2017.2",
+                    "holidays"
                 ],
                 "skill": [],
                 "system": {}
@@ -393,7 +338,7 @@
             "skillname": "DuckDuckGo",
             "foldername": "fallback-duckduckgo",
             "url": "https://github.com/MycroftAI/fallback-duckduckgo",
-            "branch": "0b9e3c7d0786621d2847ba77d5e4d492f0139531",
+            "branch": "7228afa108b504fc8e818f2c4e37209be8f4aa0d",
             "description": "Query DuckDuckGo as a fallback when no other Skill can answer the question.\n\nUses the [DuckDuckGo API](https://duckduckgo.com/api) to provide information.",
             "authorname": "MycroftAI",
             "examples": [
@@ -403,12 +348,12 @@
             ],
             "category": "Information",
             "tags": [
-                "search-engine",
+                "Information",
                 "fallback",
+                "query",
+                "search-engine",
                 "duckduckgo",
                 "searchengine",
-                "Information",
-                "query",
                 "no-license"
             ],
             "platforms": [
@@ -454,10 +399,10 @@
             ],
             "category": "Configuration",
             "tags": [
-                "helloworld",
                 "first-skill",
                 "Configuration",
                 "hello",
+                "helloworld",
                 "greeting",
                 "no-license"
             ],
@@ -507,15 +452,15 @@
             ],
             "category": "Configuration",
             "tags": [
+                "download",
                 "msm",
-                "add-skill",
-                "skill",
-                "system",
+                "Configuration",
                 "install",
                 "skills",
+                "add-skill",
+                "skill",
                 "installer",
-                "Configuration",
-                "download",
+                "system",
                 "no-license"
             ],
             "platforms": [
@@ -563,12 +508,12 @@
             ],
             "category": "Configuration",
             "tags": [
-                "IPaddress",
-                "system",
-                "IP-address",
-                "network",
                 "Configuration",
                 "network-address",
+                "IPaddress",
+                "IP-address",
+                "network",
+                "system",
                 "no-license"
             ],
             "platforms": [
@@ -617,11 +562,11 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "Entertainment",
                 "funny",
-                "jokes",
                 "humor",
                 "joke",
+                "jokes",
+                "Entertainment",
                 "humour",
                 "no-license"
             ],
@@ -666,9 +611,9 @@
             "category": "Configuration",
             "tags": [
                 "showcase",
-                "Configuration",
                 "demo",
                 "demonstration",
+                "Configuration",
                 "no-license"
             ],
             "platforms": [
@@ -718,11 +663,11 @@
             ],
             "category": "Configuration",
             "tags": [
-                "settings",
-                "system",
                 "configuration",
                 "Configuration",
+                "settings",
                 "mark1",
+                "system",
                 "no-license"
             ],
             "platforms": [
@@ -739,8 +684,8 @@
             ],
             "requirements": {
                 "python": [
-                    "astral==1.4",
-                    "arrow==0.12.0"
+                    "arrow==0.12.0",
+                    "astral==1.4"
                 ],
                 "skill": [],
                 "system": {}
@@ -770,13 +715,13 @@
             ],
             "category": "Daily",
             "tags": [
-                "Daily",
-                "naptime",
                 "nap",
-                "sleep",
-                "do-not-disturb",
                 "Configuration",
+                "sleep",
                 "donotdisturb",
+                "naptime",
+                "Daily",
+                "do-not-disturb",
                 "no-license"
             ],
             "platforms": [
@@ -872,11 +817,11 @@
             ],
             "category": "Configuration",
             "tags": [
-                "pairing",
+                "Configuration",
+                "connectivity",
                 "pair",
                 "system",
-                "connectivity",
-                "Configuration",
+                "pairing",
                 "no-license"
             ],
             "platforms": [
@@ -920,9 +865,9 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "personality",
                 "persona",
                 "Entertainment",
+                "personality",
                 "no-license"
             ],
             "platforms": [
@@ -954,7 +899,7 @@
             "skillname": "Playback Control",
             "foldername": "skill-playback-control",
             "url": "https://github.com/MycroftAI/skill-playback-control",
-            "branch": "ec4203ac6e4acecfb43f8dd56f154ce0418098e4",
+            "branch": "2f582091f45b83441b12b124f2d84bc9ee23d313",
             "description": "This Skill doesn't do anything by itself, but it provides an important common\nlanguage for audio playback skills.  By handling simple phrases like\n'pause', this one Skill can turn around and rebroadcast the [messagebus](https://mycroft.ai/documentation/message-bus/)\ncommand `mycroft.audio.service.pause`, allowing several music services to share\ncommon terminology such as \"pause\".\n\nAdditionally, this implements the common Play handler.  This allows playback\nservices to negotiate which is best suited to play back a specific request.\nThis capability is used by the [Spotify](https://github.com/forslund/spotify-skill) and [Pandora](https://github.com/mycroftai/pianobar-skill) Skills, among others.",
             "authorname": "MycroftAI",
             "examples": [
@@ -977,14 +922,14 @@
             ],
             "category": "Music",
             "tags": [
-                "playback",
-                "system",
-                "music",
-                "resume",
                 "play",
+                "resume",
+                "playback",
+                "next",
+                "music",
+                "system",
                 "Music",
                 "pause",
-                "next",
                 "no-license"
             ],
             "platforms": [
@@ -1034,8 +979,8 @@
             "category": "Daily",
             "tags": [
                 "reminder",
-                "reminders",
                 "Daily",
+                "reminders",
                 "no-license"
             ],
             "platforms": [
@@ -1067,7 +1012,7 @@
             "skillname": "Singing",
             "foldername": "skill-singing",
             "url": "https://github.com/MycroftAI/skill-singing",
-            "branch": "d181225474d5ad4c63a5dabf4ed1ad1300ac7212",
+            "branch": "3cfd5007ac2b0c728bb5557ca68a99eea20e818f",
             "description": "Mycroft will speak the lyrics to a random pop music song using text to speech.",
             "authorname": "MycroftAI",
             "examples": [
@@ -1076,13 +1021,13 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "lyrics",
-                "sing",
-                "Entertainment",
-                "music",
-                "singing",
-                "song",
                 "texttospeech",
+                "sing",
+                "song",
+                "singing",
+                "music",
+                "Entertainment",
+                "lyrics",
                 "no-license"
             ],
             "platforms": [
@@ -1127,11 +1072,11 @@
             ],
             "category": "Entertainment",
             "tags": [
+                "say",
                 "speak",
+                "repeat",
                 "Entertainment",
                 "system",
-                "say",
-                "repeat",
                 "no-license"
             ],
             "platforms": [
@@ -1176,9 +1121,9 @@
             ],
             "category": "Information",
             "tags": [
-                "spelling",
-                "Information",
                 "spell",
+                "Information",
+                "spelling",
                 "no-license"
             ],
             "platforms": [
@@ -1228,9 +1173,9 @@
             ],
             "category": "Music",
             "tags": [
-                "Music",
-                "spotify",
                 "music",
+                "spotify",
+                "Music",
                 "no-license"
             ],
             "platforms": [
@@ -1261,59 +1206,10 @@
             "desktopFile": true
         },
         {
-            "skillname": "Stock Prices",
-            "foldername": "skill-stock",
-            "url": "https://github.com/MycroftAI/skill-stock",
-            "branch": "4ba6ea9860e374b2e09a1582f33bc0b46a911ae3",
-            "description": "Using the [Financial Modeling Prep](https://financialmodelingprep.com/developer/docs/) API, you can ask Mycroft to get the current price of stocks.",
-            "authorname": "MycroftAI",
-            "examples": [
-                "Stock price of Google.",
-                "Trading at Google.",
-                "Stock price of Google",
-                "Trading at Google"
-            ],
-            "category": "Information",
-            "tags": [
-                "stock-market",
-                "stock-prices",
-                "Information",
-                "financial",
-                "stocks",
-                "no-license"
-            ],
-            "platforms": [
-                "all"
-            ],
-            "short_description": "Provides current stock prices",
-            "license": "apache-2.0",
-            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/money-check-alt.svg",
-            "credits": [
-                "Mycroft AI (@MycroftAI)"
-            ],
-            "categories": [
-                "Information"
-            ],
-            "requirements": {
-                "python": [
-                    "requests>=2.13.0"
-                ],
-                "skill": [],
-                "system": {}
-            },
-            "android": {
-                "android_icon": null,
-                "android_name": "Stock Skill",
-                "android_handler": "skill-stock.mycroftai.home"
-            },
-            "desktop": {},
-            "desktopFile": true
-        },
-        {
             "skillname": "System",
             "foldername": "skill-stop",
             "url": "https://github.com/MycroftAI/skill-stop",
-            "branch": "e33d0c8ac8d276bd06aefa6ff67ef6de76909759",
+            "branch": "e28d571f909fd8892fa52064665e9e0ec38de4f8",
             "description": "Provides verbal interfaces for basic framework interactions, such as the\n\"Stop\" command.  Also provide interface to control physical Mycroft hardware.\n\nNOTE: This Skill is a little unusual in that it really doesn't do anything\ndirectly, rather it emits messages for the device creator to capture.",
             "authorname": "MycroftAI",
             "examples": [
@@ -1376,12 +1272,12 @@
             "category": "Configuration",
             "tags": [
                 "support-request",
-                "help",
-                "troubleshooting",
-                "system",
-                "assistance",
-                "logs",
                 "Configuration",
+                "logs",
+                "assistance",
+                "troubleshooting",
+                "help",
+                "system",
                 "support",
                 "no-license"
             ],
@@ -1416,7 +1312,7 @@
             "skillname": "Timer",
             "foldername": "mycroft-timer",
             "url": "https://github.com/MycroftAI/mycroft-timer",
-            "branch": "9d0a39bd28d25122fd346d80d585cb78f5d2f647",
+            "branch": "464142d5aa646fd7f23c51fa6036b7a048726703",
             "description": "Use Mycroft when your hands are messy or you need more that the one timer in your kitchen.  Multiple timers are easy to set and track with conversational interactions.\n\nOn a Mark 1 you'll see visual feedback as the timer runs, and you can use\nthe top button to stop the beeping once a timer expires.",
             "authorname": "MycroftAI",
             "examples": [
@@ -1438,8 +1334,8 @@
             "category": "Daily",
             "tags": [
                 "kitchen-timer",
-                "timer",
                 "Daily",
+                "timer",
                 "no-license"
             ],
             "platforms": [
@@ -1473,29 +1369,39 @@
             "skillname": "Weather",
             "foldername": "skill-weather",
             "url": "https://github.com/MycroftAI/skill-weather",
-            "branch": "b0194125e2e03d010949ed6c89a8cf9ce7931141",
-            "description": "Get weather conditions, forecasts, expected precipitation and more!  By default it will tell\nyou about your default location, or you can ask for other cities around the world. \n\nCurrent conditions and weather forecasts come from [Open Weather Map](https://openweathermap.org).\n\nFor **enclosures** with screen support, conditions are briefly shown using visemes.\n\nThe temperature is shown in Celsius or Fahrenheit depending on the preferences set in your [https://home.mycroft.ai](https://home.mycroft.ai) account.",
+            "branch": "711dd23d6c75801f24f78f8e51fc6f9e6e2047b1",
+            "description": "Get weather conditions, forecasts, expected precipitation and more!  By default, it will tell\nyou about your device's configured location. You can also ask for other cities around the world. \n\nCurrent conditions and weather forecasts come from [Open Weather Map](https://openweathermap.org).\n\nThe temperature is shown in Celsius or Fahrenheit depending on the preferences \nset in your [https://home.mycroft.ai](https://home.mycroft.ai) account.  You can ask \nspecifically for a unit that differs from your configuration.",
             "authorname": "MycroftAI",
             "examples": [
                 "What is the weather?",
-                "What is the forecast tomorrow?",
-                "What is the weather going to be like Tuesday?",
                 "What is the weather in Houston?",
+                "What is the forecast tomorrow?",
+                "What is the forecast in London tomorrow?",
+                "What is the weather going to be like Tuesday?",
+                "What is the weather for the next three days?",
+                "What is the weather this weekend?",
+                "What's the temperature?",
+                "What's the temperature in Paris tomorrow in Celsius?",
+                "What's the high temperature tomorrow?",
+                "Will it be cold on Tuesday.",
                 "When will it rain next?",
                 "How windy is it?",
                 "What's the humidity?",
                 "Is it going to snow?",
-                "What's the temperature?"
+                "Is it going to snow in Baltimore?",
+                "When is the sunset?",
+                "What's the high temperature tomorrow",
+                "Will it be cold on Tuesday"
             ],
             "category": "Daily",
             "tags": [
-                "Daily",
-                "temperature",
                 "weather",
                 "humidity",
                 "rain",
                 "snow",
+                "Daily",
                 "forecast",
+                "temperature",
                 "no-license"
             ],
             "platforms": [
@@ -1512,9 +1418,7 @@
             ],
             "requirements": {
                 "python": [
-                    "pyowm==2.6.1",
-                    "requests>=2.13.0",
-                    "multi-key-dict==2.0.3"
+                    "requests"
                 ],
                 "skill": [],
                 "system": {}
@@ -1543,12 +1447,12 @@
             ],
             "category": "Configuration",
             "tags": [
-                "platform",
-                "system",
+                "Configuration",
                 "build",
                 "version",
                 "versioning",
-                "Configuration",
+                "system",
+                "platform",
                 "no-license"
             ],
             "platforms": [
@@ -1603,13 +1507,13 @@
             ],
             "category": "Information",
             "tags": [
-                "question",
-                "wikipedia",
                 "general-knowledge",
                 "Information",
-                "encyclopedia",
-                "wiki",
                 "query",
+                "wiki",
+                "encyclopedia",
+                "wikipedia",
+                "question",
                 "no-license"
             ],
             "platforms": [
@@ -1660,11 +1564,11 @@
             ],
             "category": "Configuration",
             "tags": [
-                "sound",
-                "system",
-                "volume-control",
                 "volume",
+                "sound",
                 "Configuration",
+                "volume-control",
+                "system",
                 "no-license"
             ],
             "platforms": [
@@ -1698,7 +1602,7 @@
             "skillname": "Release Test",
             "foldername": "skill-release-test",
             "url": "https://github.com/MycroftAI/skill-release-test",
-            "branch": "8cef9dd3889cf302d4aa9044fdcefb238d6f4c50",
+            "branch": "49154fc81fd75448fe63ac71e9ec5b67f8d8ede1",
             "description": "When a new release is being tested, this skill is installed to verify the\ninstallation mechanism functions properly.  Additionally, the following line\nis edited to verify that the skill update process occurs as intended.\n\nTest line:  2018/10/23 23:14",
             "authorname": "MycroftAI",
             "examples": [
@@ -1708,14 +1612,14 @@
             ],
             "category": "Configuration",
             "tags": [
-                "qa",
-                "quality-assurance",
-                "ci",
-                "cd",
+                "Configuration",
                 "testing",
                 "release",
-                "Configuration",
+                "cd",
+                "qa",
+                "ci",
                 "release-test",
+                "quality-assurance",
                 "no-license"
             ],
             "platforms": [
@@ -1795,8 +1699,8 @@
             ],
             "category": "Information",
             "tags": [
-                "system",
                 "Information",
+                "system",
                 "no-license"
             ],
             "platforms": [
@@ -1847,17 +1751,17 @@
             ],
             "category": "IoT",
             "tags": [
-                "iot",
-                "lighting",
-                "LED",
-                "home-automation",
-                "winkhub",
-                "light",
                 "smarthome",
-                "IoT",
+                "lighting",
                 "lightbulb",
+                "home-automation",
                 "smart-home",
+                "IoT",
+                "light",
                 "wink",
+                "LED",
+                "winkhub",
+                "iot",
                 "no-license"
             ],
             "platforms": [
@@ -1889,31 +1793,33 @@
             "skillname": "Zork",
             "foldername": "white-house-adventure",
             "url": "https://github.com/forslund/white-house-adventure",
-            "branch": "6eba5df187bc8a7735b05e93a28a6390b8c6f40c",
+            "branch": "80f65b9df262bb4b28c62e416faacc44e304e076",
             "description": "Zork is one of the classic text based adventure games from an era before high-end graphics circuits, instead it runs on the graphics hardware of your mind!\n\nExplore the white house, the forest surrounding it and the hidden kingdom below it. Moving this from the text domain to the voice domain makes for a curiously engaging experience and if nothing else a fun couple of minutes.\n\nThe skill utilizes the excellent Frotz (http://frotz.sourceforge.net/) Z-Machine interpreter and the Zork data files are from infocom-if (http://infocom-if.org/index2.html).\n\n*Be ware of Grues....*",
             "authorname": "forslund",
             "examples": [
                 "Play zork.",
+                "Go to the white house.",
                 "Quit zork.",
                 "Open mailbox.",
                 "play zork",
+                "Go to the white house",
                 "quit zork",
                 "open mailbox"
             ],
             "category": "Entertainment",
             "tags": [
                 "port",
-                "game",
                 "adventure",
                 "Entertainment",
+                "game",
                 "no-license"
             ],
             "platforms": [
                 "all"
             ],
             "short_description": "Play the adventure game Zork",
-            "license": "unknown",
-            "icon": "https://rawgithub.com/FortAwesome/Font-Awesome/master/advanced-options/raw-svg/solid/door-open.svg",
+            "license": "gpl-3.0",
+            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/door-open.svg",
             "credits": [
                 "@forslund"
             ],
@@ -1999,8 +1905,8 @@
             "category": "Entertainment",
             "tags": [
                 "oscon2018",
-                "oscon",
                 "Entertainment",
+                "oscon",
                 "no-license"
             ],
             "platforms": [
@@ -2043,10 +1949,10 @@
             ],
             "category": "Information",
             "tags": [
-                "drinks",
-                "cocktails",
-                "recipies",
                 "Information",
+                "cocktails",
+                "drinks",
+                "recipies",
                 "no-license"
             ],
             "platforms": [
@@ -2095,13 +2001,13 @@
             ],
             "category": "Productivity",
             "tags": [
-                "control",
-                "kde",
-                "Productivity",
-                "switch",
                 "activities",
-                "plasma",
+                "kde",
                 "desktop",
+                "control",
+                "switch",
+                "Productivity",
+                "plasma",
                 "no-license"
             ],
             "platforms": [
@@ -2118,8 +2024,8 @@
             ],
             "requirements": {
                 "python": [
-                    "dbus-python",
-                    "dbus-python "
+                    "dbus-python ",
+                    "dbus-python"
                 ],
                 "system": {
                     "all": [
@@ -2155,11 +2061,11 @@
             ],
             "category": "Productivity",
             "tags": [
-                "Productivity",
-                "mail",
+                "emails",
                 "email",
                 "Information",
-                "emails",
+                "Productivity",
+                "mail",
                 "Daily",
                 "no-license"
             ],
@@ -2264,10 +2170,10 @@
             "tags": [
                 "random",
                 "numberguess",
-                "Entertainment",
                 "game",
                 "number",
                 "guessing",
+                "Entertainment",
                 "no-license"
             ],
             "platforms": [
@@ -2311,8 +2217,8 @@
             "category": "Entertainment",
             "tags": [
                 "crystalball",
-                "random",
                 "Entertainment",
+                "random",
                 "no-license"
             ],
             "platforms": [
@@ -2355,10 +2261,10 @@
             ],
             "category": "IoT",
             "tags": [
-                "iot",
-                "homeautomation",
-                "homeassistant",
                 "smarthome",
+                "homeautomation",
+                "iot",
+                "homeassistant",
                 "IoT",
                 "no-license"
             ],
@@ -2377,9 +2283,9 @@
             "requirements": {
                 "python": [
                     "fuzzywuzzy==0.14.0",
-                    "responses",
                     "python-Levenshtein==0.12.0",
-                    "requests"
+                    "requests",
+                    "responses"
                 ],
                 "skill": [],
                 "system": {}
@@ -2402,12 +2308,12 @@
             "examples": [],
             "category": "IoT",
             "tags": [
-                "Googleaiy",
-                "googlevoicekit",
                 "voicehat",
-                "IoT",
                 "voicekit",
                 "aiy",
+                "googlevoicekit",
+                "Googleaiy",
+                "IoT",
                 "no-license"
             ],
             "platforms": [
@@ -2456,13 +2362,13 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "random",
-                "Entertainment",
-                "quotes",
-                "Information",
                 "philosophy",
-                "knowledge",
+                "random",
+                "Information",
                 "wisdom",
+                "quotes",
+                "knowledge",
+                "Entertainment",
                 "no-license"
             ],
             "platforms": [
@@ -2510,12 +2416,12 @@
             ],
             "category": "Productivity",
             "tags": [
+                "editor",
+                "Productivity",
                 "theia",
                 "vscode",
-                "dev",
-                "Productivity",
                 "IDE",
-                "editor",
+                "dev",
                 "no-license"
             ],
             "platforms": [
@@ -2533,8 +2439,8 @@
             ],
             "requirements": {
                 "python": [
-                    "ptvsd",
-                    "wget"
+                    "wget",
+                    "ptvsd"
                 ],
                 "skill": [],
                 "system": {}
@@ -2566,16 +2472,16 @@
             ],
             "category": "Productivity",
             "tags": [
-                "krunner",
-                "search",
-                "kde",
-                "Productivity",
-                "recent",
                 "bookmarks",
-                "documents",
-                "control",
-                "plasma",
+                "krunner",
+                "kde",
                 "desktop",
+                "control",
+                "recent",
+                "search",
+                "documents",
+                "Productivity",
+                "plasma",
                 "no-license"
             ],
             "platforms": [
@@ -2673,10 +2579,10 @@
             ],
             "category": "Information",
             "tags": [
-                "wifi",
-                "aircrack",
                 "Information",
+                "wifi",
                 "aircrack-ng",
+                "aircrack",
                 "no-license"
             ],
             "platforms": [
@@ -2726,8 +2632,8 @@
             ],
             "category": "Daily",
             "tags": [
-                "todo-list",
                 "brain",
+                "todo-list",
                 "remember",
                 "Productivity",
                 "Daily",
@@ -2776,11 +2682,11 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "Entertainment",
-                "funny",
-                "entertainment",
                 "laugh",
+                "funny",
                 "repeating",
+                "entertainment",
+                "Entertainment",
                 "no-license"
             ],
             "platforms": [
@@ -2825,9 +2731,9 @@
             ],
             "category": "Daily",
             "tags": [
-                "Configuration",
-                "Daily",
                 "volume",
+                "Daily",
+                "Configuration",
                 "no-license"
             ],
             "platforms": [
@@ -2868,10 +2774,10 @@
             "examples": [],
             "category": "IoT",
             "tags": [
-                "Productivity",
                 "bot",
-                "telegram-bot",
                 "messenger",
+                "telegram-bot",
+                "Productivity",
                 "IoT",
                 "no-license"
             ],
@@ -2891,8 +2797,8 @@
             ],
             "requirements": {
                 "python": [
-                    "pytz>=2020.1",
-                    "python-telegram-bot>=12.0"
+                    "python-telegram-bot>=12.0",
+                    "pytz>=2020.1"
                 ],
                 "skill": [],
                 "system": {}
@@ -2971,13 +2877,13 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "story",
-                "Entertainment",
-                "fairytales",
-                "tales",
-                "stories",
-                "fairy",
                 "fairytale",
+                "fairytales",
+                "story",
+                "stories",
+                "tales",
+                "Entertainment",
+                "fairy",
                 "no-license"
             ],
             "platforms": [
@@ -3021,13 +2927,13 @@
             ],
             "category": "Daily",
             "tags": [
-                "bandwith",
-                "speed",
-                "Productivity",
                 "ínternet",
                 "Information",
-                "IoT",
+                "speed",
+                "bandwith",
+                "Productivity",
                 "Daily",
+                "IoT",
                 "no-license"
             ],
             "platforms": [
@@ -3080,10 +2986,10 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "random",
-                "dice",
-                "decisionmaker",
                 "Entertainment",
+                "decisionmaker",
+                "dice",
+                "random",
                 "no-license"
             ],
             "platforms": [
@@ -3125,14 +3031,14 @@
             ],
             "category": "Daily",
             "tags": [
-                "spacestation",
-                "space",
-                "Entertainment",
-                "esa",
-                "Information",
-                "nasa",
                 "iss",
+                "space",
+                "Information",
+                "esa",
+                "spacestation",
+                "Entertainment",
                 "Daily",
+                "nasa",
                 "no-license"
             ],
             "platforms": [
@@ -3180,10 +3086,10 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "random",
-                "dice",
-                "dnd",
                 "Entertainment",
+                "dnd",
+                "dice",
+                "random",
                 "no-license"
             ],
             "platforms": [
@@ -3245,12 +3151,12 @@
             ],
             "category": "Entertainment",
             "tags": [
+                "Pokemon",
+                "Information",
                 "Video",
+                "Pokedex",
                 "Games",
                 "Entertainment",
-                "Pokemon",
-                "Pokedex",
-                "Information",
                 "Video Games",
                 "no-license"
             ],
@@ -3286,7 +3192,7 @@
             "skillname": "Mycroft Mark 2",
             "foldername": "skill-mark-2",
             "url": "https://github.com/MycroftAI/skill-mark-2",
-            "branch": "c7610107f593955cc5c090b81791f007b9ec58a9",
+            "branch": "f873ac4f7c77662f0a23e24e0c8a70ff6d91e94b",
             "description": "The Mycroft Mark 2 has several unique capabilities which this Skill lets you\ncontrol.\n\n###  Faceplate Brightness\nSet the faceplate to a specific brightness, or allow it to automatically adjust\nits brightness level to dim at night.",
             "authorname": "MycroftAI",
             "examples": [
@@ -3298,11 +3204,11 @@
             ],
             "category": "Configuration",
             "tags": [
-                "settings",
-                "system",
-                "mark2",
                 "configuration",
                 "Configuration",
+                "settings",
+                "mark2",
+                "system",
                 "no-license"
             ],
             "platforms": [
@@ -3320,8 +3226,8 @@
             ],
             "requirements": {
                 "python": [
-                    "astral==1.4",
-                    "arrow==0.12.0"
+                    "arrow==0.12.0",
+                    "astral==1.4"
                 ],
                 "skill": [],
                 "system": {}
@@ -3361,11 +3267,11 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "Entertainment",
-                "Productivity",
                 "learning",
-                "science",
                 "Information",
+                "science",
+                "Productivity",
+                "Entertainment",
                 "no-license"
             ],
             "platforms": [
@@ -3400,7 +3306,7 @@
             "skillname": "List Manager",
             "foldername": "list-manager-skill",
             "url": "https://github.com/lb803/list-manager-skill",
-            "branch": "10bf9d51b84c7153adec658894757252621b6685",
+            "branch": "633645e0ba4fbda0bd77521fa608462a33635e74",
             "description": "*List Manager* is a simple utility for filing lists of things you don't want to forget.\nWhether these are titles of books to read, the specs of your new bike, or random thoughts for a new programming project; you can ask [Mycroft](https://mycroft.ai/) to create a list for each them!",
             "authorname": "lb803",
             "examples": [
@@ -3475,12 +3381,12 @@
             ],
             "category": "Information",
             "tags": [
-                "mycroft-gui",
-                "sample",
-                "gui",
-                "example",
                 "delegates",
+                "gui",
+                "mycroft-gui",
                 "Information",
+                "sample",
+                "example",
                 "mycroftgui",
                 "no-license"
             ],
@@ -3530,12 +3436,12 @@
             ],
             "category": "Entertainment",
             "tags": [
+                "Movies",
+                "TMDB",
                 "I",
-                "Entertainment",
                 "Actors",
                 "Mark",
-                "TMDB",
-                "Movies",
+                "Entertainment",
                 "Mark I",
                 "no-license"
             ],
@@ -3635,8 +3541,8 @@
             ],
             "category": "Daily",
             "tags": [
-                "Dog",
                 "Bark",
+                "Dog",
                 "Daily",
                 "no-license"
             ],
@@ -3683,8 +3589,8 @@
             ],
             "category": "Information",
             "tags": [
-                "History",
                 "Information",
+                "History",
                 "Trivia",
                 "no-license"
             ],
@@ -3734,8 +3640,8 @@
             ],
             "category": "Configuration",
             "tags": [
-                "Configuration",
                 "basic",
+                "Configuration",
                 "no-license"
             ],
             "platforms": [
@@ -3777,15 +3683,15 @@
             ],
             "category": "Daily",
             "tags": [
-                "find",
-                "search",
-                "fallback",
                 "Media",
-                "dumb",
-                "Information",
-                "skills",
                 "Configuration",
                 "find-skill",
+                "Information",
+                "fallback",
+                "search",
+                "skills",
+                "find",
+                "dumb",
                 "Daily",
                 "no-license"
             ],
@@ -3838,8 +3744,8 @@
             "tags": [
                 "Transport",
                 "MBTA,Boston",
-                "Boston",
                 "MBTA,",
+                "Boston",
                 "no-license"
             ],
             "platforms": [
@@ -3886,10 +3792,10 @@
             ],
             "category": "Information",
             "tags": [
-                "vacation",
-                "nationalparks",
-                "parks",
                 "Information",
+                "nationalparks",
+                "vacation",
+                "parks",
                 "no-license"
             ],
             "platforms": [
@@ -3940,10 +3846,10 @@
             ],
             "category": "IoT",
             "tags": [
-                "home-automation",
                 "lifx",
-                "smartlight",
+                "home-automation",
                 "smartbulb",
+                "smartlight",
                 "IoT",
                 "no-license"
             ],
@@ -3997,15 +3903,15 @@
             ],
             "category": "Information",
             "tags": [
-                "Tv",
-                "Entertainment",
                 "Series",
-                "Media",
-                "shows",
                 "Information",
+                "Tv",
                 "Myepisodes.com",
                 "Myepisodes",
                 "Episodes",
+                "shows",
+                "Entertainment",
+                "Media",
                 "Tv shows",
                 "no-license"
             ],
@@ -4063,9 +3969,9 @@
             ],
             "category": "Music",
             "tags": [
-                "pandora",
-                "Music",
                 "music",
+                "Music",
+                "pandora",
                 "free",
                 "no-license"
             ],
@@ -4113,7 +4019,7 @@
             "skillname": "Camera Skill",
             "foldername": "skill-camera",
             "url": "https://github.com/MycroftAI/skill-camera",
-            "branch": "6baee1f142bca76e167b70ce4ff148157ad4cf87",
+            "branch": "a52e306f99d6a4468f3998ae85196f52bbcdad73",
             "description": "Take singleshot photographs with the Camera Skill.",
             "authorname": "MycroftAI",
             "examples": [
@@ -4128,11 +4034,11 @@
             ],
             "category": "Media",
             "tags": [
+                "GUI",
+                "Photograph",
                 "Camera",
                 "Images",
                 "Media",
-                "GUI",
-                "Photograph",
                 "no-license"
             ],
             "platforms": [
@@ -4157,6 +4063,52 @@
                 "android_icon": null,
                 "android_name": "Camera Skill",
                 "android_handler": "skill-camera.mycroftai.home"
+            },
+            "desktop": {},
+            "desktopFile": true
+        },
+        {
+            "skillname": "Homescreen",
+            "foldername": "skill-homescreen",
+            "url": "https://github.com/MycroftAI/skill-homescreen",
+            "branch": "b72800a2dd3518029541e092d49c1971f3ef56b6",
+            "description": "Homescreen provides a default display for Mycroft devices with a rich display such as the Mark II.\n\nBy default, the current time and date will be shown. Additional widgets can be activated to display other content such as the current weather.\n\nThe wallpaper may be changed randomly or a custom image can be defined in the Skill settings.",
+            "authorname": "MycroftAI",
+            "examples": [
+                "Change the wallpaper.",
+                "Change the wallpaper"
+            ],
+            "category": "Configuration",
+            "tags": [
+                "gui",
+                "Configuration",
+                "wallpaper",
+                "homescreen",
+                "display",
+                "no-license"
+            ],
+            "platforms": [
+                "platform_mark2"
+            ],
+            "short_description": "A configurable homescreen",
+            "license": "apache-2.0",
+            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/home.svg",
+            "credits": [
+                "AIX (@AIIX)",
+                "Mycroft AI"
+            ],
+            "categories": [
+                "Configuration"
+            ],
+            "requirements": {
+                "python": [],
+                "skill": [],
+                "system": {}
+            },
+            "android": {
+                "android_icon": null,
+                "android_name": "Homescreen Skill",
+                "android_handler": "skill-homescreen.mycroftai.home"
             },
             "desktop": {},
             "desktopFile": true
