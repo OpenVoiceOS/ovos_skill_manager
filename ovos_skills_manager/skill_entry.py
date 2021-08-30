@@ -199,7 +199,8 @@ class SkillEntry:
 
         desktop_file = "[Desktop Entry]"
         for k in desktop_json:
-            desktop_file += "\n" + k + "=" + desktop_json[k]
+           if desktop_json[k]:
+                desktop_file += "\n" + k + "=" + desktop_json[k]
         return desktop_file
 
     def generate_readme(self):
