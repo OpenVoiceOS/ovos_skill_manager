@@ -38,14 +38,15 @@
                 "caffeine",
                 "coffee",
                 "Information",
-                "Daily",
-                "no-license"
+                "Daily"
             ],
             "skillname": "CaffeineWiz",
             "authorname": "NeonGeckoCom",
             "foldername": "caffeinewiz.neon",
             "appstore": "OpenVoiceOS",
             "appstore_url": "https://openvoiceos.github.io/OVOS-skills-store/caffeineWiz.json",
+            "last_updated": "2021-08-10T22:09:37Z",
+            "version": "v0.1.1",
             "credits": [
                 "@NeonGeckoCom\n@reginaneon\n@NeonDaniel"
             ],
@@ -110,11 +111,11 @@
                 "duckduckgo",
                 "query",
                 "Information",
-                "permissive-license",
-                "no-license"
+                "permissive-license"
             ],
             "appstore": "OpenVoiceOS",
             "appstore_url": "https://openvoiceos.github.io/OVOS-skills-store/skill-ddg.json",
+            "last_updated": "2021-05-18T16:48:25Z",
             "version": "v0.1.0",
             "logo": "https://raw.githubusercontent.com/JarbasSkills/skill-ddg/v0.1.0/ui/logo.png",
             "android": {
@@ -139,7 +140,7 @@
             "title": "Launcher",
             "url": "https://github.com/NeonGeckoCom/launcher.neon",
             "summary": "Skill used to launch programs in Ubuntu",
-            "short_description": "Skill used to launch programs in Ubuntu",
+            "short_description": "Launcher skill",
             "description": "This example skill is used to launch desktop applications.",
             "examples": [
                 "launch chrome",
@@ -156,21 +157,21 @@
                 "arm"
             ],
             "branch": "v0.1.0",
-            "license": "unknown",
+            "license": "other",
             "icon": "https://0000.us/klatchat/app/files/neon_images/icons/neon_paw.png",
             "category": null,
             "categories": [
                 ""
             ],
             "tags": [
-                "",
-                "no-license"
+                ""
             ],
             "skillname": "Launcher",
             "authorname": "NeonGeckoCom",
             "foldername": "launcher.neon",
             "appstore": "OpenVoiceOS",
             "appstore_url": "https://openvoiceos.github.io/OVOS-skills-store/Launcher.json",
+            "last_updated": "2021-08-10T21:58:43Z",
             "requirements": {
                 "python": [],
                 "skill": [],
@@ -213,11 +214,11 @@
             "appstore_url": "https://openvoiceos.github.io/OVOS-skills-store/skill-wolfie.json",
             "license": "apache-2.0",
             "tags": [
-                "information",
-                "query",
+                "general-knowledge",
                 "Information",
                 "wolfram-alpha",
-                "general-knowledge",
+                "query",
+                "information",
                 "no-license"
             ],
             "version": "v0.1",
@@ -351,12 +352,12 @@
             "foldername": "skill-icanhazdadjokes",
             "license": "apache-2.0",
             "tags": [
-                "joke",
-                "Entertainment",
-                "jokes",
                 "funny",
-                "humour",
                 "humor",
+                "joke",
+                "jokes",
+                "Entertainment",
+                "humour",
                 "no-license"
             ],
             "version": "v0.1.0",

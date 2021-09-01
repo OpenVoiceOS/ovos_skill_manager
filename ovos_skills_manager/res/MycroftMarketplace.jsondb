@@ -1,110 +1,6 @@
 {
     "MycroftMarketplace": [
         {
-            "skillname": "Pandora",
-            "foldername": "pianobar-skill",
-            "url": "https://github.com/MycroftAI/pianobar-skill",
-            "branch": "16875241376e51aeb87c9dee1115d58e46ae779d",
-            "description": "Pandora provides dynamically generated internet radio streams.  Streams are\ninfluenced by the the traits of the music played and the songs you like\nor skip.\n\nUsing this skill does require a [Pandora.com](https://pandora.com) account.\nSign-up is free with ad-supported streams.",
-            "authorname": "MycroftAI",
-            "examples": [
-                "Skip this song.",
-                "Play Pandora",
-                "Next station.",
-                "Play Today's Hits Radio on Pandora.",
-                "List my stations",
-                "Next song.",
-                "List my stations.",
-                "Play Pandora.",
-                "Skip this song",
-                "Next station",
-                "Next song",
-                "Play Today's Hits Radio on Pandora"
-            ],
-            "category": "Music",
-            "tags": [
-                "Music",
-                "music",
-                "no-license",
-                "pandora",
-                "free"
-            ],
-            "platforms": [
-                "all"
-            ],
-            "short_description": "Listen to the Pandora music service",
-            "license": "unknown",
-            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/music.svg",
-            "credits": [
-                "Mycroft AI (@MycroftAI)"
-            ],
-            "categories": [
-                "Music"
-            ],
-            "requirements": {
-                "python": [
-                    "fuzzywuzzy==0.15.0"
-                ],
-                "skill": [],
-                "system": {}
-            },
-            "android": {
-                "android_icon": null,
-                "android_name": "Pianobar Skill",
-                "android_handler": "pianobar-skill.mycroftai.home"
-            },
-            "desktopFile": true
-        },
-        {
-            "skillname": "Stock Prices",
-            "foldername": "skill-stock",
-            "url": "https://github.com/MycroftAI/skill-stock",
-            "branch": "4ba6ea9860e374b2e09a1582f33bc0b46a911ae3",
-            "description": "Using the [Financial Modeling Prep](https://financialmodelingprep.com/developer/docs/) API, you can ask Mycroft to get the current price of stocks.",
-            "authorname": "MycroftAI",
-            "examples": [
-                "Stock price of Google.",
-                "Trading at Google.",
-                "Stock price of Google",
-                "Trading at Google"
-            ],
-            "category": "Information",
-            "tags": [
-                "stock-market",
-                "stock-prices",
-                "Information",
-                "financial",
-                "stocks",
-                "no-license"
-            ],
-            "platforms": [
-                "all"
-            ],
-            "short_description": "Provides current stock prices",
-            "license": "apache-2.0",
-            "icon": "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/money-check-alt.svg",
-            "credits": [
-                "Mycroft AI (@MycroftAI)"
-            ],
-            "categories": [
-                "Information"
-            ],
-            "requirements": {
-                "python": [
-                    "requests>=2.13.0"
-                ],
-                "skill": [],
-                "system": {}
-            },
-            "android": {
-                "android_icon": null,
-                "android_name": "Stock Skill",
-                "android_handler": "skill-stock.mycroftai.home"
-            },
-            "desktop": {},
-            "desktopFile": true
-        },
-        {
             "skillname": "Unknown Handler",
             "foldername": "fallback-unknown",
             "url": "https://github.com/MycroftAI/fallback-unknown",
@@ -122,8 +18,8 @@
             "tags": [
                 "system",
                 "unknown",
-                "fallback",
                 "Configuration",
+                "fallback",
                 "no-license"
             ],
             "platforms": [
@@ -169,12 +65,12 @@
             ],
             "category": "Information",
             "tags": [
-                "information",
-                "query",
-                "fallback",
+                "general-knowledge",
                 "Information",
                 "wolfram-alpha",
-                "general-knowledge",
+                "fallback",
+                "query",
+                "information",
                 "no-license"
             ],
             "platforms": [
@@ -191,9 +87,9 @@
             ],
             "requirements": {
                 "python": [
-                    "mtranslate",
                     "wolframalpha==3.0",
-                    "requests>=2.13.0"
+                    "requests>=2.13.0",
+                    "mtranslate"
                 ],
                 "skill": [],
                 "system": {}
@@ -286,12 +182,12 @@
             ],
             "category": "Configuration",
             "tags": [
-                "Configuration",
                 "configuration",
-                "record-audio",
-                "audio",
-                "microphone",
                 "record",
+                "audio",
+                "Configuration",
+                "microphone",
+                "record-audio",
                 "no-license"
             ],
             "platforms": [
@@ -344,11 +240,11 @@
             ],
             "category": "Configuration",
             "tags": [
-                "update-config",
-                "Configuration",
                 "configuration",
-                "system",
+                "update-config",
                 "config",
+                "Configuration",
+                "system",
                 "no-license"
             ],
             "platforms": [
@@ -365,8 +261,8 @@
             ],
             "requirements": {
                 "python": [
-                    "requests>=2.13.0",
-                    "humanhash3"
+                    "humanhash3",
+                    "requests>=2.13.0"
                 ],
                 "skill": [],
                 "system": {}
@@ -398,11 +294,11 @@
             ],
             "category": "Daily",
             "tags": [
-                "clock",
-                "date",
                 "time",
                 "date-time",
                 "world-time",
+                "clock",
+                "date",
                 "world-clock",
                 "Daily",
                 "no-license"
@@ -421,11 +317,11 @@
             ],
             "requirements": {
                 "python": [
-                    "timezonefinder",
-                    "holidays",
-                    "pytz==2017.2",
                     "geocoder",
-                    "tzlocal==1.3"
+                    "tzlocal==1.3",
+                    "timezonefinder",
+                    "pytz==2017.2",
+                    "holidays"
                 ],
                 "skill": [],
                 "system": {}
@@ -452,12 +348,12 @@
             ],
             "category": "Information",
             "tags": [
-                "searchengine",
-                "query",
-                "fallback",
                 "Information",
+                "fallback",
+                "query",
                 "search-engine",
                 "duckduckgo",
+                "searchengine",
                 "no-license"
             ],
             "platforms": [
@@ -503,11 +399,11 @@
             ],
             "category": "Configuration",
             "tags": [
-                "Configuration",
-                "helloworld",
-                "hello",
-                "greeting",
                 "first-skill",
+                "Configuration",
+                "hello",
+                "helloworld",
+                "greeting",
                 "no-license"
             ],
             "platforms": [
@@ -556,15 +452,15 @@
             ],
             "category": "Configuration",
             "tags": [
-                "add-skill",
-                "Configuration",
                 "download",
-                "skills",
-                "system",
-                "install",
-                "installer",
                 "msm",
+                "Configuration",
+                "install",
+                "skills",
+                "add-skill",
                 "skill",
+                "installer",
+                "system",
                 "no-license"
             ],
             "platforms": [
@@ -612,12 +508,12 @@
             ],
             "category": "Configuration",
             "tags": [
-                "network-address",
-                "network",
                 "Configuration",
-                "system",
-                "IP-address",
+                "network-address",
                 "IPaddress",
+                "IP-address",
+                "network",
+                "system",
                 "no-license"
             ],
             "platforms": [
@@ -666,12 +562,12 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "joke",
-                "Entertainment",
-                "jokes",
                 "funny",
-                "humour",
                 "humor",
+                "joke",
+                "jokes",
+                "Entertainment",
+                "humour",
                 "no-license"
             ],
             "platforms": [
@@ -716,8 +612,8 @@
             "tags": [
                 "showcase",
                 "demo",
-                "Configuration",
                 "demonstration",
+                "Configuration",
                 "no-license"
             ],
             "platforms": [
@@ -767,10 +663,10 @@
             ],
             "category": "Configuration",
             "tags": [
+                "configuration",
+                "Configuration",
                 "settings",
                 "mark1",
-                "Configuration",
-                "configuration",
                 "system",
                 "no-license"
             ],
@@ -819,13 +715,13 @@
             ],
             "category": "Daily",
             "tags": [
-                "do-not-disturb",
-                "Configuration",
                 "nap",
-                "donotdisturb",
+                "Configuration",
                 "sleep",
+                "donotdisturb",
                 "naptime",
                 "Daily",
+                "do-not-disturb",
                 "no-license"
             ],
             "platforms": [
@@ -876,8 +772,8 @@
             "tags": [
                 "headlines",
                 "Information",
-                "Daily",
                 "news",
+                "Daily",
                 "no-license"
             ],
             "platforms": [
@@ -922,10 +818,10 @@
             "category": "Configuration",
             "tags": [
                 "Configuration",
-                "pairing",
+                "connectivity",
                 "pair",
                 "system",
-                "connectivity",
+                "pairing",
                 "no-license"
             ],
             "platforms": [
@@ -969,8 +865,8 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "Entertainment",
                 "persona",
+                "Entertainment",
                 "personality",
                 "no-license"
             ],
@@ -1026,14 +922,14 @@
             ],
             "category": "Music",
             "tags": [
+                "play",
                 "resume",
                 "playback",
-                "play",
+                "next",
                 "music",
-                "pause",
                 "system",
                 "Music",
-                "next",
+                "pause",
                 "no-license"
             ],
             "platforms": [
@@ -1125,13 +1021,13 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "lyrics",
-                "singing",
                 "texttospeech",
-                "Entertainment",
-                "music",
-                "song",
                 "sing",
+                "song",
+                "singing",
+                "music",
+                "Entertainment",
+                "lyrics",
                 "no-license"
             ],
             "platforms": [
@@ -1176,11 +1072,11 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "Entertainment",
-                "system",
                 "say",
                 "speak",
                 "repeat",
+                "Entertainment",
+                "system",
                 "no-license"
             ],
             "platforms": [
@@ -1225,8 +1121,8 @@
             ],
             "category": "Information",
             "tags": [
-                "Information",
                 "spell",
+                "Information",
                 "spelling",
                 "no-license"
             ],
@@ -1277,9 +1173,9 @@
             ],
             "category": "Music",
             "tags": [
-                "Music",
                 "music",
                 "spotify",
+                "Music",
                 "no-license"
             ],
             "platforms": [
@@ -1375,14 +1271,14 @@
             ],
             "category": "Configuration",
             "tags": [
-                "support",
-                "logs",
-                "help",
-                "Configuration",
-                "assistance",
-                "system",
                 "support-request",
+                "Configuration",
+                "logs",
+                "assistance",
                 "troubleshooting",
+                "help",
+                "system",
+                "support",
                 "no-license"
             ],
             "platforms": [
@@ -1437,9 +1333,9 @@
             ],
             "category": "Daily",
             "tags": [
-                "timer",
                 "kitchen-timer",
                 "Daily",
+                "timer",
                 "no-license"
             ],
             "platforms": [
@@ -1499,13 +1395,13 @@
             ],
             "category": "Daily",
             "tags": [
-                "humidity",
-                "forecast",
-                "snow",
                 "weather",
-                "temperature",
+                "humidity",
                 "rain",
+                "snow",
                 "Daily",
+                "forecast",
+                "temperature",
                 "no-license"
             ],
             "platforms": [
@@ -1551,12 +1447,12 @@
             ],
             "category": "Configuration",
             "tags": [
-                "version",
                 "Configuration",
-                "platform",
-                "system",
                 "build",
+                "version",
                 "versioning",
+                "system",
+                "platform",
                 "no-license"
             ],
             "platforms": [
@@ -1611,13 +1507,13 @@
             ],
             "category": "Information",
             "tags": [
-                "query",
-                "Information",
-                "encyclopedia",
-                "question",
-                "wikipedia",
                 "general-knowledge",
+                "Information",
+                "query",
                 "wiki",
+                "encyclopedia",
+                "wikipedia",
+                "question",
                 "no-license"
             ],
             "platforms": [
@@ -1669,10 +1565,10 @@
             "category": "Configuration",
             "tags": [
                 "volume",
+                "sound",
                 "Configuration",
                 "volume-control",
                 "system",
-                "sound",
                 "no-license"
             ],
             "platforms": [
@@ -1716,14 +1612,14 @@
             ],
             "category": "Configuration",
             "tags": [
-                "cd",
-                "release",
                 "Configuration",
-                "release-test",
-                "ci",
-                "qa",
-                "quality-assurance",
                 "testing",
+                "release",
+                "cd",
+                "qa",
+                "ci",
+                "release-test",
+                "quality-assurance",
                 "no-license"
             ],
             "platforms": [
@@ -1803,8 +1699,8 @@
             ],
             "category": "Information",
             "tags": [
-                "system",
                 "Information",
+                "system",
                 "no-license"
             ],
             "platforms": [
@@ -1855,17 +1751,17 @@
             ],
             "category": "IoT",
             "tags": [
-                "IoT",
-                "iot",
-                "smart-home",
-                "home-automation",
-                "light",
+                "smarthome",
+                "lighting",
                 "lightbulb",
+                "home-automation",
+                "smart-home",
+                "IoT",
+                "light",
                 "wink",
                 "LED",
-                "smarthome",
                 "winkhub",
-                "lighting",
+                "iot",
                 "no-license"
             ],
             "platforms": [
@@ -1912,8 +1808,8 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "adventure",
                 "port",
+                "adventure",
                 "Entertainment",
                 "game",
                 "no-license"
@@ -1960,8 +1856,8 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "chatbot",
                 "aiml",
+                "chatbot",
                 "Entertainment",
                 "no-license"
             ],
@@ -2008,9 +1904,9 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "oscon",
                 "oscon2018",
                 "Entertainment",
+                "oscon",
                 "no-license"
             ],
             "platforms": [
@@ -2053,10 +1949,10 @@
             ],
             "category": "Information",
             "tags": [
-                "recipies",
+                "Information",
                 "cocktails",
                 "drinks",
-                "Information",
+                "recipies",
                 "no-license"
             ],
             "platforms": [
@@ -2106,12 +2002,12 @@
             "category": "Productivity",
             "tags": [
                 "activities",
-                "Productivity",
-                "desktop",
-                "plasma",
-                "control",
                 "kde",
+                "desktop",
+                "control",
                 "switch",
+                "Productivity",
+                "plasma",
                 "no-license"
             ],
             "platforms": [
@@ -2128,8 +2024,8 @@
             ],
             "requirements": {
                 "python": [
-                    "dbus-python",
-                    "dbus-python "
+                    "dbus-python ",
+                    "dbus-python"
                 ],
                 "system": {
                     "all": [
@@ -2166,9 +2062,9 @@
             "category": "Productivity",
             "tags": [
                 "emails",
-                "Productivity",
                 "email",
                 "Information",
+                "Productivity",
                 "mail",
                 "Daily",
                 "no-license"
@@ -2272,12 +2168,12 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "numberguess",
                 "random",
-                "Entertainment",
-                "number",
+                "numberguess",
                 "game",
+                "number",
                 "guessing",
+                "Entertainment",
                 "no-license"
             ],
             "platforms": [
@@ -2320,9 +2216,9 @@
             ],
             "category": "Entertainment",
             "tags": [
+                "crystalball",
                 "Entertainment",
                 "random",
-                "crystalball",
                 "no-license"
             ],
             "platforms": [
@@ -2365,10 +2261,10 @@
             ],
             "category": "IoT",
             "tags": [
-                "iot",
-                "homeautomation",
-                "homeassistant",
                 "smarthome",
+                "homeautomation",
+                "iot",
+                "homeassistant",
                 "IoT",
                 "no-license"
             ],
@@ -2387,9 +2283,9 @@
             "requirements": {
                 "python": [
                     "fuzzywuzzy==0.14.0",
-                    "responses",
+                    "python-Levenshtein==0.12.0",
                     "requests",
-                    "python-Levenshtein==0.12.0"
+                    "responses"
                 ],
                 "skill": [],
                 "system": {}
@@ -2412,12 +2308,12 @@
             "examples": [],
             "category": "IoT",
             "tags": [
+                "voicehat",
+                "voicekit",
+                "aiy",
                 "googlevoicekit",
                 "Googleaiy",
-                "voicekit",
-                "voicehat",
                 "IoT",
-                "aiy",
                 "no-license"
             ],
             "platforms": [
@@ -2466,13 +2362,13 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "random",
                 "philosophy",
+                "random",
                 "Information",
-                "Entertainment",
-                "quotes",
                 "wisdom",
+                "quotes",
                 "knowledge",
+                "Entertainment",
                 "no-license"
             ],
             "platforms": [
@@ -2520,11 +2416,11 @@
             ],
             "category": "Productivity",
             "tags": [
-                "Productivity",
                 "editor",
+                "Productivity",
+                "theia",
                 "vscode",
                 "IDE",
-                "theia",
                 "dev",
                 "no-license"
             ],
@@ -2543,8 +2439,8 @@
             ],
             "requirements": {
                 "python": [
-                    "ptvsd",
-                    "wget"
+                    "wget",
+                    "ptvsd"
                 ],
                 "skill": [],
                 "system": {}
@@ -2576,16 +2472,16 @@
             ],
             "category": "Productivity",
             "tags": [
-                "Productivity",
-                "krunner",
-                "desktop",
-                "search",
                 "bookmarks",
-                "plasma",
-                "control",
+                "krunner",
                 "kde",
-                "documents",
+                "desktop",
+                "control",
                 "recent",
+                "search",
+                "documents",
+                "Productivity",
+                "plasma",
                 "no-license"
             ],
             "platforms": [
@@ -2683,9 +2579,9 @@
             ],
             "category": "Information",
             "tags": [
+                "Information",
                 "wifi",
                 "aircrack-ng",
-                "Information",
                 "aircrack",
                 "no-license"
             ],
@@ -2736,10 +2632,10 @@
             ],
             "category": "Daily",
             "tags": [
+                "brain",
+                "todo-list",
                 "remember",
                 "Productivity",
-                "todo-list",
-                "brain",
                 "Daily",
                 "no-license"
             ],
@@ -2786,11 +2682,11 @@
             ],
             "category": "Entertainment",
             "tags": [
+                "laugh",
+                "funny",
+                "repeating",
                 "entertainment",
                 "Entertainment",
-                "funny",
-                "laugh",
-                "repeating",
                 "no-license"
             ],
             "platforms": [
@@ -2836,8 +2732,8 @@
             "category": "Daily",
             "tags": [
                 "volume",
-                "Configuration",
                 "Daily",
+                "Configuration",
                 "no-license"
             ],
             "platforms": [
@@ -2879,10 +2775,10 @@
             "category": "IoT",
             "tags": [
                 "bot",
-                "Productivity",
-                "telegram-bot",
-                "IoT",
                 "messenger",
+                "telegram-bot",
+                "Productivity",
+                "IoT",
                 "no-license"
             ],
             "platforms": [
@@ -2901,8 +2797,8 @@
             ],
             "requirements": {
                 "python": [
-                    "pytz>=2020.1",
-                    "python-telegram-bot>=12.0"
+                    "python-telegram-bot>=12.0",
+                    "pytz>=2020.1"
                 ],
                 "skill": [],
                 "system": {}
@@ -2930,9 +2826,9 @@
             ],
             "category": "Daily",
             "tags": [
-                "Daily",
-                "countdown",
                 "count",
+                "countdown",
+                "Daily",
                 "no-license"
             ],
             "platforms": [
@@ -2981,13 +2877,13 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "stories",
-                "story",
                 "fairytale",
-                "tales",
-                "fairy",
-                "Entertainment",
                 "fairytales",
+                "story",
+                "stories",
+                "tales",
+                "Entertainment",
+                "fairy",
                 "no-license"
             ],
             "platforms": [
@@ -3031,13 +2927,13 @@
             ],
             "category": "Daily",
             "tags": [
+                "ínternet",
+                "Information",
+                "speed",
                 "bandwith",
                 "Productivity",
-                "Information",
-                "ínternet",
-                "IoT",
                 "Daily",
-                "speed",
+                "IoT",
                 "no-license"
             ],
             "platforms": [
@@ -3091,9 +2987,9 @@
             "category": "Entertainment",
             "tags": [
                 "Entertainment",
+                "decisionmaker",
                 "dice",
                 "random",
-                "decisionmaker",
                 "no-license"
             ],
             "platforms": [
@@ -3135,14 +3031,14 @@
             ],
             "category": "Daily",
             "tags": [
-                "esa",
-                "space",
                 "iss",
+                "space",
                 "Information",
-                "Entertainment",
-                "nasa",
+                "esa",
                 "spacestation",
+                "Entertainment",
                 "Daily",
+                "nasa",
                 "no-license"
             ],
             "platforms": [
@@ -3190,10 +3086,10 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "random",
                 "Entertainment",
-                "dice",
                 "dnd",
+                "dice",
+                "random",
                 "no-license"
             ],
             "platforms": [
@@ -3255,12 +3151,12 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "Pokedex",
-                "Entertainment",
+                "Pokemon",
                 "Information",
                 "Video",
-                "Pokemon",
+                "Pokedex",
                 "Games",
+                "Entertainment",
                 "Video Games",
                 "no-license"
             ],
@@ -3308,10 +3204,10 @@
             ],
             "category": "Configuration",
             "tags": [
+                "configuration",
+                "Configuration",
                 "settings",
                 "mark2",
-                "Configuration",
-                "configuration",
                 "system",
                 "no-license"
             ],
@@ -3371,11 +3267,11 @@
             ],
             "category": "Entertainment",
             "tags": [
-                "Productivity",
-                "Information",
-                "Entertainment",
                 "learning",
+                "Information",
                 "science",
+                "Productivity",
+                "Entertainment",
                 "no-license"
             ],
             "platforms": [
@@ -3423,9 +3319,9 @@
             ],
             "category": "Productivity",
             "tags": [
-                "Note-taking",
-                "Notes",
                 "Productivity",
+                "Notes",
+                "Note-taking",
                 "no-license"
             ],
             "platforms": [
@@ -3485,13 +3381,13 @@
             ],
             "category": "Information",
             "tags": [
-                "sample",
-                "Information",
-                "gui",
                 "delegates",
-                "mycroftgui",
+                "gui",
                 "mycroft-gui",
+                "Information",
+                "sample",
                 "example",
+                "mycroftgui",
                 "no-license"
             ],
             "platforms": [
@@ -3540,12 +3436,12 @@
             ],
             "category": "Entertainment",
             "tags": [
+                "Movies",
                 "TMDB",
-                "Entertainment",
                 "I",
                 "Actors",
                 "Mark",
-                "Movies",
+                "Entertainment",
                 "Mark I",
                 "no-license"
             ],
@@ -3594,9 +3490,9 @@
             ],
             "category": "Information",
             "tags": [
+                "Dictionary",
                 "Information",
                 "Word",
-                "Dictionary",
                 "no-license"
             ],
             "platforms": [
@@ -3645,8 +3541,8 @@
             ],
             "category": "Daily",
             "tags": [
-                "Dog",
                 "Bark",
+                "Dog",
                 "Daily",
                 "no-license"
             ],
@@ -3744,8 +3640,8 @@
             ],
             "category": "Configuration",
             "tags": [
-                "Configuration",
                 "basic",
+                "Configuration",
                 "no-license"
             ],
             "platforms": [
@@ -3787,16 +3683,16 @@
             ],
             "category": "Daily",
             "tags": [
-                "find-skill",
-                "Daily",
+                "Media",
                 "Configuration",
+                "find-skill",
+                "Information",
                 "fallback",
                 "search",
-                "Information",
-                "dumb",
                 "skills",
-                "Media",
                 "find",
+                "dumb",
+                "Daily",
                 "no-license"
             ],
             "platforms": [
@@ -3848,8 +3744,8 @@
             "tags": [
                 "Transport",
                 "MBTA,Boston",
-                "Boston",
                 "MBTA,",
+                "Boston",
                 "no-license"
             ],
             "platforms": [
@@ -3896,10 +3792,10 @@
             ],
             "category": "Information",
             "tags": [
-                "parks",
-                "vacation",
                 "Information",
                 "nationalparks",
+                "vacation",
+                "parks",
                 "no-license"
             ],
             "platforms": [
@@ -3950,11 +3846,11 @@
             ],
             "category": "IoT",
             "tags": [
+                "lifx",
                 "home-automation",
                 "smartbulb",
                 "smartlight",
                 "IoT",
-                "lifx",
                 "no-license"
             ],
             "platforms": [
@@ -3971,9 +3867,9 @@
             ],
             "requirements": {
                 "python": [
-                    "webcolors>=1.11.1",
                     "fuzzywuzzy",
-                    "lifxlan"
+                    "lifxlan",
+                    "webcolors>=1.11.1"
                 ],
                 "skill": [],
                 "system": {}
@@ -4007,15 +3903,15 @@
             ],
             "category": "Information",
             "tags": [
-                "Episodes",
-                "Tv",
-                "Myepisodes",
-                "Information",
-                "Entertainment",
-                "shows",
-                "Media",
-                "Myepisodes.com",
                 "Series",
+                "Information",
+                "Tv",
+                "Myepisodes.com",
+                "Myepisodes",
+                "Episodes",
+                "shows",
+                "Entertainment",
+                "Media",
                 "Tv shows",
                 "no-license"
             ],
@@ -4073,10 +3969,10 @@
             ],
             "category": "Music",
             "tags": [
-                "free",
-                "pandora",
                 "music",
                 "Music",
+                "pandora",
+                "free",
                 "no-license"
             ],
             "platforms": [
@@ -4138,11 +4034,11 @@
             ],
             "category": "Media",
             "tags": [
+                "GUI",
                 "Photograph",
-                "Media",
                 "Camera",
                 "Images",
-                "GUI",
+                "Media",
                 "no-license"
             ],
             "platforms": [
@@ -4184,10 +4080,10 @@
             ],
             "category": "Configuration",
             "tags": [
-                "Configuration",
                 "gui",
-                "homescreen",
+                "Configuration",
                 "wallpaper",
+                "homescreen",
                 "display",
                 "no-license"
             ],
