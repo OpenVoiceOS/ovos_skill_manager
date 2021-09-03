@@ -106,25 +106,28 @@ class SkillEntry:
         return self.json.get("url")
 
     @property
-    def appstore(self):
+    def appstore(self)  :
         return self.json.get("appstore") or "unknown"
 
     @property
     def skill_name(self):
-        return self.json.get("skillname") or self.json.get("name")
+        author, repo = author_repo_from_github_url(self.url)
+        return self.json.get("skillname") or self.json.get("name") or repo
 
     @property
     def skill_short_description(self):
         return self.json.get("short_description") or \
-               self.skill_description.split(".")[0].split("\n")[0]
+               self.skill_description.split("\n")[0]
 
     @property
     def skill_description(self):
-        return self.json.get("description") or self.skill_name
+        author, repo = author_repo_from_github_url(self.url)
+        return self.json.get("description") or f"{repo} by {author}"
 
     @property
     def skill_folder(self):
-        return self.json.get("foldername") or self.url.split("/")[-1] if self.url and "/" in self.url else ""
+        author, repo = author_repo_from_github_url(self.url)
+        return self.json.get("foldername") or f"{repo}.{author}"
 
     @property
     def skill_category(self):
