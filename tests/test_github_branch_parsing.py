@@ -17,63 +17,63 @@ from ovos_skills_manager.exceptions import GithubInvalidBranch, \
 class TestGithubBranchParsing(unittest.TestCase):
     def test_get_branch_from_url_invalid(self):
         with self.assertRaises(GithubInvalidBranch):
-            get_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test")
+            get_branch_from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing")
         with self.assertRaises(GithubInvalidBranch):
-            get_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test/tree/INVALID_BRANCH", True)
+            get_branch_from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing/tree/INVALID_BRANCH", True)
         with self.assertRaises(GithubInvalidBranch):
-            get_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test@INVALID_BRANCH", True)
+            get_branch_from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@INVALID_BRANCH", True)
 
     def test_get_branch_from_url_tree(self):
-        self.assertEqual(get_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test/tree/v0.1", True),
+        self.assertEqual(get_branch_from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing/tree/v0.1", True),
                          "v0.1")
-        self.assertEqual(get_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test/tree/v0.1.1", True),
+        self.assertEqual(get_branch_from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing/tree/v0.1.1", True),
                          "v0.1.1")
-        self.assertEqual(get_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test/tree/master", True),
+        self.assertEqual(get_branch_from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing/tree/master", True),
                          "master")
 
     def test_get_branch_from_url_at(self):
-        self.assertEqual(get_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test@v0.1", True),
+        self.assertEqual(get_branch_from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@v0.1", True),
                          "v0.1")
-        self.assertEqual(get_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test@v0.1.1", True),
+        self.assertEqual(get_branch_from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@v0.1.1", True),
                          "v0.1.1")
-        self.assertEqual(get_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test@master", True),
+        self.assertEqual(get_branch_from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@master", True),
                          "master")
 
     def test_get_branch_from_commit(self):
         self.assertEqual(get_branch_from_github_url(
-            "https://github.com/NeonDaniel/skill-osm-test/commit/06fabb262077d80c32ffd12ed1092bb914658067", True),
+            "https://github.com/OpenVoiceOS/tskill-osm_parsing/commit/06fabb262077d80c32ffd12ed1092bb914658067", True),
             "06fabb262077d80c32ffd12ed1092bb914658067")
 
     def test_get_branch_from_blob(self):
         self.assertEqual(get_branch_from_github_url(
-            "https://github.com/NeonDaniel/skill-osm-test/blob/v0.1/skill.json", True), "v0.1")
+            "https://github.com/OpenVoiceOS/tskill-osm_parsing/blob/v0.1/skill.json", True), "v0.1")
 
     def test_branch_from_json_default_branch(self):
-        self.assertEqual(get_branch_from_skill_json_github_url("https://github.com/NeonDaniel/skill-osm-test"), "v0.1")
+        self.assertEqual(get_branch_from_skill_json_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing"), "v0.1")
 
     def test_branch_from_json_matching_branch(self):
-        self.assertEqual(get_branch_from_skill_json_github_url("https://github.com/NeonDaniel/skill-osm-test@v0.1"),
+        self.assertEqual(get_branch_from_skill_json_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@v0.1"),
                          "v0.1")
 
     def test_branch_from_json_not_matching_branch(self):
-        self.assertEqual(get_branch_from_skill_json_github_url("https://github.com/NeonDaniel/skill-osm-test@v0.1.1"),
+        self.assertEqual(get_branch_from_skill_json_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@v0.1.1"),
                          "v0.1")
 
     def test_branch_from_latest_release(self):
         latest = "v0.1.1"
 
-        default = get_branch_from_latest_release_github_url("https://github.com/NeonDaniel/skill-osm-test")
+        default = get_branch_from_latest_release_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing")
         self.assertEqual(default, latest)
-        old_release = get_branch_from_latest_release_github_url("https://github.com/NeonDaniel/skill-osm-test@v0.1")
+        old_release = get_branch_from_latest_release_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@v0.1")
         self.assertEqual(old_release, latest)
-        dev_branch = get_branch_from_latest_release_github_url("https://github.com/NeonDaniel/skill-osm-test/tree/dev")
+        dev_branch = get_branch_from_latest_release_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing/tree/dev")
         self.assertEqual(dev_branch, latest)
 
     def test_branch_from_json_invalid(self):
         with self.assertRaises(GithubFileNotFound):
-            get_branch_from_skill_json_github_url("https://github.com/NeonDaniel/skill-osm-test/tree/no_json")
+            get_branch_from_skill_json_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing/tree/no_json")
         with self.assertRaises(GithubFileNotFound):
-            get_branch_from_skill_json_github_url("https://github.com/NeonDaniel/skill-osm-test@no_json")
+            get_branch_from_skill_json_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@no_json")
 
 
 if __name__ == '__main__':

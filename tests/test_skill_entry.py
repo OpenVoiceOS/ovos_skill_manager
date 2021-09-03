@@ -13,7 +13,7 @@ class TestSkillEntry(unittest.TestCase):
         self.assertIsInstance(entry.requirements["python"], list)
 
     def test_requirements_json_manifest_txt_dep_system_reqs(self):
-        entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test/tree/v0.1")
+        entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing/tree/v0.1")
         self.assertIsInstance(entry.requirements, dict)
         self.assertEqual(set(entry.requirements.keys()), {"python", "system", "skill"})
 
@@ -26,10 +26,10 @@ class TestSkillEntry(unittest.TestCase):
                          {"json-skill", "manifest-skill"})
 
         self.assertEqual(entry.branch, "v0.1")
-        self.assertEqual(entry.download_url, "https://github.com/NeonDaniel/skill-osm-test/archive/v0.1.zip")
+        self.assertEqual(entry.download_url, "https://github.com/OpenVoiceOS/tskill-osm_parsing/archive/v0.1.zip")
 
     def test_requirements_json_manifest_txt(self):
-        entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test/tree/main")
+        entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing/tree/main")
         self.assertIsInstance(entry.requirements, dict)
         self.assertEqual(set(entry.requirements.keys()), {"python", "system", "skill"})
 
@@ -43,10 +43,10 @@ class TestSkillEntry(unittest.TestCase):
                          {"json-skill", "manifest-skill"})
 
         self.assertEqual(entry.branch, "main")
-        self.assertEqual(entry.download_url, "https://github.com/NeonDaniel/skill-osm-test/archive/main.zip")
+        self.assertEqual(entry.download_url, "https://github.com/OpenVoiceOS/tskill-osm_parsing/archive/main.zip")
 
     def test_implicit_branch(self):
-        entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test")
+        entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing")
         self.assertIsInstance(entry.requirements, dict)
         self.assertEqual(set(entry.requirements.keys()), {"python", "system", "skill"})
 
@@ -59,11 +59,11 @@ class TestSkillEntry(unittest.TestCase):
                          {"json-skill", "manifest-skill"})
 
         self.assertEqual(entry.branch, "v0.1")
-        self.assertEqual(entry.download_url, "https://github.com/NeonDaniel/skill-osm-test/archive/v0.1.zip")
+        self.assertEqual(entry.download_url, "https://github.com/OpenVoiceOS/tskill-osm_parsing/archive/v0.1.zip")
         self.assertIsInstance(entry.uuid, str)
 
     def test_explicit_branch(self):
-        entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test@dev")
+        entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@dev")
         self.assertIsInstance(entry.requirements, dict)
         self.assertEqual(set(entry.requirements.keys()), {"python", "system", "skill"})
 
@@ -72,21 +72,21 @@ class TestSkillEntry(unittest.TestCase):
         self.assertIsInstance(entry.requirements["skill"], list)
 
         self.assertEqual(entry.branch, "dev")
-        self.assertEqual(entry.download_url, "https://github.com/NeonDaniel/skill-osm-test/archive/dev.zip")
+        self.assertEqual(entry.download_url, "https://github.com/OpenVoiceOS/tskill-osm_parsing/archive/dev.zip")
         self.assertIsInstance(entry.uuid, str)
 
     def test_equivalent_branch_specs(self):
-        tree_spec = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test/tree/dev")
-        at_spec = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test@dev")
+        tree_spec = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing/tree/dev")
+        at_spec = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@dev")
         self.assertEqual(tree_spec, at_spec)
 
     def test_equivalent_default(self):
-        implicit = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test")
-        explicit = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test/archive/v0.1.zip")
+        implicit = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing")
+        explicit = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing/archive/v0.1.zip")
         self.assertEqual(implicit, explicit)
 
     def test_requirements_commented(self):
-        entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test@commented_requirements")
+        entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@commented_requirements")
         self.assertIsInstance(entry.requirements, dict)
         self.assertEqual(set(entry.requirements.keys()), {"python", "system", "skill"})
 
@@ -98,15 +98,15 @@ class TestSkillEntry(unittest.TestCase):
                          {"json-requirements", "manifest_requirement", "text_requirements"})
 
     def test_requirements_null_json(self):
-        entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test@commented_requirements")
+        entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@commented_requirements")
         requirements = entry.json.pop("requirements")
         self.assertEqual(requirements, entry.requirements)
 
-        entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test@v0.1")
+        entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@v0.1")
         requirements = entry.json.pop("requirements")
         self.assertEqual(requirements, entry.requirements)
 
-        entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test")
+        entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing")
         requirements = entry.json.pop("requirements")
         self.assertEqual(requirements, entry.requirements)
 
@@ -120,7 +120,7 @@ class TestSkillEntry(unittest.TestCase):
     # TODO: Find a good method for parsing versions in requirements; for now, requirements installer should handle
     #       compatible versions, this just needs to handle incompatible versions
     # def test_requirements_mismatch_versions(self):
-    #     entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test@conflicting_requirements")
+    #     entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@conflicting_requirements")
     #     self.assertIsInstance(entry.requirements, dict)
     #     self.assertEqual(set(entry.requirements.keys()), {"python", "system", "skill"})
     #

@@ -61,7 +61,7 @@ class TestGithubUtils(unittest.TestCase):
         )
 
     def test_get_main_branch_from_github_url(self):
-        branch = get_main_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test")
+        branch = get_main_branch_from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing")
         self.assertEqual(branch, "main")
 
     def test_author_repo_from_url(self):
