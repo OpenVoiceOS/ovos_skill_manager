@@ -102,8 +102,12 @@ class SkillEntry:
 
     @property
     def skill_short_description(self):
-        return self.json.get("short_description") or \
+        try:
+            return self.json.get("short_description") or \
                self.skill_description.split(".")[0].split("\n")[0]
+        except AttributeError as e:
+            if 'NoneType' in str(e):
+                return None
 
     @property
     def skill_description(self):
