@@ -10,6 +10,10 @@ osm = OVOSSkillsManager()
 
 TEST_INSTALL_DIR = os.path.join(os.path.dirname(__file__), "skills")
 
+if os.environ.get("GITHUB_TOKEN"):
+    from ovos_skills_manager.session import set_github_token
+    set_github_token(os.environ.get("GITHUB_TOKEN"))
+
 
 class TestOvosSkillsManager(unittest.TestCase):
     @classmethod
@@ -60,10 +64,10 @@ class TestOvosSkillsManager(unittest.TestCase):
     def test_get_skill_entry_from_url_release(self):
         from ovos_skills_manager import SkillEntry
 
-        skill_entry = osm.skill_entry_from_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@v0.1.1")
+        skill_entry = osm.skill_entry_from_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@v0.2.1")
         self.assertIsInstance(skill_entry, SkillEntry)
         self.assertEqual(skill_entry.url, "https://github.com/OpenVoiceOS/tskill-osm_parsing")
-        self.assertEqual(skill_entry.branch, "v0.1.1")
+        self.assertEqual(skill_entry.branch, "v0.2.1")
         self.assertIsInstance(skill_entry.requirements["python"], list)
         self.assertEqual(set(skill_entry.requirements["python"]),
                          {"json-requirements", "manifest_requirement", "text_requirements"},
@@ -71,7 +75,7 @@ class TestOvosSkillsManager(unittest.TestCase):
         self.assertIsInstance(skill_entry.requirements["system"], dict)
         self.assertIsInstance(skill_entry.requirements["skill"], list)
         self.assertIsInstance(skill_entry.download_url, str)
-        self.assertTrue(skill_entry.download_url.endswith("/v0.1.1.zip"))
+        self.assertTrue(skill_entry.download_url.endswith("/v0.2.1.zip"))
         self.assertIsInstance(skill_entry.uuid, str)
 
     def test_install_skill_from_url_valid(self):

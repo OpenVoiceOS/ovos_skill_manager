@@ -5,6 +5,10 @@ import unittest
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from ovos_skills_manager.skill_entry import SkillEntry
 
+if os.environ.get("GITHUB_TOKEN"):
+    from ovos_skills_manager.session import set_github_token
+    set_github_token(os.environ.get("GITHUB_TOKEN"))
+
 
 class TestSkillEntry(unittest.TestCase):
     def test_requirements_from_txt(self):
@@ -53,13 +57,13 @@ class TestSkillEntry(unittest.TestCase):
         self.assertEqual(set(entry.requirements["python"]),
                          {"json-requirements", "manifest_requirement", "text_requirements"})
 
-        self.assertIsInstance(entry.requirements["system"]["all"], str)
+        self.assertIsInstance(entry.requirements["system"]["all"], list)
 
         self.assertEqual(set(entry.requirements["skill"]),
                          {"json-skill", "manifest-skill"})
 
-        self.assertEqual(entry.branch, "v0.1")
-        self.assertEqual(entry.download_url, "https://github.com/OpenVoiceOS/tskill-osm_parsing/archive/v0.1.zip")
+        self.assertEqual(entry.branch, "v0.2.1")
+        self.assertEqual(entry.download_url, "https://github.com/OpenVoiceOS/tskill-osm_parsing/archive/v0.2.1.zip")
         self.assertIsInstance(entry.uuid, str)
 
     def test_explicit_branch(self):
@@ -82,7 +86,7 @@ class TestSkillEntry(unittest.TestCase):
 
     def test_equivalent_default(self):
         implicit = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing")
-        explicit = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing/archive/v0.1.zip")
+        explicit = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing/archive/v0.2.1.zip")
         self.assertEqual(implicit, explicit)
 
     def test_requirements_commented(self):
@@ -102,7 +106,7 @@ class TestSkillEntry(unittest.TestCase):
         requirements = entry.json.pop("requirements")
         self.assertEqual(requirements, entry.requirements)
 
-        entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@v0.1")
+        entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@v0.2.1")
         requirements = entry.json.pop("requirements")
         self.assertEqual(requirements, entry.requirements)
 

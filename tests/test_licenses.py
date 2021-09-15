@@ -6,6 +6,9 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from ovos_skills_manager.github import get_license_type
 from ovos_skills_manager.licenses import is_permissive, is_viral, parse_license_type
 
+if os.environ.get("GITHUB_TOKEN"):
+    from ovos_skills_manager.session import set_github_token
+    set_github_token(os.environ.get("GITHUB_TOKEN"))
 
 # TODO setup a test skill repo, since a random url can simply vanish
 
