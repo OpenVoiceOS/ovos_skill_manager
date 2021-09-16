@@ -8,6 +8,10 @@ from ovos_skills_manager.scripts.search import search_skill
 from ovos_skills_manager.appstores.mycroft_marketplace import get_mycroft_marketplace_skills
 from ovos_skills_manager.appstores.ovos import get_ovos_skills
 
+if os.environ.get("GITHUB_TOKEN"):
+    from ovos_skills_manager.session import set_github_token
+    set_github_token(os.environ.get("GITHUB_TOKEN"))
+
 # APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "andlo", "default", "all"]
 
 

@@ -7,6 +7,10 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from ovos_skills_manager.github.utils import *
 from ovos_skills_manager.github import get_main_branch_from_github_url
 
+if os.environ.get("GITHUB_TOKEN"):
+    from ovos_skills_manager.session import set_github_token
+    set_github_token(os.environ.get("GITHUB_TOKEN"))
+
 # TODO setup a test skill repo, since a random url can simply vanish
 
 
@@ -61,7 +65,7 @@ class TestGithubUtils(unittest.TestCase):
         )
 
     def test_get_main_branch_from_github_url(self):
-        branch = get_main_branch_from_github_url("https://github.com/NeonDaniel/skill-osm-test")
+        branch = get_main_branch_from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing")
         self.assertEqual(branch, "main")
 
     def test_author_repo_from_url(self):

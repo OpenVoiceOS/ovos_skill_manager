@@ -6,9 +6,9 @@ from os.path import isfile, exists, expanduser, join, isdir
 
 from ovos_skills_manager.session import SESSION as requests
 from ovos_skills_manager.exceptions import GithubInvalidUrl, \
-    JSONDecodeError, GithubFileNotFound, SkillEntryError
+    JSONDecodeError, GithubFileNotFound, SkillEntryError, GithubInvalidBranch
 from ovos_skills_manager.github import download_url_from_github_url, \
-    get_branch, get_skill_data
+    get_branch, get_skill_data, normalize_github_url, get_branch_from_github_url
 from ovos_utils.json_helper import merge_dict
 from ovos_utils.skills import blacklist_skill, whitelist_skill, \
     make_priority_skill, get_skills_folder
@@ -73,7 +73,7 @@ class SkillEntry:
             if "github" in url:
                 try:
                     github_data = get_skill_data(url, data.get("branch"))
-                    data = merge_dict(data, github_data, merge_lists=True,
+                    data = merge_dict(github_data, data, merge_lists=True,
                                       skip_empty=True, no_dupes=True)
                     parse_python_dependencies(data["requirements"].get("python"), requests.headers.get("Authorization"))
                 except GithubInvalidUrl as e:
@@ -82,8 +82,12 @@ class SkillEntry:
 
     @staticmethod
     def from_github_url(url, branch=None, parse_github=True):
-        if '@' in url:
-            url, branch = url.split('@')
+        if not branch:
+            try:
+                branch = get_branch_from_github_url(url)
+            except GithubInvalidBranch:
+                branch = None
+        url = normalize_github_url(url)
         return SkillEntry.from_json({"url": url, "branch": branch},
                                     parse_github=parse_github)
 
