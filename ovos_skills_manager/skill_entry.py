@@ -199,7 +199,8 @@ class SkillEntry:
 
         desktop_file = "[Desktop Entry]"
         for k in desktop_json:
-            desktop_file += "\n" + k + "=" + desktop_json[k]
+           if desktop_json[k]:
+                desktop_file += "\n" + k + "=" + desktop_json[k]
         return desktop_file
 
     def generate_readme(self):
@@ -299,6 +300,8 @@ class SkillEntry:
 
         LOG.info("Downloading " + self.url)
         updated = self.download(folder)
+        # TODO: desktop file generation has been disabled for the time being
+        '''
         if self.json.get("desktopFile"):
             LOG.info("Creating desktop entry")
             # TODO support system wide? /usr/local/XXX ?
@@ -328,7 +331,7 @@ class SkillEntry:
             desktop_file = join(desktop_dir, base_name + ".desktop")
             with open(desktop_file, "w") as f:
                 f.write(self.desktop_file)
-
+            '''
         return updated
 
     def update(self, folder=None, default_branch="master", platform=None):
