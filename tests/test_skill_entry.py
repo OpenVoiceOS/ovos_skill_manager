@@ -144,10 +144,10 @@ class TestSkillEntry(unittest.TestCase):
         entry = OVOS_TSKILL_AT_DEV
         self.assertEqual(entry.url, "https://github.com/OpenVoiceOS/tskill-osm_parsing")
 
-        entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/tskill-osm_parsing")
-        self.assertEqual(entry.url, "https://github.com/NeonDaniel/tskill-osm_parsing")
+        # entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/tskill-osm_parsing")
+        # self.assertEqual(entry.url, "https://github.com/NeonDaniel/tskill-osm_parsing")
 
-        entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test")
+        entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/skill-osm-test@dev")
         self.assertEqual(entry.url, "https://github.com/NeonDaniel/tskill-osm_parsing")
 
     # TODO: Find a good method for parsing versions in requirements; for now, requirements installer should handle

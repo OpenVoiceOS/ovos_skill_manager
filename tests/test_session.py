@@ -37,6 +37,22 @@ class TestCachedSession(unittest.TestCase):
             t.join()
             self.assertTrue(responses[i])
 
+    def test_threaded_token_header(self):
+        SESSION.get("https://openvoiceos.com/")
+        set_github_token("TEST")
+        responses = dict()
+
+        def get_cached_response(idx):
+            from ovos_skills_manager.session import SESSION
+            responses[idx] = SESSION.headers.get("Authorization") == "token TEST"
+            SESSION.get("https://openvoiceos.com/")
+
+        for i in range(8):
+            t = Thread(target=get_cached_response, args=(i,), daemon=True)
+            t.start()
+            t.join()
+            self.assertTrue(responses[i])
+
 
 if __name__ == '__main__':
     unittest.main()
