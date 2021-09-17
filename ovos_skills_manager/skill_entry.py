@@ -8,7 +8,7 @@ from ovos_skills_manager.session import SESSION as requests
 from ovos_skills_manager.exceptions import GithubInvalidUrl, \
     JSONDecodeError, GithubFileNotFound, SkillEntryError, GithubInvalidBranch
 from ovos_skills_manager.github import download_url_from_github_url, \
-    get_branch, get_skill_data, normalize_github_url, get_branch_from_github_url
+    get_branch, get_skill_data, normalize_github_url, get_branch_from_github_url, author_repo_from_github_url
 from ovos_utils.json_helper import merge_dict
 from ovos_utils.skills import blacklist_skill, whitelist_skill, \
     make_priority_skill, get_skills_folder
@@ -29,10 +29,18 @@ class SkillEntry:
         # a unique identifier
         # github_repo.github_author , case insensitive
         # should be guaranteed to be unique
-        author = self.skill_author.lower() if self.skill_author else None
-        repo = self.skill_folder.lower() if self.skill_folder else None
-        if repo and author:
-            return repo + "." + author
+        if self.url:
+            try:
+                author, folder = author_repo_from_github_url(self.url)
+            except Exception as e:
+                LOG.error(e)
+                return None
+        else:
+            LOG.warning(f"Skill installation from local source; uuid may have collisions")
+            author = self.skill_author if self.skill_author else None
+            folder = self.skill_folder if self.skill_folder else None
+        if folder and author:
+            return f"{folder}.{author}".lower()
         else:
             LOG.warning(f"repo or author not defined, skill uuid cannot be determined!")
             return None
@@ -75,6 +83,11 @@ class SkillEntry:
                     github_data = get_skill_data(url, data.get("branch"))
                     data = merge_dict(github_data, data, merge_lists=True,
                                       skip_empty=True, no_dupes=True)
+                    # Force override url with actual resolved url
+                    if github_data["url"] != github_data.get("resolved_url", github_data['url']):
+                        LOG.warning(f"URL from request or skill.json does not match download source."
+                                    f"json value will be overwritten.")
+                        data["url"] = github_data["resolved_url"]
                     parse_python_dependencies(data["requirements"].get("python"), requests.headers.get("Authorization"))
                 except GithubInvalidUrl as e:
                     raise e

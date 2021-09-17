@@ -42,11 +42,19 @@ def get_skill_data(url, branch=None):
         data["foldername"] = api_data["name"]
         data["last_updated"] = api_data['updated_at']
         data["url"] = api_data["html_url"]
+        data["resolved_url"] = api_data["html_url"]
         data["authorname"] = api_data["owner"]["login"]
         if "license" in data:
             data["license"] = api_data["license"]["key"]
     except GithubAPIException:
-        pass
+        LOG.warning(f"API request failed")
+        # Force override url with actual resolved url
+        header = requests.head(url)
+        if header.is_redirect:
+            LOG.warning(f"Skill install redirected from {header.url} to {header.next.url}")
+            data["resolved_url"] = header.next.url
+        else:
+            data["resolved_url"] = header.url
     except Exception as e:
         LOG.error(e)
 
