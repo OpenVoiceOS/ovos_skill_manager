@@ -10,6 +10,10 @@ if os.environ.get("GITHUB_TOKEN"):
     set_github_token(os.environ.get("GITHUB_TOKEN"))
 
 
+OVOS_TSKILL_NO_BRANCH_SPEC = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing")
+OVOS_TSKILL_AT_DEV = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@dev")
+
+
 class TestSkillEntry(unittest.TestCase):
     def test_requirements_from_txt(self):
         entry = SkillEntry.from_github_url("https://github.com/NeonGeckoCom/speed-test.neon/tree/dev")
@@ -50,7 +54,7 @@ class TestSkillEntry(unittest.TestCase):
         self.assertEqual(entry.download_url, "https://github.com/OpenVoiceOS/tskill-osm_parsing/archive/main.zip")
 
     def test_implicit_branch(self):
-        entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing")
+        entry = OVOS_TSKILL_NO_BRANCH_SPEC
         self.assertIsInstance(entry.requirements, dict)
         self.assertEqual(set(entry.requirements.keys()), {"python", "system", "skill"})
 
@@ -68,7 +72,7 @@ class TestSkillEntry(unittest.TestCase):
         self.assertEqual(entry.uuid, "tskill-osm_parsing.openvoiceos")
 
     def test_explicit_branch(self):
-        entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@dev")
+        entry = OVOS_TSKILL_AT_DEV
         self.assertIsInstance(entry.requirements, dict)
         self.assertEqual(set(entry.requirements.keys()), {"python", "system", "skill"})
 
@@ -83,11 +87,11 @@ class TestSkillEntry(unittest.TestCase):
 
     def test_equivalent_branch_specs(self):
         tree_spec = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing/tree/dev")
-        at_spec = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@dev")
+        at_spec = OVOS_TSKILL_AT_DEV
         self.assertEqual(tree_spec, at_spec)
 
     def test_equivalent_default(self):
-        implicit = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing")
+        implicit = OVOS_TSKILL_NO_BRANCH_SPEC
         explicit = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing/archive/v0.2.1.zip")
         self.assertEqual(implicit, explicit)
 
@@ -112,7 +116,7 @@ class TestSkillEntry(unittest.TestCase):
         requirements = entry.json.pop("requirements")
         self.assertEqual(requirements, entry.requirements)
 
-        entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing")
+        entry = OVOS_TSKILL_NO_BRANCH_SPEC
         requirements = entry.json.pop("requirements")
         self.assertEqual(requirements, entry.requirements)
 
@@ -124,20 +128,20 @@ class TestSkillEntry(unittest.TestCase):
         self.assertEqual(entry, SkillEntry({}))
 
     def test_skill_entry_uuid(self):
-        entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing")
+        entry = OVOS_TSKILL_NO_BRANCH_SPEC
         self.assertEqual(entry.uuid, "tskill-osm_parsing.openvoiceos")
 
-        entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@dev")
+        entry = OVOS_TSKILL_AT_DEV
         self.assertEqual(entry.uuid, "tskill-osm_parsing.openvoiceos")
 
         entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/Tskill-osm_parsing")
         self.assertEqual(entry.uuid, "tskill-osm_parsing.neondaniel")
 
     def test_skill_entry_url(self):
-        entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing")
+        entry = OVOS_TSKILL_NO_BRANCH_SPEC
         self.assertEqual(entry.url, "https://github.com/OpenVoiceOS/tskill-osm_parsing")
 
-        entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@dev")
+        entry = OVOS_TSKILL_AT_DEV
         self.assertEqual(entry.url, "https://github.com/OpenVoiceOS/tskill-osm_parsing")
 
         entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/tskill-osm_parsing")
