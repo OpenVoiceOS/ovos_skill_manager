@@ -21,7 +21,18 @@ def get_skill_data(url, branch=None):
             branch = get_branch_from_github_url(url)
             explicit_branch = branch
         except GithubInvalidBranch:
+            pass
+    if not branch:
+        try:
             branch = get_branch_from_skill_json(url)
+        except GithubFileNotFound:
+            LOG.error(f"No branch or skill.json spec")
+    if not branch:
+        try:
+            get_main_branch(url)
+        except GithubInvalidBranch:
+            # TODO: This should check for rate limiting
+            raise Exception("Unable to determine a branch! Probably exceeded rate limits")
 
     data = {
         "authorname": author,

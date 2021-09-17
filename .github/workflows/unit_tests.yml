@@ -24,6 +24,18 @@ jobs:
           pip install -r requirements.txt
           pip install pytest pytest-timeout pytest-cov
 
+      - name: Test Session
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          pytest tests/test_session.py
+
+      - name: Test Skill Entry
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          pytest tests/test_skill_entry.py
+
       - name: Test Github Branch Parsing
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -41,12 +53,6 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           pytest tests/test_licenses.py
-
-      - name: Test Skill Entry
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: |
-          pytest tests/test_skill_entry.py
 
       - name: Test Utils
         env:
