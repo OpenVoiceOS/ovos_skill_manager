@@ -10,9 +10,9 @@ if os.environ.get("GITHUB_TOKEN"):
     set_github_token(os.environ.get("GITHUB_TOKEN"))
 
 
-class TestSkillEntry(unittest.TestCase):
+class TestSkillEntryFromGit(unittest.TestCase):
     def test_requirements_from_txt(self):
-        entry = SkillEntry.from_github_url("https://github.com/NeonGeckoCom/speed-test.neon/tree/dev")
+        entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing/tree/dev")
         self.assertIsInstance(entry.requirements, dict)
         self.assertIsInstance(entry.requirements["python"], list)
 
@@ -116,21 +116,11 @@ class TestSkillEntry(unittest.TestCase):
         requirements = entry.json.pop("requirements")
         self.assertEqual(requirements, entry.requirements)
 
-    def test_skill_entry_properties_invalid_entry(self):
-        entry = SkillEntry({})
-        self.assertIsNone(entry.uuid)
-        self.assertIsInstance(entry.json, dict)
-        self.assertIsInstance(repr(entry), str)
-        self.assertEqual(entry, SkillEntry({}))
-
     def test_skill_entry_uuid(self):
-        entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing")
-        self.assertEqual(entry.uuid, "tskill-osm_parsing.openvoiceos")
-
         entry = SkillEntry.from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@dev")
         self.assertEqual(entry.uuid, "tskill-osm_parsing.openvoiceos")
 
-        entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/Tskill-osm_parsing")
+        entry = SkillEntry.from_github_url("https://github.com/NeonDaniel/Tskill-osm_parsing@dev")
         self.assertEqual(entry.uuid, "tskill-osm_parsing.neondaniel")
 
     # TODO: Find a good method for parsing versions in requirements; for now, requirements installer should handle
@@ -146,6 +136,16 @@ class TestSkillEntry(unittest.TestCase):
     #
     #     self.assertEqual(set(entry.requirements["python"]),
     #                      {"json-requirements", "manifest_requirement", "text_requirements", "awesome-pkg~=1.1"})
+
+
+class TestSkillEntryFromJson(unittest.TestCase):
+    # TODO: Add some valid and invalid JSON to parse
+    def test_skill_entry_properties_invalid_entry(self):
+        entry = SkillEntry({})
+        self.assertIsNone(entry.uuid)
+        self.assertIsInstance(entry.json, dict)
+        self.assertIsInstance(repr(entry), str)
+        self.assertEqual(entry, SkillEntry({}))
 
 
 if __name__ == '__main__':
