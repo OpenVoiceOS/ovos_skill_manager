@@ -4,7 +4,7 @@ from setuptools.command.install import install
 
 setup(
     name='ovos-skills-manager',
-    version='0.0.10a3', # Don't forget to add a version bump in upgrade_osm.py
+    version='0.0.10a4', # Don't forget to add a version bump in upgrade_osm.py
     packages=['ovos_skills_manager',
               'ovos_skills_manager.github',
               'ovos_skills_manager.appstores',

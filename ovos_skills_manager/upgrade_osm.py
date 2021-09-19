@@ -39,12 +39,12 @@ def find_and_perform_osm_upgrades(config: dict):
                 # if it's none, just bump the version in config
                 # if it's a func, execute it
                 config = upgrade_path(config) # the upgrade routine should accept and then return config
-                config["last_upgrade"] = upgrade_string
+            config["last_upgrade"] = upgrade_string
             config["version"] = upgrade_string
-            echo(f"Upgraded OSM to {upgrade_string}")
             config.store()
+            echo(f"Upgraded OSM to {upgrade_string}")
 
-def upgrade_0_0_10a1(config:JsonStorageXDG=None):
+def upgrade_0_0_10a3(config:JsonStorageXDG=None):
     # Migrate config file
     old_config = config or JsonStorageXDG("OVOS-SkillsManager")
     if path.exists(old_config.path):
@@ -62,5 +62,6 @@ UPGRADE_PATHS = OrderedDict({
     # Each version with an upgrade should map to a function, which should accept and return config
     # Versions with no upgrade should map to None, which will simply bump the version # in config
     version.parse("0.0.9a6"): None,
-    version.parse("0.0.10a3"): upgrade_0_0_10a1
+    version.parse("0.0.10a3"): upgrade_0_0_10a3,
+    version.parse("0.0.10a4"): None
 })
