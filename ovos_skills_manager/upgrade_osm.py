@@ -23,10 +23,11 @@ def check_upgrade() -> (bool, dict):
         return True, config # We haven't done the 0.0.10 upgrade yet, so... yeah
 
     last_upgrade = version.parse(last_upgrade) # cast the version to something we can compare
-    for upgrade_version in UPGRADE_PATHS.keys():
-        if last_upgrade == upgrade_version: # we have done the most recent possible upgrade
-            return False, config
-        elif last_upgrade < upgrade_version:
+    upgrade_versions = list(UPGRADE_PATHS.keys())
+    if last_upgrade == upgrade_versions[-1]:
+            return False, config  # we have done the most recent possible upgrade
+    for upgrade_version in upgrade_versions:
+        if last_upgrade < upgrade_version:
             return True, config
 
 def find_and_perform_osm_upgrades(config: dict):
@@ -54,12 +55,12 @@ def upgrade_0_0_10a1(config:JsonStorageXDG=None):
         new_config.store()
         remove(old_config.path)
         return new_config
-    raise FileNotFoundError("Unable to execute OSM upgrade 0.0.9 --> 0.0.10a2: could not find old config")
+    raise FileNotFoundError("Unable to execute OSM upgrade 0.0.9 --> 0.0.10a3: could not find old config")
 
 
 UPGRADE_PATHS = OrderedDict({
     # Each version with an upgrade should map to a function, which should accept and return config
     # Versions with no upgrade should map to None, which will simply bump the version # in config
     version.parse("0.0.9a6"): None,
-    version.parse("0.0.10a2"): upgrade_0_0_10a1
+    version.parse("0.0.10a3"): upgrade_0_0_10a1
 })

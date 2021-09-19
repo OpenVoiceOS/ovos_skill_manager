@@ -3,4 +3,4 @@ from ovos_skills_manager import OVOSSkillsManager
 
 def echo_version():
     osm = OVOSSkillsManager()
-    echo(osm.config.get('version'))
+    echo(f"OVOS Skill Manager v{osm.config.get('version')}")
