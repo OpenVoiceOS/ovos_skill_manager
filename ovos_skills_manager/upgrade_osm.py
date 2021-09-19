@@ -4,6 +4,7 @@ from os import path, remove
 from packaging import version
 from pkg_resources import get_distribution
 
+from click import echo
 from json_database import JsonConfigXDG, JsonStorageXDG
 
 def check_upgrade() -> (bool, dict):
@@ -39,11 +40,8 @@ def find_and_perform_osm_upgrades(config: dict):
                 config = upgrade_path(config) # the upgrade routine should accept and then return config
                 config["last_upgrade"] = upgrade_string
             config["version"] = upgrade_string
+            echo(f"Upgraded OSM to {upgrade_string}")
             config.store()
-    #         return (True, upgrade_version)
-    #     elif current_version == upgrade_version:
-    #         return (not config.get('upgrade_done'), upgrade_version)
-    # return (False, current_version)
 
 def upgrade_0_0_10a1(config:JsonStorageXDG=None):
     # Migrate config file
@@ -56,12 +54,12 @@ def upgrade_0_0_10a1(config:JsonStorageXDG=None):
         new_config.store()
         remove(old_config.path)
         return new_config
-    raise FileNotFoundError("Unable to execute OSM upgrade 0.0.9 --> 0.0.10a1: could not find old config")
+    raise FileNotFoundError("Unable to execute OSM upgrade 0.0.9 --> 0.0.10a2: could not find old config")
 
 
 UPGRADE_PATHS = OrderedDict({
     # Each version with an upgrade should map to a function, which should accept and return config
     # Versions with no upgrade should map to None, which will simply bump the version # in config
     version.parse("0.0.9a6"): None,
-    version.parse("0.0.10a1"): upgrade_0_0_10a1
+    version.parse("0.0.10a2"): upgrade_0_0_10a1
 })

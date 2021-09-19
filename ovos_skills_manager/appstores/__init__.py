@@ -32,7 +32,7 @@ class AbstractAppstore:
 
     def authenticate(self, auth_token=None, bootstrap=True):
         if auth_token is None:
-            auth_token = JsonConfigXDG("OVOS-SkillsManager")["appstores"]\
+            auth_token = JsonConfigXDG("OVOS-SkillsManager", subfolder="OpenVoiceOS")["appstores"]\
                 .get(self.appstore_id, {}).get("auth_token")
         if auth_token:
             set_github_token(auth_token)

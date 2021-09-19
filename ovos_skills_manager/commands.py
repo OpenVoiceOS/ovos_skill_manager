@@ -17,7 +17,8 @@ from ovos_skills_manager.scripts import \
     install as _install, \
     priority as _priority, \
     search as _search, \
-    sync as _sync
+    sync as _sync, \
+    version as _version
 #endregion
 
 
@@ -150,5 +151,11 @@ def search(method, query, fuzzy, no_ignore_case, thresh, appstore):
 def sync(appstore, rebuild, merge, github):
     _sync.sync(appstore, rebuild, merge, github)
 #endregion sync
+
+#region version
+@osm_commands.command(help="Print current OSM version")
+def version():
+    _version.echo_version()
+#endregion version
 
 #endregion COMMAND DEFINITIONS

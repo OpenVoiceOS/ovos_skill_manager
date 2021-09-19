@@ -24,7 +24,7 @@ def safe_get_skills_folder():
 
 class OVOSSkillsManager:
     def __init__(self, bus=None):
-        self.config = JsonConfigXDG("OVOS-SkillsManager")
+        self.config = JsonConfigXDG("OVOS-SkillsManager", subfolder="OpenVoiceOS")
         default_config = {
             "local": {
                 "active": True,
