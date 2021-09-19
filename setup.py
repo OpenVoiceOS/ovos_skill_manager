@@ -1,10 +1,9 @@
-from os import path, remove
 from setuptools import setup
-from setuptools.command.install import install
+from ovos_skills_manager.versions import CURRENT_OSM_VERSION
 
 setup(
     name='ovos-skills-manager',
-    version='0.0.10a3', # Don't forget to add a version bump in upgrade_osm.py
+    version=CURRENT_OSM_VERSION,
     packages=['ovos_skills_manager',
               'ovos_skills_manager.github',
               'ovos_skills_manager.appstores',
