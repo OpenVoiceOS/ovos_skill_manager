@@ -1,7 +1,10 @@
+
+from os import path
+
+from json_database import JsonConfigXDG, JsonStorageXDG
 from ovos_utils.log import LOG
 from ovos_utils.messagebus import Message
 from ovos_utils.json_helper import merge_dict
-from json_database import JsonConfigXDG
 
 from ovos_skills_manager import SkillEntry
 from ovos_skills_manager.appstores.andlo import AndloSkillList
@@ -20,6 +23,15 @@ def safe_get_skills_folder():
         return get_skills_folder()
     except:
         return ""
+
+def locate_config_file():
+    config = JsonConfigXDG("OVOS-SkillsManager", subfolder="OpenVoiceOS")
+    if not path.exists(config.path):
+        # Check for legacy config
+        config = JsonStorageXDG("OVOS-SkillsManager")
+        if not path.exists(config.path):
+            return None
+    return config
 
 
 class OVOSSkillsManager:
