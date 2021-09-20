@@ -17,6 +17,7 @@ from ovos_skills_manager.exceptions import UnknownAppstore
 from ovos_skills_manager.appstores.local import InstalledSkills, get_skills_folder
 from ovos_skills_manager.github import author_repo_from_github_url
 
+CURRENT_OSM_VERSION = "0.0.10a6"
 
 def safe_get_skills_folder():
     try:
@@ -70,7 +71,6 @@ class OVOSSkillsManager:
                 "parse_github": False,
                 "priority": 100}
         }
-
         if "appstores" not in self.config:
             # NOTE, below should match Appstore.appstore_id
             self.config["appstores"] = default_config
@@ -79,6 +79,11 @@ class OVOSSkillsManager:
                                               default_config,
                                               new_only=True,
                                               no_dupes=True)
+        if "version" not in self.config:
+            # This stuff can really only happen on first run
+            self.config["version"] = CURRENT_OSM_VERSION
+            self.config["last_upgrade"] = CURRENT_OSM_VERSION
+
         self._boostrap_tracker = {}
         self.save_config()
         self._threads = []
