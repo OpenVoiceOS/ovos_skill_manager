@@ -17,7 +17,7 @@ from ovos_skills_manager.exceptions import UnknownAppstore
 from ovos_skills_manager.appstores.local import InstalledSkills, get_skills_folder
 from ovos_skills_manager.github import author_repo_from_github_url
 
-CURRENT_OSM_VERSION = "0.0.10a6"
+CURRENT_OSM_VERSION = "0.0.10a7"
 
 def safe_get_skills_folder():
     try:

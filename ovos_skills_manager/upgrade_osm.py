@@ -4,8 +4,7 @@ from packaging import version
 
 from click import echo
 from json_database import JsonConfigXDG, JsonStorageXDG
-from osm import locate_config_file
-from ovos_skills_manager.osm import CURRENT_OSM_VERSION
+from ovos_skills_manager.osm import locate_config_file, CURRENT_OSM_VERSION
 
 def do_launch_version_checks():
     """ Upon running OSM, perform a sequence of checks to determine:
@@ -22,11 +21,12 @@ def do_launch_version_checks():
         if not _check_current_version(config): # does it reflect the most recent version?
             upgrade, config = _check_upgrade(config) # if not, do the upgrade routine
             if upgrade:
+                echo("Applying OSM updates. Please be patient and do not exit!")
                 config = _find_and_perform_osm_upgrades(config)
             # now that we've applied all updates, bump config version to current
             config["version"] = CURRENT_OSM_VERSION
             config.store()
-            echo(f"OSM is now v{CURRENT_OSM_VERSION}")
+            echo(f"OSM is now v{CURRENT_OSM_VERSION}\n")
     # if the config file doesn't exist, this must surely be first run, so don't do anything
 
 def _check_current_version(config:dict=None) -> bool:
@@ -70,6 +70,7 @@ def _find_and_perform_osm_upgrades(config: dict) -> dict:
     for upgrade_version, upgrade_path in UPGRADE_PATHS.items():
         if upgrade_version > last_upgrade:
             upgrade_string = str(upgrade_version)
+            echo(f"Running OSM upgrade: v{upgrade_string} ", nl=False)
 
             config = upgrade_path(config) # upgrade routines should accept and then return config,
                                           # in case it moves
@@ -77,7 +78,7 @@ def _find_and_perform_osm_upgrades(config: dict) -> dict:
             config["last_upgrade"] = upgrade_string
             config["version"] = upgrade_string
             config.store()
-            echo(f"Upgraded OSM to v{upgrade_string}")
+            echo("... done")
     echo("All OSM updates applied. ", nl=False)
     return config
 
