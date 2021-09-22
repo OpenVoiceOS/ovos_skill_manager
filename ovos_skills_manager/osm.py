@@ -16,8 +16,7 @@ from ovos_skills_manager.appstores.neon import NeonSkills
 from ovos_skills_manager.exceptions import UnknownAppstore
 from ovos_skills_manager.appstores.local import InstalledSkills, get_skills_folder
 from ovos_skills_manager.github import author_repo_from_github_url
-
-CURRENT_OSM_VERSION = "0.0.10a7"
+from ovos_skills_manager.versions import CURRENT_OSM_VERSION
 
 def safe_get_skills_folder():
     try:
@@ -26,6 +25,12 @@ def safe_get_skills_folder():
         return ""
 
 def locate_config_file():
+    """Tries to locate the OSM config file, first trying the current path,
+    and then checking the old location (used by the migration upgrade)
+
+    Returns:
+        [JsonConfigXDG|JsonStorageXDG|None]: the existing OSM config, or None
+    """
     config = JsonConfigXDG("OVOS-SkillsManager", subfolder="OpenVoiceOS")
     if not path.exists(config.path):
         # Check for legacy config
@@ -34,58 +39,66 @@ def locate_config_file():
             return None
     return config
 
+def get_config_object():
+    """Locates or creates the OSM config file, and ensures that all required
+       values are present, inserting defaults as needed
+
+    Returns:
+        json_database.JsonConfigXDG: the OSM config object
+    """
+    config = locate_config_file() or \
+        JsonConfigXDG("OVOS-SkillsManager", subfolder="OpenVoiceOS")
+    default_appstores = {
+        "local": {
+            "active": True,
+            "url": safe_get_skills_folder(),
+            "parse_github": False,
+            "priority": 1},
+        "ovos": {
+            "active": True,
+            "url": "https://github.com/OpenVoiceOS/OVOS-appstore",
+            "parse_github": False,
+            "priority": 2},
+        "mycroft_marketplace": {
+            "active": False,
+            "url": "https://market.mycroft.ai/",
+            "parse_github": False,
+            "priority": 5},
+        "pling": {
+            "active": False,
+            "url": "https://apps.plasma-bigscreen.org/",
+            "parse_github": False,
+            "priority": 10},
+        "neon": {
+            "active": False,
+            "url": "https://github.com/NeonGeckoCom/neon-skills-submodules/",
+            "parse_github": False,
+            "auth_token": None,
+            "priority": 50},
+        "andlo_skill_list": {
+            "active": False,
+            "url": "https://andlo.gitbook.io/mycroft-skills-list/",
+            "parse_github": False,
+            "priority": 100}
+    }
+    if "appstores" not in config:
+        # NOTE, below should match Appstore.appstore_id
+        config["appstores"] = default_appstores
+        config["appstores"] = merge_dict(config["appstores"],
+                                            default_appstores,
+                                            new_only=True,
+                                            no_dupes=True)
+    if "version" not in config:
+        # This stuff can really only happen on first run
+        config["version"] = CURRENT_OSM_VERSION
+        config["last_upgrade"] = CURRENT_OSM_VERSION
+    config.store()
+    return config
 
 class OVOSSkillsManager:
     def __init__(self, bus=None):
-        self.config = JsonConfigXDG("OVOS-SkillsManager", subfolder="OpenVoiceOS")
-        default_config = {
-            "local": {
-                "active": True,
-                "url": safe_get_skills_folder(),
-                "parse_github": False,
-                "priority": 1},
-            "ovos": {
-                "active": True,
-                "url": "https://github.com/OpenVoiceOS/OVOS-appstore",
-                "parse_github": False,
-                "priority": 2},
-            "mycroft_marketplace": {
-                "active": False,
-                "url": "https://market.mycroft.ai/",
-                "parse_github": False,
-                "priority": 5},
-            "pling": {
-                "active": False,
-                "url": "https://apps.plasma-bigscreen.org/",
-                "parse_github": False,
-                "priority": 10},
-            "neon": {
-                "active": False,
-                "url": "https://github.com/NeonGeckoCom/neon-skills-submodules/",
-                "parse_github": False,
-                "auth_token": None,
-                "priority": 50},
-            "andlo_skill_list": {
-                "active": False,
-                "url": "https://andlo.gitbook.io/mycroft-skills-list/",
-                "parse_github": False,
-                "priority": 100}
-        }
-        if "appstores" not in self.config:
-            # NOTE, below should match Appstore.appstore_id
-            self.config["appstores"] = default_config
-            self.save_config()
-        self.config["appstores"] = merge_dict(self.config["appstores"],
-                                              default_config,
-                                              new_only=True,
-                                              no_dupes=True)
-        if "version" not in self.config:
-            # This stuff can really only happen on first run
-            self.config["version"] = CURRENT_OSM_VERSION
-            self.config["last_upgrade"] = CURRENT_OSM_VERSION
-
+        self.config = get_config_object()
         self._boostrap_tracker = {}
-        self.save_config()
         self._threads = []
         self.bus = None
 
@@ -138,9 +151,6 @@ class OVOSSkillsManager:
             return InstalledSkills
         else:
             raise UnknownAppstore
-
-    def save_config(self):
-        self.config.store()
 
     def clear_cache(self, appstore_id=None):
         if appstore_id:

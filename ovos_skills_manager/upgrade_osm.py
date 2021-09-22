@@ -4,7 +4,8 @@ from packaging import version
 
 from click import echo
 from json_database import JsonConfigXDG, JsonStorageXDG
-from ovos_skills_manager.osm import locate_config_file, CURRENT_OSM_VERSION
+from ovos_skills_manager.osm import locate_config_file
+from ovos_skills_manager.versions import CURRENT_OSM_VERSION
 
 def do_launch_version_checks():
     """ Upon running OSM, perform a sequence of checks to determine:
