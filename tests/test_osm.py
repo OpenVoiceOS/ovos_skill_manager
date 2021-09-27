@@ -4,22 +4,20 @@ import sys
 import unittest
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-from ovos_skills_manager.osm import OVOSSkillsManager
-from ovos_skills_manager.session import set_github_token
-osm = OVOSSkillsManager()
 
 TEST_INSTALL_DIR = os.path.join(os.path.dirname(__file__), "skills")
 
-if os.environ.get("GITHUB_TOKEN"):
-    from ovos_skills_manager.session import set_github_token
-    set_github_token(os.environ.get("GITHUB_TOKEN"))
-
-
 class TestOvosSkillsManager(unittest.TestCase):
+    osm: object
     @classmethod
     def setUpClass(cls) -> None:
+        from .conftest import OVOSSkillsManager
+        cls.osm = OVOSSkillsManager()
+        assert 'tmp' in cls.osm.config.path
+
         github_token = os.environ.get("GITHUB_TOKEN")
         if github_token:
+            from ovos_skills_manager.session import set_github_token
             set_github_token(github_token)
 
     def setUp(self) -> None:
@@ -34,7 +32,7 @@ class TestOvosSkillsManager(unittest.TestCase):
     def test_get_skill_entry_from_url_default_branch(self):
         from ovos_skills_manager import SkillEntry
 
-        skill_entry = osm.skill_entry_from_url("https://github.com/OpenVoiceOS/tskill-osm_parsing")
+        skill_entry = self.osm.skill_entry_from_url("https://github.com/OpenVoiceOS/tskill-osm_parsing")
         self.assertIsInstance(skill_entry, SkillEntry)
         self.assertEqual(skill_entry.url, "https://github.com/OpenVoiceOS/tskill-osm_parsing")
         self.assertIsInstance(skill_entry.requirements["python"], list)
@@ -47,7 +45,7 @@ class TestOvosSkillsManager(unittest.TestCase):
     def test_get_skill_entry_from_url_no_json(self):
         from ovos_skills_manager import SkillEntry
 
-        skill_entry = osm.skill_entry_from_url("https://github.com/OpenVoiceOS/tskill-osm_parsing/tree/no_json")
+        skill_entry = self.osm.skill_entry_from_url("https://github.com/OpenVoiceOS/tskill-osm_parsing/tree/no_json")
         self.assertIsInstance(skill_entry, SkillEntry)
         self.assertEqual(skill_entry.url, "https://github.com/OpenVoiceOS/tskill-osm_parsing")
         self.assertEqual(skill_entry.branch, "no_json")
@@ -64,7 +62,7 @@ class TestOvosSkillsManager(unittest.TestCase):
     def test_get_skill_entry_from_url_release(self):
         from ovos_skills_manager import SkillEntry
 
-        skill_entry = osm.skill_entry_from_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@v0.2.1")
+        skill_entry = self.osm.skill_entry_from_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@v0.2.1")
         self.assertIsInstance(skill_entry, SkillEntry)
         self.assertEqual(skill_entry.url, "https://github.com/OpenVoiceOS/tskill-osm_parsing")
         self.assertEqual(skill_entry.branch, "v0.2.1")
@@ -79,7 +77,7 @@ class TestOvosSkillsManager(unittest.TestCase):
         self.assertIsInstance(skill_entry.uuid, str)
 
     def test_install_skill_from_url_valid(self):
-        osm.install_skill_from_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@installable", TEST_INSTALL_DIR)
+        self.osm.install_skill_from_url("https://github.com/OpenVoiceOS/tskill-osm_parsing@installable", TEST_INSTALL_DIR)
         self.assertTrue(os.path.isdir(os.path.join(TEST_INSTALL_DIR, "tskill-osm_parsing.openvoiceos")),
                         os.listdir(TEST_INSTALL_DIR))
         self.assertTrue(os.path.isfile(os.path.join(TEST_INSTALL_DIR, "tskill-osm_parsing.openvoiceos", "__init__.py")))
