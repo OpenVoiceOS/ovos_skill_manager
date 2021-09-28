@@ -1,14 +1,12 @@
 import pytest
 from os import environ, path, remove, mkdir
 
-from ovos_skills_manager.osm import OVOSSkillsManager
-
 MOCKED_VARS = { 'XDG_CACHE_HOME': '/tmp/xdg-cache/',
                 'XDG_CONFIG_HOME': '/tmp/xdg-config/',
                 'XDG_DATA_HOME': '/tmp/xdg-data/'
                 }
 
-@pytest.fixture(autouse=True, scope='session')
+@pytest.fixture(scope='session')
 def monkeymodule():
     from _pytest.monkeypatch import MonkeyPatch
     monkey = MonkeyPatch()
@@ -25,6 +23,10 @@ def osm_test(monkeymodule):
             mkdir(val)
     print("Set envvars")
     import xdg
-    # yield
-    # print(xdg.BaseDirectory.xdg_config_home)
-    # print("Done")
+    import json_database
+
+    from ovos_skills_manager import commands, github, licenses, osm, \
+        session, skill_entry, upgrade_osm, utils, versions
+    yield
+    print(xdg.BaseDirectory.xdg_config_home)
+    print("Done")

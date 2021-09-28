@@ -3,12 +3,7 @@ import sys
 import unittest
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-from ovos_skills_manager.github import get_license_type
-from ovos_skills_manager.licenses import is_permissive, is_viral, parse_license_type
 
-if os.environ.get("GITHUB_TOKEN"):
-    from ovos_skills_manager.session import set_github_token
-    set_github_token(os.environ.get("GITHUB_TOKEN"))
 
 # TODO setup a test skill repo, since a random url can simply vanish
 
@@ -16,6 +11,9 @@ if os.environ.get("GITHUB_TOKEN"):
 class TestGithubUrlParsing(unittest.TestCase):
     @classmethod
     def setUpClass(self) -> None:
+        if os.environ.get("GITHUB_TOKEN"):
+            from ovos_skills_manager.session import set_github_token
+            set_github_token(os.environ.get("GITHUB_TOKEN"))
         # some examples gathered from parsing andlo's list
         self.agpls = ["https://github.com/skeledrew/brain-skill",
                       "https://github.com/danielquinn/mycroft-evil-laugh",
@@ -85,11 +83,14 @@ class TestGithubUrlParsing(unittest.TestCase):
         """
 
     def test_parse(self):
+        from ovos_skills_manager.licenses import parse_license_type
         self.assertEqual(parse_license_type(self.mit_template_noheader), "mit")
         self.assertEqual(parse_license_type(self.isc_template), "isc")
         self.assertEqual(parse_license_type(self.bsd0_template), "0bsd")
 
     # def test_detect_viral(self):
+        #from ovos_skills_manager.github import get_license_type
+        #from ovos_skills_manager.licenses import is_permissive, is_viral
     #     for lic in [self.mit_template_noheader, self.isc_template,
     #                 self.bsd0_template]:
     #         lic = parse_license_type(lic)
@@ -111,6 +112,7 @@ class TestGithubUrlParsing(unittest.TestCase):
     #         self.assertFalse(is_permissive(lic))
     #
     # def test_detect_type_from_url(self):
+    #     from ovos_skills_manager.github import get_license_type
     #     for url in self.mits + self.mit_fails:
     #         self.assertEqual(get_license_type(url, "master"), "mit")
     #     for url in self.isc:

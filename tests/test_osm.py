@@ -11,7 +11,7 @@ class TestOvosSkillsManager(unittest.TestCase):
     osm: object
     @classmethod
     def setUpClass(cls) -> None:
-        from .conftest import OVOSSkillsManager
+        from ovos_skills_manager.osm import OVOSSkillsManager
         cls.osm = OVOSSkillsManager()
         assert 'tmp' in cls.osm.config.path
 
