@@ -4,8 +4,8 @@ from packaging import version
 
 from click import echo
 from json_database import JsonConfigXDG, JsonStorageXDG
-from ovos_skills_manager.osm import locate_config_file
-from ovos_skills_manager.versions import CURRENT_OSM_VERSION
+from ovos_skills_manager.config import _existing_osm_config
+from ovos_skills_manager.versioning.osm_versions import CURRENT_OSM_VERSION
 
 def do_launch_version_checks():
     """ Upon running OSM, perform a sequence of checks to determine:
@@ -17,7 +17,7 @@ def do_launch_version_checks():
             2. Repeat until there are no unapplied upgrades
             3. Bump config to the current version
     """
-    config = locate_config_file()
+    config = _existing_osm_config()
     if config: # does the config file exist?
         if not _check_current_version(config): # does it reflect the most recent version?
             upgrade, config = _check_upgrade(config) # if not, do the upgrade routine
@@ -34,7 +34,7 @@ def _check_current_version(config:dict=None) -> bool:
     """ Determine the currently-installed version of OSM, or pretend to be
         version 0.0.9, which is older than the oldest marked upgrade
     """
-    config = config or locate_config_file()
+    config = config or _existing_osm_config()
     return version.parse((config.get("version") or "0.0.9")) == version.parse(CURRENT_OSM_VERSION)
 
 def _check_upgrade(config:dict=None) -> (bool, dict):
@@ -44,7 +44,7 @@ def _check_upgrade(config:dict=None) -> (bool, dict):
         bool: Whether there are upgrades to be applied
         dict: the existing OSM config object for rereferencing
     """
-    config = config or locate_config_file()
+    config = config or _existing_osm_config()
     # find the last upgrade path that was performed
     last_upgrade = config.get('last_upgrade')
     if not last_upgrade:

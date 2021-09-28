@@ -1,9 +1,14 @@
 from setuptools import setup
-from ovos_skills_manager.versions import CURRENT_OSM_VERSION
+
+def _get_version():
+    with open('ovos_skills_manager/versioning/osm_versions.py') as versions:
+        for line in versions:
+            if line.startswith('CURRENT_OSM_VERSION'):
+                # CURRENT_OSM_VERSION = "0.0.10a9" --> "0.0.10a9"
+                return line.replace('"','').strip('\n').split('= ')[1]
 
 setup(
     name='ovos-skills-manager',
-    version=CURRENT_OSM_VERSION,
     packages=['ovos_skills_manager',
               'ovos_skills_manager.github',
               'ovos_skills_manager.appstores',
@@ -29,4 +34,5 @@ setup(
         [console_scripts]
         osm=ovos_skills_manager.commands:osm_commands
     ''',
+    version=_get_version(),
 )

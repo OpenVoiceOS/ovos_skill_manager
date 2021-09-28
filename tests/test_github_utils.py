@@ -4,19 +4,17 @@ import unittest
 
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-from ovos_skills_manager.github.utils import *
-from ovos_skills_manager.github import get_main_branch_from_github_url
+
+
+# TODO setup a test skill repo, since a random url can simply vanish
 
 if os.environ.get("GITHUB_TOKEN"):
     from ovos_skills_manager.session import set_github_token
     set_github_token(os.environ.get("GITHUB_TOKEN"))
 
-# TODO setup a test skill repo, since a random url can simply vanish
-
-
 class TestGithubUtils(unittest.TestCase):
-
     def test_normalize_url(self):
+        from ovos_skills_manager.github.utils import normalize_github_url
         normie = "https://github.com/JarbasSkills/skill-wolfie"
         raw = "https://raw.githubusercontent.com/JarbasSkills/skill-wolfie"
         api = "https://api.github.com/repos/JarbasSkills/skill-wolfie"
@@ -32,6 +30,8 @@ class TestGithubUtils(unittest.TestCase):
             self.assertEqual(normalize_github_url(url), normie)
 
     def test_branch_from_url(self):
+        from ovos_skills_manager.github.utils import get_branch_from_github_url, \
+            GithubInvalidBranch
         normie = "https://github.com/MycroftAI/skill-hello-world"
 
         # implicit branch in url
@@ -65,10 +65,12 @@ class TestGithubUtils(unittest.TestCase):
         )
 
     def test_get_main_branch_from_github_url(self):
+        from ovos_skills_manager.github import get_main_branch_from_github_url
         branch = get_main_branch_from_github_url("https://github.com/OpenVoiceOS/tskill-osm_parsing")
         self.assertEqual(branch, "main")
 
     def test_author_repo_from_url(self):
+        from ovos_skills_manager.github.utils import author_repo_from_github_url
         url = "https://github.com/JarbasSkills/skill-wolfie"
         self.assertEqual(author_repo_from_github_url(url),
                          ["JarbasSkills", "skill-wolfie"])
@@ -84,6 +86,7 @@ class TestGithubUtils(unittest.TestCase):
                          ["JarbasSkills", "skill-wolfie"])
 
     def test_skill_name_from_url(self):
+        from ovos_skills_manager.github.utils import skill_name_from_github_url
         url = "https://github.com/JarbasSkills/skill-wolfie"
         self.assertEqual(skill_name_from_github_url(url), "Wolfie Skill")
         self.assertEqual(skill_name_from_github_url(url + "/tree/v0.1"),
@@ -98,6 +101,7 @@ class TestGithubUtils(unittest.TestCase):
                          "Wolfie Skill")
 
     def test_dl_url(self):
+        from ovos_skills_manager.github.utils import download_url_from_github_url, blob2raw
         # raw
         dl = "https://raw.githubusercontent.com/JarbasSkills/skill-ddg/master/__init__.py"
         self.assertEqual(download_url_from_github_url(dl), dl)
@@ -122,6 +126,7 @@ class TestGithubUtils(unittest.TestCase):
 class TestGithubUrlValidation(unittest.TestCase):
 
     def test_branch(self):
+        from ovos_skills_manager.github.utils import validate_branch, GithubInvalidUrl
         url = "https://github.com/JarbasSkills/skill-ddg"
         self.assertEqual(validate_branch("master", url), True)
         self.assertEqual(validate_branch("V666", url), False)
@@ -132,6 +137,8 @@ class TestGithubUrlValidation(unittest.TestCase):
         )
 
     def test_skill(self):
+        from ovos_skills_manager.github.utils import validate_github_skill_url, \
+            is_valid_github_skill_url, GithubInvalidUrl, GithubNotSkill, GithubUrls
         # explicit branch
         url = "https://github.com/JarbasSkills/skill-ddg"
         branch = "master"
@@ -164,6 +171,8 @@ class TestGithubUrlValidation(unittest.TestCase):
         self.assertEqual(is_valid_github_skill_url(url), False)
 
     def test_templates(self):
+        from ovos_skills_manager.github.utils import GithubInvalidBranch, \
+            GithubUrls, match_url_template
         # unknown branch
         url = "https://github.com/JarbasSkills/skill-ddg"
         template = GithubUrls.SKILL
