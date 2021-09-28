@@ -33,7 +33,7 @@ def test_upgrade_migrates_config():
         # set the config to reflect an old version
         config['version'] = '0.0.9'
         config['last_upgrade'] = '0.0.9'
-        # config.store()
+        config.store()
         _path = config.path
 
     # move the config file to the old location
