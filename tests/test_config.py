@@ -46,7 +46,7 @@ def test_upgrade_migrates_config():
     os.remove(_path)
 
     from ovos_skills_manager.upgrade_osm import do_launch_version_checks
-    from ovos_skills_manager.versions import CURRENT_OSM_VERSION
+    from osm_versions import CURRENT_OSM_VERSION
     do_launch_version_checks()
     with get_config_object() as config:
         assert config

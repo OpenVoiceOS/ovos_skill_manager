@@ -26,7 +26,8 @@ def osm_test(monkeymodule):
     import json_database
 
     from ovos_skills_manager import commands, github, licenses, osm, \
-        session, skill_entry, upgrade_osm, utils, versions
+        session, skill_entry, upgrade_osm, utils
+    import osm_versions as versions
     yield
     print(xdg.BaseDirectory.xdg_config_home)
     print("Done")
