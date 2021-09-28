@@ -8,6 +8,7 @@ on:
 jobs:
   unit_tests:
     strategy:
+      max-parallel: 2
       matrix:
         python-version: [3.6, 3.7, 3.8, 3.9]
     runs-on: ubuntu-latest

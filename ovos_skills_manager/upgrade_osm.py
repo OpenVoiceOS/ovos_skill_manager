@@ -20,10 +20,14 @@ def do_launch_version_checks():
     config = _existing_osm_config()
     if config: # does the config file exist?
         if not _check_current_version(config): # does it reflect the most recent version?
+            echo("OSM has been updated. Checking for upgrades... ", nl=False)
             upgrade, config = _check_upgrade(config) # if not, do the upgrade routine
             if upgrade:
-                echo("Applying OSM updates. Please be patient and do not exit!")
+                echo("found")
+                echo("Applying OSM upgrades. Please be patient and do not exit!")
                 config = _find_and_perform_osm_upgrades(config)
+            else:
+                echo("none found\nApplying new version number.")
             # now that we've applied all updates, bump config version to current
             config["version"] = CURRENT_OSM_VERSION
             config.store()
@@ -59,8 +63,9 @@ def _check_upgrade(config:dict=None) -> (bool, dict):
     for upgrade_version in upgrade_versions:
         if last_upgrade < upgrade_version:
             return True, config
+    return False, config
 
-def _find_and_perform_osm_upgrades(config: dict) -> dict:
+def _find_and_perform_osm_upgrades(config: JsonStorageXDG) -> JsonStorageXDG:
     """ Accepts and returns config. Iterates over possible upgrades,
         applying the earliest unapplied upgrade and bumping config's version.
         Loops until there are no more upgrades to apply.
@@ -80,7 +85,7 @@ def _find_and_perform_osm_upgrades(config: dict) -> dict:
             config["version"] = upgrade_string
             config.store()
             echo("... done")
-    echo("All OSM updates applied. ", nl=False)
+    echo("All OSM upgrades applied. ", nl=False)
     return config
 
 def _upgrade_0_0_10a3(config:JsonStorageXDG=None):
