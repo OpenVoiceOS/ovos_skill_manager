@@ -1,5 +1,5 @@
 from setuptools import setup
-from osm_versions import CURRENT_OSM_VERSION
+from ovos_skills_manager.versioning.osm_versions import CURRENT_OSM_VERSION
 
 setup(
     name='ovos-skills-manager',

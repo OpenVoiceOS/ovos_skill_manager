@@ -4,7 +4,7 @@ from json_database import JsonConfigXDG, JsonStorageXDG
 from ovos_utils.json_helper import merge_dict
 
 from ovos_skills_manager.appstores.local import get_skills_folder
-from osm_versions import CURRENT_OSM_VERSION
+from ovos_skills_manager.versioning.osm_versions import CURRENT_OSM_VERSION
 
 def safe_get_skills_folder():
     try:

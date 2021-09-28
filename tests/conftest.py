@@ -27,7 +27,7 @@ def osm_test(monkeymodule):
 
     from ovos_skills_manager import commands, github, licenses, osm, \
         session, skill_entry, upgrade_osm, utils
-    import osm_versions as versions
+    import ovos_skills_manager.versioning.osm_versions as versions
     yield
     print(xdg.BaseDirectory.xdg_config_home)
     print("Done")
