@@ -12,7 +12,7 @@ def safe_get_skills_folder():
     except:
         return ""
 
-def existing_osm_config() -> Union[JsonStorageXDG, JsonConfigXDG]:
+def _existing_osm_config() -> Union[JsonStorageXDG, JsonConfigXDG]:
     """NOTE: Use get_config_object() unless you're migrating config!
     
     Tries to locate the OSM config file, first trying the current path,
@@ -36,7 +36,7 @@ def get_config_object() -> Union[JsonStorageXDG, JsonConfigXDG]:
     Returns:
         json_database.JsonConfigXDG: the OSM config object
     """
-    config = existing_osm_config() or \
+    config = _existing_osm_config() or \
         JsonConfigXDG("OVOS-SkillsManager", subfolder="OpenVoiceOS")
     default_appstores = {
         "local": {

@@ -13,8 +13,8 @@ def test_mock_envvars():
         assert os.environ[var] == val
 
 def test_locate_config():
-    from ovos_skills_manager.config import existing_osm_config
-    with existing_osm_config() as config:
+    from ovos_skills_manager.config import _existing_osm_config
+    with _existing_osm_config() as config:
         assert config.path == os.environ['XDG_CONFIG_HOME'] + 'OpenVoiceOS/OVOS-SkillsManager.json'
 
 def test_get_config():
