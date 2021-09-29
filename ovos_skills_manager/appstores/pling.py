@@ -42,7 +42,7 @@ def _parse_pling(skill):
     return skill_json
 
 
-def get_pling_skills(parse_github=False, skiplist=None):
+def get_pling_skills(parse_github:bool=False, skiplist=None):
     skiplist = skiplist or []
     url = "https://api.kde-look.org/ocs/v1/content/data"
     params = {"categories": "608", "page": 0}

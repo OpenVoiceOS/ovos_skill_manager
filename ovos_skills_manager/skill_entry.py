@@ -52,7 +52,7 @@ class SkillEntry:
 
     # constructors
     @staticmethod
-    def from_json(data: Union[str, dict], parse_github=True):
+    def from_json(data: Union[str, dict], parse_github:bool=True):
         if isinstance(data, str):
             if data.startswith("http"):
                 url = data
@@ -90,7 +90,7 @@ class SkillEntry:
         return SkillEntry(data)
 
     @staticmethod
-    def from_github_url(url, branch=None, parse_github=True):
+    def from_github_url(url, branch:str=None, parse_github:bool=True):
         if not branch:
             try:
                 branch = get_branch_from_github_url(url)

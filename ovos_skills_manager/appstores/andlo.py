@@ -5,7 +5,7 @@ from ovos_skills_manager.exceptions import GithubInvalidUrl
 from ovos_utils.log import LOG
 
 
-def get_andlos_list_skills(parse_github=False, skiplist=None):
+def get_andlos_list_skills(parse_github:bool=False, skiplist=None):
     skiplist = skiplist or []
     url = "https://raw.githubusercontent.com/andlo/mycroft-skills-list-gitbook/master/_data/skills.json"
     andlos_list = requests.get(url).json()

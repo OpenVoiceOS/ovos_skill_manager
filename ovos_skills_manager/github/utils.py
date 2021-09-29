@@ -68,7 +68,7 @@ def normalize_github_url(url):
     return "/".join(["https://github.com", author, skillname])
 
 
-def blob2raw(url, validate=False):
+def blob2raw(url:str, validate:bool=False):
     if not url.startswith("https://github.com") and \
             not url.startswith("https://raw.githubusercontent.com"):
         raise GithubInvalidUrl(url)
@@ -80,19 +80,19 @@ def blob2raw(url, validate=False):
     return url
 
 
-def author_repo_from_github_url(url):
+def author_repo_from_github_url(url:str):
     url = normalize_github_url(url)
     return url.split("/")[-2:]
 
 
-def skill_name_from_github_url(url):
+def skill_name_from_github_url(url:str):
     _, repo = author_repo_from_github_url(url)
     words = camel_case_split(repo.replace("-", " ").lower()).split(" ")
     name = " ".join([w for w in words if w != "skill"]) + " skill"
     return name.title()
 
 
-def get_branch_from_github_url(url, validate=False):
+def get_branch_from_github_url(url:str, validate:bool=False):
     branch = None
     url = url.replace("/blob/", "/tree/")
     if "/tree/" in url:
@@ -113,12 +113,12 @@ def get_branch_from_github_url(url, validate=False):
         raise GithubInvalidBranch
 
 
-def validate_branch(branch, url):
+def validate_branch(branch:str, url:str):
     url = normalize_github_url(url) + "/tree/{branch}".format(branch=branch)
     return requests.get(url).status_code == 200
 
 
-def download_url_from_github_url(url, branch=None):
+def download_url_from_github_url(url:str, branch:str=None):
     # specific file
     try:
         url = blob2raw(url)
@@ -137,7 +137,7 @@ def download_url_from_github_url(url, branch=None):
     raise GithubInvalidUrl(url)
 
 
-def validate_github_skill_url(url, branch=None):
+def validate_github_skill_url(url:str, branch:str=None):
     branch = branch or get_branch_from_github_url(url)
     try:
 
@@ -151,14 +151,14 @@ def validate_github_skill_url(url, branch=None):
     raise GithubNotSkill
 
 
-def is_valid_github_skill_url(url, branch=None):
+def is_valid_github_skill_url(url:str, branch:str=None):
     try:
         return validate_github_skill_url(url, branch)
     except Exception as e:
         return False
 
 
-def match_url_template(url, template, branch=None):
+def match_url_template(url:str, template:str, branch:str=None):
     branch = branch or get_branch_from_github_url(url)
     author, repo = author_repo_from_github_url(url)
     url = template.format(author=author, branch=branch, repo=repo)
