@@ -138,7 +138,7 @@ Options:
 
 #### Print config
 
-print current configuration of osm, config file can be found at `~/.cache/json_database/OVOS-SkillsManager.json`
+print current configuration of osm, config file can be found at `~/.config/OpenVoiceOS/OVOS-SkillsManager.json`
 ```bash
 (.venv) user@hostname:~$ osm print --help
 Usage: osm print [OPTIONS]

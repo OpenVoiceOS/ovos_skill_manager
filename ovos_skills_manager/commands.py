@@ -17,15 +17,20 @@ from ovos_skills_manager.scripts import \
     install as _install, \
     priority as _priority, \
     search as _search, \
-    sync as _sync
+    sync as _sync, \
+    version as _version
 #endregion
 
 
 #region COMMAND DEFINITIONS
 
-@click.group(name='osm', cls=DefaultGroup, help="See also: osm COMMAND --help")
-def osm_commands():
-    pass
+@click.group(name='osm', cls=DefaultGroup, default='\0',
+    help="See also: osm COMMAND --help",
+    no_args_is_help=True, invoke_without_command=True)
+@click.option('--version', help='Print current OSM version and exit.', is_flag=True, required=False)
+def osm_commands(version=False):
+    if version:
+        _version.echo_version()
 
 #region add-auth
 @osm_commands.command(help='Add an auth token')
