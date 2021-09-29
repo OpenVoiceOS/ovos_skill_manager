@@ -33,7 +33,7 @@ class SearchTests(unittest.TestCase):
     def test_search_mycroft_all(self):
         from ovos_skills_manager.scripts.search import search_skill
         # methods = ['all', 'name', 'url', 'category', 'author', 'tag', 'description']
-        query = "stock"
+        query = "dismissal"
         fuzzy = True
         thresh = 80
         results = search_skill(method="all", query=query, fuzzy=fuzzy, no_ignore_case=False,
@@ -44,7 +44,7 @@ class SearchTests(unittest.TestCase):
     def test_search_mycroft_name(self):
         from ovos_skills_manager.scripts.search import search_skill
         # methods = ['all', 'name', 'url', 'category', 'author', 'tag', 'description']
-        query = "stock prices"
+        query = "dismiss"
         fuzzy = True
         thresh = 80
         results = search_skill(method="name", query=query, fuzzy=fuzzy, no_ignore_case=False,
@@ -55,7 +55,7 @@ class SearchTests(unittest.TestCase):
     def test_search_mycroft_url(self):
         from ovos_skills_manager.scripts.search import search_skill
         # methods = ['all', 'name', 'url', 'category', 'author', 'tag', 'description']
-        query = "https://github.com/MycroftAI/skill-stock"
+        query = "https://github.com/ChanceNCounter/dismissal-skill"
         fuzzy = False
         thresh = 80
         results = search_skill(method="url", query=query, fuzzy=fuzzy, no_ignore_case=False,

@@ -111,8 +111,10 @@ class SkillEntry:
 
     @property
     def skill_name(self):
-        author, repo = author_repo_from_github_url(self.url)
-        return self.json.get("skillname") or self.json.get("name") or repo
+        return_val = self.json.get("skillname") or self.json.get("name")
+        if self.url and not return_val:
+            _, return_val = author_repo_from_github_url(self.url)
+        return return_val
 
     @property
     def skill_short_description(self):
@@ -121,13 +123,19 @@ class SkillEntry:
 
     @property
     def skill_description(self):
-        author, repo = author_repo_from_github_url(self.url)
-        return self.json.get("description") or f"{repo} by {author}"
+        return_val = self.json.get("description")
+        if self.url and not return_val:
+            author, repo = author_repo_from_github_url(self.url)
+            return_val = f"{repo} by {author}"
+        return return_val
 
     @property
     def skill_folder(self):
-        author, repo = author_repo_from_github_url(self.url)
-        return self.json.get("foldername") or f"{repo}.{author}"
+        return_val = self.json.get("foldername")
+        if self.url and not return_val:
+            author, repo = author_repo_from_github_url(self.url)
+            return_val = f"{repo}.{author}"
+        return return_val
 
     @property
     def skill_category(self):
