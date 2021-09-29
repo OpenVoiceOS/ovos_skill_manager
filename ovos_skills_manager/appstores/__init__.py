@@ -1,4 +1,7 @@
 import os
+import re
+import shutil
+from typing import Optional
 
 from json_database import JsonDatabaseXDG, JsonConfigXDG
 from json_database.search import Query
@@ -10,14 +13,11 @@ from ovos_skills_manager.exceptions import AuthenticationError, GithubInvalidUrl
 from ovos_skills_manager.session import set_github_token, clear_github_token
 from ovos_skills_manager.github import get_branch_from_github_url,\
     normalize_github_url, GithubInvalidBranch
-import shutil
-import re
-from os import remove
 
 
 class AbstractAppstore:
-    def __init__(self, name, parse_github=False, appstore_id=None,
-                 bootstrap=False):
+    def __init__(self, name:str, parse_github:bool=False, appstore_id:Optional[str]=None,
+                 bootstrap:bool=False):
         self.name = name
         default_id = re.sub(r'[^\w]', ' ',
                             name.lower().replace("_", " ").replace("-", " "))
@@ -30,7 +30,7 @@ class AbstractAppstore:
             except AuthenticationError:
                 pass
 
-    def authenticate(self, auth_token=None, bootstrap=True):
+    def authenticate(self, auth_token:Optional[dict]=None, bootstrap:bool=True):
         if auth_token is None:
             auth_token = JsonConfigXDG("OVOS-SkillsManager", subfolder="OpenVoiceOS")["appstores"]\
                 .get(self.appstore_id, {}).get("auth_token")
@@ -43,7 +43,7 @@ class AbstractAppstore:
     def clear_authentication():
         clear_github_token()
 
-    def bootstrap(self, new_only=True):
+    def bootstrap(self, new_only:bool=True):
         base_db = join(dirname(dirname(__file__)), "res",
                        self.db.name + ".jsondb")
         if not len(self.db):
@@ -64,10 +64,10 @@ class AbstractAppstore:
             remove(self.db.path)
             self.db.reset()
 
-    def get_skills_list(self, skiplist=None):
+    def get_skills_list(self, skiplist:list=None):
         return []
 
-    def sync_skills_list(self, merge=False, new_only=False):
+    def sync_skills_list(self, merge:bool=False, new_only:bool=False):
         skiplist = None
         if new_only:
             skiplist = [s["url"] for s in self.db if s.get("url")]
@@ -90,14 +90,14 @@ class AbstractAppstore:
                 self.db.add_item(skill.json)
             self.db.commit()
 
-    def sync_skills_list_threaded(self, merge=False, new_only=False):
+    def sync_skills_list_threaded(self, merge:bool=False, new_only:bool=False):
         return create_daemon(self.sync_skills_list, (merge, new_only))
 
     def total_skills(self):
         return len(self.db)
 
-    def search_skills_by_name(self, name, as_json=False,
-                              fuzzy=True, thresh=0.85, ignore_case=True):
+    def search_skills_by_name(self, name:str, as_json:bool=False,
+                              fuzzy:bool=True, thresh:float=0.85, ignore_case=True):
         query = Query(self.db)
         query.contains_value('skillname', name, fuzzy, thresh, ignore_case)
         results = query.result
@@ -109,8 +109,8 @@ class AbstractAppstore:
             return query.result
         return [SkillEntry.from_json(s, False) for s in results]
 
-    def search_skills_by_id(self, skill_id, as_json=False, fuzzy=False,
-                            thresh=0.85, ignore_case=True):
+    def search_skills_by_id(self, skill_id:str, as_json=False, fuzzy=False,
+                            thresh:float=0.85, ignore_case=True):
         """ skill_id is repo.author , case insensitive,
         searchs by name and filters results by author """
         name = ".".join(skill_id.split(".")[:-1])
@@ -129,7 +129,7 @@ class AbstractAppstore:
             return query.result
         return [SkillEntry.from_json(s, False) for s in results]
 
-    def search_skills_by_url(self, url, as_json=False):
+    def search_skills_by_url(self, url:str, as_json=False):
         query = Query(self.db)
         try:
             # if branch implicit in url, be sure to use it!
@@ -152,8 +152,8 @@ class AbstractAppstore:
             return query.result
         return [SkillEntry.from_json(s, parse_github=False) for s in results]
 
-    def search_skills_by_category(self, category, as_json=False,
-                                  fuzzy=True, thresh=0.85, ignore_case=True):
+    def search_skills_by_category(self, category:str, as_json=False,
+                                  fuzzy=True, thresh:float=0.85, ignore_case=True):
         query = Query(self.db)
         query.contains_value('category', category, fuzzy, thresh)
         results = query.result
@@ -164,8 +164,8 @@ class AbstractAppstore:
             return query.result
         return [SkillEntry.from_json(s, False) for s in results]
 
-    def search_skills_by_author(self, authorname, as_json=False,
-                                fuzzy=True, thresh=0.85, ignore_case=True):
+    def search_skills_by_author(self, authorname:str, as_json=False,
+                                fuzzy=True, thresh:float=0.85, ignore_case=True):
         query = Query(self.db)
         query.value_contains_token('authorname', authorname,
                                    fuzzy, thresh, ignore_case)
@@ -177,8 +177,8 @@ class AbstractAppstore:
             return query.result
         return [SkillEntry.from_json(s, False) for s in results]
 
-    def search_skills_by_tag(self, tag, as_json=False,
-                             fuzzy=True, thresh=0.85, ignore_case=True):
+    def search_skills_by_tag(self, tag:str, as_json:bool=False,
+                             fuzzy:bool=True, thresh:float=0.85, ignore_case:bool=True):
         query = Query(self.db)
         query.contains_value('tags', tag, fuzzy, thresh, ignore_case)
         results = query.result
@@ -189,9 +189,9 @@ class AbstractAppstore:
             return query.result
         return [SkillEntry.from_json(s, False) for s in results]
 
-    def search_skills_by_description(self, value, as_json=False,
-                                     fuzzy=True, thresh=0.85,
-                                     ignore_case=True):
+    def search_skills_by_description(self, value, as_json:bool=False,
+                                     fuzzy:bool=True, thresh=0.85,
+                                     ignore_case:bool=True):
         query = Query(self.db)
         query.value_contains_token('description', value,
                                    fuzzy, thresh, ignore_case)
@@ -203,8 +203,8 @@ class AbstractAppstore:
             return query.result
         return [SkillEntry.from_json(s, False) for s in results]
 
-    def search_skills(self, query, as_json=False, fuzzy=True, thresh=0.85,
-                      ignore_case=True):
+    def search_skills(self, query:str, as_json:bool=False, fuzzy:bool=True,
+                      thresh:float=0.85, ignore_case:bool=True):
         # check for exact url matches
         url_skills = self.search_skills_by_url(query, as_json)
         if url_skills:

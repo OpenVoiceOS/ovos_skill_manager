@@ -45,7 +45,7 @@ def get_mycroft_marketplace_skill_urls_from_submodules(branch=None):
         yield l.split("url = ")[-1].strip()
 
 
-def get_mycroft_marketplace_skills(branch=None, parse_github=False,
+def get_mycroft_marketplace_skills(branch:str=None, parse_github:bool=False,
                                    skiplist=None):
     skiplist = skiplist or []
     data = get_marketplace_json(branch)

@@ -31,7 +31,7 @@ class GithubAPI(str, Enum):
     REPO_ZIP = REPO + '/zipball/{branch}'
 
 
-def api_zip_url_from_github_url(url, branch=None, token=None):
+def api_zip_url_from_github_url(url:str, branch:str=None, token:str=None):
     # specific file
     try:
         url = blob2raw(url)
@@ -51,7 +51,7 @@ def api_zip_url_from_github_url(url, branch=None, token=None):
 
 
 # Github API methods
-def get_repo_data_from_github_api(url, branch=None):
+def get_repo_data_from_github_api(url:str, branch:str=None):
     author, repo = author_repo_from_github_url(url)
     url = GithubAPI.REPO.format(owner=author, repo=repo)
     try:
@@ -63,7 +63,7 @@ def get_repo_data_from_github_api(url, branch=None):
     return data
 
 
-def get_license_data_from_github_api(url, branch=None):
+def get_license_data_from_github_api(url:str, branch:str=None):
     author, repo = author_repo_from_github_url(url)
     url = GithubAPI.REPO_LICENSE.format(owner=author, repo=repo)
     try:
@@ -75,7 +75,7 @@ def get_license_data_from_github_api(url, branch=None):
     return data
 
 
-def get_repo_releases_from_github_api(url, branch=None):
+def get_repo_releases_from_github_api(url:str, branch:str=None):
     try:
         author, repo = author_repo_from_github_url(url)
         url = GithubAPI.REPO_RELEASES.format(owner=author, repo=repo)
@@ -97,7 +97,7 @@ def get_repo_releases_from_github_api(url, branch=None):
 
 
 # url getters
-def get_license_url_from_github_api(url, branch=None):
+def get_license_url_from_github_api(url:str, branch:str=None):
     try:
         data = get_license_data_from_github_api(url, branch)
         return data["download_url"]
@@ -116,7 +116,7 @@ def get_license_url_from_github_api(url, branch=None):
 
 
 # data getters
-def get_main_branch_from_github_api(url, branch=None):
+def get_main_branch_from_github_api(url:str, branch:str=None):
     try:
         # implicit in url
         return get_branch_from_github_url(url)
@@ -133,11 +133,11 @@ def get_main_branch_from_github_api(url, branch=None):
         raise GithubAPIInvalidBranch(str(e))
 
 
-def get_latest_release_from_api(url, branch=None):
+def get_latest_release_from_api(url:str, branch:str=None):
     return get_repo_releases_from_github_api(url)[0]
 
 
-def get_branch_from_latest_release_github_api(url, branch=None):
+def get_branch_from_latest_release_github_api(url:str, branch:str=None):
     try:
         return get_latest_release_from_api(url)["name"]
     except IndexError:
@@ -146,7 +146,7 @@ def get_branch_from_latest_release_github_api(url, branch=None):
         raise GithubAPIRateLimited
 
 
-def get_file_from_github_api(url, filepath, branch=None):
+def get_file_from_github_api(url:str, filepath:str, branch:str=None):
     author, repo = author_repo_from_github_url(url)
     branch = branch or get_main_branch_from_github_api(url)
     url = GithubAPI.REPO_FILE.format(owner=author, repo=repo, file=filepath)
@@ -158,7 +158,7 @@ def get_file_from_github_api(url, filepath, branch=None):
     raise GithubAPIFileNotFound
 
 
-def get_readme_url_from_github_api(url, branch=None):
+def get_readme_url_from_github_api(url:str, branch:str=None):
     author, repo = author_repo_from_github_url(url)
     default_url = GithubAPI.REPO_README.format(owner=author, repo=repo)
     try:
@@ -181,7 +181,7 @@ def get_readme_url_from_github_api(url, branch=None):
     raise GithubAPIReadmeNotFound
 
 
-def get_readme_from_github_api(url, branch=None):
+def get_readme_from_github_api(url:str, branch:str=None):
     author, repo = author_repo_from_github_url(url)
     default_url = GithubAPI.REPO_README.format(owner=author, repo=repo)
     try:
@@ -215,7 +215,7 @@ def get_readme_from_github_api(url, branch=None):
     raise GithubAPIReadmeNotFound
 
 
-def get_license_type_from_github_api(url, branch=None):
+def get_license_type_from_github_api(url:str, branch:str=None):
     try:
         data = get_repo_data_from_github_api(url, branch)
         if "API rate limit exceeded" in data.get("message", ""):
@@ -227,7 +227,7 @@ def get_license_type_from_github_api(url, branch=None):
     return parse_license_type(text)
 
 
-def get_license_from_github_api(url, branch=None):
+def get_license_from_github_api(url:str, branch:str=None):
     try:
         data = get_license_data_from_github_api(url, branch)
         if "API rate limit exceeded" in data.get("message", ""):
@@ -250,7 +250,7 @@ def get_license_from_github_api(url, branch=None):
     raise GithubAPILicenseNotFound
 
 
-def get_requirements_from_github_api(url, branch=None):
+def get_requirements_from_github_api(url:str, branch:str=None):
     author, repo = author_repo_from_github_url(url)
     content = None
     for dst in GITHUB_REQUIREMENTS_FILES:
@@ -271,7 +271,7 @@ def get_requirements_from_github_api(url, branch=None):
             if t.strip() and not t.strip().startswith("#")]
 
 
-def get_skill_requirements_from_github_api(url, branch=None):
+def get_skill_requirements_from_github_api(url:str, branch:str=None):
     author, repo = author_repo_from_github_url(url)
     content = None
     for dst in GITHUB_SKILL_REQUIREMENTS_FILES:
@@ -292,7 +292,7 @@ def get_skill_requirements_from_github_api(url, branch=None):
             if t.strip() and not t.strip().startswith("#")]
 
 
-def get_manifest_from_github_api(url, branch=None):
+def get_manifest_from_github_api(url:str, branch:str=None):
     author, repo = author_repo_from_github_url(url)
     content = None
     for dst in GITHUB_MANIFEST_FILES:
@@ -312,7 +312,7 @@ def get_manifest_from_github_api(url, branch=None):
     return validate_manifest(content)
 
 
-def get_json_url_from_github_api(url, branch=None):
+def get_json_url_from_github_api(url:str, branch=None):
     author, repo = author_repo_from_github_url(url)
     for dst in GITHUB_JSON_FILES:
         try:
@@ -326,7 +326,7 @@ def get_json_url_from_github_api(url, branch=None):
     raise GithubAPIFileNotFound
 
 
-def get_skill_json_from_github_api(url, branch=None):
+def get_skill_json_from_github_api(url:str, branch:str=None):
     author, repo = author_repo_from_github_url(url)
     for dst in GITHUB_JSON_FILES:
         try:
@@ -346,7 +346,7 @@ def get_skill_json_from_github_api(url, branch=None):
     raise GithubAPIFileNotFound
 
 
-def get_desktop_url_from_github_api(url, branch=None):
+def get_desktop_url_from_github_api(url:str, branch:str=None):
     author, repo = author_repo_from_github_url(url)
     for dst in GITHUB_DESKTOP_FILES:
         try:
@@ -360,7 +360,7 @@ def get_desktop_url_from_github_api(url, branch=None):
     raise GithubAPIFileNotFound
 
 
-def get_desktop_from_github_api(url, branch=None):
+def get_desktop_from_github_api(url:str, branch:str=None):
     author, repo = author_repo_from_github_url(url)
     for dst in GITHUB_DESKTOP_FILES:
         try:
@@ -378,23 +378,23 @@ def get_desktop_from_github_api(url, branch=None):
     raise GithubAPIFileNotFound
 
 
-def get_desktop_json_from_github_api(url, branch=None):
+def get_desktop_json_from_github_api(url:str, branch:str=None):
     desktop = get_desktop_from_github_api(url, branch)
     return desktop_to_json(desktop)
 
 
 # data parsers
-def get_readme_json_from_api(url, branch=None):
+def get_readme_json_from_api(url:str, branch:str=None):
     readme = get_readme_from_github_api(url, branch)
     return readme_to_json(readme)
 
 
-def get_desktop_json_from_api(url, branch=None):
+def get_desktop_json_from_api(url:str, branch:str=None):
     desktop = get_desktop_from_github_api(url, branch)
     return desktop_to_json(desktop)
 
 
-def get_requirements_json_from_github_api(url, branch=None):
+def get_requirements_json_from_github_api(url:str, branch:str=None):
     data = {"python": [], "system": {}, "skill": []}
     try:
         manif = get_manifest_from_github_api(url, branch)
@@ -415,7 +415,7 @@ def get_requirements_json_from_github_api(url, branch=None):
     return data
 
 
-def get_branch_from_skill_json_github_api(url, branch=None):
+def get_branch_from_skill_json_github_api(url:str, branch:str=None):
     try:
         json_data = get_skill_json_from_github_api(url, branch)
         return json_data.get("branch") or branch
@@ -423,7 +423,7 @@ def get_branch_from_skill_json_github_api(url, branch=None):
         return branch
 
 
-def get_skill_from_api(url, branch=None, strict=False):
+def get_skill_from_api(url:str, branch:str=None, strict:bool=False):
     data = {}
 
     # extract branch from .json, should branch take precedence?
@@ -520,7 +520,7 @@ def get_skill_from_api(url, branch=None, strict=False):
     return data
 
 
-def get_icon_url_from_github_api(url, branch=None):
+def get_icon_url_from_github_api(url:str, branch:str=None):
     author, repo = author_repo_from_github_url(url)
     for dst in GITHUB_ICON_FILES:
         try:
@@ -534,7 +534,7 @@ def get_icon_url_from_github_api(url, branch=None):
     raise GithubAPIFileNotFound
 
 
-def get_logo_url_from_github_api(url, branch=None):
+def get_logo_url_from_github_api(url:str, branch:str=None):
     author, repo = author_repo_from_github_url(url)
     for dst in GITHUB_LOGO_FILES:
         try:
@@ -548,7 +548,7 @@ def get_logo_url_from_github_api(url, branch=None):
     raise GithubAPIFileNotFound
 
 
-def get_android_url_from_github_api(url, branch=None):
+def get_android_url_from_github_api(url:str, branch:str=None):
     for dst in GITHUB_ANDROID_FILES:
         try:
             data = get_file_from_github_api(url, dst, branch)
@@ -561,7 +561,7 @@ def get_android_url_from_github_api(url, branch=None):
     raise GithubAPIFileNotFound
 
 
-def get_android_json_from_github_api(url, branch=None):
+def get_android_json_from_github_api(url:str, branch:str=None):
     for dst in GITHUB_ANDROID_FILES:
         try:
             data = get_file_from_github_api(url, dst, branch)

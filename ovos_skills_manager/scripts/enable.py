@@ -4,7 +4,7 @@ from ovos_skills_manager import OVOSSkillsManager
 APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "andlo", "neon", "all"]
 
 
-def enable(appstore):
+def enable(appstore: str):
     osm = OVOSSkillsManager()
     original = osm.get_active_appstores()
     click.echo("Currently active appstores: " + ", ".join(original))
@@ -27,6 +27,3 @@ def enable(appstore):
     else:
         click.echo("No new appstores to enable")
 
-
-if __name__ == '__main__':
-    enable()

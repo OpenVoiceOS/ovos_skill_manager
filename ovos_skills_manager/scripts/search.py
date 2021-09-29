@@ -7,7 +7,7 @@ SEARCH_OPTIONS = ['all', 'name', 'url', 'category', 'author', 'tag',
 APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "andlo", "neon", "default", "all"]
 
 
-def search_skill(method, query, fuzzy, no_ignore_case, thresh, appstore):
+def search_skill(method: str, query: str, fuzzy: bool, no_ignore_case: bool, thresh: float, appstore: str):
     osm = OVOSSkillsManager()
     set_github_token(osm.config["appstores"].get(appstore, {}).get("auth_token"))
 
@@ -48,7 +48,7 @@ def search_skill(method, query, fuzzy, no_ignore_case, thresh, appstore):
     return skills
 
 
-def search(method, query, fuzzy, no_ignore_case, thresh, appstore):
+def search(method: str, query: str, fuzzy: bool, no_ignore_case: bool, thresh: float, appstore: str):
     skills = search_skill(method, query, fuzzy, no_ignore_case,
                           thresh, appstore)
 
@@ -57,7 +57,3 @@ def search(method, query, fuzzy, no_ignore_case, thresh, appstore):
     else:
         for s in skills:
             click.echo(s)
-
-
-if __name__ == '__main__':
-    search()

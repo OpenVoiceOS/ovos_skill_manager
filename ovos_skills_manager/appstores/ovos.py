@@ -7,7 +7,7 @@ from os import walk
 import json
 
 
-def get_ovos_skills(parse_github=False, skiplist=None):
+def get_ovos_skills(parse_github:bool=False, skiplist=None):
     skiplist = skiplist or []
     path = join(gettempdir(), "ovos")
     dl_url = "https://github.com/OpenVoiceOS/OVOS-skills-store/archive/main.zip"

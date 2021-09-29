@@ -5,7 +5,7 @@ from ovos_skills_manager import OVOSSkillsManager
 APPSTORE_OPTIONS = ["ovos", "mycroft", "pling", "neon", "andlo"]
 
 
-def priority(appstore, priority):
+def priority(appstore: str, priority: int):
     osm = OVOSSkillsManager()
     osm.set_appstore_priority(appstore, priority)
     prompt = "Appstore priorities:\n"
@@ -15,7 +15,3 @@ def priority(appstore, priority):
     click.confirm('Save changes?', abort=True)
     osm.config.store()
     click.echo("changes saved!")
-
-
-if __name__ == '__main__':
-    priority()

@@ -6,7 +6,7 @@ import base64
 import json
 
 
-def get_neon_skills_from_api(parse_github=False, skiplist=None):
+def get_neon_skills_from_api(parse_github:bool=False, skiplist=None):
     skiplist = skiplist or []
     skills_url = "https://api.github.com/repos/NeonGeckoCom/neon-skills-submodules/contents/skill-metadata.json"
     skill_json = requests.get(skills_url).json()
@@ -27,7 +27,7 @@ def get_neon_skills_from_api(parse_github=False, skiplist=None):
                                    parse_github=parse_github)
 
 
-def get_neon_skills(parse_github=False, skiplist=None):
+def get_neon_skills(parse_github:bool=False, skiplist=None):
     skiplist = skiplist or []
     skills_url = "https://raw.githubusercontent.com/NeonGeckoCom/neon-skills-submodules/master/skill-metadata.json"
     skill_json = requests.get(skills_url).json()

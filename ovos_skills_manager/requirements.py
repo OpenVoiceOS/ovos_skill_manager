@@ -3,6 +3,7 @@ from os.path import exists, join, dirname
 import os
 import sys
 from subprocess import PIPE, Popen
+from typing import Optional, Union
 from pako import PakoManager
 from ovos_skills_manager.exceptions import PipException, \
     SkillRequirementsException, InvalidManifest
@@ -15,7 +16,7 @@ DEFAULT_CONSTRAINTS = '/etc/mycroft/constraints.txt'
 PIP_LOCK = ComboLock(join(gettempdir(), "ovos_pip.lock"))
 
 
-def pip_install(packages, constraints=None, print_logs=False):
+def pip_install(packages:list, constraints:Optional[str]=None, print_logs:bool=False):
     if not len(packages):
         return False
     # Use constraints to limit the installed versions
@@ -56,7 +57,7 @@ def pip_install(packages, constraints=None, print_logs=False):
     return True
 
 
-def install_system_deps(manifest, overrides=None):
+def install_system_deps(manifest:dict, overrides:Optional[dict]=None):
     overrides = overrides or {
         exe: (packages or '').split()
         for exe, packages in manifest.items()
@@ -71,7 +72,7 @@ def install_system_deps(manifest, overrides=None):
         raise SkillRequirementsException(str(e))
 
 
-def validate_manifest(content):
+def validate_manifest(content:Union[str,dict]):
     if isinstance(content, str):
         data = yaml.safe_load(content)
     else:

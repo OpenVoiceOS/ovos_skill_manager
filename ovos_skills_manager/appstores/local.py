@@ -15,7 +15,7 @@ from os import listdir, walk
 from os.path import join, isdir, isfile
 
 
-def get_local_skills(parse_github=False, skiplist=None):
+def get_local_skills(parse_github:bool=False, skiplist=None):
     skills = get_skills_folder()
     skiplist = skiplist or []
     folders = listdir(skills)

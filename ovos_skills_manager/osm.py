@@ -7,6 +7,7 @@ from ovos_utils.messagebus import Message
 from ovos_utils.json_helper import merge_dict
 
 from ovos_skills_manager import SkillEntry
+from ovos_skills_manager.appstores import AbstractAppstore
 from ovos_skills_manager.appstores.andlo import AndloSkillList
 from ovos_skills_manager.appstores.mycroft_marketplace import \
     MycroftMarketplace
@@ -34,7 +35,7 @@ class OVOSSkillsManager:
         if self.bus:
             self.bus.emit(Message(event_name, event_data))
 
-    def get_active_appstores(self, bootstrap=False):
+    def get_active_appstores(self, bootstrap:bool=False):
         stores = {}
         for appstore_id in self.config["appstores"]:
             if self.config["appstores"][appstore_id]["active"]:
@@ -46,7 +47,7 @@ class OVOSSkillsManager:
                                                         bootstrap=bootstrap)
         return stores
 
-    def get_appstore(self, appstore_id, bootstrap=True):
+    def get_appstore(self, appstore_id: str, bootstrap:bool=True):
         if self.config["appstores"][appstore_id]["active"]:
             parse_github = self.config["appstores"][appstore_id]["parse_github"]
             store = self.name_to_appstore(appstore_id)
@@ -58,7 +59,7 @@ class OVOSSkillsManager:
         return None
 
     @staticmethod
-    def name_to_appstore(name):
+    def name_to_appstore(name: str) -> AbstractAppstore:
         if name in ["pling", "bigscreen"]:
             return Pling
         elif name in ["mycroft", "mycroft_marketplace"]:
@@ -75,14 +76,14 @@ class OVOSSkillsManager:
         else:
             raise UnknownAppstore
 
-    def clear_cache(self, appstore_id=None):
+    def clear_cache(self, appstore_id:str=None):
         if appstore_id:
             self.get_appstore(appstore_id).clear_cache()
         else:
             for appstore in self.appstores:
                 appstore.clear_cache()
 
-    def validate_appstore_name(self, appstore):
+    def validate_appstore_name(self, appstore: str):
         if appstore in ["pling", "bigscreen"]:
             appstore = "pling"
         elif appstore in ["mycroft", "mycroft_marketplace"]:
@@ -100,28 +101,28 @@ class OVOSSkillsManager:
             raise UnknownAppstore
         return appstore
 
-    def enable_appstore(self, appstore_id):
+    def enable_appstore(self, appstore_id: str):
         appstore_id = self.validate_appstore_name(appstore_id)
         self.config["appstores"][appstore_id]["active"] = True
         self.emit("osm.store.enabled", {"store": appstore_id})
 
-    def set_appstore_priority(self, appstore_id, priority):
+    def set_appstore_priority(self, appstore_id: str, priority: int):
         appstore_id = self.validate_appstore_name(appstore_id)
         self.config["appstores"][appstore_id]["priority"] = priority
         self.emit("osm.store.priority.change", {"store": appstore_id,
                                                 "priority": priority})
 
-    def set_appstore_auth_token(self, appstore_id, token):
+    def set_appstore_auth_token(self, appstore_id: str, token: str):
         appstore_id = self.validate_appstore_name(appstore_id)
         self.config["appstores"][appstore_id]["auth_token"] = token
         self.emit("osm.store.token.change", {"store": appstore_id})
 
-    def disable_appstore(self, appstore_id):
+    def disable_appstore(self, appstore_id: str):
         appstore_id = self.validate_appstore_name(appstore_id)
         self.config["appstores"][appstore_id]["active"] = False
         self.emit("osm.store.disabled", {"store": appstore_id})
 
-    def sync_appstores(self, merge=False, new_only=False, threaded=False):
+    def sync_appstores(self, merge:bool=False, new_only:bool=False, threaded:bool=False):
         stores = self.get_active_appstores()
         self.emit("osm.sync.start")
         for appstore_id in stores:
@@ -153,8 +154,8 @@ class OVOSSkillsManager:
             stores.append((store, priority))
         return [s[0] for s in sorted(stores, key=lambda k: k[1])]
 
-    def search_skills(self, name, as_json=False, fuzzy=True, thresh=0.85,
-                      ignore_case=True):
+    def search_skills(self, name: str, as_json:bool=False, fuzzy:bool=True, thresh:float=0.85,
+                      ignore_case:bool=True):
         self.emit("osm.search.start",
                   {"query": name, "thresh": thresh, "fuzzy": fuzzy,
                    "ignore_case": ignore_case, "search_type": "generic"})
@@ -173,8 +174,8 @@ class OVOSSkillsManager:
                   {"query": name, "thresh": thresh, "fuzzy": fuzzy,
                    "ignore_case": ignore_case, "search_type": "generic"})
 
-    def search_skills_by_id(self, skill_id, as_json=False, fuzzy=False,
-                            thresh=0.85, ignore_case=True):
+    def search_skills_by_id(self, skill_id: str, as_json:bool=False, fuzzy:bool=False,
+                            thresh:float=0.85, ignore_case:bool=True):
         """ skill_id is repo.author , case insensitive,
         searchs by name and filters results by author """
         self.emit("osm.search.start",
@@ -197,8 +198,8 @@ class OVOSSkillsManager:
                   {"query": skill_id, "thresh": thresh, "fuzzy": fuzzy,
                    "ignore_case": ignore_case, "search_type": "id"})
 
-    def search_skills_by_name(self, name, as_json=False,
-                              fuzzy=True, thresh=0.85, ignore_case=True):
+    def search_skills_by_name(self, name:str, as_json:bool=False,
+                              fuzzy:bool=True, thresh:float=0.85, ignore_case:bool=True):
         self.emit("osm.search.start",
                   {"query": name, "thresh": thresh, "fuzzy": fuzzy,
                    "ignore_case": ignore_case, "search_type": "name"})
@@ -217,7 +218,7 @@ class OVOSSkillsManager:
                   {"query": name, "thresh": thresh, "fuzzy": fuzzy,
                    "ignore_case": ignore_case, "search_type": "name"})
 
-    def search_skills_by_url(self, url, as_json=False):
+    def search_skills_by_url(self, url:str, as_json:bool=False):
         self.emit("osm.search.start",
                   {"query": url, "search_type": "url"})
         for store in self.appstores:
@@ -231,8 +232,8 @@ class OVOSSkillsManager:
         self.emit("osm.search.finish",
                   {"query": url, "search_type": "url"})
 
-    def search_skills_by_category(self, category, as_json=False,
-                                  fuzzy=True, thresh=0.85, ignore_case=True):
+    def search_skills_by_category(self, category:str, as_json:bool=False,
+                                  fuzzy:bool=True, thresh:float=0.85, ignore_case:bool=True):
         self.emit("osm.search.start",
                   {"query": category, "thresh": thresh, "fuzzy": fuzzy,
                    "ignore_case": ignore_case, "search_type": "category"})
@@ -252,8 +253,8 @@ class OVOSSkillsManager:
                   {"query": category, "thresh": thresh, "fuzzy": fuzzy,
                    "ignore_case": ignore_case, "search_type": "category"})
 
-    def search_skills_by_author(self, authorname, as_json=False,
-                                fuzzy=True, thresh=0.85, ignore_case=True):
+    def search_skills_by_author(self, authorname:str, as_json:bool=False,
+                                fuzzy:bool=True, thresh:float=0.85, ignore_case:bool=True):
         self.emit("osm.search.start",
                   {"query": authorname, "thresh": thresh, "fuzzy": fuzzy,
                    "ignore_case": ignore_case, "search_type": "author"})
@@ -273,8 +274,8 @@ class OVOSSkillsManager:
                   {"query": authorname, "thresh": thresh, "fuzzy": fuzzy,
                    "ignore_case": ignore_case, "search_type": "author"})
 
-    def search_skills_by_tag(self, tag, as_json=False,
-                             fuzzy=True, thresh=0.85, ignore_case=True):
+    def search_skills_by_tag(self, tag:str, as_json:bool=False,
+                             fuzzy:bool=True, thresh:float=0.85, ignore_case:bool=True):
         self.emit("osm.search.start",
                   {"query": tag, "thresh": thresh, "fuzzy": fuzzy,
                    "ignore_case": ignore_case, "search_type": "tag"})
@@ -293,9 +294,9 @@ class OVOSSkillsManager:
                   {"query": tag, "thresh": thresh, "fuzzy": fuzzy,
                    "ignore_case": ignore_case, "search_type": "tag"})
 
-    def search_skills_by_description(self, value, as_json=False,
-                                     fuzzy=True, thresh=0.85,
-                                     ignore_case=True):
+    def search_skills_by_description(self, value: str, as_json:bool=False,
+                                     fuzzy:bool=True, thresh:float=0.85,
+                                     ignore_case:bool=True):
         self.emit("osm.search.start",
                   {"query": value, "thresh": thresh, "fuzzy": fuzzy,
                    "ignore_case": ignore_case, "search_type": "description"})
@@ -344,7 +345,7 @@ class OVOSSkillsManager:
                                      "requirements": requirements,
                                      "authorname": json.get("authorname")}, False)
 
-    def install_skill_from_url(self, url: str, skill_dir: str = None):
+    def install_skill_from_url(self, url: str, skill_dir:str=None):
         """
         Installs a Skill from the passed url
         :param url: Git url of skill to install (including optional branch spec)

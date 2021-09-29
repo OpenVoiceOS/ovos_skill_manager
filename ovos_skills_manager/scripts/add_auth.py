@@ -3,7 +3,7 @@ from ovos_skills_manager import OVOSSkillsManager
 
 APPSTORE_OPTIONS = ["neon"]
 
-def add_auth(appstore, token):
+def add_auth(appstore: str, token: str):
     osm = OVOSSkillsManager()
     osm.set_appstore_auth_token(appstore, token)
     prompt = f"Appstore token:\n{token}"
@@ -12,6 +12,3 @@ def add_auth(appstore, token):
     osm.config.store()
     click.echo("changes saved!")
 
-
-if __name__ == '__main__':
-    add_auth()

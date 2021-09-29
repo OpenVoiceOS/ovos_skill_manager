@@ -3,6 +3,7 @@ import shutil
 
 from os import mkdir
 from os.path import isfile, exists, expanduser, join, isdir
+from typing import Optional, Union
 
 from ovos_skills_manager.session import SESSION as requests
 from ovos_skills_manager.exceptions import GithubInvalidUrl, \
@@ -51,7 +52,7 @@ class SkillEntry:
 
     # constructors
     @staticmethod
-    def from_json(data, parse_github=True):
+    def from_json(data: Union[str, dict], parse_github:bool=True):
         if isinstance(data, str):
             if data.startswith("http"):
                 url = data
@@ -89,7 +90,7 @@ class SkillEntry:
         return SkillEntry(data)
 
     @staticmethod
-    def from_github_url(url, branch=None, parse_github=True):
+    def from_github_url(url, branch:str=None, parse_github:bool=True):
         if not branch:
             try:
                 branch = get_branch_from_github_url(url)
@@ -250,7 +251,7 @@ class SkillEntry:
     def make_priority(self):
         make_priority_skill(self.skill_folder)
 
-    def download(self, folder=None):
+    def download(self, folder:str=None) -> bool:
         folder = folder or get_skills_folder()
         if self.download_url.endswith(".tar.gz"):
             ext = "tar.gz"
@@ -267,8 +268,11 @@ class SkillEntry:
         return install_skill(url, folder, file, session=requests,
                              skill_folder_name=skill_dirname)
 
-    def install(self, folder=None, default_branch="master", platform=None,
-                update=True):
+    def install(self,
+                folder:Optional[str]=None,
+                default_branch:str="master",
+                platform:Optional[str]=None,
+                update:bool=True) -> bool:
         if not folder:
             folder = get_skills_folder()
         if not update and self.is_previously_installed(folder):
@@ -342,7 +346,10 @@ class SkillEntry:
             '''
         return updated
 
-    def update(self, folder=None, default_branch="master", platform=None):
+    def update(self,
+               folder:Optional[str]=None,
+               default_branch:str="master",
+               platform:Optional[str]=None) -> bool:
         # convenience method
         return self.install(folder, default_branch, platform, update=True)
 

@@ -28,7 +28,7 @@ from ovos_skills_manager.scripts import \
     help="See also: osm COMMAND --help",
     no_args_is_help=True, invoke_without_command=True)
 @click.option('--version', help='Print current OSM version and exit.', is_flag=True, required=False)
-def osm_commands(version=False):
+def osm_commands(version:bool=False):
     if version:
         _version.echo_version()
 
