@@ -106,7 +106,7 @@ class SkillEntry:
         return self.json.get("url")
 
     @property
-    def appstore(self)  :
+    def appstore(self):
         return self.json.get("appstore") or "unknown"
 
     @property
@@ -118,6 +118,7 @@ class SkillEntry:
 
     @property
     def skill_short_description(self):
+        # TODO consider using OpenJarbas/quebra_frases or another chunker
         return self.json.get("short_description") or \
                self.skill_description.split("\n")[0]
 
