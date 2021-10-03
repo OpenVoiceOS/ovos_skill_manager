@@ -124,11 +124,8 @@ class SkillEntry:
 
     @property
     def skill_description(self):
-        return_val = self.json.get("description")
-        if self.url and not return_val:
-            author, repo = author_repo_from_github_url(self.url)
-            return_val = f"{repo} by {author}"
-        return return_val
+        return self.json.get("description") or ("{1} by {0}".format(
+                *author_repo_from_github_url(self.url)) if self.url else "No description")
 
     @property
     def skill_folder(self):
