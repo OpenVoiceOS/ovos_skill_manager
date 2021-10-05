@@ -111,20 +111,29 @@ class SkillEntry:
 
     @property
     def skill_name(self):
-        return self.json.get("skillname") or self.json.get("name")
+        return_val = self.json.get("skillname") or self.json.get("name")
+        if self.url and not return_val:
+            _, return_val = author_repo_from_github_url(self.url)
+        return return_val
 
     @property
     def skill_short_description(self):
+        # TODO consider using OpenJarbas/quebra_frases or another chunker
         return self.json.get("short_description") or \
-               self.skill_description.split(".")[0].split("\n")[0]
+               self.skill_description.split("\n")[0]
 
     @property
     def skill_description(self):
-        return self.json.get("description") or self.skill_name
+        return self.json.get("description") or ("{1} by {0}".format(
+                *author_repo_from_github_url(self.url)) if self.url else "No description")
 
     @property
     def skill_folder(self):
-        return self.json.get("foldername") or self.url.split("/")[-1] if self.url and "/" in self.url else ""
+        return_val = self.json.get("foldername")
+        if self.url and not return_val:
+            author, repo = author_repo_from_github_url(self.url)
+            return_val = f"{repo}.{author}"
+        return return_val
 
     @property
     def skill_category(self):
