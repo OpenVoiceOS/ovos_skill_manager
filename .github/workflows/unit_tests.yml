@@ -28,40 +28,45 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          pytest tests/test_github_branch_parsing.py
+          pytest --cov=ovos_skills_manager --cov-report xml tests/test_github_branch_parsing.py
 
       - name: Test Github Utils
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          pytest tests/test_github_utils.py
+          pytest --cov-append --cov-report xml --cov=ovos_skills_manager tests/test_github_utils.py
 
       - name: Test License Parsing
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          pytest tests/test_licenses.py
+          pytest --cov-append --cov-report xml --cov=ovos_skills_manager tests/test_licenses.py
 
       - name: Test Skill Entry
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          pytest tests/test_skill_entry.py
+          pytest --cov-append --cov-report xml --cov=ovos_skills_manager tests/test_skill_entry.py
 
       - name: Test Utils
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          pytest tests/test_utils.py
+          pytest --cov-append --cov-report xml --cov=ovos_skills_manager tests/test_utils.py
 
       - name: Test Search Skill
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          pytest tests/test_search_skill.py
+          pytest --cov-append --cov-report xml --cov=ovos_skills_manager tests/test_search_skill.py
 
       - name: Test OSM
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          pytest tests/test_osm.py
+          pytest --cov-append --cov-report xml --cov=ovos_skills_manager tests/test_osm.py
+      - name: Upload coverage
+        env:
+          CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
+        uses:
+          codecov/codecov-action@v2
