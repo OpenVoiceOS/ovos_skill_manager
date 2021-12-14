@@ -215,6 +215,8 @@ def get_requirements_json(url, branch=None):
     try:
         req = get_requirements(url, branch)
         data["python"] = list(set(data["python"] + req))
+    except GithubFileNotFound:
+        LOG.debug("No python requirements file available")
     except GithubSkillEntryError:
         LOG.error("Error reading from requirements files!")
     try:
