@@ -205,6 +205,8 @@ def get_requirements_json(url, branch=None):
     try:
         manif = get_manifest(url, branch)
         data = manif['dependencies'] or {}
+    except GithubFileNotFound:
+        LOG.debug("No manifest file available")
     except GithubSkillEntryError:
         LOG.error("Error reading from manifest!")
     data["python"] = data.get("python") or []
@@ -218,6 +220,8 @@ def get_requirements_json(url, branch=None):
     try:
         skill_req = get_skill_requirements(url, branch)
         data["skill"] = list(set(data["skill"] + skill_req))
+    except GithubFileNotFound:
+        LOG.debug("No skill requirements file available")
     except GithubSkillEntryError:
         LOG.error("Error reading skills requirements!")
     return data
