@@ -22,7 +22,7 @@ setup(
                       "json_database>=0.5.6",
                       "requests",
                       "requests-cache",
-                      "ovos_utils>=0.0.7",
+                      "ovos_utils>=0.0.7,!=0.0.12",
                       "pako>=0.2.3",
                       "PyYaml",
                       "bs4",
