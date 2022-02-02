@@ -1,8 +1,10 @@
 import os
 import sys
 import unittest
+from os.path import basename
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
 
 class TestSkillEntryFromGit(unittest.TestCase):
     @classmethod
@@ -158,6 +160,64 @@ class TestSkillEntryFromJson(unittest.TestCase):
         self.assertIsInstance(entry.json, dict)
         self.assertIsInstance(repr(entry), str)
         self.assertEqual(entry, SkillEntry({}))
+
+
+class TestSkillEntryFromDirectory(unittest.TestCase):
+    def test_skill_entry_from_directory(self):
+        from ovos_skills_manager.skill_entry import SkillEntry
+        test_dir = os.path.join(os.path.dirname(__file__), "skill_dirs")
+        complete_dir = os.path.join(test_dir, "tskill-osm_parsing-complete")
+        minimal_dir = os.path.join(test_dir, "tskill-osm_parsing-minimal")
+        no_git_dir = os.path.join(test_dir, "tskill-osm_parsing-no_git")
+        no_json_dir = os.path.join(test_dir, "tskill-osm_parsing-no_json")
+
+
+        with self.assertRaises(ValueError):
+            SkillEntry.from_directory(__file__)
+        with self.assertRaises(ValueError):
+            SkillEntry.from_directory("/invalid")
+
+        for test_skill_dir in (complete_dir, minimal_dir, no_git_dir, no_json_dir):
+            skill = SkillEntry.from_directory(test_skill_dir)
+            self.assertIsInstance(skill, SkillEntry)
+            self.assertIsInstance(skill.uuid, str)
+            self.assertEqual(skill.appstore, "InstalledSkills")
+            self.assertIsInstance(skill.skill_name, str)
+            self.assertEqual(skill.skill_folder, basename(test_skill_dir))
+            self.assertIsInstance(skill.skill_examples, list)
+            self.assertIsInstance(skill.requirements, dict)
+            self.assertIsInstance(skill.url, str)
+
+            if test_skill_dir == complete_dir:
+                self.assertTrue(skill.url.startswith("https://github.com"))
+                self.assertEqual(set(skill.requirements["python"]),
+                                 {"text_requirements",
+                                  "manifest_requirement",
+                                  "json-requirements"})
+                self.assertIsInstance(skill.requirements["system"], dict)
+                self.assertEqual(set(skill.requirements["skill"]),
+                                 {"manifest-skill",
+                                  "json-skill"})
+            elif test_skill_dir == minimal_dir:
+                self.assertEqual(set(skill.requirements["python"]),
+                                 {"text_requirements"})
+                self.assertIsInstance(skill.requirements["system"], dict)
+            elif test_skill_dir == no_git_dir:
+                self.assertEqual(set(skill.requirements["python"]),
+                                 {"text_requirements",
+                                  "manifest_requirement",
+                                  "json-requirements"})
+                self.assertIsInstance(skill.requirements["system"], dict)
+                self.assertEqual(set(skill.requirements["skill"]),
+                                 {"manifest-skill",
+                                  "json-skill"})
+            elif test_skill_dir == no_json_dir:
+                self.assertEqual(set(skill.requirements["python"]),
+                                 {"text_requirements",
+                                  "manifest_requirement"})
+                self.assertIsInstance(skill.requirements["system"], dict)
+                self.assertEqual(set(skill.requirements["skill"]),
+                                 {"manifest-skill"})
 
 
 if __name__ == '__main__':
