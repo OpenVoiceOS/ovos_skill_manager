@@ -15,6 +15,7 @@ from ovos_skills_manager.session import SESSION as requests
 import base64
 import json
 from enum import Enum
+from typing import Optional
 
 
 # TODO github api token from env
@@ -31,11 +32,21 @@ class GithubAPI(str, Enum):
     REPO_ZIP = REPO + '/zipball/{branch}'
 
 
-def api_zip_url_from_github_url(url:str, branch:str=None, token:str=None):
+def api_zip_url_from_github_url(url: str, branch: Optional[str] = None,
+                                token: Optional[str] = None) -> str:
+    """
+    Get an API URL to download the repository as a zip archive
+    https://docs.github.com/en/rest/reference/repos#download-a-repository-archive-zip
+    @param url: Repository URL, optionally containing a branch spec
+    @param branch: Optional branch spec, otherwise branch from `url` will be used
+    @param token: Optional GitHub token to include with request
+    @return: GitHub API URL to query for a zip archive
+    """
+    # TODO: `token` is not used?
     # specific file
     try:
         url = blob2raw(url)
-        if requests.get(url).status_code == 200:
+        if requests.get(url).ok:
             return url
     except GithubInvalidUrl:
         pass
@@ -51,7 +62,16 @@ def api_zip_url_from_github_url(url:str, branch:str=None, token:str=None):
 
 
 # Github API methods
-def get_repo_data_from_github_api(url:str, branch:str=None):
+def get_repo_data_from_github_api(url: str,
+                                  branch: Optional[str] = None) -> dict:
+    """
+    Get git data for the repository at the given URL and branch
+    https://docs.github.com/en/rest/reference/repos#get-a-repository
+    @param url: Repository URL
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: dict repository data
+    """
+    # TODO: Handle branch spec in URL?
     author, repo = author_repo_from_github_url(url)
     url = GithubAPI.REPO.format(owner=author, repo=repo)
     try:
@@ -63,7 +83,15 @@ def get_repo_data_from_github_api(url:str, branch:str=None):
     return data
 
 
-def get_license_data_from_github_api(url:str, branch:str=None):
+def get_license_data_from_github_api(url: str,
+                                     branch: Optional[str] = None) -> dict:
+    """
+    Get license data for the repository at the given URL and branch
+    https://docs.github.com/en/rest/reference/licenses#get-the-license-for-a-repository
+    @param url: Repository URL
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: dict license data
+    """
     author, repo = author_repo_from_github_url(url)
     url = GithubAPI.REPO_LICENSE.format(owner=author, repo=repo)
     try:
@@ -75,7 +103,16 @@ def get_license_data_from_github_api(url:str, branch:str=None):
     return data
 
 
-def get_repo_releases_from_github_api(url:str, branch:str=None):
+def get_repo_releases_from_github_api(url: str,
+                                      branch: Optional[str] = None) -> list:
+    """
+    Get releases data for the repository at the specified URL and branch
+    https://docs.github.com/en/rest/reference/repos#list-repository-tags
+    @param url: Repository URL
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: repo tag data
+    """
+    # TODO: There is a releases API, but this uses the tags API
     try:
         author, repo = author_repo_from_github_url(url)
         url = GithubAPI.REPO_RELEASES.format(owner=author, repo=repo)
@@ -97,7 +134,14 @@ def get_repo_releases_from_github_api(url:str, branch:str=None):
 
 
 # url getters
-def get_license_url_from_github_api(url:str, branch:str=None):
+def get_license_url_from_github_api(url: str,
+                                    branch: str = None) -> str:
+    """
+    Try to get a license file url for the repository at the given url and branch
+    @param url: Repository URL
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: url to be used for downloading the repository license file
+    """
     try:
         data = get_license_data_from_github_api(url, branch)
         return data["download_url"]
@@ -116,7 +160,14 @@ def get_license_url_from_github_api(url:str, branch:str=None):
 
 
 # data getters
-def get_main_branch_from_github_api(url:str, branch:str=None):
+def get_main_branch_from_github_api(url: str, branch: str = None) -> str:
+    """
+    Determine the preferred branch for the specified URL.
+    @param url: Repository URL
+    @param branch: Optional branch spec to read skill.json from,
+    otherwise default branch will be used
+    @return: default branch name read from skill.json or latest release
+    """
     try:
         # implicit in url
         return get_branch_from_github_url(url)
@@ -133,11 +184,23 @@ def get_main_branch_from_github_api(url:str, branch:str=None):
         raise GithubAPIInvalidBranch(str(e))
 
 
-def get_latest_release_from_api(url:str, branch:str=None):
+def get_latest_release_from_api(url: str) -> dict:
+    """
+    Determine the main branch for the specified URL.
+    https://docs.github.com/en/rest/reference/repos#list-repository-tags
+    @param url: Repository URL
+    @return: data associated with latest tagged release
+    """
+    # TODO: API returns dict but raw returns str?
     return get_repo_releases_from_github_api(url)[0]
 
 
-def get_branch_from_latest_release_github_api(url:str, branch:str=None):
+def get_branch_from_latest_release_github_api(url: str) -> str:
+    """
+    Determine the branch associated with the latest GitHub Release if specified
+    @param url: Repository URL
+    @return: branch spec of latest tag
+    """
     try:
         return get_latest_release_from_api(url)["name"]
     except IndexError:
@@ -146,7 +209,16 @@ def get_branch_from_latest_release_github_api(url:str, branch:str=None):
         raise GithubAPIRateLimited
 
 
-def get_file_from_github_api(url:str, filepath:str, branch:str=None):
+def get_file_from_github_api(url: str, filepath: str,
+                             branch: Optional[str] = None) -> dict:
+    """
+    Get information for a file in a repository.
+    https://docs.github.com/en/rest/reference/repos#get-repository-content
+    @param url: Repository URL
+    @param filepath: path to a file in the repository
+    @param branch: Optional branch to query, otherwise branch from `url` will be used
+    @return: parsed API data
+    """
     author, repo = author_repo_from_github_url(url)
     branch = branch or get_main_branch_from_github_api(url)
     url = GithubAPI.REPO_FILE.format(owner=author, repo=repo, file=filepath)
@@ -158,7 +230,15 @@ def get_file_from_github_api(url:str, filepath:str, branch:str=None):
     raise GithubAPIFileNotFound
 
 
-def get_readme_url_from_github_api(url:str, branch:str=None):
+def get_readme_url_from_github_api(url: str,
+                                   branch: Optional[str] = None) -> str:
+    """
+    Get the readme file url for the specified repository
+    https://docs.github.com/en/rest/reference/repos#get-a-repository-readme
+    @param url: Repository URL
+    @param branch: Optional branch to query, otherwise default branch will be used
+    @return: url of repository README file
+    """
     author, repo = author_repo_from_github_url(url)
     default_url = GithubAPI.REPO_README.format(owner=author, repo=repo)
     try:
@@ -181,7 +261,14 @@ def get_readme_url_from_github_api(url:str, branch:str=None):
     raise GithubAPIReadmeNotFound
 
 
-def get_readme_from_github_api(url:str, branch:str=None):
+def get_readme_from_github_api(url: str,
+                               branch: Optional[str] = None) -> str:
+    """
+    Get the readme file contents for the specified repository
+    @param url: Repository URL
+    @param branch: Optional branch to query, otherwise default branch will be used
+    @return: contents of repository README file
+    """
     author, repo = author_repo_from_github_url(url)
     default_url = GithubAPI.REPO_README.format(owner=author, repo=repo)
     try:
@@ -215,7 +302,15 @@ def get_readme_from_github_api(url:str, branch:str=None):
     raise GithubAPIReadmeNotFound
 
 
-def get_license_type_from_github_api(url:str, branch:str=None):
+def get_license_type_from_github_api(url: str,
+                                     branch: Optional[str] = None) -> str:
+    """
+    Determine the License Name for the license of a given repository
+    https://docs.github.com/en/rest/reference/licenses#get-the-license-for-a-repository
+    @param url: Repository URL to query
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: License Name
+    """
     try:
         data = get_repo_data_from_github_api(url, branch)
         if "API rate limit exceeded" in data.get("message", ""):
@@ -227,7 +322,13 @@ def get_license_type_from_github_api(url:str, branch:str=None):
     return parse_license_type(text)
 
 
-def get_license_from_github_api(url:str, branch:str=None):
+def get_license_from_github_api(url: str, branch: str = None) -> str:
+    """
+    Get string contents of the license file for the specified repository
+    @param url: Repository URL to query
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: License file contents
+    """
     try:
         data = get_license_data_from_github_api(url, branch)
         if "API rate limit exceeded" in data.get("message", ""):
@@ -250,7 +351,14 @@ def get_license_from_github_api(url:str, branch:str=None):
     raise GithubAPILicenseNotFound
 
 
-def get_requirements_from_github_api(url:str, branch:str=None):
+def get_requirements_from_github_api(url: str,
+                                     branch: Optional[str] = None) -> list:
+    """
+    Get Python requirements from text files in the specified repository
+    @param url: Repository URL to query
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: List parsed python requirements
+    """
     author, repo = author_repo_from_github_url(url)
     content = None
     for dst in GITHUB_REQUIREMENTS_FILES:
@@ -271,7 +379,14 @@ def get_requirements_from_github_api(url:str, branch:str=None):
             if t.strip() and not t.strip().startswith("#")]
 
 
-def get_skill_requirements_from_github_api(url:str, branch:str=None):
+def get_skill_requirements_from_github_api(url: str,
+                                           branch: Optional[str] = None) -> list:
+    """
+    Get Skill requirements from text files in the specified repository
+    @param url: Repository URL to query
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: List parsed skill requirements
+    """
     author, repo = author_repo_from_github_url(url)
     content = None
     for dst in GITHUB_SKILL_REQUIREMENTS_FILES:
@@ -292,7 +407,14 @@ def get_skill_requirements_from_github_api(url:str, branch:str=None):
             if t.strip() and not t.strip().startswith("#")]
 
 
-def get_manifest_from_github_api(url:str, branch:str=None):
+def get_manifest_from_github_api(url: str,
+                                 branch: Optional[str] = None) -> dict:
+    """
+    Get requirements specified in the repository manifest file
+    @param url: Repository URL to query
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: dict parsed requirements
+    """
     author, repo = author_repo_from_github_url(url)
     content = None
     for dst in GITHUB_MANIFEST_FILES:
@@ -312,7 +434,14 @@ def get_manifest_from_github_api(url:str, branch:str=None):
     return validate_manifest(content)
 
 
-def get_json_url_from_github_api(url:str, branch=None):
+def get_json_url_from_github_api(url: str,
+                                 branch: Optional[str] = None) -> str:
+    """
+    Get skill.json file URL for the specified repository
+    @param url: Repository URL to query
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: URL of skill.json
+    """
     author, repo = author_repo_from_github_url(url)
     for dst in GITHUB_JSON_FILES:
         try:
@@ -326,7 +455,14 @@ def get_json_url_from_github_api(url:str, branch=None):
     raise GithubAPIFileNotFound
 
 
-def get_skill_json_from_github_api(url:str, branch:str=None):
+def get_skill_json_from_github_api(url: str,
+                                   branch: Optional[str] = None) -> dict:
+    """
+    Get skill.json file contents for the specified repository
+    @param url: Repository URL to query
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: data parsed from skill.json
+    """
     author, repo = author_repo_from_github_url(url)
     for dst in GITHUB_JSON_FILES:
         try:
@@ -346,7 +482,14 @@ def get_skill_json_from_github_api(url:str, branch:str=None):
     raise GithubAPIFileNotFound
 
 
-def get_desktop_url_from_github_api(url:str, branch:str=None):
+def get_desktop_url_from_github_api(url: str,
+                                    branch: Optional[str] = None) -> str:
+    """
+    Get skill.desktop file URL for the specified repository
+    @param url: Repository URL to query
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: URL of skill.desktop
+    """
     author, repo = author_repo_from_github_url(url)
     for dst in GITHUB_DESKTOP_FILES:
         try:
@@ -360,7 +503,14 @@ def get_desktop_url_from_github_api(url:str, branch:str=None):
     raise GithubAPIFileNotFound
 
 
-def get_desktop_from_github_api(url:str, branch:str=None):
+def get_desktop_from_github_api(url: str,
+                                branch: Optional[str] = None) -> str:
+    """
+    Get skill.desktop file contents for the specified repository
+    @param url: Repository URL to query
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: skill.desktop string contents
+    """
     author, repo = author_repo_from_github_url(url)
     for dst in GITHUB_DESKTOP_FILES:
         try:
@@ -378,23 +528,38 @@ def get_desktop_from_github_api(url:str, branch:str=None):
     raise GithubAPIFileNotFound
 
 
-def get_desktop_json_from_github_api(url:str, branch:str=None):
+def get_desktop_json_from_github_api(url: str,
+                                     branch: Optional[str] = None) -> dict:
+    """
+    Get parsed skill.desktop file contents for the specified repository
+    @param url: Repository URL to query
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: skill.desktop contents parsed into a dict
+    """
     desktop = get_desktop_from_github_api(url, branch)
     return desktop_to_json(desktop)
 
 
 # data parsers
-def get_readme_json_from_api(url:str, branch:str=None):
+def get_readme_json_from_api(url: str, branch: Optional[str] = None) -> dict:
+    """
+    Get parsed readme file contents for the specified repository
+    @param url: Repository URL to query
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: Readme contents parsed into a dict
+    """
     readme = get_readme_from_github_api(url, branch)
     return readme_to_json(readme)
 
 
-def get_desktop_json_from_api(url:str, branch:str=None):
-    desktop = get_desktop_from_github_api(url, branch)
-    return desktop_to_json(desktop)
-
-
-def get_requirements_json_from_github_api(url:str, branch:str=None):
+def get_requirements_json_from_github_api(url: str,
+                                          branch: Optional[str] = None) -> dict:
+    """
+    Get parsed requirements for the specified repository
+    @param url: Repository URL to query
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: requirements with keys: {python, system, skill}
+    """
     data = {"python": [], "system": {}, "skill": []}
     try:
         manif = get_manifest_from_github_api(url, branch)
@@ -415,7 +580,14 @@ def get_requirements_json_from_github_api(url:str, branch:str=None):
     return data
 
 
-def get_branch_from_skill_json_github_api(url:str, branch:str=None):
+def get_branch_from_skill_json_github_api(url: str,
+                                          branch: Optional[str] = None):
+    """
+    Get branch specified in skill.json file for the specified repository
+    @param url: Repository URL to query
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: branch spec from skill.json or `branch`
+    """
     try:
         json_data = get_skill_json_from_github_api(url, branch)
         return json_data.get("branch") or branch
@@ -423,7 +595,16 @@ def get_branch_from_skill_json_github_api(url:str, branch:str=None):
         return branch
 
 
-def get_skill_from_api(url:str, branch:str=None, strict:bool=False):
+def get_skill_from_api(url: str,
+                       branch: Optional[str] = None,
+                       strict: bool = False) -> dict:
+    """
+    Parse serialized `SkillEntry` data from the specified repository
+    @param url: Repository URL to query
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @param strict: If true, requires a release to be specified, even if branch passed
+    @return: data to build a `SkillEntry`
+    """
     data = {}
 
     # extract branch from .json, should branch take precedence?
@@ -439,7 +620,7 @@ def get_skill_from_api(url:str, branch:str=None, strict:bool=False):
         data["last_updated"] = api_data['updated_at']
         data["url"] = api_data["html_url"]
         data["authorname"] = api_data["owner"]["login"]
-    except GithubAPIException as e:
+    except GithubAPIException:
         LOG.error("Failed to retrieve repo data from github api")
         raise
 
@@ -449,14 +630,15 @@ def get_skill_from_api(url:str, branch:str=None, strict:bool=False):
             for r in releases:
                 if r["name"] == branch or r["commit"]["sha"] == branch:
                     data["version"] = r["name"]
-                    #data["download_url"] = r["tarball_url"]
+                    # data["download_url"] = r["tarball_url"]
                     break
         else:
             data["version"] = releases[0]["name"]
-            #data["download_url"] = releases[0]["tarball_url"]
-    except GithubAPIException as e:
+            # data["download_url"] = releases[0]["tarball_url"]
+    except GithubAPIException:
         LOG.error("Failed to retrieve releases data from github api")
         if strict:
+            # TODO: Should this really happen if we spec'd a branch?
             raise GithubAPIReleasesNotFound
 
     # augment with readme data
@@ -520,7 +702,14 @@ def get_skill_from_api(url:str, branch:str=None, strict:bool=False):
     return data
 
 
-def get_icon_url_from_github_api(url:str, branch:str=None):
+def get_icon_url_from_github_api(url: str,
+                                 branch: Optional[str] = None) -> str:
+    """
+    Get skill icon file URL for the specified repository
+    @param url: Repository URL to query
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: URL of skill icon
+    """
     author, repo = author_repo_from_github_url(url)
     for dst in GITHUB_ICON_FILES:
         try:
@@ -534,7 +723,14 @@ def get_icon_url_from_github_api(url:str, branch:str=None):
     raise GithubAPIFileNotFound
 
 
-def get_logo_url_from_github_api(url:str, branch:str=None):
+def get_logo_url_from_github_api(url: str,
+                                 branch: Optional[str] = None) -> str:
+    """
+    Get skill logo file URL for the specified repository
+    @param url: Repository URL to query
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: URL of skill logo
+    """
     author, repo = author_repo_from_github_url(url)
     for dst in GITHUB_LOGO_FILES:
         try:
@@ -548,7 +744,14 @@ def get_logo_url_from_github_api(url:str, branch:str=None):
     raise GithubAPIFileNotFound
 
 
-def get_android_url_from_github_api(url:str, branch:str=None):
+def get_android_url_from_github_api(url: str,
+                                    branch: Optional[str] = None) -> str:
+    """
+    Get android.json file URL for the specified repository
+    @param url: Repository URL to query
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: URL of android.json
+    """
     for dst in GITHUB_ANDROID_FILES:
         try:
             data = get_file_from_github_api(url, dst, branch)
@@ -561,7 +764,14 @@ def get_android_url_from_github_api(url:str, branch:str=None):
     raise GithubAPIFileNotFound
 
 
-def get_android_json_from_github_api(url:str, branch:str=None):
+def get_android_json_from_github_api(url: str,
+                                     branch: Optional[str] = None) -> dict:
+    """
+    Get parsed android.json file contents for the specified repository
+    @param url: Repository URL to query
+    @param branch: Optional branch spec, otherwise default branch will be used
+    @return: parsed android.json contents
+    """
     for dst in GITHUB_ANDROID_FILES:
         try:
             data = get_file_from_github_api(url, dst, branch)
