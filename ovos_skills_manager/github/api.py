@@ -162,12 +162,12 @@ def get_license_url_from_github_api(url: str,
 # data getters
 def get_main_branch_from_github_api(url: str, branch: str = None) -> str:
     """
-    Determine the main branch for the specified URL.
+    Determine the preferred branch for the specified URL.
     @param url: Repository URL
-    @param branch: Optional branch spec, otherwise default branch will be used
-    @return: default branch name
+    @param branch: Optional branch spec to read skill.json from,
+    otherwise default branch will be used
+    @return: default branch name read from skill.json or latest release
     """
-    # TODO: Should `branch` be accepted here?
     try:
         # implicit in url
         return get_branch_from_github_url(url)
