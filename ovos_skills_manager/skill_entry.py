@@ -102,14 +102,20 @@ class SkillEntry:
                                     parse_github=parse_github)
 
     @staticmethod
-    def from_directory(skill_dir: str):
+    def from_directory(skill_dir: str, github_token: Optional[str] = None):
+        """
+        Build a SkillEntry for a local skill directory
+        @param skill_dir: path to skill
+        @param github_token: optional Github token for private dependencies
+        @return: SkillEntry representation of the specified skill
+        """
         skill_dir = expanduser(skill_dir)
         if not isdir(skill_dir):
             raise ValueError(f"{skill_dir} is not a valid directory")
 
         data = get_skill_data_from_directory(skill_dir)
         parse_python_dependencies(data["requirements"].get("python"),
-                                  requests.headers.get("Authorization"))
+                                  github_token)
         return SkillEntry.from_json(data, False)
 
     # properties
