@@ -101,6 +101,11 @@ def get_skill_data_from_directory(skill_dir: str):
                 with open(join(root_dir, f)) as fi:
                     reqs = [r for r in fi.read().split("\n") if r.strip()]
                 skill_data["requirements"]["skill"] += reqs
+    # de-dupe requirements
+    skill_data["requirements"]["python"] = \
+        list(set(skill_data["requirements"]["python"]))
+    skill_data["requirements"]["skill"] = \
+        list(set(skill_data["requirements"]["skill"]))
     skill_data['foldername'] = fold  # Override what the config specifies
     skill_data['authorname'] = skill_data.get('authorname') or "local"
     return skill_data
