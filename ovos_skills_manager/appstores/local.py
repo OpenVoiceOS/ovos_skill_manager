@@ -16,7 +16,13 @@ from os.path import join, isdir, isfile
 
 
 def get_local_skills(parse_github:bool=False, skiplist=None):
-    skills = get_skills_folder()
+    try:
+        skills = get_skills_folder()
+    except FileNotFoundError:
+        return
+    except KeyError:
+        # TODO: Patching config error in ovos_utils
+        return
     skiplist = skiplist or []
     folders = listdir(skills)
     for fold in folders:
