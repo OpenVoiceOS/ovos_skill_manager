@@ -22,12 +22,12 @@ def osm_test(monkeymodule):
         if not path.exists(val):
             mkdir(val)
     print("Set envvars")
-    import xdg
+    # import xdg
     import json_database
 
     from ovos_skills_manager import commands, github, licenses, osm, \
         session, skill_entry, upgrade_osm, utils
     import ovos_skills_manager.versioning.osm_versions as versions
     yield
-    print(xdg.BaseDirectory.xdg_config_home)
+    # print(xdg.BaseDirectory.xdg_config_home)
     print("Done")
