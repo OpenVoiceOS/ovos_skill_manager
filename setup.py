@@ -19,7 +19,7 @@ setup(
     author='JarbasAI',
     install_requires=["packaging",
                       "ovos_skill_installer>=0.0.5",
-                      "json_database~=0.5,>=0.5.6",
+                      "json_database~=0.7",
                       "combo-lock~=0.2",
                       "requests",
                       "requests-cache",
