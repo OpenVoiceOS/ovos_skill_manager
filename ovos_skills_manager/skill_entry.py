@@ -168,11 +168,11 @@ class SkillEntry:
 
     @property
     def skill_tags(self) -> list:
-        return self.json.get("tags", [])
+        return self.json.get("tags") or []
 
     @property
     def skill_examples(self) -> list:
-        return self.json.get("examples", [])
+        return self.json.get("examples") or []
 
     @property
     def homescreen_msg(self) -> str:
@@ -208,7 +208,8 @@ class SkillEntry:
     def requirements(self) -> dict:
         try:
             return self.json.get("requirements") or \
-                   get_skill_data(self.url, self.branch).get("requirements")
+                   get_skill_data(self.url, self.branch).get("requirements") \
+                   or {}
         except GithubFileNotFound:
             return {}
 
