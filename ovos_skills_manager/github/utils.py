@@ -118,7 +118,7 @@ def validate_branch(branch:str, url:str):
     return requests.get(url).status_code == 200
 
 
-def download_url_from_github_url(url:str, branch:str=None):
+def download_url_from_github_url(url: str, branch: str = None):
     # specific file
     try:
         url = blob2raw(url)

@@ -5,6 +5,7 @@ from os import mkdir
 from os.path import isfile, exists, expanduser, join, isdir
 from typing import Optional, Union
 
+from ovos_skills_manager.local_skill import get_skill_data_from_directory
 from ovos_skills_manager.session import SESSION as requests
 from ovos_skills_manager.exceptions import GithubInvalidUrl, \
     JSONDecodeError, GithubFileNotFound, SkillEntryError, GithubInvalidBranch
@@ -52,7 +53,7 @@ class SkillEntry:
 
     # constructors
     @staticmethod
-    def from_json(data: Union[str, dict], parse_github:bool=True):
+    def from_json(data: Union[str, dict], parse_github: bool = True):
         if isinstance(data, str):
             if data.startswith("http"):
                 url = data
@@ -90,7 +91,7 @@ class SkillEntry:
         return SkillEntry(data)
 
     @staticmethod
-    def from_github_url(url, branch:str=None, parse_github:bool=True):
+    def from_github_url(url, branch: str = None, parse_github: bool = True):
         if not branch:
             try:
                 branch = get_branch_from_github_url(url)
@@ -100,10 +101,27 @@ class SkillEntry:
         return SkillEntry.from_json({"url": url, "branch": branch},
                                     parse_github=parse_github)
 
+    @staticmethod
+    def from_directory(skill_dir: str, github_token: Optional[str] = None):
+        """
+        Build a SkillEntry for a local skill directory
+        @param skill_dir: path to skill
+        @param github_token: optional Github token for private dependencies
+        @return: SkillEntry representation of the specified skill
+        """
+        skill_dir = expanduser(skill_dir)
+        if not isdir(skill_dir):
+            raise ValueError(f"{skill_dir} is not a valid directory")
+
+        data = get_skill_data_from_directory(skill_dir)
+        parse_python_dependencies(data["requirements"].get("python"),
+                                  github_token)
+        return SkillEntry.from_json(data, False)
+
     # properties
     @property
-    def url(self):
-        return self.json.get("url")
+    def url(self) -> str:
+        return self.json.get("url") or ""
 
     @property
     def appstore(self):
@@ -146,7 +164,7 @@ class SkillEntry:
 
     @property
     def skill_author(self):
-        return self.json.get("authorname") or self.url.split("/")[-2] if self.url and "/" in self.url else ""
+        return self.json.get("authorname") or (self.url.split("/")[-2] if self.url and "/" in self.url else "")
 
     @property
     def skill_tags(self):
@@ -163,17 +181,23 @@ class SkillEntry:
                                       author=self.skill_author)
 
     @property
-    def branch(self):
-        return self.json.get("branch") or get_branch(self.url)
+    def branch(self) -> str:
+        try:
+            return self.json.get("branch") or get_branch(self.url)
+        except GithubInvalidUrl:
+            return ""
 
     @property
     def branch_overrides(self):
         return self.json.get("branch_overrides") or {}
 
     @property
-    def download_url(self):
+    def download_url(self) -> str:
         """ generated from github url directly"""
-        return download_url_from_github_url(self.url, self.branch)
+        try:
+            return download_url_from_github_url(self.url, self.branch)
+        except GithubInvalidUrl:
+            return ""
 
     @property
     def default_download_url(self):
