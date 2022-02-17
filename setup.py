@@ -23,7 +23,7 @@ setup(
                       "combo-lock~=0.2",
                       "requests",
                       "requests-cache",
-                      "ovos_utils>=0.0.7,!=0.0.12",
+                      "ovos_utils~=0.0.15",
                       "pako>=0.2.3",
                       "PyYaml",
                       "bs4",
