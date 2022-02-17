@@ -7,7 +7,7 @@ from typing import Optional, Union
 from pako import PakoManager
 from ovos_skills_manager.exceptions import PipException, \
     SkillRequirementsException, InvalidManifest
-from json_database.utils.combo_lock import ComboLock
+from combo_lock import ComboLock
 from tempfile import gettempdir
 import yaml
 
