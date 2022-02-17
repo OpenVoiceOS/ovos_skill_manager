@@ -20,7 +20,7 @@ setup(
     install_requires=["packaging",
                       "ovos_skill_installer>=0.0.5",
                       "json_database~=0.5,>=0.5.6",
-                      "combo-lock~=0.2"
+                      "combo-lock~=0.2",
                       "requests",
                       "requests-cache",
                       "ovos_utils>=0.0.7,!=0.0.12",
