@@ -27,7 +27,7 @@ class SkillEntry:
         self._data = data or {}
 
     @property
-    def uuid(self):
+    def uuid(self) -> str:
         # a unique identifier
         # github_repo.github_author , case insensitive
         # should be guaranteed to be unique
@@ -36,7 +36,7 @@ class SkillEntry:
                 author, folder = author_repo_from_github_url(self.url)
             except Exception as e:
                 LOG.error(e)
-                return None
+                return ""
         else:
             LOG.warning(f"Skill installation from local source; uuid may have collisions")
             author = self.skill_author if self.skill_author else None
@@ -45,10 +45,10 @@ class SkillEntry:
             return f"{folder}.{author}".lower()
         else:
             LOG.warning(f"repo or author not defined, skill uuid cannot be determined!")
-            return None
+            return ""
 
     @property
-    def json(self):
+    def json(self) -> dict:
         return self._data
 
     # constructors
@@ -124,58 +124,58 @@ class SkillEntry:
         return self.json.get("url") or ""
 
     @property
-    def appstore(self):
+    def appstore(self) -> str:
         return self.json.get("appstore") or "unknown"
 
     @property
-    def skill_name(self):
+    def skill_name(self) -> str:
         return_val = self.json.get("skillname") or self.json.get("name")
         if self.url and not return_val:
             _, return_val = author_repo_from_github_url(self.url)
-        return return_val
+        return return_val or ""
 
     @property
-    def skill_short_description(self):
+    def skill_short_description(self) -> str:
         # TODO consider using OpenJarbas/quebra_frases or another chunker
         return self.json.get("short_description") or \
                self.skill_description.split("\n")[0]
 
     @property
-    def skill_description(self):
+    def skill_description(self) -> str:
         return self.json.get("description") or ("{1} by {0}".format(
                 *author_repo_from_github_url(self.url)) if self.url else "No description")
 
     @property
-    def skill_folder(self):
-        return_val = self.json.get("foldername")
+    def skill_folder(self) -> str:
+        return_val = self.json.get("foldername") or ""
         if self.url and not return_val:
             author, repo = author_repo_from_github_url(self.url)
             return_val = f"{repo}.{author}"
         return return_val
 
     @property
-    def skill_category(self):
+    def skill_category(self) -> str:
         return self.json.get("category") or "VoiceApp"
 
     @property
-    def skill_icon(self):
+    def skill_icon(self) -> str:
         # TODO bundle a default icon
         return self.json.get("icon") or "https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/robot.svg"
 
     @property
-    def skill_author(self):
+    def skill_author(self) -> str:
         return self.json.get("authorname") or (self.url.split("/")[-2] if self.url and "/" in self.url else "")
 
     @property
-    def skill_tags(self):
-        return self.json.get("tags", [])
+    def skill_tags(self) -> list:
+        return self.json.get("tags") or []
 
     @property
-    def skill_examples(self):
-        return self.json.get("examples", [])
+    def skill_examples(self) -> list:
+        return self.json.get("examples") or []
 
     @property
-    def homescreen_msg(self):
+    def homescreen_msg(self) -> str:
         home_screen_msg = "{skill_folder}.{author}.home".lower()
         return home_screen_msg.format(skill_folder=self.skill_folder,
                                       author=self.skill_author)
@@ -188,7 +188,7 @@ class SkillEntry:
             return ""
 
     @property
-    def branch_overrides(self):
+    def branch_overrides(self) -> dict:
         return self.json.get("branch_overrides") or {}
 
     @property
@@ -200,24 +200,25 @@ class SkillEntry:
             return ""
 
     @property
-    def default_download_url(self):
+    def default_download_url(self) -> str:
         """ sugar / backwards compat """
         return self.download_url
 
     @property
-    def requirements(self):
+    def requirements(self) -> dict:
         try:
             return self.json.get("requirements") or \
-                   get_skill_data(self.url, self.branch).get("requirements")
+                   get_skill_data(self.url, self.branch).get("requirements") \
+                   or {}
         except GithubFileNotFound:
             return {}
 
     @property
-    def license(self):
+    def license(self) -> str:
         return self.json.get("license") or "unknown"
 
     @property
-    def desktop_file(self):
+    def desktop_file(self) -> str:
         return self.generate_desktop_file()
 
     # generators

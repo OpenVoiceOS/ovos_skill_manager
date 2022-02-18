@@ -156,7 +156,7 @@ class TestSkillEntryFromJson(unittest.TestCase):
     def test_skill_entry_properties_invalid_entry(self):
         from ovos_skills_manager.skill_entry import SkillEntry
         entry = SkillEntry({})
-        self.assertIsNone(entry.uuid)
+        self.assertFalse(entry.uuid)
         self.assertIsInstance(entry.json, dict)
         self.assertIsInstance(repr(entry), str)
         self.assertEqual(entry, SkillEntry({}))
