@@ -19,6 +19,7 @@ from ovos_skills_manager.exceptions import UnknownAppstore
 from ovos_skills_manager.appstores.local import InstalledSkills
 from ovos_skills_manager.github import author_repo_from_github_url
 
+
 class OVOSSkillsManager:
     def __init__(self, bus=None):
         self.config = get_config_object()
@@ -367,11 +368,13 @@ class OVOSSkillsManager:
             store = self.get_appstore(skill.appstore)
             store.authenticate(bootstrap=False)
         except Exception as e:
+            LOG.error(e)
             self.emit("osm.install.error",
                       {"folder": folder, "skill": skill.json, "error": str(e)})
         try:
             skill.install(folder)
         except Exception as e:
+            LOG.error(e)
             self.emit("osm.install.error",
                       {"folder": folder, "skill": skill.json, "error": str(e)})
         if store:
