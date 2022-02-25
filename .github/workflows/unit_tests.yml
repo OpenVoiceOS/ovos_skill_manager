@@ -93,7 +93,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          pytest --cov-append --cov-report xml --cov=ovos_skills_manager test/unittest/test_osm.py
+          pytest --cov-append --cov-report xml --cov=ovos_skills_manager test/unittests/test_osm.py
       - name: Upload coverage
         env:
           CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
