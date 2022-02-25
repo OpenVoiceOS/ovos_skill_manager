@@ -1,11 +1,52 @@
+import os
 from setuptools import setup
 
-def _get_version():
-    with open('ovos_skills_manager/versioning/osm_versions.py') as versions:
-        for line in versions:
-            if line.startswith('CURRENT_OSM_VERSION'):
-                # CURRENT_OSM_VERSION = "0.0.10a9" --> "0.0.10a9"
-                return line.replace('"','').strip('\n').split('= ')[1]
+BASEDIR = os.path.abspath(os.path.dirname(__file__))
+
+
+def get_version():
+    """ Find the version of the package"""
+    version = None
+    version_file = os.path.join(BASEDIR, 'ovos_skills_manager', 'version.py')
+    major, minor, build, alpha = (None, None, None, None)
+    with open(version_file) as f:
+        for line in f:
+            if 'VERSION_MAJOR' in line:
+                major = line.split('=')[1].strip()
+            elif 'VERSION_MINOR' in line:
+                minor = line.split('=')[1].strip()
+            elif 'VERSION_BUILD' in line:
+                build = line.split('=')[1].strip()
+            elif 'VERSION_ALPHA' in line:
+                alpha = line.split('=')[1].strip()
+
+            if ((major and minor and build and alpha) or
+                    '# END_VERSION_BLOCK' in line):
+                break
+    version = f"{major}.{minor}.{build}"
+    if alpha and int(alpha) > 0:
+        version += f"a{alpha}"
+    return version
+
+
+def package_files(directory):
+    paths = []
+    for (path, directories, filenames) in os.walk(directory):
+        for filename in filenames:
+            paths.append(os.path.join('..', path, filename))
+    return paths
+
+
+def required(requirements_file):
+    """ Read requirements file and remove comments and empty lines. """
+    with open(os.path.join(BASEDIR, requirements_file), 'r') as f:
+        requirements = f.read().splitlines()
+        if 'MYCROFT_LOOSE_REQUIREMENTS' in os.environ:
+            print('USING LOOSE REQUIREMENTS!')
+            requirements = [r.replace('==', '>=').replace('~=', '>=') for r in requirements]
+        return [pkg for pkg in requirements
+                if pkg.strip() and not pkg.startswith("#")]
+
 
 setup(
     name='ovos-skills-manager',
@@ -13,23 +54,12 @@ setup(
               'ovos_skills_manager.github',
               'ovos_skills_manager.appstores',
               'ovos_skills_manager.scripts',
-              'ovos_skills_manager.versioning',
               'ovos_skills_manager.local_skill'],
     url='https://github.com/OpenVoiceOS/ovos_skill_manager',
     license='Apache-2.0',
     author='JarbasAI',
-    install_requires=["packaging",
-                      "ovos_skill_installer>=0.0.5",
-                      "json_database~=0.7",
-                      "combo-lock~=0.2",
-                      "requests",
-                      "requests-cache",
-                      "ovos_utils~=0.0.15",
-                      "pako>=0.2.3",
-                      "PyYaml",
-                      "bs4",
-                      "click",
-                      "click-default-group>=1.2.2"],
+    install_requires=required("requirements/requirements.txt"),
+    package_data={'': package_files('ovos_skills_manager')},
     include_package_data=True,
     author_email='jarbasai@mailfence.com',
     description='Open Voice OS skill manager',
@@ -37,5 +67,5 @@ setup(
         [console_scripts]
         osm=ovos_skills_manager.commands:osm_commands
     ''',
-    version=_get_version(),
+    version=get_version(),
 )
