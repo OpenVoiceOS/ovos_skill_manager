@@ -226,7 +226,7 @@ class SkillEntry:
         return {'Terminal': 'false',
                 'Type': 'Application',
                 'Name': self.skill_name,
-                'Exec': 'mycroft-gui-app --hideTextInput --skill' +
+                'Exec': 'mycroft-gui-app --hideTextInput --skill=' +
                         self.homescreen_msg,
                 'Icon': self.skill_icon,
                 'Categories': "VoiceApp",
