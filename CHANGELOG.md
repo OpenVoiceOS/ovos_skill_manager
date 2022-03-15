@@ -1,5 +1,17 @@
 # Changelog
 
+## [Unreleased](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/HEAD)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.10...HEAD)
+
+**Fixed bugs:**
+
+- Fix typo in `os.remove` call in AbstractAppstore [\#91](https://github.com/OpenVoiceOS/ovos_skill_manager/pull/91) ([NeonDaniel](https://github.com/NeonDaniel))
+
+## [V0.0.10](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/V0.0.10) (2022-03-01)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.10a1...V0.0.10)
+
 ## [V0.0.10a1](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/V0.0.10a1) (2022-03-01)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.10a20...V0.0.10a1)
