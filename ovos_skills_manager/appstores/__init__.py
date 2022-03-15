@@ -61,7 +61,7 @@ class AbstractAppstore:
     def clear_cache(self):
         if isfile(self.db.path):
             LOG.debug("Removing appstore cache " + self.db.path)
-            remove(self.db.path)
+            os.remove(self.db.path)
             self.db.reset()
 
     def get_skills_list(self, skiplist:list=None):
