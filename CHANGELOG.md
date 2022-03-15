@@ -2,7 +2,15 @@
 
 ## [Unreleased](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/HEAD)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.10...HEAD)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.11a1...HEAD)
+
+**Fixed bugs:**
+
+- fix .desktop homescreen message [\#90](https://github.com/OpenVoiceOS/ovos_skill_manager/pull/90) ([JarbasAl](https://github.com/JarbasAl))
+
+## [V0.0.11a1](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/V0.0.11a1) (2022-03-15)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.10...V0.0.11a1)
 
 **Fixed bugs:**
 
