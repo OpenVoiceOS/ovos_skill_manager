@@ -229,10 +229,12 @@ def get_file_from_github_api(url: str, filepath: str,
     data = resp.json()
     if "API rate limit exceeded" in data.get("message", ""):
         raise GithubAPIRateLimited
+    if "Bad credentials" in data.get("message", ""):
+        raise GithubAPIException(data)
     if resp.ok:
         return data
     LOG.warning(f"{resp.url} returned {resp.status_code}: {resp.content}")
-    raise GithubAPIFileNotFound
+    raise GithubAPIFileNotFound(resp.status_code)
 
 
 def get_readme_url_from_github_api(url: str,
