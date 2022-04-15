@@ -30,7 +30,7 @@ class AbstractAppstore:
             except AuthenticationError:
                 pass
 
-    def authenticate(self, auth_token:Optional[dict]=None, bootstrap:bool=True):
+    def authenticate(self, auth_token:Optional[str]=None, bootstrap:bool=True):
         if auth_token is None:
             auth_token = JsonConfigXDG("OVOS-SkillsManager", subfolder="OpenVoiceOS")["appstores"]\
                 .get(self.appstore_id, {}).get("auth_token")
