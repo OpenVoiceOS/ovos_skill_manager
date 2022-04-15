@@ -75,11 +75,14 @@ def get_repo_data_from_github_api(url: str,
     author, repo = author_repo_from_github_url(url)
     url = GithubAPI.REPO.format(owner=author, repo=repo)
     try:
-        data = requests.get(url, params={"ref": branch}).json()
+        resp = requests.get(url, params={"ref": branch})
+        data = resp.json()
     except Exception as e:
-        raise GithubAPIRepoNotFound
+        raise GithubAPIRepoNotFound(e)
     if "API rate limit exceeded" in data.get("message", ""):
-        raise GithubAPIRateLimited
+        raise GithubAPIRateLimited(data.get("message"))
+    if not resp.ok:
+        raise GithubAPIException(resp.status_code)
     return data
 
 
@@ -177,7 +180,7 @@ def get_main_branch_from_github_api(url: str, branch: str = None) -> str:
         data = get_repo_data_from_github_api(url, branch)
         if "API rate limit exceeded" in data.get("message", ""):
             raise GithubAPIRateLimited
-        return data['default_branch']
+        return data.get('default_branch') or branch
     except GithubAPIRateLimited:
         raise
     except Exception as e:
