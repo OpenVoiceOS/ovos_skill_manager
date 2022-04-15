@@ -367,8 +367,8 @@ class OVOSSkillsManager:
             self.validate_appstore_name(skill.appstore)
             store = self.get_appstore(skill.appstore)
             store.authenticate(bootstrap=False)
-        except UnknownAppstore:
-            pass
+        except UnknownAppstore as e:
+            LOG.info(f"Skill Entry from unknown appstore: {e}")
         except Exception as e:
             LOG.exception(e)
             self.emit("osm.install.error",

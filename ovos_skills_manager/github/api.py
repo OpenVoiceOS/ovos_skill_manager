@@ -234,8 +234,8 @@ def get_file_from_github_api(url: str, filepath: str,
         raise GithubAPIException(data)
     if resp.ok:
         return data
-    LOG.warning(f"{resp.url} returned {resp.status_code}: {resp.content}")
-    raise GithubAPIFileNotFound(resp.status_code)
+    raise GithubAPIFileNotFound(f"{resp.url} returned {resp.status_code}:"
+                                f" {resp.content}")
 
 
 def get_readme_url_from_github_api(url: str,
