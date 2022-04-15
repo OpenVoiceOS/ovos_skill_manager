@@ -248,8 +248,8 @@ def get_requirements(url, branch=None):
 def get_skill_requirements(url, branch=None):
     try:
         return get_skill_requirements_from_github_api(url, branch)
-    except GithubAPIException:
-        LOG.info("API Error, falling back to HTML")
+    except GithubAPIException as e:
+        LOG.info(f"API Error: {e}")
         return get_skill_requirements_from_github_url(url, branch)
 
 

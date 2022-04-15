@@ -396,14 +396,14 @@ def get_skill_requirements_from_github_api(url: str,
         except GithubAPIFileNotFound:
             continue
         if "API rate limit exceeded" in data.get("message", ""):
-            raise GithubAPIRateLimited
+            raise GithubAPIRateLimited(data.get("message"))
         if data.get("content"):
             content = data["content"]
             if data["encoding"] == "base64":
                 content = base64.b64decode(content).decode("utf-8")
             # TODO Raise UnknownEncoding?
     if not content:
-        raise GithubAPIFileNotFound
+        raise GithubAPIFileNotFound("Requirements file not found")
     return [t for t in content.split("\n")
             if t.strip() and not t.strip().startswith("#")]
 
