@@ -99,7 +99,7 @@ class OVOSSkillsManager:
                           "installed_skills"]:
             appstore = "local"
         elif appstore not in self.config["appstores"]:
-            raise UnknownAppstore
+            raise UnknownAppstore(f"Unknown Appstore: {appstore}")
         return appstore
 
     def enable_appstore(self, appstore_id: str):

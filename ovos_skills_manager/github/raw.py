@@ -287,6 +287,7 @@ def get_requirements_from_github_url(url: str,
     if "<title>Rate limit &middot; GitHub</title>" in html:
         raise GithubHTTPRateLimited
     if not resp.ok:
+        LOG.warning(f"resp={resp}")
         raise GithubFileNotFound(resp.status_code)
     return [t for t in html.split("\n")
             if t.strip() and not t.strip().startswith("#")]

@@ -228,6 +228,7 @@ def get_file_from_github_api(url: str, filepath: str,
         raise GithubAPIRateLimited
     if resp.ok:
         return data
+    LOG.warning(resp)
     raise GithubAPIFileNotFound
 
 
@@ -367,8 +368,6 @@ def get_requirements_from_github_api(url: str,
             data = get_file_from_github_api(url, dst.format(repo=repo), branch)
         except GithubAPIFileNotFound:
             continue
-        if "API rate limit exceeded" in data.get("message", ""):
-            raise GithubAPIRateLimited
 
         if data.get("content"):
             content = data["content"]
