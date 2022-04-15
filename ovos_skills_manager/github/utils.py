@@ -110,7 +110,7 @@ def get_branch_from_github_url(url:str, validate:bool=False):
                 raise GithubInvalidBranch
         return branch
     else:
-        raise GithubInvalidBranch
+        raise GithubInvalidBranch(branch)
 
 
 def validate_branch(branch:str, url:str):

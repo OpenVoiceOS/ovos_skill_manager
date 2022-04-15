@@ -222,10 +222,11 @@ def get_file_from_github_api(url: str, filepath: str,
     author, repo = author_repo_from_github_url(url)
     branch = branch or get_main_branch_from_github_api(url)
     url = GithubAPI.REPO_FILE.format(owner=author, repo=repo, file=filepath)
-    data = requests.get(url, params={"ref": branch}).json()
+    resp = requests.get(url, params={"ref": branch})
+    data = resp.json()
     if "API rate limit exceeded" in data.get("message", ""):
         raise GithubAPIRateLimited
-    if data.get("message", "") != 'Not Found':
+    if resp.ok:
         return data
     raise GithubAPIFileNotFound
 
@@ -368,6 +369,7 @@ def get_requirements_from_github_api(url: str,
             continue
         if "API rate limit exceeded" in data.get("message", ""):
             raise GithubAPIRateLimited
+
         if data.get("content"):
             content = data["content"]
             if data["encoding"] == "base64":
