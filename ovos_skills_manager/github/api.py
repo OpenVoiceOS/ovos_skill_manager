@@ -230,6 +230,7 @@ def get_file_from_github_api(url: str, filepath: str,
     if "API rate limit exceeded" in data.get("message", ""):
         raise GithubAPIRateLimited
     if "Bad credentials" in data.get("message", ""):
+        LOG.info(requests.headers)
         raise GithubAPIException(data)
     if resp.ok:
         return data
