@@ -233,7 +233,6 @@ def get_manifest(url, branch=None):
     try:
         return get_manifest_from_github_api(url, branch)
     except GithubAPIException:
-        LOG.info("API Error, falling back to HTML")
         return get_manifest_from_github_url(url, branch)
 
 
@@ -241,7 +240,6 @@ def get_requirements(url, branch=None):
     try:
         return get_requirements_from_github_api(url, branch)
     except GithubAPIException:
-        LOG.info("API Error, falling back to HTML")
         return get_requirements_from_github_url(url, branch)
 
 
@@ -258,7 +256,6 @@ def get_readme(url, branch=None):
     try:
         return get_readme_from_github_api(url, branch)
     except GithubAPIException:
-        LOG.info("API Error, falling back to HTML")
         return get_readme_from_github_url(url, branch)
 
 
@@ -274,7 +271,6 @@ def get_readme_url(url, branch=None):
     try:
         return get_readme_url_from_github_api(url, branch)
     except GithubAPIException:
-        LOG.info("API Error, falling back to HTML")
         return get_readme_url_from_github_url(url, branch)
 
 
@@ -283,7 +279,6 @@ def get_license(url, branch=None):
     try:
         return get_license_from_github_api(url, branch)
     except GithubAPIException:
-        LOG.info("API Error, falling back to HTML")
         return get_license_from_github_url(url, branch)
 
 
@@ -291,7 +286,6 @@ def get_license_data(url, branch=None):
     try:
         return get_license_data_from_github_api(url, branch)
     except GithubAPIException:
-        LOG.info("API Error, falling back to HTML")
         return get_license_data_from_github_url(url, branch)
 
 
@@ -302,7 +296,6 @@ def get_license_type(url, branch=None):
         # requests since license_type should be cached by get_repo_data
         return get_license_type_from_github_api(url, branch)
     except GithubAPIException:
-        LOG.info("API Error, falling back to HTML")
         return get_license_type_from_github_url(url, branch)
 
 
@@ -310,7 +303,6 @@ def get_license_url(url, branch=None):
     try:
         return get_license_url_from_github_api(url, branch)
     except GithubAPIException:
-        LOG.info("API Error, falling back to HTML")
         return get_license_url_from_github_url(url, branch)
 
 
@@ -319,7 +311,6 @@ def get_skill_json(url, branch=None):
     try:
         return get_skill_json_from_github_api(url, branch)
     except GithubAPIException:
-        LOG.info("API Error, falling back to HTML")
         return get_skill_json_from_github_url(url, branch)
 
 
@@ -327,7 +318,6 @@ def get_skill_json_url(url, branch=None):
     try:
         return get_json_url_from_github_api(url, branch)
     except GithubAPIException:
-        LOG.info("API Error, falling back to HTML")
         return get_json_url_from_github_url(url, branch)
 
 
@@ -336,7 +326,6 @@ def get_desktop(url, branch=None):
     try:
         return get_desktop_from_github_api(url, branch)
     except GithubAPIException:
-        LOG.info("API Error, falling back to HTML")
         return get_desktop_from_github_url(url, branch)
 
 
@@ -349,7 +338,6 @@ def get_desktop_url(url, branch=None):
     try:
         return get_desktop_url_from_github_api(url, branch)
     except GithubAPIException:
-        LOG.info("API Error, falling back to HTML")
         return get_desktop_url_from_github_url(url, branch)
 
 
@@ -358,7 +346,6 @@ def get_icon(url, branch=None):
     try:
         return get_icon_url_from_github_api(url, branch)
     except GithubAPIException:
-        LOG.info("API Error, falling back to HTML")
         return get_icon_url_from_github_url(url, branch)
 
 
@@ -367,7 +354,6 @@ def get_logo_url(url, branch=None):
     try:
         return get_logo_url_from_github_api(url, branch)
     except GithubAPIException:
-        LOG.info("API Error, falling back to HTML")
         return get_logo_url_from_github_url(url, branch)
 
 
@@ -376,7 +362,6 @@ def get_android_url(url, branch=None):
     try:
         return get_android_url_from_github_api(url, branch)
     except GithubAPIException:
-        LOG.info("API Error, falling back to HTML")
         return get_android_url_from_github_url(url, branch)
 
 
@@ -384,5 +369,4 @@ def get_android_json(url, branch=None):
     try:
         return get_android_json_from_github_api(url, branch)
     except GithubAPIException:
-        LOG.info("API Error, falling back to HTML")
         return get_android_json_from_github_url(url, branch)

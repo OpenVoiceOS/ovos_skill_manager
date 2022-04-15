@@ -231,7 +231,7 @@ def get_file_from_github_api(url: str, filepath: str,
         raise GithubAPIRateLimited
     if resp.ok:
         return data
-    LOG.warning(resp)
+    LOG.warning(f"{resp.url} returned {resp.status_code}: {resp.content}")
     raise GithubAPIFileNotFound
 
 
