@@ -95,11 +95,13 @@ def get_skill_data_from_directory(skill_dir: str):
                     manifest.get("skill") or []
             elif f in GITHUB_REQUIREMENTS_FILES:
                 with open(join(root_dir, f)) as fi:
-                    reqs = [r for r in fi.read().split("\n") if r.strip()]
+                    reqs = [r for r in fi.read().split("\n") if r.strip()
+                            and not r.strip().startswith("#")]
                 skill_data["requirements"]["python"] += reqs
             elif f in GITHUB_SKILL_REQUIREMENTS_FILES:
                 with open(join(root_dir, f)) as fi:
-                    reqs = [r for r in fi.read().split("\n") if r.strip()]
+                    reqs = [r for r in fi.read().split("\n") if r.strip()
+                            and not r.strip().startswith("#")]
                 skill_data["requirements"]["skill"] += reqs
     # de-dupe requirements
     skill_data["requirements"]["python"] = \
