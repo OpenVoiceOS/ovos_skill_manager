@@ -2,7 +2,19 @@
 
 ## [Unreleased](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/HEAD)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.11a1...HEAD)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.11a2...HEAD)
+
+**Implemented enhancements:**
+
+- Handle Commented requirements files [\#94](https://github.com/OpenVoiceOS/ovos_skill_manager/issues/94)
+
+**Fixed bugs:**
+
+- Fix local commented requirements file handling [\#95](https://github.com/OpenVoiceOS/ovos_skill_manager/pull/95) ([NeonDaniel](https://github.com/NeonDaniel))
+
+## [V0.0.11a2](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/V0.0.11a2) (2022-03-15)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.11a1...V0.0.11a2)
 
 **Fixed bugs:**
 
