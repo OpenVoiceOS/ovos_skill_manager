@@ -48,46 +48,49 @@ def search_skill(method: str, query: str, fuzzy: bool, no_ignore_case: bool, thr
 
 
 def install(method: str, skill: str, fuzzy: bool, no_ignore_case: bool, thresh: float, appstore: str, search: bool,
-            branch: str, folder: str):
-    if search:
-        skills = search_skill(method, skill, fuzzy, no_ignore_case,
-                              thresh, appstore)
-    elif not skill.startswith("http"):
-        click.confirm('{s} does not look like a valid skill url, do you '
-                      'want to enable search?'.format(s=skill),
-                      abort=True)
-        skills = search_skill(method, skill, fuzzy, no_ignore_case,
-                              thresh, appstore)
-    else:
-        skills = [SkillEntry.from_github_url(skill, branch)]
-
-    if not len(skills):
-        click.echo("NO RESULTS")
-    else:
-        # ask option
-        prompt = "\nSearch Results:\n    appstore - branch - url \n"
-        opts = {}
-        for s in skills:
-            idx = len(opts) + 1
-            prompt += str(idx) + " - " + s.appstore + " - " + s.branch + " " +\
-                      s.url + "\n"
-            opts[idx] = s
-        prompt += "0 - cancel installation\n"
-        def ask_selection():
-            click.echo(prompt)
-            value = click.prompt('Select an option', type=int)
-            if value < 0 or value > len(opts):
-                click.echo("Invalid choice")
-                return ask_selection()
-            return value
-
-        value = ask_selection()
-        if value == 0:
-            click.echo("Installation cancelled")
-            return
-        skill = opts[value]
-        skill_str = skill.branch + " " + skill.url
-        click.confirm('Do you want to install {s} ?'.format(s=skill_str),
-                      abort=True)
+            branch: str, folder: str, non_interactive: bool):
+    if non_interactive:
+        skill = SkillEntry.from_github_url(skill, branch)
         skill.install(folder)
+    else:
+        if search:
+            skills = search_skill(method, skill, fuzzy, no_ignore_case,
+                                thresh, appstore)
+        elif not skill.startswith("http"):
+            click.confirm('{s} does not look like a valid skill url, do you '
+                        'want to enable search?'.format(s=skill),
+                        abort=True)
+            skills = search_skill(method, skill, fuzzy, no_ignore_case,
+                                thresh, appstore)
+        else:
+            skills = [SkillEntry.from_github_url(skill, branch)]
 
+        if not len(skills):
+            click.echo("NO RESULTS")
+        else:
+            # ask option
+            prompt = "\nSearch Results:\n    appstore - branch - url \n"
+            opts = {}
+            for s in skills:
+                idx = len(opts) + 1
+                prompt += str(idx) + " - " + s.appstore + " - " + s.branch + " " +\
+                        s.url + "\n"
+                opts[idx] = s
+            prompt += "0 - cancel installation\n"
+            def ask_selection():
+                click.echo(prompt)
+                value = click.prompt('Select an option', type=int)
+                if value < 0 or value > len(opts):
+                    click.echo("Invalid choice")
+                    return ask_selection()
+                return value
+
+            value = ask_selection()
+            if value == 0:
+                click.echo("Installation cancelled")
+                return
+            skill = opts[value]
+            skill_str = skill.branch + " " + skill.url
+            click.confirm('Do you want to install {s} ?'.format(s=skill_str),
+                        abort=True)
+            skill.install(folder)
