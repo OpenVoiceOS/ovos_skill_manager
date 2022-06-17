@@ -96,12 +96,14 @@ def enable(appstore):
                    'to 100 (exact match),  default 80')
 @click.option('--no-ignore-case', default=False, is_flag=True,
               help='ignore upper/lower case, default ignore')
+@click.option('--non-interactive', default=False, is_flag=True,
+              help='install single skill non-interactive from url and branch')
 def install(method, skill, fuzzy, no_ignore_case, thresh, appstore, search,
-            branch, folder):
+            branch, folder, non_interactive):
     if skill is None:
         skill = click.prompt('Skill to install (url or search term)')
     _install.install(method, skill, fuzzy, no_ignore_case, thresh, appstore, search,
-            branch, folder)
+            branch, folder, non_interactive)
 #endregion install
 
 #region priority

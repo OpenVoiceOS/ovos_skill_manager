@@ -54,6 +54,9 @@ GITHUB_LOGO_FILES = ["ui/logo.png", "logo.png",
 
 # url utils
 def normalize_github_url(url):
+    if "www.github.com" in url:
+        url = url.replace("www.github.com", "github.com")
+
     url = url\
         .replace("git://", "https://")\
         .replace("https://raw.githubusercontent.com", "https://github.com")\
