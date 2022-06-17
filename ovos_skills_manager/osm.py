@@ -99,7 +99,7 @@ class OVOSSkillsManager:
                           "installed_skills"]:
             appstore = "local"
         elif appstore not in self.config["appstores"]:
-            raise UnknownAppstore
+            raise UnknownAppstore(f"Unknown Appstore: {appstore}")
         return appstore
 
     def enable_appstore(self, appstore_id: str):
@@ -367,8 +367,10 @@ class OVOSSkillsManager:
             self.validate_appstore_name(skill.appstore)
             store = self.get_appstore(skill.appstore)
             store.authenticate(bootstrap=False)
+        except UnknownAppstore as e:
+            LOG.info(f"Skill Entry from unknown appstore: {e}")
         except Exception as e:
-            LOG.error(e)
+            LOG.exception(e)
             self.emit("osm.install.error",
                       {"folder": folder, "skill": skill.json, "error": str(e)})
         try:

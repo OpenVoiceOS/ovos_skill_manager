@@ -282,10 +282,13 @@ def get_requirements_from_github_url(url: str,
     """
     branch = branch or get_branch_from_github_url(url)
     url = requirements_url_from_github_url(url, branch)
-    html = requests.get(url).text
+    resp = requests.get(url)
+    html = resp.text
     if "<title>Rate limit &middot; GitHub</title>" in html:
         raise GithubHTTPRateLimited
-
+    if not resp.ok:
+        raise GithubFileNotFound(f"{resp.url} returned {resp.status_code}:"
+                                 f" {resp.content}")
     return [t for t in html.split("\n")
             if t.strip() and not t.strip().startswith("#")]
 

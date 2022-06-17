@@ -6,6 +6,8 @@ SESSION.headers = {"User-Agent": USER_AGENT}
 
 def set_github_token(token: str):
     global SESSION
+    if not token:
+        raise ValueError("null token passed")
     SESSION.headers["Authorization"] = f"token {token}"
 
 
