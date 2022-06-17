@@ -2,7 +2,15 @@
 
 ## [Unreleased](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/HEAD)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.11a2...HEAD)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.11a3...HEAD)
+
+**Merged pull requests:**
+
+- Add non-interactive option to commandline install [\#96](https://github.com/OpenVoiceOS/ovos_skill_manager/pull/96) ([AIIX](https://github.com/AIIX))
+
+## [V0.0.11a3](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/V0.0.11a3) (2022-05-06)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.11a2...V0.0.11a3)
 
 **Implemented enhancements:**
 
