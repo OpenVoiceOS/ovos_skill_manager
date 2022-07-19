@@ -5,6 +5,7 @@ combo-lock~=0.2
 requests
 requests-cache
 ovos_utils~=0.0.15
+ovos_config~=0.0,>=0.0.3
 pako>=0.2.3
 PyYAML~=5.4
 bs4
