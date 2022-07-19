@@ -1,7 +1,4 @@
 
-from os import path
-
-from json_database import JsonConfigXDG, JsonStorageXDG
 from ovos_utils.log import LOG
 from ovos_utils.messagebus import Message
 from ovos_utils.json_helper import merge_dict
@@ -14,7 +11,7 @@ from ovos_skills_manager.appstores.mycroft_marketplace import \
 from ovos_skills_manager.appstores.pling import Pling
 from ovos_skills_manager.appstores.ovos import OVOSstore
 from ovos_skills_manager.appstores.neon import NeonSkills
-from ovos_skills_manager.config import get_config_object, safe_get_skills_folder
+from ovos_skills_manager.config import get_config_object
 from ovos_skills_manager.exceptions import UnknownAppstore
 from ovos_skills_manager.appstores.local import InstalledSkills
 from ovos_skills_manager.github import author_repo_from_github_url

@@ -6,7 +6,7 @@ requests
 requests-cache
 ovos_utils~=0.0.15
 pako>=0.2.3
-PyYaml
+PyYAML~=5.4
 bs4
 click
 click-default-group>=1.2.2
