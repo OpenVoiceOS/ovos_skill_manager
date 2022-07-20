@@ -2,7 +2,17 @@
 
 ## [Unreleased](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/HEAD)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.11a4...HEAD)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.11a5...HEAD)
+
+**Merged pull requests:**
+
+- Fix Automation Checkout refs [\#99](https://github.com/OpenVoiceOS/ovos_skill_manager/pull/99) ([NeonDaniel](https://github.com/NeonDaniel))
+- Update release tag workflows to include version change commits [\#98](https://github.com/OpenVoiceOS/ovos_skill_manager/pull/98) ([NeonDaniel](https://github.com/NeonDaniel))
+- Refactor for ovos\_config and minor code cleanup [\#97](https://github.com/OpenVoiceOS/ovos_skill_manager/pull/97) ([NeonDaniel](https://github.com/NeonDaniel))
+
+## [V0.0.11a5](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/V0.0.11a5) (2022-06-17)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.11a4...V0.0.11a5)
 
 **Merged pull requests:**
 
