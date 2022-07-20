@@ -1,5 +1,5 @@
 from ovos_skills_manager.skill_entry import SkillEntry
-from ovos_utils.configuration import read_mycroft_config
+from ovos_config.config import Configuration
 from ovos_skills_manager.session import SESSION as requests
 from ovos_skills_manager.github.raw import is_valid_github_skill_url, \
     validate_branch, normalize_github_url
@@ -11,7 +11,7 @@ from ovos_utils.log import LOG
 def get_current_marketplace_branch():
     # TODO check mycroft version for default branch as fallback
     try:
-        default_branch = read_mycroft_config().get("skills", {}) \
+        default_branch = Configuration().get("skills", {}) \
             .get("msm", {}).get("repo", {}).get("branch", "21.02")
     except FileNotFoundError:
         default_branch = "21.02"

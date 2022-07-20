@@ -1,8 +1,8 @@
 from os import path
-from typing import Union
+from typing import Union, Optional
 from json_database import JsonConfigXDG, JsonStorageXDG
 from ovos_utils.json_helper import merge_dict
-
+from ovos_utils.log import LOG
 from ovos_skills_manager.appstores.local import get_skills_folder
 from ovos_skills_manager.version import CURRENT_OSM_VERSION
 
@@ -10,10 +10,12 @@ from ovos_skills_manager.version import CURRENT_OSM_VERSION
 def safe_get_skills_folder():
     try:
         return get_skills_folder()
-    except:
+    except Exception as e:
+        LOG.error(e)
         return ""
 
-def _existing_osm_config() -> Union[JsonStorageXDG, JsonConfigXDG]:
+
+def _existing_osm_config() -> Optional[Union[JsonStorageXDG, JsonConfigXDG]]:
     """NOTE: Use get_config_object() unless you're migrating config!
     
     Tries to locate the OSM config file, first trying the current path,
@@ -29,6 +31,7 @@ def _existing_osm_config() -> Union[JsonStorageXDG, JsonConfigXDG]:
         if not path.exists(config.path):
             return None
     return config
+
 
 def get_config_object() -> Union[JsonStorageXDG, JsonConfigXDG]:
     """Locates or creates the OSM config file, and ensures that all required
@@ -76,9 +79,9 @@ def get_config_object() -> Union[JsonStorageXDG, JsonConfigXDG]:
         # NOTE, below should match Appstore.appstore_id
         config["appstores"] = default_appstores
         config["appstores"] = merge_dict(config["appstores"],
-                                            default_appstores,
-                                            new_only=True,
-                                            no_dupes=True)
+                                         default_appstores,
+                                         new_only=True,
+                                         no_dupes=True)
     if "version" not in config:
         # This stuff can really only happen on first run
         config["version"] = CURRENT_OSM_VERSION
