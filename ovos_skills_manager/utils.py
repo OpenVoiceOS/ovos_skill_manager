@@ -155,14 +155,17 @@ def read_skill_examples(skill_dir: str) -> list:
     examples = list()
     if not path.isdir(skill_dir):
         raise FileNotFoundError(f"{skill_dir} is not a valid directory")
-    if path.isfile(path.join(skill_dir, "README.md")):
+
+    skill_data = read_skill_json(skill_dir)
+    if "examples" in skill_data:
+        examples = skill_data["examples"]
+
+    elif path.isfile(path.join(skill_dir, "README.md")):
         with open(path.join(skill_dir, "README.md")) as f:
             readme = f.read()
-        readme = readme_to_json(readme)
-        examples = readme.get("examples", [])
-    else:
-        skill_data = read_skill_json(skill_dir)
-        examples = skill_data.get("examples", [])
+            readme_data = readme_to_json(readme)
+            if readme_data.get("examples"):
+                examples = readme_data["examples"]
      
     return examples
 
