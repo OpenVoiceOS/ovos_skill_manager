@@ -181,9 +181,9 @@ def get_skills_info():
 
 def get_skills_examples(randomize=False):
     """
-    Builds a list of skills with info about them
+    Builds a list of skill examples from all skills
     :param randomize: whether to randomize the list of examples
-    :returns: list of skills with info
+    :returns: list of skill examples
     """
     skill_examples = list()
     skills_list = build_skills_list()
