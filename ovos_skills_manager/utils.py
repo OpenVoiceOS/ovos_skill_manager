@@ -1,11 +1,17 @@
 import json
+import requests
+
 from os import listdir, path
 from os.path import isdir
 from random import shuffle
+from distutils.version import StrictVersion
 
 from ovos_utils.log import LOG
 from ovos_utils.skills.locations import (get_plugin_skills,
                                          get_skill_directories)
+
+from ovos_skills_manager.session import SESSION
+
 
 def parse_python_dependencies(python_deps: list, token: str = None) -> list:
     """
@@ -106,6 +112,7 @@ def desktop_to_json(desktop: str) -> dict:
         data[k] = val
     return data
 
+
 def build_skills_list():
     """
     Builds skills list for extracting examples, intents, etc.
@@ -129,6 +136,7 @@ def build_skills_list():
     
     return skills
 
+
 def read_skill_json(skill_dir: str) -> dict:
     """
     Get a dict representation of the specified skill (directory)
@@ -145,6 +153,7 @@ def read_skill_json(skill_dir: str) -> dict:
             replace('-', ' ').lower()
         skill_data = {"title": skill_name}
     return skill_data
+
 
 def read_skill_examples(skill_dir: str) -> list:
     """
@@ -169,6 +178,7 @@ def read_skill_examples(skill_dir: str) -> list:
      
     return examples
 
+
 def get_skills_info():
     """
     Builds a list of skills with info about them
@@ -181,6 +191,7 @@ def get_skills_info():
         skills_info.append(info)
     
     return skills_info
+
 
 def get_skills_examples(randomize=False):
     """
@@ -199,3 +210,45 @@ def get_skills_examples(randomize=False):
         return skill_examples
     else:
         return skill_examples
+
+
+def get_skills_from_url(url: str) -> list:
+    """
+    Parse a list of skill references at a given URL
+    :param url: URL of skill list to parse (one skill per line)
+    :returns: list of skills by name, url, and/or ID
+    """
+    r = SESSION.get(url)
+    if not r.ok:
+        LOG.warning(f"Cached response returned: {r.status_code}")
+        SESSION.cache.delete_url(r.url)
+        r = requests.get(url)
+    if r.ok:
+        return [s for s in r.text.split("\n") if s.strip()]
+    else:
+        LOG.error(f"{url} request failed with code: {r.status_code}")
+    return []
+
+
+def set_osm_constraints_file(constraints_file: str):
+    """
+    Sets the DEFAULT_CONSTRAINTS param for OVOS Skills Manager.
+    :param constraints_file: path to valid constraints file for the core
+    """
+    if not constraints_file:
+        raise ValueError("constraints_file not defined")
+    import ovos_skills_manager.requirements
+    ovos_skills_manager.requirements.DEFAULT_CONSTRAINTS = constraints_file
+
+
+def get_pypi_package_versions(pkg_name: str) -> list:
+    """
+    Get a list of package versions available on PyPI
+    :param pkg_name: package name to search on PyPI
+    :returns: sorted list of available versions on PyPI
+    """
+    url = f"https://pypi.org/pypi/{pkg_name}/json"
+    data = requests.get(url).json()
+    versions = list(data.get("releases", {}).keys())
+    versions.sort(key=StrictVersion)
+    return versions
