@@ -2,7 +2,15 @@
 
 ## [Unreleased](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/HEAD)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.11...HEAD)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.12a1...HEAD)
+
+**Implemented enhancements:**
+
+- Migrate common skill util functions from neon\_core to OSM [\#103](https://github.com/OpenVoiceOS/ovos_skill_manager/pull/103) ([NeonDaniel](https://github.com/NeonDaniel))
+
+## [V0.0.12a1](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/V0.0.12a1) (2022-11-07)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.11...V0.0.12a1)
 
 **Merged pull requests:**
 
