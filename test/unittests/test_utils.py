@@ -96,6 +96,11 @@ class TestUtils(unittest.TestCase):
         self.assertEqual(num_installed, install_pip_deps.call_count)
         self.assertEqual(num_installed, install_sys_deps.call_count)
 
+        # Test list with invalid directory
+        list_installed = install_local_skill_dependencies(
+            [local_skills_dir, os.path.dirname(__file__)])
+        self.assertEqual(installed, list_installed)
+
 
 if __name__ == '__main__':
     unittest.main()
