@@ -1,0 +1,2 @@
+requests>=2.20.0,<2.26.0
+ovos_utils>=0.0.6

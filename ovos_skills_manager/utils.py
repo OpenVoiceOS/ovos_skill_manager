@@ -2,13 +2,13 @@ import json
 import requests
 
 from os import listdir, path
-from os.path import isdir
+from os.path import isdir, isfile, join, expanduser
 from random import shuffle
 from distutils.version import StrictVersion
 
 from ovos_utils.log import LOG
 from ovos_utils.skills.locations import (get_plugin_skills,
-                                         get_skill_directories)
+                                         get_skill_directories, get_default_skills_directory)
 
 from ovos_skills_manager.session import SESSION
 
@@ -252,3 +252,37 @@ def get_pypi_package_versions(pkg_name: str) -> list:
     versions = list(data.get("releases", {}).keys())
     versions.sort(key=StrictVersion)
     return versions
+
+
+def install_local_skill_dependencies(skills_dir: str = None) -> list:
+    """
+    Install skill dependencies for skills in the specified directory and ensure
+    the directory is loaded.
+    NOTE: dependence on other skills is not handled here.
+          Only Python and System dependencies are handled
+    :param skills_dir: Directory to install skills from
+    :returns: list of installed skill directories
+    """
+    from ovos_skills_manager.skill_entry import SkillEntry
+    from ovos_skills_manager.requirements import pip_install, install_system_deps
+    skills_dir = expanduser(skills_dir) or get_default_skills_directory()
+
+    if not isdir(skills_dir):
+        raise ValueError(f"{skills_dir} is not a valid directory")
+    installed_skills = list()
+    for skill in listdir(skills_dir):
+        skill_dir = join(skills_dir, skill)
+        if not isdir(skill_dir):
+            continue
+        if not isfile(join(skill_dir, "__init__.py")):
+            continue
+        LOG.debug(f"Attempting installation of {skill}")
+        try:
+            entry = SkillEntry.from_directory(skill_dir)
+            pip_install(entry.requirements.get('python', list()))
+            install_system_deps(entry.requirements.get('system', dict()))
+            installed_skills.append(skill)
+        except Exception as e:
+            LOG.error(f"Exception while installing {skill}")
+            LOG.exception(e)
+    return installed_skills

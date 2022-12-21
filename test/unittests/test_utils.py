@@ -1,7 +1,10 @@
 import os
 import sys
 import unittest
+import importlib
+import json
 
+from unittest.mock import Mock
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 
@@ -75,6 +78,23 @@ class TestUtils(unittest.TestCase):
         from ovos_skills_manager.utils import get_pypi_package_versions
         versions = get_pypi_package_versions("neon-skill-about")
         self.assertIsInstance(versions, list)
+
+    def test_install_local_skill_dependencies(self):
+        import ovos_skills_manager.requirements
+        from ovos_skills_manager.utils import install_local_skill_dependencies
+        install_pip_deps = Mock()
+        install_sys_deps = Mock()
+        ovos_skills_manager.requirements.pip_install = install_pip_deps
+        ovos_skills_manager.requirements.install_system_deps = install_sys_deps
+
+        local_skills_dir = os.path.join(os.path.dirname(__file__),
+                                        "local_skills")
+
+        installed = install_local_skill_dependencies(local_skills_dir)
+        num_installed = len(installed)
+        self.assertEqual(installed, os.listdir(local_skills_dir))
+        self.assertEqual(num_installed, install_pip_deps.call_count)
+        self.assertEqual(num_installed, install_sys_deps.call_count)
 
 
 if __name__ == '__main__':
