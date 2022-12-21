@@ -2,7 +2,15 @@
 
 ## [Unreleased](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/HEAD)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.12a1...HEAD)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.12a2...HEAD)
+
+**Merged pull requests:**
+
+- Add `install_local_skill_dependencies` util with unit test [\#104](https://github.com/OpenVoiceOS/ovos_skill_manager/pull/104) ([NeonDaniel](https://github.com/NeonDaniel))
+
+## [V0.0.12a2](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/V0.0.12a2) (2022-12-20)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.12a1...V0.0.12a2)
 
 **Implemented enhancements:**
 
