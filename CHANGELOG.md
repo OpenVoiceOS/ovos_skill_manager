@@ -2,7 +2,15 @@
 
 ## [Unreleased](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/HEAD)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.12a2...HEAD)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.12a3...HEAD)
+
+**Merged pull requests:**
+
+- fix examples fetching when plugin dirs returns list of empty skill dir list [\#102](https://github.com/OpenVoiceOS/ovos_skill_manager/pull/102) ([AIIX](https://github.com/AIIX))
+
+## [V0.0.12a3](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/V0.0.12a3) (2022-12-21)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.12a2...V0.0.12a3)
 
 **Merged pull requests:**
 
