@@ -122,7 +122,7 @@ def build_skills_list():
     """
     skills = list()
     skills_dirs = get_skill_directories()
-    plugin_dirs = get_plugin_skills()
+    plugin_dirs = get_plugin_skills()[0]
 
     for skills_dir in skills_dirs:
         if not isdir(skills_dir):
@@ -135,7 +135,7 @@ def build_skills_list():
     for skill_dir in plugin_dirs:
         if path.isdir(skill_dir[0]):
             skills.append(skill_dir[0])
-    
+
     return skills
 
 
