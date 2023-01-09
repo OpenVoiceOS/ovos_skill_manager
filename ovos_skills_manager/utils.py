@@ -106,6 +106,7 @@ def desktop_to_json(desktop: str) -> dict:
         data[k] = val
     return data
 
+
 def build_skills_list():
     """
     Builds skills list for extracting examples, intents, etc.
@@ -113,24 +114,19 @@ def build_skills_list():
     """
     skills = list()
     skills_dirs = get_skill_directories()
-    plugin_dirs = get_plugin_skills()
+    plugin_dirs = get_plugin_skills()[0]
 
-    if len(skills_dirs) > 0:
-        for skills_dir in skills_dirs:
-            if not isdir(skills_dir):
-                LOG.warning(f"No such directory: {skills_dir}")
-                continue
-            for skill in listdir(skills_dir):
-                if path.isdir(path.join(skills_dir, skill)):
-                    skills.append(path.join(skills_dir, skill))
+    for skills_dir in skills_dirs:
+        if not isdir(skills_dir):
+            LOG.warning(f"No such directory: {skills_dir}")
+            continue
+        for skill in listdir(skills_dir):
+                    if path.isdir(path.join(skills_dir, skill)):
+                        skills.append(path.join(skills_dir, skill))
 
-    if len(plugin_dirs) > 0:
-        for skill_dir in plugin_dirs:
-            try:
-                if path.isdir(skill_dir[0]):
-                    skills.append(skill_dir[0])
-            except:
-                LOG.error(f"List index errors: {skill_dir}")
+    for skill_dir in plugin_dirs:
+        if path.isdir(skill_dir[0]):
+            skills.append(skill_dir[0])
 
     return skills
 
