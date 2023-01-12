@@ -2,7 +2,15 @@
 
 ## [Unreleased](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/HEAD)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.12a3...HEAD)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.12a4...HEAD)
+
+**Merged pull requests:**
+
+- remove forcing log level info [\#105](https://github.com/OpenVoiceOS/ovos_skill_manager/pull/105) ([emphasize](https://github.com/emphasize))
+
+## [V0.0.12a4](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/V0.0.12a4) (2023-01-09)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.12a3...V0.0.12a4)
 
 **Merged pull requests:**
 
