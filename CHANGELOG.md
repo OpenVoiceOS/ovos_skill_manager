@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/HEAD)
+## [V0.0.12a5](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/V0.0.12a5) (2023-01-12)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.12a4...HEAD)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.12a4...V0.0.12a5)
 
 **Merged pull requests:**
 
