@@ -17,7 +17,7 @@ root access if you are running on a raspberry pi
   reviewed by humans!
 - [Pling]() - the official plasma bigscreen skills store, skills are accepted 
   by default and only removed if flagged as malicious
-- [Andlo's skill list]() - not a real appstore, this is a web scrapped 
+- [Andlo's skill list](https://github.com/andlo/mycroft-skills-list-gitbook/tree/master/skills) - not a real appstore, this is a web scrapped 
   automatically generated list of 900+ skills from all over github, there 
   is no review at all, it will catch [malicious skills](https://github.com/JarbasAl/skill-XPLOIT-hijack-speech)
   
