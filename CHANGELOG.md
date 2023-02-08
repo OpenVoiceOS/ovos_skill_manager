@@ -1,5 +1,21 @@
 # Changelog
 
+## [Unreleased](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/HEAD)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.12...HEAD)
+
+**Closed issues:**
+
+- Readme link to Andlo's list broken [\#106](https://github.com/OpenVoiceOS/ovos_skill_manager/issues/106)
+
+**Merged pull requests:**
+
+- Update link to Andlo's list [\#107](https://github.com/OpenVoiceOS/ovos_skill_manager/pull/107) ([weex](https://github.com/weex))
+
+## [V0.0.12](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/V0.0.12) (2023-01-24)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.12a5...V0.0.12)
+
 ## [V0.0.12a5](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/V0.0.12a5) (2023-01-12)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.12a4...V0.0.12a5)
