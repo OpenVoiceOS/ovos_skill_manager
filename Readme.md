@@ -140,8 +140,8 @@ Options:
 
 print current configuration of osm, config file can be found at `~/.config/OpenVoiceOS/OVOS-SkillsManager.json`
 ```bash
-(.venv) user@hostname:~$ osm print --help
-Usage: osm print [OPTIONS]
+(.venv) user@hostname:~$ osm print-config --help
+Usage: osm print-config [OPTIONS]
 
 Options:
   --appstore [ovos|mycroft|pling|andlo|all|default]
