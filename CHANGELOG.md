@@ -2,7 +2,19 @@
 
 ## [Unreleased](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/HEAD)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.12...HEAD)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.13a1...HEAD)
+
+**Fixed bugs:**
+
+- osm disable shows 'enable' dialog [\#110](https://github.com/OpenVoiceOS/ovos_skill_manager/issues/110)
+
+**Merged pull requests:**
+
+- fix \#110: typo in osm disable prompt [\#111](https://github.com/OpenVoiceOS/ovos_skill_manager/pull/111) ([ChanceNCounter](https://github.com/ChanceNCounter))
+
+## [V0.0.13a1](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/V0.0.13a1) (2023-02-08)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.12...V0.0.13a1)
 
 **Closed issues:**
 
