@@ -58,7 +58,7 @@ def print_config(appstore):
 @click.argument('appstore', required=False)
 def disable(appstore):
     if appstore is None:
-        appstore = click.prompt('select appstore to enable',
+        appstore = click.prompt('select appstore to disable',
                     type=click.Choice(_enable.APPSTORE_OPTIONS))
     _disable.disable(appstore)
 #endregion disable
