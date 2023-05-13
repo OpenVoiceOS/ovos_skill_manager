@@ -27,7 +27,7 @@ class ResourceLocation(str, Enum):
     LOCALE_LANG = "/locale/{lang}"
     DESKTOP = "/res/desktop"
     DESKTOP_FILE = "/res/desktop/{repo}.desktop"
-    SKILLSTORE_FILE = "/res/desktop/skill.json"
+    SKILLSTORE_FILE = "skill.json"
     SOUND = "/res/snd"
     ICON = "/res/icon"
     UI = "/ui"
