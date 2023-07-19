@@ -9,4 +9,5 @@ on:
 jobs:
   build_and_publish_pypi_and_release:
     uses: neongeckocom/.github/.github/workflows/publish_stable_release.yml@master
-    secrets: inherit
+    secrets:
+      PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}

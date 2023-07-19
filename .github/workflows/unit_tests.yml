@@ -14,8 +14,7 @@ on:
       - 'LICENSE'
       - 'CHANGELOG.md'
       - 'MANIFEST.in'
-      - 'readme.md'
-      - 'scripts/**'
+      - 'Readme.md'
   push:
     branches:
       - master
@@ -28,8 +27,7 @@ on:
       - 'LICENSE'
       - 'CHANGELOG.md'
       - 'MANIFEST.in'
-      - 'readme.md'
-      - 'scripts/**'
+      - 'Readme.md'
   workflow_dispatch:
 
 jobs:
