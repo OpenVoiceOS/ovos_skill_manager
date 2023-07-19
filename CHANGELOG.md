@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.13a4](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/0.0.13a4) (2023-07-19)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/0.0.13a3...0.0.13a4)
+
+**Merged pull requests:**
+
+- Add description to fix PyPI automation failure [\#118](https://github.com/OpenVoiceOS/ovos_skill_manager/pull/118) ([NeonDaniel](https://github.com/NeonDaniel))
+
 ## [0.0.13a3](https://github.com/OpenVoiceOS/ovos_skill_manager/tree/0.0.13a3) (2023-07-19)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos_skill_manager/compare/V0.0.13a2...0.0.13a3)
