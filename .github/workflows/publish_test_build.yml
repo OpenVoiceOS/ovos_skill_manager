@@ -14,7 +14,6 @@ on:
       - 'CHANGELOG.md'
       - 'MANIFEST.in'
       - 'Readme.md'
-      - 'scripts/**'
   workflow_dispatch:
 
 jobs:
