@@ -30,6 +30,7 @@ def get_version():
 
 
 def package_files(directory):
+    directory = os.path.join(BASEDIR, directory)
     paths = []
     for (path, directories, filenames) in os.walk(directory):
         for filename in filenames:
