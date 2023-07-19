@@ -2,6 +2,7 @@ import os
 from setuptools import setup
 
 BASEDIR = os.path.abspath(os.path.dirname(__file__))
+os.chdir(BASEDIR)  # For relative `packages` spec in setup below
 
 
 def get_version():
@@ -30,6 +31,7 @@ def get_version():
 
 
 def package_files(directory):
+    directory = os.path.join(BASEDIR, directory)
     paths = []
     for (path, directories, filenames) in os.walk(directory):
         for filename in filenames:
@@ -48,6 +50,12 @@ def required(requirements_file):
                 if pkg.strip() and not pkg.startswith("#")]
 
 
+def get_description():
+    with open(os.path.join(BASEDIR, "Readme.md"), "r") as f:
+        long_description = f.read()
+    return long_description
+
+
 setup(
     name='ovos-skills-manager',
     packages=['ovos_skills_manager',
@@ -63,6 +71,8 @@ setup(
     include_package_data=True,
     author_email='jarbasai@mailfence.com',
     description='Open Voice OS skill manager',
+    long_description=get_description(),
+    long_description_content_type="text/markdown",
     entry_points='''
         [console_scripts]
         osm=ovos_skills_manager.commands:osm_commands
