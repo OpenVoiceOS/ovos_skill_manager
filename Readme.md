@@ -1,3 +1,10 @@
+:warning: This project is no longer maintained :warning:
+> Skills are now recommended to be packaged for installation as Python packages.
+> More information on skill installation is available [in the docs](https://openvoiceos.github.io/community-docs/ht_skills_install/).
+
+> This project can still be used as a replacement for MSM where MSM is supported.
+
+> ovos-core version 0.0.8 is the last version of ovos-core to implement OSM.
 # OVOS skills manager
 
 Install skills from any appstore!
