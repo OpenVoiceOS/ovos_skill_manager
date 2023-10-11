@@ -1,3 +1,6 @@
+:warning: This project is no longer maintained :warning:
+> Skills are now recommended to be packaged for installation as Python packages.
+> More information on skill installation is available [in the docs](https://openvoiceos.github.io/community-docs/ht_skills_install/).
 # OVOS skills manager
 
 Install skills from any appstore!
