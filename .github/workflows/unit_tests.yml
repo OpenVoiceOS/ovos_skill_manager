@@ -14,8 +14,7 @@ on:
       - 'LICENSE'
       - 'CHANGELOG.md'
       - 'MANIFEST.in'
-      - 'readme.md'
-      - 'scripts/**'
+      - 'Readme.md'
   push:
     branches:
       - master
@@ -28,11 +27,14 @@ on:
       - 'LICENSE'
       - 'CHANGELOG.md'
       - 'MANIFEST.in'
-      - 'readme.md'
-      - 'scripts/**'
+      - 'Readme.md'
   workflow_dispatch:
 
 jobs:
+  py_build_tests:
+    uses: neongeckocom/.github/.github/workflows/python_build_tests.yml@master
+    with:
+      python_version: "3.8"
   unit_tests:
     strategy:
       max-parallel: 2
