@@ -68,6 +68,8 @@ Options:
                                   80
 
   --no-ignore-case                ignore upper/lower case, default ignore
+  --non-interactive               install single skill non-interactive from url and branch
+  --pip                           install from pip, bypassing standard OSM install process
   --help                          Show this message and exit.
 
 ```

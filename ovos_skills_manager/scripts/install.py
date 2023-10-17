@@ -1,6 +1,7 @@
+from sys import executable
+from subprocess import check_call
 import click
 from ovos_skills_manager import SkillEntry, OVOSSkillsManager
-from ovos_skills_manager.session import set_github_token
 
 SEARCH_OPTIONS = ['all', 'name', 'url', 'category', 'author', 'tag',
                   'description']
@@ -48,7 +49,9 @@ def search_skill(method: str, query: str, fuzzy: bool, no_ignore_case: bool, thr
 
 
 def install(method: str, skill: str, fuzzy: bool, no_ignore_case: bool, thresh: float, appstore: str, search: bool,
-            branch: str, folder: str, non_interactive: bool):
+            branch: str, folder: str, non_interactive: bool, pip: bool):
+    if pip:
+        return install_from_pip(skill)
     if non_interactive:
         skill = SkillEntry.from_github_url(skill, branch)
         skill.install(folder)
@@ -94,3 +97,8 @@ def install(method: str, skill: str, fuzzy: bool, no_ignore_case: bool, thresh: 
             click.confirm('Do you want to install {s} ?'.format(s=skill_str),
                         abort=True)
             skill.install(folder)
+
+
+def install_from_pip(package):
+    """Install package from pip"""
+    check_call([executable, "-m", "pip", "install", package])

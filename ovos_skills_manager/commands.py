@@ -98,12 +98,14 @@ def enable(appstore):
               help='ignore upper/lower case, default ignore')
 @click.option('--non-interactive', default=False, is_flag=True,
               help='install single skill non-interactive from url and branch')
+@click.option('--pip', default=False, is_flag=True,
+              help="install from pip, bypassing standard OSM install process")
 def install(method, skill, fuzzy, no_ignore_case, thresh, appstore, search,
-            branch, folder, non_interactive):
+            branch, folder, non_interactive, pip):
     if skill is None:
         skill = click.prompt('Skill to install (url or search term)')
     _install.install(method, skill, fuzzy, no_ignore_case, thresh, appstore, search,
-            branch, folder, non_interactive)
+            branch, folder, non_interactive, pip)
 #endregion install
 
 #region priority
