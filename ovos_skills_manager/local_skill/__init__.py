@@ -1,4 +1,5 @@
 import json
+from enum import Enum
 
 from os import walk
 from os.path import join, isfile
@@ -19,6 +20,30 @@ from ovos_skills_manager.github.utils import (
     GITHUB_MANIFEST_FILES, author_repo_from_github_url
 )
 from ovos_skills_manager.utils import readme_to_json
+
+
+class ResourceLocation(str, Enum):
+    LOCALE = "/locale"
+    LOCALE_LANG = "/locale/{lang}"
+    DESKTOP = "/res/desktop"
+    DESKTOP_FILE = "/res/desktop/{repo}.desktop"
+    SKILLSTORE_FILE = "skill.json"
+    SOUND = "/res/snd"
+    ICON = "/res/icon"
+    UI = "/ui"
+    UI_ANDROID = "/ui/+android"
+    UI_MEDIACENTER = "/ui/+mediacenter"
+    UI_SOUND = "/ui/sound"
+    UI_IMAGES = "/ui/images"
+    UI_BACKGROUNDS = "/ui/backgrounds"
+    UI_ANIMATIONS = "/ui/animations"
+    UI_ICONS = "/ui/icons"
+    UI_TRANSLATIONS = "/ui/ttanslations"
+    UI_BOXES = "/ui/boxes"
+    UI_TEMPLATES = "/ui/templates"
+    UI_CODE = "/ui/code"
+    SKILL_CODE = "__init__.py"
+    AUTOMATION_SCRIPTS = "/scripts"
 
 
 def get_skill_data_from_directory(skill_dir: str):
